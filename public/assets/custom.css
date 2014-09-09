@@ -55,8 +55,18 @@
 	margin-top: 15px;
 }
 
-.media-body >p {
+.list-group-custom > li > div > a > img {
+	width: 35px;
+}
+
+.list-group-custom > li > div > .media-body > p {
 	font-size: 14px;
+	margin: 0px;
+}
+
+.list-group-custom > li > div > .media-body > .media-heading {
+	font-size: 20px;
+	font-weight: bold;
 }
 
 

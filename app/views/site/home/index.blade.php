@@ -38,7 +38,7 @@
 	malesuada magna mollis euismod. Donec sed odio dui.
 </p>
 <div class="media-block">
-	<ul class="list-group">
+	<ul class="list-group list-group-custom">
   		<li class="list-group-item">
 			<div class="media">
 				<a class="pull-left" href="#">
@@ -50,8 +50,6 @@
 				    <p>
 				    	Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo.
 					</p>
-				    <p>
-				    </p>
 				</div>
 			</div>
 		</li>
@@ -66,8 +64,6 @@
 				    <p>
 				    	Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo.
 					</p>
-				    <p>
-				    </p>
 				</div>
 			</div>
 		</li>
@@ -82,8 +78,6 @@
 				    <p>
 				    	Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo.
 					</p>
-				    <p>
-				    </p>
 				</div>
 			</div>
 		</li>
@@ -98,8 +92,6 @@
 				    <p>
 				    	Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo.
 					</p>
-				    <p>
-				    </p>
 				</div>
 			</div>
 		</li>
@@ -114,8 +106,6 @@
 				    <p>
 				    	Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo.
 					</p>
-				    <p>
-				    </p>
 				</div>
 			</div>
 		</li>
@@ -130,8 +120,62 @@
 				    <p>
 				    	Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo.
 					</p>
+				</div>
+			</div>
+		</li>
+		<li class="list-group-item">
+			<div class="media">
+				<a class="pull-left" href="#">
+				    <img class="media-object img-circle" src="{{{ asset('assets/ico/apple-touch-icon-72-precomposed.png') }}}" alt="">
+				</a>
+				<a href="#" class="btn btn-inverse pull-right" role="button">Deploy</a>
+				<div class="media-body">
+					<h6 class="media-heading">Media heading7 </h6>
 				    <p>
-				    </p>
+				    	Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo.
+					</p>
+				</div>
+			</div>
+		</li>
+		<li class="list-group-item">
+			<div class="media">
+				<a class="pull-left" href="#">
+				    <img class="media-object img-circle" src="{{{ asset('assets/ico/apple-touch-icon-72-precomposed.png') }}}" alt="">
+				</a>
+				<a href="#" class="btn btn-inverse pull-right" role="button">Deploy</a>
+				<div class="media-body">
+					<h6 class="media-heading">Media heading8 </h6>
+				    <p>
+				    	Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo.
+					</p>
+				</div>
+			</div>
+		</li>
+		<li class="list-group-item">
+			<div class="media">
+				<a class="pull-left" href="#">
+				    <img class="media-object img-circle" src="{{{ asset('assets/ico/apple-touch-icon-72-precomposed.png') }}}" alt="">
+				</a>
+				<a href="#" class="btn btn-inverse pull-right" role="button">Deploy</a>
+				<div class="media-body">
+					<h6 class="media-heading">Media heading9 </h6>
+				    <p>
+				    	Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo.
+					</p>
+				</div>
+			</div>
+		</li>
+		<li class="list-group-item">
+			<div class="media">
+				<a class="pull-left" href="#">
+				    <img class="media-object img-circle" src="{{{ asset('assets/ico/apple-touch-icon-72-precomposed.png') }}}" alt="">
+				</a>
+				<a href="#" class="btn btn-inverse pull-right" role="button">Deploy</a>
+				<div class="media-body">
+					<h6 class="media-heading">Media heading10 </h6>
+				    <p>
+				    	Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo.
+					</p>
 				</div>
 			</div>
 		</li>
