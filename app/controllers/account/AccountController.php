@@ -66,6 +66,7 @@ class AccountController extends BaseController {
             $oldAccount = clone $account;
             $account->name = Input::get('name');
             $account->cloudProvider = Input::get('cloudProvider');
+            $account->credentials = json_encode(Input::get('credentials'));
             $account->user_id = Auth::id(); // logged in user id
             //@TODO  based on the json template for provider to populate, load the field and values.
             // Save it in credentials field of table as json.
