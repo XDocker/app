@@ -13,7 +13,7 @@
         <h4 class="text-center">Login into your account</h4>
     </div>
     @include('site.user.social')
-    <form class="form-horizontal" method="POST" action="{{ URL::to('user/login') }}" accept-charset="UTF-8">
+    <form method="POST" action="{{ URL::to('user/login') }}" accept-charset="UTF-8">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <fieldset>
             <div class="form-group">
