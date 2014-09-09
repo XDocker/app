@@ -48,7 +48,6 @@ class AccountController extends BaseController {
      *
      */
     public function getCreate() {
-    	$mode = 'create';
         return View::make('site/account/create_edit');
     }
     /**
