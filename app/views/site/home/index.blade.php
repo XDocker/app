@@ -16,7 +16,7 @@
 <div class="page-header">
 	<div class="row">
 		<div class="col-md-9">
-			<h4>Home Page</h4>
+			<h6>Home Page</h6>
 		</div>
 		<div class="col-md-3">
 			<form class="navbar-right" action="#" role="search">
@@ -38,102 +38,104 @@
 	malesuada magna mollis euismod. Donec sed odio dui.
 </p>
 <div class="media-block">
-	<div class="media">
-		<a class="pull-left" href="#">
-		    <img class="media-object img-circle" src="{{{ asset('assets/ico/apple-touch-icon-144-precomposed.png') }}}" alt="">
-		</a>
-		<div class="media-body">
-			<h4 class="media-heading">Media heading</h4>
-		    <p>
-		    	Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. 
-			    Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. 
-			    Donec lacinia congue felis in faucibus.
-			</p>
-		    <p>
-		    	<a href="#" class="btn btn-inverse" role="button">Deploy</a>
-		    </p>
-		</div>
-	</div>
-	<div class="media">
-		<a class="pull-left" href="#">
-		    <img class="media-object img-circle" src="{{{ asset('assets/ico/apple-touch-icon-144-precomposed.png') }}}" alt="">
-		</a>
-		<div class="media-body">
-			<h4 class="media-heading">Media heading1</h4>
-		    <p>
-		    	Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. 
-			    Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. 
-			    Donec lacinia congue felis in faucibus.
-			</p>
-		    <p>
-		    	<a href="#" class="btn btn-inverse" role="button">Deploy</a>
-		    </p>
-		</div>
-	</div>
-	<div class="media">
-		<a class="pull-left" href="#">
-		    <img class="media-object img-circle" src="{{{ asset('assets/ico/apple-touch-icon-144-precomposed.png') }}}" alt="">
-		</a>
-		<div class="media-body">
-			<h4 class="media-heading">Media heading3</h4>
-		    <p>
-		    	Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. 
-			    Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. 
-			    Donec lacinia congue felis in faucibus.
-			</p>
-		    <p>
-		    	<a href="#" class="btn btn-inverse" role="button">Deploy</a>
-		    </p>
-		</div>
-	</div>
-	<div class="media">
-		<a class="pull-left" href="#">
-		    <img class="media-object img-circle" src="{{{ asset('assets/ico/apple-touch-icon-144-precomposed.png') }}}" alt="">
-		</a>
-		<div class="media-body">
-			<h4 class="media-heading">Media heading4</h4>
-		    <p>
-		    	Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. 
-			    Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. 
-			    Donec lacinia congue felis in faucibus.
-			</p>
-		    <p>
-		    	<a href="#" class="btn btn-inverse" role="button">Deploy</a>
-		    </p>
-		</div>
-	</div>
-	<div class="media">
-		<a class="pull-left" href="#">
-		    <img class="media-object img-circle" src="{{{ asset('assets/ico/apple-touch-icon-144-precomposed.png') }}}" alt="">
-		</a>
-		<div class="media-body">
-			<h4 class="media-heading">Media heading5</h4>
-		    <p>
-		    	Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. 
-			    Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. 
-			    Donec lacinia congue felis in faucibus.
-			</p>
-		    <p>
-		    	<a href="#" class="btn btn-inverse" role="button">Deploy</a>
-		    </p>
-		</div>
-	</div>
-	<div class="media">
-		<a class="pull-left" href="#">
-		    <img class="media-object img-circle" src="{{{ asset('assets/ico/apple-touch-icon-144-precomposed.png') }}}" alt="">
-		</a>
-		<div class="media-body">
-			<h4 class="media-heading">Media heading6</h4>
-		    <p>
-		    	Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. 
-			    Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. 
-			    Donec lacinia congue felis in faucibus.
-			</p>
-		    <p>
-		    	<a href="#" class="btn btn-inverse" role="button">Deploy</a>
-		    </p>
-		</div>
-	</div>
+	<ul class="list-group">
+  		<li class="list-group-item">
+			<div class="media">
+				<a class="pull-left" href="#">
+				    <img class="media-object img-circle" src="{{{ asset('assets/ico/apple-touch-icon-72-precomposed.png') }}}" alt="">
+				</a>
+				<a href="#" class="btn btn-inverse pull-right" role="button">Deploy</a>
+				<div class="media-body">
+					<h6 class="media-heading">Media heading </h6>
+				    <p>
+				    	Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo.
+					</p>
+				    <p>
+				    </p>
+				</div>
+			</div>
+		</li>
+		<li class="list-group-item">
+			<div class="media">
+				<a class="pull-left" href="#">
+				    <img class="media-object img-circle" src="{{{ asset('assets/ico/apple-touch-icon-72-precomposed.png') }}}" alt="">
+				</a>
+				<a href="#" class="btn btn-inverse pull-right" role="button">Deploy</a>
+				<div class="media-body">
+					<h6 class="media-heading">Media heading2 </h6>
+				    <p>
+				    	Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo.
+					</p>
+				    <p>
+				    </p>
+				</div>
+			</div>
+		</li>
+		<li class="list-group-item">
+			<div class="media">
+				<a class="pull-left" href="#">
+				    <img class="media-object img-circle" src="{{{ asset('assets/ico/apple-touch-icon-72-precomposed.png') }}}" alt="">
+				</a>
+				<a href="#" class="btn btn-inverse pull-right" role="button">Deploy</a>
+				<div class="media-body">
+					<h6 class="media-heading">Media heading3 </h6>
+				    <p>
+				    	Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo.
+					</p>
+				    <p>
+				    </p>
+				</div>
+			</div>
+		</li>
+		<li class="list-group-item">
+			<div class="media">
+				<a class="pull-left" href="#">
+				    <img class="media-object img-circle" src="{{{ asset('assets/ico/apple-touch-icon-72-precomposed.png') }}}" alt="">
+				</a>
+				<a href="#" class="btn btn-inverse pull-right" role="button">Deploy</a>
+				<div class="media-body">
+					<h6 class="media-heading">Media heading4 </h6>
+				    <p>
+				    	Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo.
+					</p>
+				    <p>
+				    </p>
+				</div>
+			</div>
+		</li>
+		<li class="list-group-item">
+			<div class="media">
+				<a class="pull-left" href="#">
+				    <img class="media-object img-circle" src="{{{ asset('assets/ico/apple-touch-icon-72-precomposed.png') }}}" alt="">
+				</a>
+				<a href="#" class="btn btn-inverse pull-right" role="button">Deploy</a>
+				<div class="media-body">
+					<h6 class="media-heading">Media heading5 </h6>
+				    <p>
+				    	Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo.
+					</p>
+				    <p>
+				    </p>
+				</div>
+			</div>
+		</li>
+		<li class="list-group-item">
+			<div class="media">
+				<a class="pull-left" href="#">
+				    <img class="media-object img-circle" src="{{{ asset('assets/ico/apple-touch-icon-72-precomposed.png') }}}" alt="">
+				</a>
+				<a href="#" class="btn btn-inverse pull-right" role="button">Deploy</a>
+				<div class="media-body">
+					<h6 class="media-heading">Media heading6 </h6>
+				    <p>
+				    	Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo.
+					</p>
+				    <p>
+				    </p>
+				</div>
+			</div>
+		</li>
+	</ul>
 	<div class="text-center">
 		<div class="pagination">
 			<ul>
