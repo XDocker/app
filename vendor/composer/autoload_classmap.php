@@ -6,8 +6,8 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Account' => $baseDir . '/app/models/Account.php',
     'AccountController' => $baseDir . '/app/controllers/account/AccountController.php',
+    'AddTypeToCloudAccounts' => $baseDir . '/app/database/migrations/2014_09_09_133324_add_type_to_cloud_accounts.php',
     'AdminBlogsController' => $baseDir . '/app/controllers/admin/AdminBlogsController.php',
     'AdminCommentsController' => $baseDir . '/app/controllers/admin/AdminCommentsController.php',
     'AdminController' => $baseDir . '/app/controllers/AdminController.php',
@@ -51,7 +51,6 @@ return array(
     'ClassPreloader\\Parser\\FileVisitor' => $vendorDir . '/classpreloader/classpreloader/src/ClassPreloader/Parser/FileVisitor.php',
     'ClassPreloader\\Parser\\NodeTraverser' => $vendorDir . '/classpreloader/classpreloader/src/ClassPreloader/Parser/NodeTraverser.php',
     'CloudAccount' => $baseDir . '/app/models/CloudAccount.php',
-    'CloudAccountsController' => $baseDir . '/app/controllers/CloudAccountsController.php',
     'Comment' => $baseDir . '/app/models/Comment.php',
     'CommentsTableSeeder' => $baseDir . '/app/database/seeds/CommentsTableSeeder.php',
     'ConfideSetupUsersTable' => $baseDir . '/app/database/migrations/2013_02_05_024934_confide_setup_users_table.php',
@@ -80,6 +79,7 @@ return array(
     'File_Iterator_Facade' => $vendorDir . '/phpunit/php-file-iterator/File/Iterator/Facade.php',
     'File_Iterator_Factory' => $vendorDir . '/phpunit/php-file-iterator/File/Iterator/Factory.php',
     'File_X509' => $vendorDir . '/phpseclib/phpseclib/phpseclib/File/X509.php',
+    'HomeController' => $baseDir . '/app/controllers/HomeController.php',
     'Hybrid_Auth' => $vendorDir . '/hybridauth/hybridauth/hybridauth/Hybrid/Auth.php',
     'Hybrid_Endpoint' => $vendorDir . '/hybridauth/hybridauth/hybridauth/Hybrid/Endpoint.php',
     'Hybrid_Error' => $vendorDir . '/hybridauth/hybridauth/hybridauth/Hybrid/Error.php',
