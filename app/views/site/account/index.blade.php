@@ -10,7 +10,7 @@
 				<a class="pull-left" href="#">
 				    <img class="media-object img-circle" src="http://placehold.it/260x180" alt="">
 				</a>
-				<a href="#" class="btn btn-inverse pull-right" role="button">Edit</a>
+				<a href="{{ URL::to('account/' . $account->id . '/edit') }}" class="btn btn-inverse pull-right" role="button">Edit</a>
 				<div class="media-body">
 					<h6 class="media-heading"><a href="">{{ String::title($account->name) }}</a></h6>
 				    <p>
@@ -25,6 +25,9 @@
 		</li>
 @endforeach
 	</ul>
+</div>
+<div>
+	<a href="{{ URL::to('account/create') }}" class="btn btn-inverse pull-right" role="button">Add New Cloud Account</a>
 </div>
 
 @stop
