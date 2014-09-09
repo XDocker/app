@@ -51,7 +51,8 @@ class AccountController extends BaseController {
         $mode = $id !== false ? 'edit' : 'create';
         $account = $id !== false ? $this->accounts->findOrfail($id) : null;
         $title='';
-        return View::make('site/account/create_edit', compact('mode', 'account', 'title'));
+		$providers = Config::get('cloud_account_schema');
+        return View::make('site/account/create_edit', compact('mode', 'account', 'title', 'providers'));
     }
     /**
      * Edits a user

@@ -32,9 +32,10 @@
 						@if ($mode == 'create')
 							<select class="form-control" name="cloudProvider" id="cloudProvider">
 								<option value="">Select </option>
-								<option value="Amazon AWS" {{{ Input::old('cloudProvider', isset($account->cloudProvider) ? 'selected="selected"' : '') }}}>{{{ Lang::get('account.account.cP_amazon_aws.yes') }}}</option>
+								@foreach ($providers as $key => $value)
+									<option value="{{$key}}" {{{ Input::old('cloudProvider', isset($account->cloudProvider) && ($account->cloudProvider == $key) ? 'selected="selected"' : '') }}}>{{{ $key }}}</option>
+								@endforeach
 							</select>
-						
 						@endif
 						{{ $errors->first('cloudProvider', '<span class="help-inline">:message</span>') }}
 					</div>
