@@ -45,7 +45,7 @@
 				<!-- name -->
 				<div class="form-group {{{ $errors->has('username') ? 'error' : '' }}}">
 					<label class="col-md-2 control-label" for="name">Name</label>
-					<div class="col-md-10">
+					<div class="col-md-6">
 						<input class="form-control" type="text" name="name" id="name" value="{{{ Input::old('name', isset($account->name) ? $account->name : null) }}}" />
 						{{ $errors->first('name', '<span class="help-inline">:message</span>') }}
 					</div>
@@ -87,9 +87,9 @@
 		<!-- Form Actions -->
 		<div class="form-group">
 			<div class="col-md-offset-2 col-md-10">
-				<element class="btn-cancel close_popup">Cancel</element>
-				<button type="reset" class="btn btn-default">Reset</button>
-				<button type="submit" class="btn btn-success">OK</button>
+				<button type="submit" class="btn btn-success">OK</button>	
+				<button class="btn btn-default">Cancel</button>
+				<button type="reset" class="btn btn-warning">Reset</button>
 			</div>
 		</div>
 		<!-- ./ form actions -->
