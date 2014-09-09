@@ -94,3 +94,14 @@
 		<!-- ./ form actions -->
 	</form>
 @stop
+
+@section('scripts')
+<script src="{{asset('assets/bower_components/jsonform/deps/underscore.js')}}"></script>
+<script src="{{asset('assets/bower_components/jsonform/lib/jsonform.js')}}"></script>
+<script type="text/javascript">
+	(function($){
+		'use strict';
+		
+	})(jQuery);
+</script>
+@stop

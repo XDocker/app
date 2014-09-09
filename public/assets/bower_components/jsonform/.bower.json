@@ -1,0 +1,14 @@
+{
+  "name": "jsonform",
+  "homepage": "https://github.com/joshfire/jsonform",
+  "_release": "3aa545b899",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "3aa545b8994aa85f91490ec8289765732520193c"
+  },
+  "_source": "git://github.com/joshfire/jsonform.git",
+  "_target": "*",
+  "_originalSource": "jsonform",
+  "_direct": true
+}
