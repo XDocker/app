@@ -56,6 +56,7 @@
 				<a href="{{ URL::to('account') }}" class="btn btn-default">Back</a>
 				<button type="reset" class="btn btn-default">Reset</button>
 				<button type="submit" class="btn btn-success">Save</button>
+				<a href="{{ URL::to('account/' . $account->id . '/delete') }}" class="btn btn-danger">Delete</a>
 			</div>
 		</div>
 		<!-- ./ form actions -->

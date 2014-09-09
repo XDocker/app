@@ -83,6 +83,33 @@ class AccountController extends BaseController {
             return Redirect::to('account')->with('error', $error);
         }
     }
+
+	 /**
+     * Remove the specified Account .
+     *
+     * @param $account
+     * 
+     */
+    public function postDelete($account)
+    {
+        CloudAccount::where('id', $account->id)->delete();
+
+        $id = $account->id;
+        $account->delete();
+
+        // Was the comment post deleted?
+        $account = CloudAccount::find($id);
+        if ( empty($account) )
+        {
+            // TODO needs to delete all of that user's content
+            return Redirect::to('account')->with('success', 'Removed Account Successfully');
+        }
+        else
+        {
+            // There was a problem deleting the user
+            return Redirect::to('account/'.$account->id.'/edit')->with('error', 'Error while deleting');
+        }
+    }
     
     public function getFields() {
         $ret = '';

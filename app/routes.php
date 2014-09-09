@@ -127,5 +127,6 @@ Route::group(array(
     //:: User Account Routes ::
     Route::get('account/{account}/edit', 'AccountController@getCreate');
 	Route::post('account/{account}/edit', 'AccountController@postEdit');
+	Route::any('account/{account}/delete', 'AccountController@postDelete');
     Route::controller('account', 'AccountController');
 });
