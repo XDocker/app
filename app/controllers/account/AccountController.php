@@ -6,6 +6,7 @@
  * - getIndex()
  * - getCreate()
  * - postEdit()
+ * - postDelete()
  * - getFields()
  * Classes list:
  * - AccountController extends BaseController
@@ -49,7 +50,7 @@ class AccountController extends BaseController {
      */
     public function getCreate($id = false) {
         $mode = $id !== false ? 'edit' : 'create';
-        $account = $id !== false ? $this->accounts->findOrfail($id) : null;
+        $account = $id !== false ? CloudAccount::findOrFail($id) : null;
         $title = '';
         $providers = Config::get('cloud_account_schema');
         return View::make('site/account/create_edit', compact('mode', 'account', 'title', 'providers'));
@@ -79,6 +80,27 @@ class AccountController extends BaseController {
         }
         catch(Exception $e) {
             return Redirect::to('account')->with('error', $error);
+        }
+    }
+    /**
+     * Remove the specified Account .
+     *
+     * @param $account
+     *
+     */
+    public function postDelete($account) {
+        CloudAccount::where('id', $account->id)->delete();
+        
+        $id = $account->id;
+        $account->delete();
+        // Was the comment post deleted?
+        $account = CloudAccount::find($id);
+        if (empty($account)) {
+            // TODO needs to delete all of that user's content
+            return Redirect::to('account')->with('success', 'Removed Account Successfully');
+        } else {
+            // There was a problem deleting the user
+            return Redirect::to('account/' . $account->id . '/edit')->with('error', 'Error while deleting');
         }
     }
     

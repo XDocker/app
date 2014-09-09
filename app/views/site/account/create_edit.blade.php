@@ -18,12 +18,6 @@
 		<!-- cloudProvider -->
 		<div class="form-group {{{ $errors->has('email') ? 'error' : '' }}}">
 			<label class="col-md-2 control-label" for="email">Cloud Provider</label>
-			<!--
-			<div class="col-md-10">
-				<input class="form-control" type="text" name="cloudProvider" id="email" value="{{{ Input::old('cloudProvider', !empty($account) ? $account->cloudProvider : null) }}}" />
-				{{ $errors->first('cloudProvider', '<span class="help-inline">:message</span>') }}
-			</div>
-			-->
 			<div class="col-md-6">
 				<select class="form-control" name="cloudProvider" id="cloudProvider" required>
 					<option value="">Select </option>
@@ -31,7 +25,6 @@
 						<option value="{{$key}}" {{{ Input::old('cloudProvider', isset($account->cloudProvider) && ($account->cloudProvider == $key) ? 'selected="selected"' : '') }}}>{{{ $key }}}</option>
 					@endforeach
 				</select>
-				{{ $errors->first('cloudProvider', '<span class="help-inline">:message</span>') }}
 			</div>
 		</div>
 		<!-- ./ cloudProvider -->
@@ -41,7 +34,6 @@
 			<label class="col-md-2 control-label" for="name">Name</label>
 			<div class="col-md-6">
 				<input class="form-control" type="text" name="name" id="name" value="{{{ Input::old('name', isset($account->name) ? $account->name : null) }}}" required />
-				{{ $errors->first('name', '<span class="help-inline">:message</span>') }}
 			</div>
 		</div>
 

@@ -5,6 +5,7 @@
  * - (()
  * - (()
  * - (()
+ * - (()
  * Classes list:
  */
 /*
@@ -122,10 +123,15 @@ Route::group(array(
     'before' => 'auth'
 ) , function () {
     # Resource route for the cloud account API crendentials
-    Route::post('account/', 'AccountController@getIndex');
+    Route::any('account/', 'AccountController@getIndex');
     Route::get('account/create', 'AccountController@getCreate');
-    Route::post('account/create', 'AccountController@postEdit');
     Route::get('account/{id}/edit', 'AccountController@getCreate');
-    Route::post('account/{account}/edit', 'AccountController@postEdit');
+    Route::group(array(
+        'before' => 'csrf'
+    ) , function () {
+        Route::post('account/create', 'AccountController@postEdit');
+        Route::post('account/{account}/edit', 'AccountController@postEdit');
+        Route::post('account/{account}/delete', 'AccountController@postDelete');
+    });
     Route::controller('account', 'AccountController');
 });
