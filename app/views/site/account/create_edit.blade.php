@@ -98,7 +98,7 @@
     		$("#cloudProvider").change(function () 
     		{
        			var provider = this.value;
-       			$.get("{{ URL::to('account/getFields/') }}",{'provider': provider, 'accountId' : <?=$account->id?> }, function(data){
+       			$.get("{{ URL::to('account/getFields/') }}",{'provider': provider, 'accountId' : '{{$account->id}}' }, function(data){
     				populateFields(data);
   				});
        		 
@@ -106,7 +106,7 @@
     		);
 		});
 		
-		populateFields= functin (data)
+		var populateFields= functin (data)
 		{
 			
 		}

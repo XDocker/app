@@ -26,7 +26,7 @@ Route::model('comment', 'Comment');
 Route::model('post', 'Post');
 Route::model('role', 'Role');
 
-Route::model('account', 'Account');
+Route::model('account', 'CloudAccount');
 /** ------------------------------------------
  *  Route constraint patterns
  *  ------------------------------------------
@@ -93,14 +93,8 @@ Route::any('user/social/{action?}', array(
     "as" => "hybridauth",
     'uses' => 'UserController@socialLogin'
 ));
-
-Route::post('account/', 'AccountController@getIndex');
-Route::post('account/create', 'AccountController@getCreate');
-//:: User Account Routes ::
-Route::post('account/{account}/edit', 'AccountController@postEdit');
 # User RESTful Routes (Login, Logout, Register, etc)
 Route::controller('user', 'UserController');
-Route::controller('account', 'AccountController');
 //:: Application Routes ::
 
 # Filter for detect language
@@ -110,9 +104,11 @@ Route::get('contact-us', function () {
     // Return about us page
     return View::make('site/contact-us');
 });
+/* We don't use the default blog stuff
 # Posts - Second to last set, match slug
 Route::get('{postSlug}', 'BlogController@getView');
 Route::post('{postSlug}', 'BlogController@postView');
+*/
 # Index Page - Last route, no matches
 Route::get('/', array(
     'before' => 'detectLang',
@@ -126,6 +122,9 @@ Route::group(array(
     'before' => 'auth'
 ) , function () {
     # Resource route for the cloud account API crendentials
-    
+    Route::post('account/', 'AccountController@getIndex');
+    Route::post('account/create', 'AccountController@getCreate');
+    //:: User Account Routes ::
+    Route::post('account/{account}/edit', 'AccountController@postEdit');
+    Route::controller('account', 'AccountController');
 });
-Route::resource('cloudaccounts', 'CloudAccountsController');
