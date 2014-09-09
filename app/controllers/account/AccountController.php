@@ -47,8 +47,11 @@ class AccountController extends BaseController {
      * Displays the form for cloud account creation
      *
      */
-    public function getCreate() {
-        return View::make('site/account/create_edit');
+    public function getCreate($id = false) {
+        $mode = $id !== false ? 'edit' : 'create';
+        $account = $id !== false ? $this->accounts->findOrfail($id) : null;
+        $title='';
+        return View::make('site/account/create_edit', compact('mode', 'account', 'title'));
     }
     /**
      * Edits a user

@@ -14,7 +14,7 @@ class AddTypeToCloudAccounts extends Migration {
 	{
 		Schema::table('cloud_accounts', function(Blueprint $table)
 		{
-			$table->string('type');
+			$table->string('cloudProvider');
 		});
 	}
 
@@ -28,7 +28,7 @@ class AddTypeToCloudAccounts extends Migration {
 	{
 		Schema::table('cloud_accounts', function(Blueprint $table)
 		{
-			$table->dropColumn('type');
+			$table->dropColumn('cloudProvider');
 		});
 	}
 

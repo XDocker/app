@@ -1,4 +1,4 @@
-@extends('admin.layouts.modal')
+@extends('site.layouts.default')
 
 {{-- Content --}}
 @section('content')
@@ -24,7 +24,7 @@
 					<label class="col-md-2 control-label" for="email">Cloud Provider</label>
 					<!--
 					<div class="col-md-10">
-						<input class="form-control" type="text" name="cloudProvider" id="email" value="{{{ Input::old('cloudProvider', isset($account) ? $account->cloudProvider : null) }}}" />
+						<input class="form-control" type="text" name="cloudProvider" id="email" value="{{{ Input::old('cloudProvider', !empty($account) ? $account->cloudProvider : null) }}}" />
 						{{ $errors->first('cloudProvider', '<span class="help-inline">:message</span>') }}
 					</div>
 					-->
@@ -93,22 +93,4 @@
 		</div>
 		<!-- ./ form actions -->
 	</form>
-	<script>
-		$( document ).ready(function() {
-    		$("#cloudProvider").change(function () 
-    		{
-       			var provider = this.value;
-       			$.get("{{ URL::to('account/getFields/') }}",{'provider': provider, 'accountId' : '{{$account->id}}' }, function(data){
-    				populateFields(data);
-  				});
-       		 
-    		}
-    		);
-		});
-		
-		var populateFields= functin (data)
-		{
-			
-		}
-	</script>
 @stop
