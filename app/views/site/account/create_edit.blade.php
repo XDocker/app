@@ -9,7 +9,7 @@
 	</style>
 
 	{{-- Create/Edit cloud account Form --}}
-	<form id="cloudProviderCredntialsForm" class="form-horizontal" method="post" action="@if (isset($user)){{ URL::to('accounts/' . $account->id . '/edit') }}@endif" autocomplete="off">
+	<form id="cloudProviderCredntialsForm" class="form-horizontal" method="post" action="@if (isset($account->id)){{ URL::to('account/' . $account->id . '/edit') }}@endif" autocomplete="off">
 		<!-- CSRF Token -->
 		<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
 		<!-- ./ csrf token -->
@@ -25,7 +25,7 @@
 			</div>
 			-->
 			<div class="col-md-6">
-				<select class="form-control" name="cloudProvider" id="cloudProvider">
+				<select class="form-control" name="cloudProvider" id="cloudProvider" required>
 					<option value="">Select </option>
 					@foreach ($providers as $key => $value)
 						<option value="{{$key}}" {{{ Input::old('cloudProvider', isset($account->cloudProvider) && ($account->cloudProvider == $key) ? 'selected="selected"' : '') }}}>{{{ $key }}}</option>
@@ -40,7 +40,7 @@
 		<div class="form-group {{{ $errors->has('username') ? 'error' : '' }}}">
 			<label class="col-md-2 control-label" for="name">Name</label>
 			<div class="col-md-6">
-				<input class="form-control" type="text" name="name" id="name" value="{{{ Input::old('name', isset($account->name) ? $account->name : null) }}}" />
+				<input class="form-control" type="text" name="name" id="name" value="{{{ Input::old('name', isset($account->name) ? $account->name : null) }}}" required />
 				{{ $errors->first('name', '<span class="help-inline">:message</span>') }}
 			</div>
 		</div>
@@ -74,11 +74,19 @@
 			var $additionalCloudProviderFields = $('#additionalCloudProviderFields');
 			var $cloudProvider = $('#cloudProvider');
 			$cloudProvider.on('change', function(){
+				var schema = PROVIDERS[$cloudProvider.val()] || {}, values = {};
+				for(var credentialKey in SAVED_CREDENTIALS) {
+					if(!SAVED_CREDENTIALS.hasOwnProperty(credentialKey) ){
+						continue;
+					}
+					values['credentials['+credentialKey+']'] = SAVED_CREDENTIALS[credentialKey];
+				}
 				$additionalCloudProviderFields.empty().jsonForm({
-			        schema: PROVIDERS[$cloudProvider.val()] || {},
+			        schema: schema,
 			        params: {
 			        	fieldHtmlClass: 'form-control'
-			        }
+			        },
+			        value: values
 		      	});
 		      	// Patch in bs3 classes
 		      	$additionalCloudProviderFields

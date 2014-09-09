@@ -110,7 +110,7 @@
 
 		<!-- Javascripts
 		================================================== -->
-        <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="{{asset('assets/bower_components/jquery/dist/jquery.min.js')}}"></script>
         <script src="{{asset('assets/bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
         <script src="{{asset('assets/bower_components/flat-ui/dist/js/flat-ui.min.js')}}"></script>
 

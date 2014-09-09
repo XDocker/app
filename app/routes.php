@@ -123,8 +123,9 @@ Route::group(array(
 ) , function () {
     # Resource route for the cloud account API crendentials
     Route::post('account/', 'AccountController@getIndex');
-    Route::post('account/create', 'AccountController@getCreate');
-    //:: User Account Routes ::
+    Route::get('account/create', 'AccountController@getCreate');
+    Route::post('account/create', 'AccountController@postEdit');
+    Route::get('account/{id}/edit', 'AccountController@getCreate');
     Route::post('account/{account}/edit', 'AccountController@postEdit');
     Route::controller('account', 'AccountController');
 });

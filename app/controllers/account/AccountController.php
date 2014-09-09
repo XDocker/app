@@ -39,7 +39,7 @@ class AccountController extends BaseController {
     public function getIndex() {
         // Get all the user's accounts
         $accounts = $this->accounts->orderBy('created_at', 'DESC')->paginate(10);
-        var_dump($accounts, $this->accounts, $this->accounts->owner);
+        // var_dump($accounts, $this->accounts, $this->accounts->owner);
         // Show the page
         return View::make('site/account/index', compact('accounts'));
     }
@@ -55,31 +55,29 @@ class AccountController extends BaseController {
         return View::make('site/account/create_edit', compact('mode', 'account', 'title', 'providers'));
     }
     /**
-     * Edits a user
+     * Saves/Edits an account
      *
      */
-    public function postEdit($account) {
-        // Validate the inputs
-        $validator = Validator::make(Input::all() , $account->getUpdateRules());
-        
-        if ($validator->passes()) {
-            $oldAccount = clone $account;
+    public function postEdit($account = false) {
+        try {
+            if (empty($account)) {
+                $account = new CloudAccount;
+            }
             $account->name = Input::get('name');
             $account->cloudProvider = Input::get('cloudProvider');
             $account->credentials = json_encode(Input::get('credentials'));
             $account->user_id = Auth::id(); // logged in user id
             //@TODO  based on the json template for provider to populate, load the field and values.
             // Save it in credentials field of table as json.
-            $account->prepareRules($oldAccount, $account);
+            // $account->prepareRules($oldAccount, $account);
             // Save if valid.
-            $account->amend();
-        }
-        // Get validation errors (see Ardent package)
-        $error = $account->errors()->all();
-        
-        if (empty($error)) {
+            $success = $account->save();
+            // return var_dump($account);
+            
+            //$error = $account->errors()->all();
             return Redirect::to('account')->with('success', Lang::get('account/account.account_account_updated'));
-        } else {
+        }
+        catch(Exception $e) {
             return Redirect::to('account')->with('error', $error);
         }
     }
