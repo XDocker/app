@@ -49,9 +49,9 @@ class AccountController extends BaseController {
      */
     public function getCreate($id = false) {
         $mode = $id !== false ? 'edit' : 'create';
-        $account = $id !== false ? $this->accounts->findOrfail($id) : null;
-        $title='';
-		$providers = Config::get('cloud_account_schema');
+        $account = $id !== false ? $id : null;
+        $title = '';
+        $providers = Config::get('cloud_account_schema');
         return View::make('site/account/create_edit', compact('mode', 'account', 'title', 'providers'));
     }
     /**
@@ -66,7 +66,8 @@ class AccountController extends BaseController {
             $oldAccount = clone $account;
             $account->name = Input::get('name');
             $account->cloudProvider = Input::get('cloudProvider');
-            $account->userid = ''; // logged in cloud account id
+            $account->credentials = json_encode(Input::get('credentials'));
+            $account->user_id = Auth::id(); // logged in user id
             //@TODO  based on the json template for provider to populate, load the field and values.
             // Save it in credentials field of table as json.
             $account->prepareRules($oldAccount, $account);

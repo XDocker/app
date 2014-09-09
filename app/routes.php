@@ -125,6 +125,7 @@ Route::group(array(
     Route::post('account/', 'AccountController@getIndex');
     Route::post('account/create', 'AccountController@getCreate');
     //:: User Account Routes ::
-    Route::post('account/{account}/edit', 'AccountController@postEdit');
+    Route::get('account/{account}/edit', 'AccountController@getCreate');
+	Route::post('account/{account}/edit', 'AccountController@postEdit');
     Route::controller('account', 'AccountController');
 });
