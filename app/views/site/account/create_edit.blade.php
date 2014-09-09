@@ -69,6 +69,7 @@
 	(function($){
 		'use strict';
 		var PROVIDERS = {{ json_encode($providers) }};
+		var SAVED_CREDENTIALS = {{ !empty($account -> credentials) ? $account -> credentials : 'null' }};
 		$(function(){
 			var $additionalCloudProviderFields = $('#additionalCloudProviderFields');
 			var $cloudProvider = $('#cloudProvider');

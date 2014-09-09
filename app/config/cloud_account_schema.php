@@ -8,17 +8,17 @@
 
 return array(
     'Amazon AWS' => array(
-        'accountId' => array(
+        'credentials[accountId]' => array(
             'type' => 'string',
             'title' => 'Account ID',
             'required' => true
         ) ,
-        'apiKey' => array(
+        'credentials[apiKey]' => array(
             'type' => 'string',
             'title' => 'API Key',
             'required' => true
         ) ,
-        'secretKey' => array(
+        'credentials[secretKey]' => array(
             'type' => 'string',
             'title' => 'Secret Key',
             'required' => true
