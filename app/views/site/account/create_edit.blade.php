@@ -25,14 +25,12 @@
 			</div>
 			-->
 			<div class="col-md-6">
-				@if ($mode == 'create')
-					<select class="form-control" name="cloudProvider" id="cloudProvider">
-						<option value="">Select </option>
-						@foreach ($providers as $key => $value)
-							<option value="{{$key}}" {{{ Input::old('cloudProvider', isset($account->cloudProvider) && ($account->cloudProvider == $key) ? 'selected="selected"' : '') }}}>{{{ $key }}}</option>
-						@endforeach
-					</select>
-				@endif
+				<select class="form-control" name="cloudProvider" id="cloudProvider">
+					<option value="">Select </option>
+					@foreach ($providers as $key => $value)
+						<option value="{{$key}}" {{{ Input::old('cloudProvider', isset($account->cloudProvider) && ($account->cloudProvider == $key) ? 'selected="selected"' : '') }}}>{{{ $key }}}</option>
+					@endforeach
+				</select>
 				{{ $errors->first('cloudProvider', '<span class="help-inline">:message</span>') }}
 			</div>
 		</div>
@@ -41,32 +39,11 @@
 		<!-- name -->
 		<div class="form-group {{{ $errors->has('username') ? 'error' : '' }}}">
 			<label class="col-md-2 control-label" for="name">Name</label>
-			<div class="col-md-10">
+			<div class="col-md-6">
 				<input class="form-control" type="text" name="name" id="name" value="{{{ Input::old('name', isset($account->name) ? $account->name : null) }}}" />
 				{{ $errors->first('name', '<span class="help-inline">:message</span>') }}
 			</div>
 		</div>
-
-		
-		<!-- Activation Status -->
-		<div class="form-group {{{ $errors->has('active') || $errors->has('active') ? 'error' : '' }}}">
-			<label class="col-md-2 control-label" for="confirm">Account Active?</label>
-			<div class="col-md-6">
-				@if ($mode == 'create')
-					<select class="form-control" name="active" id="active">
-						<option value="1"{{{ (Input::old('active', 0) === 1 ? ' selected="selected"' : '') }}}>{{{ Lang::get('general.yes') }}}</option>
-						<option value="0"{{{ (Input::old('active', 0) === 0 ? ' selected="selected"' : '') }}}>{{{ Lang::get('general.no') }}}</option>
-					</select>
-				@else
-					<select class="form-control" name="active" id="active">
-						<option value="1"{{{ ($account->active ? ' selected="selected"' : '') }}}>{{{ Lang::get('general.yes') }}}</option>
-						<option value="0"{{{ ( ! $account->active ? ' selected="selected"' : '') }}}>{{{ Lang::get('general.no') }}}</option>
-					</select>
-				@endif
-				{{ $errors->first('confirm', '<span class="help-inline">:message</span>') }}
-			</div>
-		</div>
-		<!-- ./ activation status -->
 
 		<!-- ./ username -->
 		<div id="additionalCloudProviderFields">
