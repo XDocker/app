@@ -26,7 +26,7 @@ return array(
 	|
 	*/
 
-	'url' => 'http://104.131.38.159',
+	'url' => 'http://app.xdocker.org',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -65,7 +65,7 @@ return array(
 	|
 	*/
 
-	'key' => '46vxQY6kegF2DIFnSxmYTut0WheRsfnS',
+	'key' => 'g25wmy6i9MUReI46iL3hB9Q2IlDHQhU2',
 
 	'cipher' => MCRYPT_RIJNDAEL_128,	
 
