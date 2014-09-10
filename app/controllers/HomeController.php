@@ -32,6 +32,9 @@ class HomeController extends BaseController {
 	 */
 	public function getIndex()
 	{
+		 $providers = Config::get('thirdparty_integration');
+		 
+		 
 		// Show the page
 		return View::make('site/home/index');
 	}

@@ -58,7 +58,7 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => '127.0.0.1',
-			'database'  => 'xdocker1',
+			'database'  => 'xdockernew',
 			'username'  => 'root',
 			'password'  => 'DZ5aWBKvAe',
 			'charset'   => 'utf8',
