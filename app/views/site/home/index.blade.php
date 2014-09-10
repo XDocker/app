@@ -39,148 +39,21 @@
 </p>
 <div class="media-block">
 	<ul class="list-group list-group-custom">
+		@foreach($data as $instance)
   		<li class="list-group-item">
 			<div class="media">
-				<a class="pull-left" href="#">
-				    <img class="media-object img-circle" src="{{{ asset('assets/ico/apple-touch-icon-72-precomposed.png') }}}" alt="">
-				</a>
 				<a href="#" class="btn btn-inverse pull-right" role="button">Deploy</a>
 				<div class="media-body">
-					<h6 class="media-heading">Media heading </h6>
+					<h4 class="media-heading">{{!empty($instance -> name)?$instance -> name:''}}</h4>
 				    <p>
-				    	Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo.
+				    	{{!empty($instance -> description)?$instance -> description:''}}
 					</p>
 				</div>
 			</div>
 		</li>
-		<li class="list-group-item">
-			<div class="media">
-				<a class="pull-left" href="#">
-				    <img class="media-object img-circle" src="{{{ asset('assets/ico/apple-touch-icon-72-precomposed.png') }}}" alt="">
-				</a>
-				<a href="#" class="btn btn-inverse pull-right" role="button">Deploy</a>
-				<div class="media-body">
-					<h6 class="media-heading">Media heading2 </h6>
-				    <p>
-				    	Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo.
-					</p>
-				</div>
-			</div>
-		</li>
-		<li class="list-group-item">
-			<div class="media">
-				<a class="pull-left" href="#">
-				    <img class="media-object img-circle" src="{{{ asset('assets/ico/apple-touch-icon-72-precomposed.png') }}}" alt="">
-				</a>
-				<a href="#" class="btn btn-inverse pull-right" role="button">Deploy</a>
-				<div class="media-body">
-					<h6 class="media-heading">Media heading3 </h6>
-				    <p>
-				    	Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo.
-					</p>
-				</div>
-			</div>
-		</li>
-		<li class="list-group-item">
-			<div class="media">
-				<a class="pull-left" href="#">
-				    <img class="media-object img-circle" src="{{{ asset('assets/ico/apple-touch-icon-72-precomposed.png') }}}" alt="">
-				</a>
-				<a href="#" class="btn btn-inverse pull-right" role="button">Deploy</a>
-				<div class="media-body">
-					<h6 class="media-heading">Media heading4 </h6>
-				    <p>
-				    	Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo.
-					</p>
-				</div>
-			</div>
-		</li>
-		<li class="list-group-item">
-			<div class="media">
-				<a class="pull-left" href="#">
-				    <img class="media-object img-circle" src="{{{ asset('assets/ico/apple-touch-icon-72-precomposed.png') }}}" alt="">
-				</a>
-				<a href="#" class="btn btn-inverse pull-right" role="button">Deploy</a>
-				<div class="media-body">
-					<h6 class="media-heading">Media heading5 </h6>
-				    <p>
-				    	Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo.
-					</p>
-				</div>
-			</div>
-		</li>
-		<li class="list-group-item">
-			<div class="media">
-				<a class="pull-left" href="#">
-				    <img class="media-object img-circle" src="{{{ asset('assets/ico/apple-touch-icon-72-precomposed.png') }}}" alt="">
-				</a>
-				<a href="#" class="btn btn-inverse pull-right" role="button">Deploy</a>
-				<div class="media-body">
-					<h6 class="media-heading">Media heading6 </h6>
-				    <p>
-				    	Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo.
-					</p>
-				</div>
-			</div>
-		</li>
-		<li class="list-group-item">
-			<div class="media">
-				<a class="pull-left" href="#">
-				    <img class="media-object img-circle" src="{{{ asset('assets/ico/apple-touch-icon-72-precomposed.png') }}}" alt="">
-				</a>
-				<a href="#" class="btn btn-inverse pull-right" role="button">Deploy</a>
-				<div class="media-body">
-					<h6 class="media-heading">Media heading7 </h6>
-				    <p>
-				    	Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo.
-					</p>
-				</div>
-			</div>
-		</li>
-		<li class="list-group-item">
-			<div class="media">
-				<a class="pull-left" href="#">
-				    <img class="media-object img-circle" src="{{{ asset('assets/ico/apple-touch-icon-72-precomposed.png') }}}" alt="">
-				</a>
-				<a href="#" class="btn btn-inverse pull-right" role="button">Deploy</a>
-				<div class="media-body">
-					<h6 class="media-heading">Media heading8 </h6>
-				    <p>
-				    	Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo.
-					</p>
-				</div>
-			</div>
-		</li>
-		<li class="list-group-item">
-			<div class="media">
-				<a class="pull-left" href="#">
-				    <img class="media-object img-circle" src="{{{ asset('assets/ico/apple-touch-icon-72-precomposed.png') }}}" alt="">
-				</a>
-				<a href="#" class="btn btn-inverse pull-right" role="button">Deploy</a>
-				<div class="media-body">
-					<h6 class="media-heading">Media heading9 </h6>
-				    <p>
-				    	Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo.
-					</p>
-				</div>
-			</div>
-		</li>
-		<li class="list-group-item">
-			<div class="media">
-				<a class="pull-left" href="#">
-				    <img class="media-object img-circle" src="{{{ asset('assets/ico/apple-touch-icon-72-precomposed.png') }}}" alt="">
-				</a>
-				<a href="#" class="btn btn-inverse pull-right" role="button">Deploy</a>
-				<div class="media-body">
-					<h6 class="media-heading">Media heading10 </h6>
-				    <p>
-				    	Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo.
-					</p>
-				</div>
-			</div>
-		</li>
+		@endforeach
 	</ul>
-	<div class="text-center">
+	<!-- <div class="text-center">
 		<div class="pagination">
 			<ul>
 	        	<li class="previous"><a href="#fakelink" class="fui-arrow-left"></a></li>
@@ -195,6 +68,6 @@
 	            <li class="next"><a href="#fakelink" class="fui-arrow-right"></a></li>
 			</ul>
 		</div>
-	</div>
+	</div> -->
 </div>
 @stop

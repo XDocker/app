@@ -1,41 +1,58 @@
 <?php
-
+/**
+ * Class and Function List:
+ * Function list:
+ * - __construct()
+ * - getIndex()
+ * Classes list:
+ * - HomeController extends BaseController
+ */
 class HomeController extends BaseController {
-
     /**
      * Post Model
      * @var Post
      */
-    
     /**
      * User Model
      * @var User
      */
     protected $user;
-
     /**
      * Inject the models.
      * @param Post $post
      * @param User $user
      */
-    public function __construct(Post $post, User $user)
-    {
+    public function __construct(Post $post, User $user) {
         parent::__construct();
-
+        
         $this->user = $user;
     }
-    
-	/**
-	 * Returns all the blog posts.
-	 *
-	 * @return View
-	 */
-	public function getIndex()
-	{
-		 $providers = Config::get('thirdparty_integration');
-		 
-		 
-		// Show the page
-		return View::make('site/home/index');
-	}
+    /**
+     * Returns all the blog posts.
+     *
+     * @return View
+     */
+    public function getIndex() {
+        $dockerHubCredentials = Config::get('local/thirdparty_integration.Docker_Hub');
+        
+        try {
+            $process = curl_init($dockerHubCredentials['search_url']);
+            curl_setopt($process, CURLOPT_USERPWD, $dockerHubCredentials['username'] . ":" . $dockerHubCredentials['password']);
+            curl_setopt($process, CURLOPT_RETURNTRANSFER, TRUE);
+            curl_setopt($process, CURLOPT_SSL_VERIFYPEER, FALSE);
+            $response = curl_exec($process);
+            curl_close($process);
+            
+            $response = json_decode($response);
+            
+            $data = $response->results;
+            // var_dump($dockerHubCredentials, $data, json_decode($data));
+            
+        }
+        catch(Exception $e) {
+            $data = array();
+        }
+        // Show the page
+        return View::make('site/home/index', compact('data'));
+    }
 }

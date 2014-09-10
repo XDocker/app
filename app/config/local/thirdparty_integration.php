@@ -4,11 +4,12 @@
  * Function list:
  * Classes list:
  */
-// Schema for the CloudAccount specific fields, will be converted into JSON and used on the front-end with https://github.com/joshfire/jsonform
+// DockerHub credentials for fetching repositories
 
 return array(
     'Docker_Hub' => array(
         'username' => 'sseshachala',
-        'password' => 'Java0man'
+        'password' => 'Java0man',
+        'search_url' => 'https://index.docker.io/v1/search?q=xdocker'
     ) ,
 );
