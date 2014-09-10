@@ -18,7 +18,7 @@
 				</form>
 				<a href="{{ URL::to('account/' . $account->id . '/edit') }}" class="btn btn-inverse pull-right" role="button">Edit</a>
 				<div class="media-body">
-					<h6 class="media-heading"><a href="">{{ String::title($account->name) }}</a></h6>
+					<h4 class="media-heading">{{ String::title($account->name) }}</h4>
 					<p>
 						<span class="glyphicon glyphicon-calendar"></span> <!--Sept 16th, 2012-->{{{ $account->created_at }}}
 					</p>
