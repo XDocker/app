@@ -32,18 +32,6 @@ class DeploymentController extends BaseController {
         $this->user = $user;
     }
     /**
-     * Returns all the Accounts for logged in user.
-     *
-     * @return View
-     */
-    public function getIndex() {
-        // Get all the user's deployments
-        $deployments = $this->deployments->orderBy('created_at', 'DESC')->paginate(10);
-        // var_dump($deployments, $this->deployments, $this->deployments->owner);
-        // Show the page
-        return View::make('site/deployment/index', compact('deployments'));
-    }
-    /**
      * Displays the form for cloud deployment creation
      *
      */
@@ -51,7 +39,7 @@ class DeploymentController extends BaseController {
         $mode = $id !== false ? 'edit' : 'create';
         $deployment = $id !== false ? Deployment::findOrFail($id) : null;
         $providers = Config::get('deployment_schema');
-        return View::make('site/deployment/create_edit', compact('mode', 'deployment', 'providers'));
+        return View::make('site/deployment/create', compact('mode', 'deployment', 'providers'));
     }
     /**
      * Saves/Edits an deployment

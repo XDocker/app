@@ -26,6 +26,7 @@ class CreateDeploymentsTable extends Migration {
             $table->integer('user_id')->unsigned()->index();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->text('parameters');
+            $table->string('status');
             $table->timestamps();
         });
     }
