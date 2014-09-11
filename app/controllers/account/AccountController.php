@@ -50,7 +50,7 @@ class AccountController extends BaseController {
     public function getCreate($id = false) {
         $mode = $id !== false ? 'edit' : 'create';
         $account = $id !== false ? CloudAccount::findOrFail($id) : null;
-        $providers = Config::get('account_schema');
+        $providers = Config::get('local/account_schema');
         return View::make('site/account/create_edit', compact('mode', 'account', 'providers'));
     }
     /**
