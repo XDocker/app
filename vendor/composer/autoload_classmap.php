@@ -72,7 +72,7 @@ return array(
     'Crypt_Twofish' => $vendorDir . '/phpseclib/phpseclib/phpseclib/Crypt/Twofish.php',
     'DatabaseSeeder' => $baseDir . '/app/database/seeds/DatabaseSeeder.php',
     'Deployment' => $baseDir . '/app/models/Deployment.php',
-    'DeploymentsController' => $baseDir . '/app/controllers/DeploymentsController.php',
+    'DeploymentController' => $baseDir . '/app/controllers/deployment/DeploymentController.php',
     'EntrustPermissions' => $baseDir . '/app/database/migrations/2013_05_21_024934_entrust_permissions.php',
     'EntrustSetupTables' => $baseDir . '/app/database/migrations/2013_02_08_031702_entrust_setup_tables.php',
     'File_ANSI' => $vendorDir . '/phpseclib/phpseclib/phpseclib/File/ANSI.php',

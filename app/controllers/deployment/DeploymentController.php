@@ -38,7 +38,7 @@ class DeploymentController extends BaseController {
     public function getCreate($id = false) {
         $mode = $id !== false ? 'edit' : 'create';
         $deployment = $id !== false ? Deployment::findOrFail($id) : null;
-        $providers = Config::get('deployment_schema');
+        $providers = Config::get('local/deployment_schema');
         return View::make('site/deployment/create', compact('mode', 'deployment', 'providers'));
     }
     /**
