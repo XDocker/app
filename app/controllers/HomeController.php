@@ -36,7 +36,11 @@ class HomeController extends BaseController {
         $dockerHubCredentials = Config::get('local/thirdparty_integration.Docker_Hub');
         
         try {
-            $process = curl_init($dockerHubCredentials['search_url']);
+            $search_term = Input::get('q');
+            if (empty($search_term)) {
+                $search_term = 'xdocker';
+            }
+            $process = curl_init($dockerHubCredentials['search_url'] . $search_term);
             curl_setopt($process, CURLOPT_USERPWD, $dockerHubCredentials['username'] . ":" . $dockerHubCredentials['password']);
             curl_setopt($process, CURLOPT_RETURNTRANSFER, TRUE);
             curl_setopt($process, CURLOPT_SSL_VERIFYPEER, FALSE);
@@ -48,11 +52,12 @@ class HomeController extends BaseController {
             $data = $response->results;
             // var_dump($dockerHubCredentials, $data, json_decode($data));
             
+            
         }
         catch(Exception $e) {
             $data = array();
         }
         // Show the page
-        return View::make('site/home/index', compact('data'));
+        return View::make('site/home/index', compact('data', 'search_term'));
     }
 }

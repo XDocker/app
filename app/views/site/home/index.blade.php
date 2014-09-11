@@ -19,10 +19,10 @@
 			<h6>Home Page</h6>
 		</div>
 		<div class="col-md-3">
-			<form class="navbar-right" action="#" role="search">
+			<form class="navbar-right" action="#" role="search" method="get">
                 <div class="form-group home-search">
                   <div class="input-group">
-                    <input class="form-control" id="navbarInput-01" type="search" placeholder="Search">
+                    <input class="form-control" name="q" type="search" placeholder="Search" value="{{$search_term}}">
                     <span class="input-group-btn">
                       <button type="submit" class="btn"><span class="fui-search"></span></button>
                     </span>
