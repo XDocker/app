@@ -126,12 +126,15 @@ Route::group(array(
     Route::any('account/', 'AccountController@getIndex');
     Route::get('account/create', 'AccountController@getCreate');
     Route::get('account/{id}/edit', 'AccountController@getCreate');
+    Route::get('deployment/create', 'DeploymentController@getCreate');
     Route::group(array(
         'before' => 'csrf'
     ) , function () {
         Route::post('account/create', 'AccountController@postEdit');
         Route::post('account/{account}/edit', 'AccountController@postEdit');
         Route::post('account/{account}/delete', 'AccountController@postDelete');
+        Route::post('deployment/create', 'DeploymentController@postEdit');
+        Route::post('deployment/{deployment}/delete', 'DeploymentController@postDelete');
     });
-    Route::controller('account', 'AccountController');
+    // Route::controller('account', 'AccountController');
 });

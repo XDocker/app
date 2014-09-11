@@ -7,7 +7,6 @@
  * - getCreate()
  * - postEdit()
  * - postDelete()
- * - getFields()
  * Classes list:
  * - AccountController extends BaseController
  */
@@ -51,9 +50,8 @@ class AccountController extends BaseController {
     public function getCreate($id = false) {
         $mode = $id !== false ? 'edit' : 'create';
         $account = $id !== false ? CloudAccount::findOrFail($id) : null;
-        $title = '';
-        $providers = Config::get('account_schema');
-        return View::make('site/account/create_edit', compact('mode', 'account', 'title', 'providers'));
+        $providers = Config::get('local/account_schema');
+        return View::make('site/account/create_edit', compact('mode', 'account', 'providers'));
     }
     /**
      * Saves/Edits an account
@@ -102,36 +100,5 @@ class AccountController extends BaseController {
             // There was a problem deleting the user
             return Redirect::to('account/' . $account->id . '/edit')->with('error', 'Error while deleting');
         }
-    }
-    
-    public function getFields() {
-        $ret = '';
-        
-        $provider = Input::get('provider');
-        $accountId = Input::get('accountId');
-        if (!empty($accountId)) {
-            $acctModel = new CloudAccount($accountId);
-        }
-        
-        switch ($provider) {
-            case 'Amazon AWS':
-                $apiAccessKey = isset($acctModel->content->apiAccessKey) ? $acctModel->content->apiAccessKey : '';
-                $secretAccessKey = isset($acctModel->content->secretAccessKey) ? $acctModel->content->secretAccessKey : '';
-                $ret = array(
-                    array(
-                        'id' => 'apiAccessKey',
-                        'name' => 'apiAccessKey',
-                        'type' => 'text',
-                        'value' => $apiAccessKey
-                    ) ,
-                    array(
-                        'id' => 'secretAccessKey',
-                        'name' => 'secretAccessKey',
-                        'type' => 'text',
-                        'value' => $secretAccessKey
-                    ) ,
-                );
-        }
-        print json_encode($ret);
     }
 }

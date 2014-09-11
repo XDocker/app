@@ -24,11 +24,11 @@
                   <div class="input-group">
                     <input class="form-control" name="q" type="search" placeholder="Search" value="{{$search_term}}">
                     <span class="input-group-btn">
-                      <button type="submit" class="btn"><span class="fui-search"></span></button>
+                      <button type="submit" class="btn" title="Search"><span class="fui-search"></span></button>
                     </span>
                   </div>
                 </div>
-              </form>
+            </form>
 		</div>
 	</div>
 </div>
@@ -42,11 +42,11 @@
 		@foreach($data as $instance)
   		<li class="list-group-item">
 			<div class="media">
-				<a href="#" class="btn btn-inverse pull-right" role="button">Deploy</a>
+				<a href="{{ URL::to('deployment/create/') }}?name={{urlencode($instance -> name)}}" class="btn btn-inverse pull-right" role="button">Deploy</a>
 				<div class="media-body">
-					<h4 class="media-heading">{{!empty($instance -> name)?$instance -> name:''}}</h4>
+					<h4 class="media-heading">{{{!empty($instance -> name)?$instance -> name:''}}}</h4>
 				    <p>
-				    	{{!empty($instance -> description)?$instance -> description:''}}
+				    	{{{!empty($instance -> description)?$instance -> description:''}}}
 					</p>
 				</div>
 			</div>
