@@ -24,11 +24,11 @@
                   <div class="input-group">
                     <input class="form-control" name="q" type="search" placeholder="Search" value="{{$search_term}}">
                     <span class="input-group-btn">
-                      <button type="submit" class="btn"><span class="fui-search"></span></button>
+                      <button type="submit" class="btn" title="Search"><span class="fui-search"></span></button>
                     </span>
                   </div>
                 </div>
-              </form>
+            </form>
 		</div>
 	</div>
 </div>
