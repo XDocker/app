@@ -15,7 +15,7 @@
         "zizaco/entrust": "~1.2",
         "bllim/datatables": "~1.3",
         "hybridauth/hybridauth": "*",
-        "aws/aws-sdk-php": "~2.6",
+        "aws/aws-sdk-php": "~2.6"
     },
     "require-dev": {
         "way/generators": "~2.6",
@@ -34,7 +34,9 @@
             "app/database/seeds",
             "app/tests/library"
         ],
-         "psr-0": { "Aws\\Laravel": "src/" }
+        "psr-0": {
+            "Aws\\Laravel": "src/"
+        }
     },
     "scripts": {
         "pre-update-cmd": [
