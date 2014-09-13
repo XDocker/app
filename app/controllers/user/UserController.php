@@ -235,8 +235,7 @@ class UserController extends BaseController {
             try {
                 // Logout older providers - clear expired connections
                 $socialAuth->logoutAllProviders();
-                // return Redirect::intended('/');
-                
+                return Redirect::to('user/login')->with('error', $e . '<br/>Please try again later!');
             }
             catch(Exception $err) {
                 var_dump($err);

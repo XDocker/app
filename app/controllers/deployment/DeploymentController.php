@@ -3,7 +3,6 @@
  * Class and Function List:
  * Function list:
  * - __construct()
- * - getIndex()
  * - getCreate()
  * - postEdit()
  * - postDelete()
@@ -38,9 +37,14 @@ class DeploymentController extends BaseController {
     public function getCreate($id = false) {
         $mode = $id !== false ? 'edit' : 'create';
         $deployment = $id !== false ? Deployment::findOrFail($id) : null;
-		$cloud_account_ids = CloudAccount::where('user_id', Auth::id()) -> get();
-        $providers = Config::get('local/deployment_schema');
-        return View::make('site/deployment/create', compact('mode', 'deployment', 'providers', 'cloud_account_ids'));
+        $cloud_account_ids = CloudAccount::where('user_id', Auth::id())->get();
+        $providers = Config::get('local/deployment schema');
+        return View::make('site/deployment/create', array(
+            'mode' => $mode,
+            'deployment' => $deployment,
+            'providers' => $providers,
+            'cloud_account_ids' => $cloud_account_ids
+        ));
     }
     /**
      * Saves/Edits an deployment
