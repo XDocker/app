@@ -38,7 +38,7 @@ class DeploymentController extends BaseController {
         $mode = $id !== false ? 'edit' : 'create';
         $deployment = $id !== false ? Deployment::findOrFail($id) : null;
         $cloud_account_ids = CloudAccount::where('user_id', Auth::id())->get();
-        $providers = Config::get('local/deployment schema');
+        $providers = Config::get('deployment_schema');
         return View::make('site/deployment/create', array(
             'mode' => $mode,
             'deployment' => $deployment,
@@ -63,7 +63,7 @@ class DeploymentController extends BaseController {
             $deployment->user_id = Auth::id(); // logged in user id
             try {
                 // Get and save status from external WS
-                $process = curl_init(Config::get('local/deployment_api.url'));
+                $process = curl_init(Config::get('deployment_api.url'));
                 curl_setopt($process, CURLOPT_RETURNTRANSFER, TRUE);
                 curl_setopt($process, CURLOPT_SSL_VERIFYPEER, FALSE);
                 $fields = array(
