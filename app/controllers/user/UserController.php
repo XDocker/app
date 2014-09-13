@@ -235,10 +235,11 @@ class UserController extends BaseController {
             try {
                 // Logout older providers - clear expired connections
                 $socialAuth->logoutAllProviders();
-                return Redirect::to('user/login')->with('error', $e . '<br/>Please try again later!');
+                return Redirect::to('user/login')->with('error', $e->getMessage() . '<br/>Please try again later!');
             }
             catch(Exception $err) {
                 var_dump($err);
+                return Redirect::to('user/login')->with('notice', $e->getMessage());
             }
         }
     }
@@ -311,6 +312,7 @@ class UserController extends BaseController {
         }
         catch(Exception $err) {
             var_dump($err);
+            return Redirect::to('user/login')->with('notice', $e->getMessage());
         }
         
         return Redirect::to('/');
