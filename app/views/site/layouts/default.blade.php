@@ -104,7 +104,11 @@
 		<hr>
 	    <div id="footer">
 	      <div class="container">
-	        <p class="muted credit text-center">xDocker : Test drive Docker images on any infrastructure. <a href="https://github.com/Xervmon/laravelcp">Github</a>.</p>
+	        <p class="muted credit text-center">xDocker : Test drive Docker images on any infrastructure. </p>
+	        <p class="text-center">
+	        	<iframe src="http://ghbtns.com/github-btn.html?user=Xervmon&repo=Xdocker&type=watch&count=true"
+  allowtransparency="true" frameborder="0" scrolling="0" width="170" height="30"></iframe>
+	        </p>
 	      </div>
 	    </div>
 
