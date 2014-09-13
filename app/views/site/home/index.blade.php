@@ -14,7 +14,7 @@
 {{-- Content --}}
 @section('content')
 <div class="media-block">
-	<label>Your Deployments:</label>
+	<h6 class="page-header">Your Deployments:</h6>
 	<ul class="list-group list-group-custom">
 		@foreach($deployments as $deployment)
   		<li class="list-group-item">
@@ -26,7 +26,7 @@
 					<button type="submit" class="btn btn-danger pull-right" role="button">Delete</button>
 				</form>				
 				<div class="media-body">
-					<h4 class="media-heading">{{{!empty($deployment -> name)?$deployment -> name:''}}}</h4>
+					<h4 class="media-heading">{{{!empty($deployment -> name)?$deployment -> name:'Untitled'}}} - {{{!empty($deployment -> docker_name)?$deployment -> docker_name:'Untitled'}}}</h4>
 				    <p>
 				    	{{{!empty($deployment -> status)?$deployment -> status:''}}}
 					</p>
@@ -39,7 +39,7 @@
 <div class="page-header">
 	<div class="row">
 		<div class="col-md-9">
-			<h6>Home Page</h6>
+			<h6>Public Docker Images:</h6>
 		</div>
 		<div class="col-md-3">
 			<form class="navbar-right" action="#" role="search" method="get">
@@ -56,9 +56,6 @@
 	</div>
 </div>
 <p>
-	Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, 
-	tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem 
-	malesuada magna mollis euismod. Donec sed odio dui.
 </p>
 <div class="media-block">
 	<ul class="list-group list-group-custom">
