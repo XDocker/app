@@ -38,8 +38,9 @@ class DeploymentController extends BaseController {
     public function getCreate($id = false) {
         $mode = $id !== false ? 'edit' : 'create';
         $deployment = $id !== false ? Deployment::findOrFail($id) : null;
+		$cloud_account_ids = CloudAccount::where('user_id', Auth::id()) -> get();
         $providers = Config::get('local/deployment_schema');
-        return View::make('site/deployment/create', compact('mode', 'deployment', 'providers'));
+        return View::make('site/deployment/create', compact('mode', 'deployment', 'providers', 'cloud_account_ids'));
     }
     /**
      * Saves/Edits an deployment
