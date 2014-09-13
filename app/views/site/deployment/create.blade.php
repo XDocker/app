@@ -22,7 +22,7 @@
 				<select class="form-control" name="cloud_account_id" id="cloud_account_id" required>
 					<option value="">Select </option>
 					@foreach ($cloud_account_ids as $key => $value)
-						<option value="{{$key}}" data-cloud-provider="{{{$value->cloudProvider}}}" {{{ Input::old('cloud_account_id', isset($deployment->cloud_account_id) && ($deployment->cloud_account_id == $key) ? 'selected="selected"' : '') }}}>{{{$value->cloudProvider}}}</option>
+						<option value="{{$key}}" data-cloud-provider="{{{$value->cloudProvider}}}" {{{ Input::old('cloud_account_id', isset($deployment->cloud_account_id) && ($deployment->cloud_account_id == $key) ? 'selected="selected"' : '') }}}>{{{$value->name}}}</option>
 					@endforeach
 				</select>
 			</div>
@@ -67,7 +67,7 @@
 			var $cloud_account_id = $('#cloud_account_id');
 			$cloud_account_id.on('change', function(){
 				var cloudProvider = $(this).find('option:selected').data('cloud-provider');
-				console.log(cloudProvider);
+				console.log('cloudProvider', cloudProvider);
 				var schema = PROVIDERS[cloudProvider] || {}, values = {};
 				for(var parameterKey in SAVED_PARAMETERS) {
 					if(!SAVED_PARAMETERS.hasOwnProperty(parameterKey) ){
