@@ -127,6 +127,7 @@ Route::group(array(
     Route::get('account/create', 'AccountController@getCreate');
     Route::get('account/{id}/edit', 'AccountController@getCreate');
     Route::get('deployment/create', 'DeploymentController@getCreate');
+    // Route::get('deployment/{id}/edit/', 'DeploymentController@getCreate');
     Route::group(array(
         'before' => 'csrf'
     ) , function () {
@@ -134,8 +135,9 @@ Route::group(array(
         Route::post('account/{account}/edit', 'AccountController@postEdit');
         Route::post('account/{account}/delete', 'AccountController@postDelete');
         Route::post('deployment/create', 'DeploymentController@postEdit');
-		Route::post('deployment/edit{id}', 'DeploymentController@getCreate');
-        Route::post('deployment/{deployment}/delete', 'DeploymentController@postDelete');
+        // Route::post('deployment/{deployment}/edit', 'DeploymentController@postEdit');
+        Route::post('deployment/{id}/delete', 'DeploymentController@postDelete');
     });
     // Route::controller('account', 'AccountController');
+    
 });

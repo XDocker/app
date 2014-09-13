@@ -43,7 +43,8 @@ class DeploymentController extends BaseController {
             'mode' => $mode,
             'deployment' => $deployment,
             'providers' => $providers,
-            'cloud_account_ids' => $cloud_account_ids
+            'cloud_account_ids' => $cloud_account_ids,
+            'docker_name' => Input::get('name')
         ));
     }
     /**
@@ -61,14 +62,18 @@ class DeploymentController extends BaseController {
             $deployment->user_id = Auth::id(); // logged in user id
             //@TODO get and save status from external WS
             $deployment->status = 'Unknown';
+            $deployment->docker_name = Input::get('docker_name');
             $success = $deployment->save();
+            if (!$success) {
+                throw new Exception($deployment->errors());
+            }
             // return var_dump($deployment);
             
             //$error = $deployment->errors()->all();
             return Redirect::to('/')->with('success', Lang::get('deployment/deployment.deployment_deployment_updated'));
         }
         catch(Exception $e) {
-            return Redirect::to('deployment')->with('error', $error);
+            return Redirect::intended('/')->with('error', $e->getMessage());
         }
     }
     /**
@@ -77,19 +82,16 @@ class DeploymentController extends BaseController {
      * @param $deployment
      *
      */
-    public function postDelete($deployment) {
-        Deployment::where('id', $deployment->id)->delete();
-        
-        $id = $deployment->id;
-        $deployment->delete();
+    public function postDelete($id) {
+        Deployment::where('id', $id)->delete();
         // Was the comment post deleted?
         $deployment = Deployment::find($id);
         if (empty($deployment)) {
             // TODO needs to delete all of that user's content
-            return Redirect::to('deployment')->with('success', 'Removed Account Successfully');
+            return Redirect::to('/')->with('success', 'Removed Deployment Successfully');
         } else {
             // There was a problem deleting the user
-            return Redirect::to('deployment/' . $deployment->id . '/edit')->with('error', 'Error while deleting');
+            return Redirect::to('/')->with('error', 'Error while deleting');
         }
     }
 }

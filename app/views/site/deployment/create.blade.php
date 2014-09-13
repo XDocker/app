@@ -14,6 +14,8 @@
 		<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
 		<!-- ./ csrf token -->
 
+		<input type="hidden" name="docker_name" value="{{ $docker_name }}" />
+
 		
 		<!-- cloud_account_id -->
 		<div class="form-group {{{ $errors->has('email') ? 'error' : '' }}}">

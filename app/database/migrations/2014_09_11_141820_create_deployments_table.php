@@ -21,6 +21,7 @@ class CreateDeploymentsTable extends Migration {
         Schema::create('deployments', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->string('docker_name');
             $table->integer('cloud_account_id')->unsigned()->index();
             $table->foreign('cloud_account_id')->references('id')->on('cloud_accounts');
             $table->integer('user_id')->unsigned()->index();

@@ -13,16 +13,18 @@
 
 {{-- Content --}}
 @section('content')
-@foreach($deployments as $deployment)
-	<pre>{{json_encode($deployment)}}</pre>
-@endforeach
-
 <div class="media-block">
+	<label>Your Deployments:</label>
 	<ul class="list-group list-group-custom">
 		@foreach($deployments as $deployment)
   		<li class="list-group-item">
 			<div class="media">
-				<a href="{{ URL::to('deployment/edit/') }}?id={{urlencode($deployment -> id)}}" class="btn btn-inverse pull-right" role="button">Edit</a>
+				<form class="pull-right" method="post" action="{{ URL::to('deployment/' . $deployment->id . '/delete') }}">
+					<!-- CSRF Token -->
+					<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
+					<!-- ./ csrf token -->
+					<button type="submit" class="btn btn-danger pull-right" role="button">Delete</button>
+				</form>				
 				<div class="media-body">
 					<h4 class="media-heading">{{{!empty($deployment -> name)?$deployment -> name:''}}}</h4>
 				    <p>
