@@ -22,7 +22,7 @@
 		@foreach($deployments as $deployment)
   		<li class="list-group-item">
 			<div class="media">
-				<a href="{{ URL::to('deployment/' . $deployment -> id . '/edit') }}" class="btn btn-inverse pull-right" role="button">Edit</a>
+				<a href="{{ URL::to('deployment/edit/') }}?id={{urlencode($deployment -> id)}}" class="btn btn-inverse pull-right" role="button">Edit</a>
 				<div class="media-body">
 					<h4 class="media-heading">{{{!empty($deployment -> name)?$deployment -> name:''}}}</h4>
 				    <p>

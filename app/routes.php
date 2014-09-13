@@ -134,7 +134,7 @@ Route::group(array(
         Route::post('account/{account}/edit', 'AccountController@postEdit');
         Route::post('account/{account}/delete', 'AccountController@postDelete');
         Route::post('deployment/create', 'DeploymentController@postEdit');
-		Route::post('deployment/{id}/edit', 'DeploymentController@getCreate');
+		Route::post('deployment/edit{id}', 'DeploymentController@getCreate');
         Route::post('deployment/{deployment}/delete', 'DeploymentController@postDelete');
     });
     // Route::controller('account', 'AccountController');
