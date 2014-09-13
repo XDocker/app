@@ -77,7 +77,7 @@ class AccountController extends BaseController {
             return Redirect::to('account')->with('success', Lang::get('account/account.account_account_updated'));
         }
         catch(Exception $e) {
-            return Redirect::to('account')->with('error', $error);
+            return Redirect::to('account')->with('error', $e->getMessage());
         }
     }
     /**
