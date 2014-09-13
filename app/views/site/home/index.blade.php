@@ -13,6 +13,9 @@
 
 {{-- Content --}}
 @section('content')
+@foreach($deployments as $deployment)
+	<pre>{{json_encode($deployment)}}</pre>
+@endforeach
 <div class="page-header">
 	<div class="row">
 		<div class="col-md-9">
@@ -39,7 +42,7 @@
 </p>
 <div class="media-block">
 	<ul class="list-group list-group-custom">
-		@foreach($data as $instance)
+		@foreach($dockerInstances as $instance)
   		<li class="list-group-item">
 			<div class="media">
 				<a href="{{ URL::to('deployment/create/') }}?name={{urlencode($instance -> name)}}" class="btn btn-inverse pull-right" role="button">Deploy</a>

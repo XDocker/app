@@ -52,18 +52,16 @@ class DeploymentController extends BaseController {
                 $deployment = new Deployment;
             }
             $deployment->name = Input::get('name');
-            $deployment->cloudProvider = Input::get('cloudProvider');
-            $deployment->credentials = json_encode(Input::get('credentials'));
+            $deployment->cloud_account_id = Input::get('cloud_account_id');
+            $deployment->parameters = json_encode(Input::get('parameters'));
             $deployment->user_id = Auth::id(); // logged in user id
-            //@TODO  based on the json template for provider to populate, load the field and values.
-            // Save it in credentials field of table as json.
-            // $deployment->prepareRules($oldAccount, $deployment);
-            // Save if valid.
+            //@TODO get and save status from external WS
+            $deployment->status = 'Unknown';
             $success = $deployment->save();
             // return var_dump($deployment);
             
             //$error = $deployment->errors()->all();
-            return Redirect::to('deployment')->with('success', Lang::get('deployment/deployment.deployment_deployment_updated'));
+            return Redirect::to('/')->with('success', Lang::get('deployment/deployment.deployment_deployment_updated'));
         }
         catch(Exception $e) {
             return Redirect::to('deployment')->with('error', $error);

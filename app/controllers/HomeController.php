@@ -33,9 +33,11 @@ class HomeController extends BaseController {
      * @return View
      */
     public function getIndex() {
-        $dockerHubCredentials = Config::get('local/thirdparty_integration.Docker_Hub');
+        
+        $deployments = Deployment::where('user_id', Auth::id())->get();
         
         try {
+            $dockerHubCredentials = Config::get('local/thirdparty_integration.Docker_Hub');
             $search_term = Input::get('q');
             if (empty($search_term)) {
                 $search_term = 'xdocker';
@@ -49,15 +51,19 @@ class HomeController extends BaseController {
             
             $response = json_decode($response);
             
-            $data = $response->results;
-            // var_dump($dockerHubCredentials, $data, json_decode($data));
+            $dockerInstances = $response->results;
+            // var_dump($dockerHubCredentials, $dockerInstances, json_decode($dockerInstances));
             
             
         }
         catch(Exception $e) {
-            $data = array();
+            $dockerInstances = array();
         }
         // Show the page
-        return View::make('site/home/index', compact('data', 'search_term'));
+        return View::make('site/home/index', array(
+            'dockerInstances' => $dockerInstances,
+            'search_term' => $search_term,
+            'deployments' => $deployments
+        ));
     }
 }
