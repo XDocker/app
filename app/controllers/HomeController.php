@@ -35,7 +35,6 @@ class HomeController extends BaseController {
     public function getIndex() {
         
         $deployments = Deployment::where('user_id', Auth::id())->get();
-        
         try {
             $dockerHubCredentials = Config::get('local/thirdparty_integration.Docker_Hub');
             $search_term = Input::get('q');

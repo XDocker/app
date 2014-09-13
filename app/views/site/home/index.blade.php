@@ -16,6 +16,24 @@
 @foreach($deployments as $deployment)
 	<pre>{{json_encode($deployment)}}</pre>
 @endforeach
+
+<div class="media-block">
+	<ul class="list-group list-group-custom">
+		@foreach($deployments as $deployment)
+  		<li class="list-group-item">
+			<div class="media">
+				<a href="{{ URL::to('deployment/' . $deployment -> id . '/edit') }}" class="btn btn-inverse pull-right" role="button">Edit</a>
+				<div class="media-body">
+					<h4 class="media-heading">{{{!empty($deployment -> name)?$deployment -> name:''}}}</h4>
+				    <p>
+				    	{{{!empty($deployment -> status)?$deployment -> status:''}}}
+					</p>
+				</div>
+			</div>
+		</li>
+		@endforeach
+	</ul>
+</div>
 <div class="page-header">
 	<div class="row">
 		<div class="col-md-9">
