@@ -11,20 +11,21 @@ class CloudProvider
 		$config['region'] = 'us-east-1';
 		self::$aws = Aws\Common\Aws::factory($config);
 
-		$conSTatus = false;
+		$conStatus = FALSE;
 		try
 		{
 			$ec2Compute = self::$aws -> get('ec2');
 			$result = $ec2Compute->getRegions();
-			$conSTatus = (!empty($result) && count($result) > 0);
+			print_r($result); die);
+			$conStatus = (!empty($result) && count($result) > 0);
 
 		} catch(Exception $ex)
 		{
-			$conSTatus = false;
+			$conStatus = FALSE;
 			Log::error($ex);
 			//log_message('error', 'Connection failed with API and Secret .' . $ex->getMessage());
 		}
-		return $conSTatus;
+		return $conStatus;
 	}
 	
 	public static function authenticate($account)

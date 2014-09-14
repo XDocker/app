@@ -68,8 +68,7 @@ class AccountController extends BaseController {
             $account->user_id = Auth::id(); // logged in user id
             
             $conStatus = CloudProvider::authenticate($account);
-			echo $conStatus;
-            //@TODO  based on the json template for provider to populate, load the field and values.
+			//@TODO  based on the json template for provider to populate, load the field and values.
             // Save it in credentials field of table as json.
             // $account->prepareRules($oldAccount, $account);
             // Save if valid.
