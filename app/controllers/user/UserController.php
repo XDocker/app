@@ -239,7 +239,7 @@ class UserController extends BaseController {
             }
             catch(Exception $err) {
                 var_dump($err);
-                return Redirect::to('user/login')->with('notice', $e->getMessage());
+                return Redirect::to('user/login')->with('notice', $e->getMessage() . '<hr/>' . $err->getMessage());
             }
         }
     }
