@@ -29,7 +29,7 @@ class CloudProvider
 	
 	public static function authenticate($account)
 	{
-		switch($cloudProvider->cloudProvider)
+		switch($account->cloudProvider)
 		{
 			case 'Amazon AWS' : return $this->AWSAuth($account); break;
 		}
