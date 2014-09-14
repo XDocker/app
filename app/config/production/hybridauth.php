@@ -1,9 +1,9 @@
 <?php
 /**
- * Class and Function List:
- * Function list:
- * Classes list:
- */
+* Class and Function List:
+* Function list:
+* Classes list:
+*/
 return array(
     /*
     |--------------------------------------------------------------------------
@@ -16,12 +16,12 @@ return array(
     |
     */
     
-    "base_url" => URL::to('user/social/auth') ,
+    "base_url" => URL::to('user/social/auth'),
     "providers" => array(
         "Google" => array(
             "enabled" => true,
             "keys" => array(
-                "id" => "667508165338-u4f17rre6vhqdda4o3m0it31uk15lknm.apps.googleusercontent.com",
+                "id" => "1031333276894-29163rbahnkl7mq210ujnj64g2viraoh.apps.googleusercontent.com",
                 "secret" => "2ucUzhWErni0PsrCD_HbAA_n"
             ) ,
         ) ,
@@ -35,15 +35,8 @@ return array(
         "LinkedIn" => array(
             "enabled" => true,
             "keys" => array(
-                "key" => "75xqpctq9drir4",
-                "secret" => "M4T3DQcHiA6Vf178"
-            ) ,
-        ) ,
-        "Github" => array(
-            "enabled" => true,
-            "keys" => array(
-                "key" => "",
-                "secret" => ""
+                "key" => "75e87jrvaewyzk",
+                "secret" => "ug1qoqjc3BvdV2q6"
             ) ,
         )
     ) ,

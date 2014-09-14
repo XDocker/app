@@ -50,7 +50,7 @@ class AccountController extends BaseController {
     public function getCreate($id = false) {
         $mode = $id !== false ? 'edit' : 'create';
         $account = $id !== false ? CloudAccount::findOrFail($id) : null;
-        $providers = Config::get('local/account_schema');
+        $providers = Config::get('account_schema');
         return View::make('site/account/create_edit', compact('mode', 'account', 'providers'));
     }
     /**
@@ -77,7 +77,7 @@ class AccountController extends BaseController {
             return Redirect::to('account')->with('success', Lang::get('account/account.account_account_updated'));
         }
         catch(Exception $e) {
-            return Redirect::to('account')->with('error', $error);
+            return Redirect::to('account')->with('error', $e->getMessage());
         }
     }
     /**

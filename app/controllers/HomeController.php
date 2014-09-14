@@ -36,10 +36,10 @@ class HomeController extends BaseController {
         if (Auth::check()) {
             $deployments = Deployment::where('user_id', Auth::id())->get();
         } else {
-            $deployments = false;
+            $deployments = array();
         }
         try {
-            $dockerHubCredentials = Config::get('local/thirdparty_integration.Docker_Hub');
+            $dockerHubCredentials = Config::get('thirdparty_integration.Docker_Hub');
             $search_term = Input::get('q');
             if (empty($search_term)) {
                 $search_term = 'xdocker';

@@ -6,12 +6,14 @@
 		<meta charset="utf-8" />
 		<title>
 			@section('title')
-			Laravel 4 Sample Site
+			xDocker Test drive Docker Image on any Cloud IaaS
 			@show
 		</title>
-		<meta name="keywords" content="your, awesome, keywords, here" />
-		<meta name="author" content="Jon Doe" />
-		<meta name="description" content="Lorem ipsum dolor sit amet, nihil fabulas et sea, nam posse menandri scripserit no, mei." />
+		<meta name="keywords" content="Docker, Amazon AWS Google Compute" />
+		<meta name="author" content="Team xDocker" />
+		<meta name="description" content="There are docker images for builds that are available in docker repository. We will only focus on public repositories. We list the repositories and any chosen repository could be deployed on any cloud. Now this could be run on your local machine too.
+But when you are vetting a service, as to how it looks and works, you may need to manually set up the service through multiple steps.
+" />
 
 		<!-- Mobile Specific Metas
 		================================================== -->
@@ -42,7 +44,7 @@
 		<link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{{ asset('assets/ico/apple-touch-icon-114-precomposed.png') }}}">
 		<link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{{ asset('assets/ico/apple-touch-icon-72-precomposed.png') }}}">
 		<link rel="apple-touch-icon-precomposed" href="{{{ asset('assets/ico/apple-touch-icon-57-precomposed.png') }}}">
-		<link rel="shortcut icon" href="{{{ asset('assets/ico/favicon.png') }}}">
+		<link rel="shortcut icon" href="{{{ asset('assets/ico/favicon.ico') }}}">
 	</head>
 
 	<body>
@@ -106,8 +108,7 @@
 	      <div class="container">
 	        <p class="muted credit text-center">xDocker : Test drive Docker images on any infrastructure. </p>
 	        <p class="text-center">
-	        	<iframe src="http://ghbtns.com/github-btn.html?user=Xervmon&repo=Xdocker&type=watch&count=true"
-  allowtransparency="true" frameborder="0" scrolling="0" width="170" height="30"></iframe>
+	        	<iframe src="http://ghbtns.com/github-btn.html?user=xdocker&repo=app&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="170" height="30"></iframe>
 	        </p>
 	      </div>
 	    </div>
