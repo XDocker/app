@@ -9,7 +9,7 @@ class CloudProvider
 		$config['key'] 	  =	$credentials->apiKey;
 		$config['secret'] = $credentials->secretKey;
 		$config['region'] = 'us-east-1';
-		$this -> aws = Aws\Common\Aws::factory($config);
+		self::$aws = Aws\Common\Aws::factory($config);
 
 		$conSTatus = false;
 		try
