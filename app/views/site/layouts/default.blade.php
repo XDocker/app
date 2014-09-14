@@ -108,7 +108,7 @@ But when you are vetting a service, as to how it looks and works, you may need t
 	      <div class="container">
 	        <p class="muted credit text-center">xDocker : Test drive Docker images on any infrastructure. </p>
 	        <p class="text-center">
-	        	<iframe src="http://ghbtns.com/github-btn.html?user=Xervmon&repo=Xdocker&type=watch&count=true"
+	        	<iframe src="http://ghbtns.com/github-btn.html?user=xdocker&repo=app&type=watch&count=true"
   allowtransparency="true" frameborder="0" scrolling="0" width="170" height="30"></iframe>
 	        </p>
 	      </div>
