@@ -318,7 +318,7 @@ class UserController extends BaseController {
         }
         catch(Exception $err) {
             Log::error($err);
-            return Redirect::to('/')->with('notice', $e->getMessage());
+            return Redirect::to('/')->with('notice', $err->getMessage());
         }
         
         return Redirect::to('/');
