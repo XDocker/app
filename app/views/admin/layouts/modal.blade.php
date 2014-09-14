@@ -146,7 +146,7 @@
 	});
 	});
 	$('.wysihtml5').wysihtml5();
-	$(prettyPrint)
+	$(prettyPrint);
 </script>
 
     @yield('scripts')

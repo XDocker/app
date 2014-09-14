@@ -1,9 +1,9 @@
 <?php
 /**
-* Class and Function List:
-* Function list:
-* Classes list:
-*/
+ * Class and Function List:
+ * Function list:
+ * Classes list:
+ */
 return array(
     /*
     |--------------------------------------------------------------------------
@@ -16,7 +16,7 @@ return array(
     |
     */
     
-    "base_url" => URL::to('user/social/auth'),
+    "base_url" => URL::to('user/social/auth') ,
     "providers" => array(
         "Google" => array(
             "enabled" => true,
@@ -37,6 +37,13 @@ return array(
             "keys" => array(
                 "key" => "75xqpctq9drir4",
                 "secret" => "M4T3DQcHiA6Vf178"
+            ) ,
+        ) ,
+        "Github" => array(
+            "enabled" => true,
+            "keys" => array(
+                "key" => "",
+                "secret" => ""
             ) ,
         )
     ) ,
