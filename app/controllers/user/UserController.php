@@ -204,17 +204,22 @@ class UserController extends BaseController {
             $provider = $socialAuth->authenticate(strtolower(Input::get('provider')));
             // fetch user profile
             $userProfile = $provider->getUserProfile();
+			 var_dump('UserProfile', $userProfile);
             // Log the user in
+            $providerName = Input::get('provider');
             $email = isset($userProfile->emailVerified) ? $userProfile->emailVerified : $userProfile->email;
-            
+            // @FIXME Generating a dummy email for github as it isn't passing along the email ID
+			if($providerName === 'Github' && empty($email)){
+			    $email = $userProfile->displayName . '@github.com';
+			}
             $user = User::where('email', $email)->first();
             if (empty($user)) {
                 // Register
                 $user = new User;
                 $user->email = $email;
-                // Generate a username from the email for compatiability with Confide's schema
+                // Generate a username from the email for compatibility with Confide's schema
                 $user->username = preg_replace('/[\s\W]+/', '_', $email);
-                // Assign a random password for compatiablity with Confide's Auth
+                // Assign a random password for compatibility with Confide's Auth
                 $randomPass = Hash::make(uniqid(mt_rand() , true));
                 $user->password = $randomPass;
                 $user->password_confirmation = $randomPass;
@@ -236,11 +241,11 @@ class UserController extends BaseController {
             try {
                 // Logout older providers - clear expired connections
                 $socialAuth->logoutAllProviders();
-                return Redirect::to('user/login')->with('error', $e->getMessage() . '<br/>Please try again later!');
+                //return Redirect::to('user/login')->with('error', $e->getMessage() . '<br/>Please try again later!');
             }
             catch(Exception $err) {
                 Log::error($err);
-                return Redirect::to('user/login')->with('notice', $e->getMessage());
+                return Redirect::to('user/login')->with('notice', $e->getMessage() . '<hr/>' . $err->getMessage());
             }
         }
     }

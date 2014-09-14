@@ -42,8 +42,8 @@ return array(
         "Github" => array(
             "enabled" => true,
             "keys" => array(
-                "key" => "",
-                "secret" => ""
+                "id" => "034831f8e83e0e93de01",
+                "secret" => "365e4188fad6f44768ca929e562cecb7f1dc8fa9"
             ) ,
         )
     ) ,
