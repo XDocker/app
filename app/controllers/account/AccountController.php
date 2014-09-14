@@ -38,7 +38,7 @@ class AccountController extends BaseController {
      */
     public function getIndex() {
         // Get all the user's accounts
-        $accounts = $this->accounts->orderBy('created_at', 'DESC')->paginate(10);
+        $accounts = $this->accounts->where('user_id', Auth::id())->orderBy('created_at', 'DESC')->paginate(10);
         // var_dump($accounts, $this->accounts, $this->accounts->owner);
         // Show the page
         return View::make('site/account/index', compact('accounts'));
@@ -72,7 +72,7 @@ class AccountController extends BaseController {
             // Save it in credentials field of table as json.
             // $account->prepareRules($oldAccount, $account);
             // Save if valid.
-            if($conStatus === 1)
+            if($conStatus == 1)
 			{
             	$success = $account->save();
 				return Redirect::to('account')->with('success', Lang::get('account/account.account_account_updated'));
@@ -81,7 +81,6 @@ class AccountController extends BaseController {
 			{
 				return Redirect::to('account')->with('error', Lang::get('account/account.account_account_auth_failed'));
 			}
-           
         }
         catch(Exception $e) {
         	Log::error($e);

@@ -6,14 +6,16 @@
 * Classes list:
 * - CloudAccount extends \
 */
-class CloudAccount extends \Eloquent {
+class CloudAccount extends \Eloquent 
+{
     protected $fillable = [];
     /**
      * Get the account's owner.
      *
      * @return User
      */
-    public function owner() {
+    public function owner() 
+    {
         return $this->belongsTo('User', 'user_id');
     }
 }
