@@ -5,8 +5,9 @@ class CloudProvider
 	private $aws;
 	private function AWSAuth($account)
 	{
-		$config['key'] =$account->api_key;
-		$config['secret'] = $account->secret_key;
+		$credentials = json_decode($account->credentials);
+		$config['key'] 	  =	$credentials->apiKey;
+		$config['secret'] = $credentials->secretKey;
 		$config['region'] = 'us-east-1';
 		$this -> aws = Aws\Common\Aws::factory($config);
 
@@ -20,16 +21,15 @@ class CloudProvider
 		} catch(Exception $ex)
 		{
 			$conSTatus = false;
+			Log::error($ex);
 			//log_message('error', 'Connection failed with API and Secret .' . $ex->getMessage());
 		}
 		return $conSTatus;
 	}
 	
-	public static function authenticate($cloudProvider, $account)
+	public static function authenticate($account)
 	{
-		echo $cloudProvider;
-		print_r($account); die();
-		switch($cloudProvider)
+		switch($cloudProvider->cloudProvider)
 		{
 			case 'Amazon AWS' : return $this->AWSAuth($account); break;
 		}
