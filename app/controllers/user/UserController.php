@@ -203,9 +203,16 @@ class UserController extends BaseController {
             $provider = $socialAuth->authenticate(strtolower(Input::get('provider')));
             // fetch user profile
             $userProfile = $provider->getUserProfile();
+			 var_dump('UserProfile', $userProfile);
             // Log the user in
+            $providerName = Input::get('provider');
             $email = isset($userProfile->emailVerified) ? $userProfile->emailVerified : $userProfile->email;
-            
+            // @FIXME Generating a dummy email for github as it isn't passing along the email ID
+			if($providerName === 'Github' && empty($email)){
+			    $email = $userProfile->displayName . '@github.com';
+			}
+			var_dump('provider',$providerName);
+			var_dump('email',$email);
             $user = User::where('email', $email)->first();
             if (empty($user)) {
                 // Register
@@ -235,11 +242,11 @@ class UserController extends BaseController {
             try {
                 // Logout older providers - clear expired connections
                 $socialAuth->logoutAllProviders();
-                return Redirect::to('user/login')->with('error', $e->getMessage() . '<br/>Please try again later!');
+                //return Redirect::to('user/login')->with('error', $e->getMessage() . '<br/>Please try again later!');
             }
             catch(Exception $err) {
                 var_dump($err);
-                return Redirect::to('user/login')->with('notice', $e->getMessage());
+                //return Redirect::to('user/login')->with('notice', $e->getMessage());
             }
         }
     }
