@@ -211,9 +211,9 @@ class UserController extends BaseController {
                 // Register
                 $user = new User;
                 $user->email = $email;
-                // Generate a username from the email for compatiability with Confide's schema
+                // Generate a username from the email for compatibility with Confide's schema
                 $user->username = preg_replace('/[\s\W]+/', '_', $email);
-                // Assign a random password for compatiablity with Confide's Auth
+                // Assign a random password for compatibility with Confide's Auth
                 $randomPass = Hash::make(uniqid(mt_rand() , true));
                 $user->password = $randomPass;
                 $user->password_confirmation = $randomPass;
@@ -239,7 +239,7 @@ class UserController extends BaseController {
             }
             catch(Exception $err) {
                 var_dump($err);
-                return Redirect::to('user/login')->with('notice', $e->getMessage());
+                return Redirect::to('user/login')->with('notice', $e->getMessage() . '<hr/>' . $err->getMessage());
             }
         }
     }
