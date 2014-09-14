@@ -191,7 +191,7 @@ class UserController extends BaseController {
                 Hybrid_Endpoint::process();
             }
             catch(Exception $e) {
-            	Log::error($e);
+                Log::error($e);
                 // redirect back to http://URL/social/
                 return Redirect::route('hybridauth');
             }
@@ -204,14 +204,14 @@ class UserController extends BaseController {
             $provider = $socialAuth->authenticate(strtolower(Input::get('provider')));
             // fetch user profile
             $userProfile = $provider->getUserProfile();
-			 var_dump('UserProfile', $userProfile);
+            var_dump('UserProfile', $userProfile);
             // Log the user in
             $providerName = Input::get('provider');
             $email = isset($userProfile->emailVerified) ? $userProfile->emailVerified : $userProfile->email;
             // @FIXME Generating a dummy email for github as it isn't passing along the email ID
-			if($providerName === 'Github' && empty($email)){
-			    $email = $userProfile->displayName . '@github.com';
-			}
+            if ($providerName === 'Github' && empty($email)) {
+                $email = $userProfile->displayName . '@github.com';
+            }
             $user = User::where('email', $email)->first();
             if (empty($user)) {
                 // Register
@@ -242,6 +242,7 @@ class UserController extends BaseController {
                 // Logout older providers - clear expired connections
                 $socialAuth->logoutAllProviders();
                 //return Redirect::to('user/login')->with('error', $e->getMessage() . '<br/>Please try again later!');
+                
             }
             catch(Exception $err) {
                 Log::error($err);
