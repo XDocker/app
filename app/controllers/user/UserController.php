@@ -191,6 +191,7 @@ class UserController extends BaseController {
                 Hybrid_Endpoint::process();
             }
             catch(Exception $e) {
+            	Log::error($e);
                 // redirect back to http://URL/social/
                 return Redirect::route('hybridauth');
             }
@@ -231,14 +232,14 @@ class UserController extends BaseController {
         }
         catch(Exception $e) {
             // exception codes can be found on HybBridAuth's web site
-            var_dump($e);
+            Log::error($e);
             try {
                 // Logout older providers - clear expired connections
                 $socialAuth->logoutAllProviders();
                 return Redirect::to('user/login')->with('error', $e->getMessage() . '<br/>Please try again later!');
             }
             catch(Exception $err) {
-                var_dump($err);
+                Log::error($err);
                 return Redirect::to('user/login')->with('notice', $e->getMessage());
             }
         }
@@ -311,7 +312,7 @@ class UserController extends BaseController {
             $socialAuth->logoutAllProviders();
         }
         catch(Exception $err) {
-            var_dump($err);
+            Log::error($err);
             return Redirect::to('/')->with('notice', $e->getMessage());
         }
         
