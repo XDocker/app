@@ -2,7 +2,7 @@
 //require_once SHARED_ADDONPATH . 'libraries/aws/aws.phar';
 class CloudProvider
 {
-	private $aws;
+	private static $aws;
 	private static function AWSAuth($account)
 	{
 		$credentials = json_decode($account->credentials);
@@ -14,7 +14,7 @@ class CloudProvider
 		$conSTatus = false;
 		try
 		{
-			$ec2Compute = $this -> aws -> get('ec2');
+			$ec2Compute = self::$aws -> get('ec2');
 			$result = $ec2Compute->getRegions();
 			$conSTatus = (!empty($result) && count($result) > 0);
 
