@@ -25,8 +25,10 @@ class CloudProvider
 		return $conSTatus;
 	}
 	
-	public function authenticate($cloudProvider, $account)
+	public static function authenticate($cloudProvider, $account)
 	{
+		echo $cloudProvider;
+		print_r($account); die();
 		switch($cloudProvider)
 		{
 			case 'Amazon AWS' : return $this->AWSAuth($account); break;
