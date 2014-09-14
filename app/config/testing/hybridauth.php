@@ -38,6 +38,13 @@ return array(
                 "key" => "75e87jrvaewyzk",
                 "secret" => "ug1qoqjc3BvdV2q6"
             ) ,
+        ),
+         "Github" => array(
+            "enabled" => true,
+            "keys" => array(
+                "key" => "",
+                "secret" => ""
+            ) ,
         )
     ) ,
 );
