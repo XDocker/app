@@ -8,13 +8,13 @@ return array(
  
     'port' => 587,
  
-    'from' => array('address' => 'test@gamecp.com', 'name' => 'LaravelCP'),
+    'from' => array('address' => 'info@xervmon.com', 'name' => 'Info Team'),
  
     'encryption' => 'tls',
  
-    'username' => 'test@gamecp.com',
+    'username' => 'info@xervmon.com',
  
-    'password' => 'password',
+    'password' => 'Java9873#man',
  
     'sendmail' => '/usr/sbin/sendmail -bs',
  
