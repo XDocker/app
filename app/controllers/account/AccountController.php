@@ -73,7 +73,7 @@ class AccountController extends BaseController {
             // Save it in credentials field of table as json.
             // $account->prepareRules($oldAccount, $account);
             // Save if valid.
-            if($conSTatus)
+            if($conStatus)
 			{
             	$success = $account->save();
 				return Redirect::to('account')->with('success', Lang::get('account/account.account_account_updated'));
