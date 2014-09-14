@@ -16,7 +16,6 @@ class CloudProvider
 		{
 			$ec2Compute = self::$aws -> get('ec2');
 			$result = $ec2Compute->getRegions();
-			print_r($result); die);
 			$conStatus = (!empty($result) && count($result) > 0);
 
 		} catch(Exception $ex)
