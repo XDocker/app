@@ -3,7 +3,7 @@
 class CloudProvider
 {
 	private $aws;
-	private function AWSAuth($account)
+	private static function AWSAuth($account)
 	{
 		$credentials = json_decode($account->credentials);
 		$config['key'] 	  =	$credentials->apiKey;
@@ -31,7 +31,7 @@ class CloudProvider
 	{
 		switch($account->cloudProvider)
 		{
-			case 'Amazon AWS' : return $this->AWSAuth($account); break;
+			case 'Amazon AWS' : return self::AWSAuth($account); break;
 		}
 	}
 }
