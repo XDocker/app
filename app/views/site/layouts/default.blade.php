@@ -88,6 +88,9 @@ But when you are vetting a service, as to how it looks and works, you may need t
 
 		<!-- Container -->
 		<div class="container">
+			<a {{ (Request::is('/') ? ' class="show"' : 'class="hide"') }} href="https://github.com/XDocker/web" target="_blank">
+		        <img style="position: absolute; top: 53px; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub">
+		      </a>
 			<!-- Notifications -->
 			@include('notifications')
 			<!-- ./ notifications -->

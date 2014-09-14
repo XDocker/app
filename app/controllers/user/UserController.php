@@ -236,13 +236,13 @@ class UserController extends BaseController {
 			return Redirect::intended('/');
 		} catch(Exception $e) {
 			// exception codes can be found on HybBridAuth's web site
-			var_dump($e);
+			//var_dump($e);
 			try {
 				// Logout older providers - clear expired connections
 				$socialAuth -> logoutAllProviders();
 				//return Redirect::to('user/login')->with('error', $e->getMessage() . '<br/>Please try again later!');
 			} catch(Exception $err) {
-				var_dump($err);
+				//var_dump($err);
 				return Redirect::to('user/login') -> with('notice', $e -> getMessage() . '<hr/>' . $err -> getMessage());
 			}
 		}
@@ -316,7 +316,7 @@ class UserController extends BaseController {
 			$socialAuth = new Hybrid_Auth(app_path() . '/config/hybridauth.php');
 			$socialAuth -> logoutAllProviders();
 		} catch(Exception $err) {
-			var_dump($err);
+			//var_dump($err);
 			return Redirect::to('/') -> with('notice', $e -> getMessage());
 		}
 
