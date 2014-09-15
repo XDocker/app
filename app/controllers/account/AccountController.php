@@ -68,22 +68,19 @@ class AccountController extends BaseController {
             $account->user_id = Auth::id(); // logged in user id
             
             $conStatus = CloudProvider::authenticate($account);
-			//@TODO  based on the json template for provider to populate, load the field and values.
+            //@TODO  based on the json template for provider to populate, load the field and values.
             // Save it in credentials field of table as json.
             // $account->prepareRules($oldAccount, $account);
             // Save if valid.
-            if($conStatus == 1)
-			{
-            	$success = $account->save();
-				return Redirect::to('account')->with('success', Lang::get('account/account.account_account_updated'));
+            if ($conStatus == 1) {
+                $success = $account->save();
+                return Redirect::to('account')->with('success', Lang::get('account/account.account_account_updated'));
+            } else {
+                return Redirect::to('account')->with('error', Lang::get('account/account.account_account_auth_failed'));
             }
-			else 
-			{
-				return Redirect::to('account')->with('error', Lang::get('account/account.account_account_auth_failed'));
-			}
         }
         catch(Exception $e) {
-        	Log::error($e);
+            Log::error($e);
             return Redirect::to('account')->with('error', $e->getMessage());
         }
     }
