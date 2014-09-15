@@ -13,5 +13,6 @@ return array(
 	'cp_amazon_aws'              => 'Amazon AWS',
 	'account_updated'          => 'Account updated.',
 	'account_created'          => 'Account created.',
+	'account_auth_failed'	   => 'Account authentication failed. Please check credentials',
 
 );
