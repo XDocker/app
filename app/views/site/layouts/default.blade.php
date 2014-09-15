@@ -61,7 +61,7 @@ But when you are vetting a service, as to how it looks and works, you may need t
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="{{{ URL::to('') }}}"><img src="http://www.xdocker.org/wp-content/uploads/2014/09/xDocker_5.png "></a>  
+                    <a class="navbar-brand" href="{{{ URL::to('') }}}"><img src="{{{ asset('assets/img/xDocker_5.png') }}}"></a>  
                 </div>
                 <div class="collapse navbar-collapse" id="navbar-collapse-target">
                     <ul class="nav navbar-nav navbar-right">
@@ -86,7 +86,7 @@ But when you are vetting a service, as to how it looks and works, you may need t
 		<!-- Container -->
 		<div class="container">
 			<a {{ (Request::is('/') ? ' class="show"' : 'class="hide"') }} href="https://github.com/XDocker/app" target="_blank">
-		        <img style="position: absolute; top: 53px; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub">
+		        <img style="position: absolute; top: 53px; right: 0; border: 0;" src="{{{ asset('assets/img/forkme_right_red_aa0000.png') }}}" alt="Fork me on GitHub">
 		      </a>
 			<!-- Notifications -->
 			@include('notifications')
