@@ -38,6 +38,7 @@ class AccountController extends BaseController {
      */
     public function getIndex() {
         // Get all the user's accounts
+        //Auth::id() : gives the logged in userid
         $accounts = $this->accounts->where('user_id', Auth::id())->orderBy('created_at', 'DESC')->paginate(10);
         // var_dump($accounts, $this->accounts, $this->accounts->owner);
         // Show the page
@@ -74,9 +75,9 @@ class AccountController extends BaseController {
             // Save if valid.
             if ($conStatus == 1) {
                 $success = $account->save();
-                return Redirect::to('account')->with('success', Lang::get('account/account.account_account_updated'));
+                return Redirect::to('account')->with('success', Lang::get('account/account.account_updated'));
             } else {
-                return Redirect::to('account')->with('error', Lang::get('account/account.account_account_auth_failed'));
+                return Redirect::to('account')->with('error', Lang::get('account/account.account_auth_failed'));
             }
         }
         catch(Exception $e) {
