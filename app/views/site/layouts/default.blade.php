@@ -61,7 +61,7 @@ But when you are vetting a service, as to how it looks and works, you may need t
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="{{{ URL::to('') }}}"><img src="{{{ asset('assets/img/xDocker_5.png') }}}"></a>  
+                    <a class="navbar-brand" href="{{{ URL::to('') }}}"><img src="{{{ asset('assets/img/logo.png') }}}"></a>  
                 </div>
                 <div class="collapse navbar-collapse" id="navbar-collapse-target">
                     <ul class="nav navbar-nav navbar-right">
