@@ -88,6 +88,8 @@ But when you are vetting a service, as to how it looks and works, you may need t
 			<a {{ (Request::is('/') ? ' class="show"' : 'class="hide"') }} href="https://github.com/XDocker/app" target="_blank">
 		        <img style="position: absolute; top: 53px; right: 0; border: 0;" src="{{{ asset('assets/img/forkme_right_red_aa0000.png') }}}" alt="Fork me on GitHub">
 		      </a>
+
+		    {{App::environment()}}
 			<!-- Notifications -->
 			@include('notifications')
 			<!-- ./ notifications -->
