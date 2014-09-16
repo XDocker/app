@@ -1,6 +1,8 @@
 # Laravel
 /bootstrap/compiled.php
 /vendor
+/app/storage/logs
+/app/storage/sessions
 
 # Configuration
 /app/config/local
