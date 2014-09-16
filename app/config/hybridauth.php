@@ -47,7 +47,7 @@ return array(
             ),
             "wrapper" => array(
                     'class'=>'',
-                    'path' => ''
+                    'path' => '' 
                 )
         )
     ) ,
