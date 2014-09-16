@@ -29,7 +29,7 @@
 	</ul>
 </div>
 <div>
-	<a href="{{ URL::to('account/create') }}" class="btn btn-inverse pull-right" role="button">Add New Cloud Account</a>
+	<a href="{{ URL::to('account/create') }}" class="btn btn-block pull-right" role="button">Add New Cloud Account</a>
 </div>
 
 @stop
