@@ -1,77 +1,77 @@
 .social-login-icons {
-	margin-right: 20px;
+    margin-right: 20px;
 }
-
 .social-google {
-  color: #da573b;
-  border-color: #be5238;
+    color: #da573b;
+    border-color: #be5238;
 }
-.social-google:hover{
-  color: #be5238;
-  border-color: #9b4631;
+.social-google:hover {
+    color: #be5238;
+    border-color: #9b4631;
 }
-
 .social-git {
-  color: #34495E;
-  border-color: #34495E;
+    color: #34495E;
+    border-color: #34495E;
 }
 .social-git:hover {
-  color: #2C3E50;
-  border-color: #2C3E50;
+    color: #2C3E50;
+    border-color: #2C3E50;
 }
 .social-facebook {
-  color: #4c699e;
-  border-color: #47618d;
+    color: #4c699e;
+    border-color: #47618d;
 }
 .social-facebook:hover {
-  color: #47618d;
-  border-color: #3c5173;
+    color: #47618d;
+    border-color: #3c5173;
 }
-
 .social-linkedin {
-  color: #4875B4;
-  border-color: #466b99;
+    color: #4875B4;
+    border-color: #466b99;
 }
 .social-linkedin:hover {
-  color: #466b99;
-  border-color: #3b5a7c;
+    color: #466b99;
+    border-color: #3b5a7c;
 }
-
 .main {
-	width: 320px;
-	margin: 0 auto;
+    width: 320px;
+    margin: 0 auto;
 }
-
 .login-checkbox {
-	float: right;
+    float: right;
 }
-
 .login-checkbox > label > #remember {
 	margin-top: 5px;
 }
-
-.home-search{
-	margin-bottom:0px;	
+.home-search {
+    margin-bottom: 0px;
 }
-
 .list-group-custom > li > div > a > img {
-	width: 35px;
+    width: 35px;
 }
-
 .list-group-custom > li > div > .media-body > p {
-	font-size: 14px;
-	margin: 0px;
+    font-size: 14px;
+    margin: 0px;
 }
-
 .list-group-custom > li > div > .media-body > .media-heading {
-	font-size: 20px;
-	font-weight: bold;
+    font-size: 20px;
+    font-weight: bold;
 }
-
 .nav-tabs {
-	margin-bottom: 15px;
+    margin-bottom: 15px;
 }
-
+.navbar-brand img {
+    margin-top: -5%;
+}
+.clear-both {
+    clear: both;
+}
+.banner-github {
+    position: absolute;
+    top: 64px;
+    right: 0;
+    border: 0;
+}
 .label {
 	font-weight: 500;
 }

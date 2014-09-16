@@ -62,7 +62,7 @@ But when you are vetting a service, as to how it looks and works, you may need t
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="{{{ URL::to('') }}}"><img src="{{{ asset('assets/img/logo.png') }}}"></a>  
+                    <a class="navbar-brand" href="{{{ URL::to('/') }}}"><img class="img-responsive" src="{{{ asset('assets/img/logo.png') }}}"></a>  
                 </div>
                 <div class="collapse navbar-collapse" id="navbar-collapse-target">
                     <ul class="nav navbar-nav navbar-right">
@@ -84,11 +84,12 @@ But when you are vetting a service, as to how it looks and works, you may need t
 		</nav>
 		<!-- ./ navbar -->
 
+		<a class="banner-github {{ (Request::is('/') ? '' : 'hide') }}" href="https://github.com/XDocker/app" target="_blank">
+	        <img src="{{{ asset('assets/img/forkme_right_red_aa0000.png') }}}" alt="Fork me on GitHub">
+	    </a>
+
 		<!-- Container -->
-		<div class="container">
-			<a {{ (Request::is('/') ? ' class="show"' : 'class="hide"') }} href="https://github.com/XDocker/app" target="_blank">
-		        <img style="position: absolute; top: 53px; right: 0; border: 0;" src="{{{ asset('assets/img/forkme_right_red_aa0000.png') }}}" alt="Fork me on GitHub">
-		    </a>
+		<div class="container clear-both">
 			<!-- Notifications -->
 			@include('notifications')
 			<!-- ./ notifications -->

@@ -204,7 +204,6 @@ class UserController extends BaseController {
             $provider = $socialAuth->authenticate(strtolower(Input::get('provider')));
             // fetch user profile
             $userProfile = $provider->getUserProfile();
-            return var_dump($userProfile);
             // Log the user in
             $providerName = Input::get('provider');
             $email = isset($userProfile->emailVerified) ? $userProfile->emailVerified : $userProfile->email;
