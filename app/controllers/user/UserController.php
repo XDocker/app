@@ -213,6 +213,7 @@ class UserController extends BaseController {
 			if ($providerName === 'Github' && empty($email)) {
 				$email = $userProfile -> displayName . '@github.com';
 			}
+			
 			$user = User::where('email', $email) -> first();
 			if (empty($user)) {
 				// Register
@@ -237,6 +238,7 @@ class UserController extends BaseController {
 			return Redirect::intended('/');
 		} catch(Exception $e) {
 			// exception codes can be found on HybBridAuth's web site
+			var_dump('$e',$e);
 			Log::error($e);
 			try {
 				// Logout older providers - clear expired connections

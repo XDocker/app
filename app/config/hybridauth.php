@@ -39,12 +39,16 @@ return array(
                 "secret" => "M4T3DQcHiA6Vf178"
             ) ,
         ) ,
-        "Github" => array(
+        "GitHub" => array(
             "enabled" => true,
             "keys" => array(
-                "id" => "034831f8e83e0e93de01",
-                "secret" => "365e4188fad6f44768ca929e562cecb7f1dc8fa9"
-            ) ,
-        )
+                "id" => "3e3fafa53756d298a947",
+                "secret" => "7d74ad22d1f3793fdc18b846d6df4b25b1762f85"
+            ),
+            "wrapper" => array(
+                    'class'=>'Hybrid_Providers_GitHub',
+                    'path' => app_path() . '/../vendor/hybridauth/hybridauth/additional-providers/hybridauth-github/Providers/GitHub.php'
+                )
+        ),
     ) ,
 );
