@@ -38,8 +38,8 @@
 					@endforeach
 				@endif
 		</ul>
-		@if(empty($deployments))
-			{{{ Lang::get('home/home.empty_deployments') }}}
+		@if(count($deployments) === 0) 
+			<div class="alert alert-warning"> {{{ Lang::get('home/home.empty_deployments') }}}</div>
 		@endif
 	</div>
 @endif
