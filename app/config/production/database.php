@@ -58,12 +58,12 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => '127.0.0.1',
-			'database'  => 'xdocker',
-			'username'  => 'root',
-			'password'  => '',
+			'database'  => 'dev',
+			'username'  => 'dev',
+			'password'  => 'oYTrSdbR0II76Qnl',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
-			'prefix'    => '',
+			'prefix'    => 'xd_',
 		),
 
 		'pgsql' => array(
