@@ -16,11 +16,7 @@
 <div class="media-block">
 	<h6 class="page-header">Your Deployments:</h6>
 	<ul class="list-group list-group-custom">
-		{{{
-		<?php
-			if(!empty($deployments)) 
-			{
-		?>
+		@if(!empty($deployments)) 
 			@foreach($deployments as $deployment)
 	  		<li class="list-group-item">
 				<div class="media">
@@ -39,11 +35,9 @@
 				</div>
 			</li>
 			@endforeach
-			<?php
-			
-			}
-			else echo Lang::get('home/home.empty_deployments');
-			?>
+		@endif
+		@if(empty($deployments)) {{{ Lang::get('home/home.empty_deployments') }}}
+		@endif
 	</ul>
 </div>
 <div class="page-header">
