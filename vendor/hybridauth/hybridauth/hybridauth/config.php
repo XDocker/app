@@ -59,10 +59,6 @@ return
 				"enabled" => true,
 				"keys"    => array ( "id" => "", "secret" => "" ) 
 			),
-			"GitHub" => array (
-				"enabled" => true,
-				"keys"    => array ( "id" => "", "secret" => "" ) 
-			),
 		),
 
 		// if you want to enable logging, set 'debug_mode' to true  then provide a writable file by the web server on "debug_file"

@@ -5,8 +5,6 @@ use ArrayAccess;
 use ReflectionClass;
 use ReflectionParameter;
 
-class BindingResolutionException extends \Exception {}
-
 class Container implements ArrayAccess {
 
 	/**
@@ -105,7 +103,7 @@ class Container implements ArrayAccess {
 	/**
 	 * Register a binding with the container.
 	 *
-	 * @param  string  $abstract
+	 * @param  string|array  $abstract
 	 * @param  \Closure|string|null  $concrete
 	 * @param  bool  $shared
 	 * @return void
@@ -200,7 +198,7 @@ class Container implements ArrayAccess {
 	 * Wrap a Closure such that it is shared.
 	 *
 	 * @param  \Closure  $closure
-	 * @return Closure
+	 * @return \Closure
 	 */
 	public function share(Closure $closure)
 	{
@@ -852,6 +850,29 @@ class Container implements ArrayAccess {
 		unset($this->bindings[$key]);
 
 		unset($this->instances[$key]);
+	}
+
+	/**
+	 * Dynamically access container services.
+	 *
+	 * @param  string  $key
+	 * @return mixed
+	 */
+	public function __get($key)
+	{
+		return $this[$key];
+	}
+
+	/**
+	 * Dynamically set container services.
+	 *
+	 * @param  string  $key
+	 * @param  mixed   $value
+	 * @return void
+	 */
+	public function __set($key, $value)
+	{
+		$this[$key] = $value;
 	}
 
 }

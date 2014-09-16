@@ -77,7 +77,7 @@ class Builder {
 			return $this->findMany($id, $columns);
 		}
 
-		$this->query->where($this->model->getKeyName(), '=', $id);
+		$this->query->where($this->model->getQualifiedKeyName(), '=', $id);
 
 		return $this->first($columns);
 	}
@@ -93,7 +93,7 @@ class Builder {
 	{
 		if (empty($id)) return $this->model->newCollection();
 
-		$this->query->whereIn($this->model->getKeyName(), $id);
+		$this->query->whereIn($this->model->getQualifiedKeyName(), $id);
 
 		return $this->get($columns);
     }
@@ -105,7 +105,7 @@ class Builder {
 	 * @param  array  $columns
 	 * @return \Illuminate\Database\Eloquent\Model|static
 	 *
-	 * @throws ModelNotFoundException
+	 * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
 	 */
 	public function findOrFail($id, $columns = array('*'))
 	{
@@ -131,7 +131,7 @@ class Builder {
 	 * @param  array  $columns
 	 * @return \Illuminate\Database\Eloquent\Model|static
 	 *
-	 * @throws ModelNotFoundException
+	 * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
 	 */
 	public function firstOrFail($columns = array('*'))
 	{
@@ -405,7 +405,7 @@ class Builder {
 	 * Get the hydrated models without eager loading.
 	 *
 	 * @param  array  $columns
-	 * @return array|static[]
+	 * @return \Illuminate\Database\Eloquent\Model[]
 	 */
 	public function getModels($columns = array('*'))
 	{
@@ -711,7 +711,7 @@ class Builder {
 	/**
 	 * Set the relationships that should be eager loaded.
 	 *
-	 * @param  dynamic  $relations
+	 * @param  mixed  $relations
 	 * @return $this
 	 */
 	public function with($relations)

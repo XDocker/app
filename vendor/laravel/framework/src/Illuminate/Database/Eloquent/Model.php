@@ -352,7 +352,7 @@ abstract class Model implements ArrayAccess, ArrayableInterface, JsonableInterfa
 	/**
 	 * Get the global scopes for this class instance.
 	 *
-	 * @return array
+	 * @return \Illuminate\Database\Eloquent\ScopeInterface[]
 	 */
 	public function getGlobalScopes()
 	{
@@ -389,7 +389,7 @@ abstract class Model implements ArrayAccess, ArrayableInterface, JsonableInterfa
 	 * @param  array  $attributes
 	 * @return $this
 	 *
-	 * @throws MassAssignmentException
+	 * @throws \Illuminate\Database\Eloquent\MassAssignmentException
 	 */
 	public function fill(array $attributes)
 	{
@@ -590,7 +590,7 @@ abstract class Model implements ArrayAccess, ArrayableInterface, JsonableInterfa
 	/**
 	 * Begin querying the model.
 	 *
-	 * @return \Illuminate\Database\Eloquent\Builder|static
+	 * @return \Illuminate\Database\Eloquent\Builder
 	 */
 	public static function query()
 	{
@@ -601,7 +601,7 @@ abstract class Model implements ArrayAccess, ArrayableInterface, JsonableInterfa
 	 * Begin querying the model on a given connection.
 	 *
 	 * @param  string  $connection
-	 * @return \Illuminate\Database\Eloquent\Builder|static
+	 * @return \Illuminate\Database\Eloquent\Builder
 	 */
 	public static function on($connection = null)
 	{
@@ -665,7 +665,7 @@ abstract class Model implements ArrayAccess, ArrayableInterface, JsonableInterfa
 	 * @param  array  $columns
 	 * @return \Illuminate\Support\Collection|static
 	 *
-	 * @throws ModelNotFoundException
+	 * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
 	 */
 	public static function findOrFail($id, $columns = array('*'))
 	{
@@ -1262,6 +1262,42 @@ abstract class Model implements ArrayAccess, ArrayableInterface, JsonableInterfa
 	}
 
 	/**
+	 * Set the observable event names.
+	 *
+	 * @return void
+	 */
+	public function setObservableEvents(array $observables)
+	{
+		$this->observables = $observables;
+	}
+
+	/**
+	 * Add an observable event name.
+	 *
+	 * @param  mixed  $observables
+	 * @return void
+	 */
+	public function addObservableEvents($observables)
+	{
+		$observables = is_array($observables) ? $observables : func_get_args();
+
+		$this->observables = array_unique(array_merge($this->observables, $observables));
+	}
+
+	/**
+	 * Remove an observable event name.
+	 *
+	 * @param  mixed  $observables
+	 * @return void
+	 */
+	public function removeObservableEvents($observables)
+	{
+		$observables = is_array($observables) ? $observables : func_get_args();
+
+		$this->observables = array_diff($this->observables, $observables);
+	}
+
+	/**
 	 * Increment a column's value by a given amount.
 	 *
 	 * @param  string  $column
@@ -1529,6 +1565,8 @@ abstract class Model implements ArrayAccess, ArrayableInterface, JsonableInterfa
 		foreach ($this->touches as $relation)
 		{
 			$this->$relation()->touch();
+
+			$this->$relation->touchOwners();
 		}
 	}
 
@@ -1691,7 +1729,7 @@ abstract class Model implements ArrayAccess, ArrayableInterface, JsonableInterfa
 	/**
 	 * Get a new query builder for the model's table.
 	 *
-	 * @return \Illuminate\Database\Eloquent\Builder|static
+	 * @return \Illuminate\Database\Eloquent\Builder
 	 */
 	public function newQuery()
 	{
@@ -1750,7 +1788,7 @@ abstract class Model implements ArrayAccess, ArrayableInterface, JsonableInterfa
 	 * Remove all of the global scopes from an Eloquent builder.
 	 *
 	 * @param  \Illuminate\Database\Eloquent\Builder  $builder
-	 * @return void
+	 * @return \Illuminate\Database\Eloquent\Builder
 	 */
 	public function removeGlobalScopes($builder)
 	{
@@ -1853,6 +1891,16 @@ abstract class Model implements ArrayAccess, ArrayableInterface, JsonableInterfa
 	public function getKeyName()
 	{
 		return $this->primaryKey;
+	}
+
+	/**
+	 * Set the primary key for the model.
+	 *
+	 * @return void
+	 */
+	public function setKeyName($key)
+	{
+		$this->primaryKey = $key;
 	}
 
 	/**
@@ -2542,7 +2590,7 @@ abstract class Model implements ArrayAccess, ArrayableInterface, JsonableInterfa
 		// If this value is some other type of string, we'll create the DateTime with
 		// the format used by the database connection. Once we get the instance we
 		// can return back the finally formatted DateTime instances to the devs.
-		elseif ( ! $value instanceof DateTime)
+		else
 		{
 			$value = Carbon::createFromFormat($format, $value);
 		}
@@ -2680,23 +2728,25 @@ abstract class Model implements ArrayAccess, ArrayableInterface, JsonableInterfa
 	}
 
 	/**
-	 * Determine if the model or a given attribute has been modified.
+	 * Determine if the model or given attribute(s) have been modified.
 	 *
-	 * @param  string|null  $attribute
+	 * @param  array|string|null  $attributes
 	 * @return bool
 	 */
-	public function isDirty($attribute = null)
+	public function isDirty($attributes = null)
 	{
 		$dirty = $this->getDirty();
 
-		if (is_null($attribute))
+		if (is_null($attributes)) return count($dirty) > 0;
+
+		if ( ! is_array($attributes)) $attributes = func_get_args();
+
+		foreach ($attributes as $attribute)
 		{
-			return count($dirty) > 0;
+			if (array_key_exists($attribute, $dirty)) return true;
 		}
-		else
-		{
-			return array_key_exists($attribute, $dirty);
-		}
+
+		return false;
 	}
 
 	/**
