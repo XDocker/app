@@ -21,8 +21,7 @@ But when you are vetting a service, as to how it looks and works, you may need t
 
 		<!-- CSS
 		================================================== -->
-        <link rel="stylesheet" href="{{asset('bower_components/bootstrap/dist/css/bootstrap.min.css')}}">
-        <link rel="stylesheet" href="{{asset('bower_components/flat-ui/dist/css/flat-ui.css')}}">
+        <link rel="stylesheet" href="{{asset('bower_components/bootswatch/paper/bootstrap.min.css')}}">
         <link rel="stylesheet" href="{{asset('bower_components/font-awesome/css/font-awesome.min.css')}}">
         <link rel="stylesheet" href="{{asset('assets/css/custom.css')}}">
 		<style>
@@ -48,11 +47,13 @@ But when you are vetting a service, as to how it looks and works, you may need t
 	</head>
 
 	<body>
+		<!-- Env: {{App::environment()}} -->
+
 		<!-- To make sticky footer need to wrap in a div -->
 		<div id="wrap">
 		<!-- Navbar -->
         	
-		<nav class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">
+		<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 			 <div class="container-fluid">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-target">
@@ -87,7 +88,7 @@ But when you are vetting a service, as to how it looks and works, you may need t
 		<div class="container">
 			<a {{ (Request::is('/') ? ' class="show"' : 'class="hide"') }} href="https://github.com/XDocker/app" target="_blank">
 		        <img style="position: absolute; top: 53px; right: 0; border: 0;" src="{{{ asset('assets/img/forkme_right_red_aa0000.png') }}}" alt="Fork me on GitHub">
-		      </a>
+		    </a>
 			<!-- Notifications -->
 			@include('notifications')
 			<!-- ./ notifications -->
@@ -117,7 +118,6 @@ But when you are vetting a service, as to how it looks and works, you may need t
 		================================================== -->
         <script src="{{asset('bower_components/jquery/dist/jquery.min.js')}}"></script>
         <script src="{{asset('bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
-        <script src="{{asset('bower_components/flat-ui/dist/js/flat-ui.min.js')}}"></script>
 
         @yield('scripts')
 	</body>

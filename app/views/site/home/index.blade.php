@@ -36,7 +36,8 @@
 						</div>
 					</li>
 					@endforeach
-				@else {{{ Lang::get('home/home.empty_deployments') }}}
+				@else 
+					{{{ Lang::get('home/home.empty_deployments') }}}
 				@endif
 		</ul>
 	</div>
@@ -52,7 +53,7 @@
                   <div class="input-group">
                     <input class="form-control" name="q" type="search" placeholder="Search" value="{{$search_term}}">
                     <span class="input-group-btn">
-                      <button type="submit" class="btn" title="Search"><span class="fui-search"></span></button>
+                      <button type="submit" class="btn" title="Search"><span class="fa fa-search"></span></button>
                     </span>
                   </div>
                 </div>

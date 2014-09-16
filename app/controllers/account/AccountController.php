@@ -50,7 +50,7 @@ class AccountController extends BaseController {
      */
     public function getCreate($id = false) {
         $mode = $id !== false ? 'edit' : 'create';
-        $account = $id !== false ? CloudAccount::findOrFail($id) : null;
+        $account = $id !== false ? CloudAccount::where('user_id', Auth::id())->findOrFail($id) : null;
         $providers = Config::get('account_schema');
         return View::make('site/account/create_edit', compact('mode', 'account', 'providers'));
     }
@@ -62,6 +62,8 @@ class AccountController extends BaseController {
         try {
             if (empty($account)) {
                 $account = new CloudAccount;
+            } else if ($account->user_id !== Auth::id()) {
+                throw new Exception('general.access_denied');
             }
             $account->name = Input::get('name');
             $account->cloudProvider = Input::get('cloudProvider');
@@ -75,7 +77,7 @@ class AccountController extends BaseController {
             // Save if valid.
             if ($conStatus == 1) {
                 $success = $account->save();
-                return Redirect::to('account')->with('success', Lang::get('account/account.account_updated'));
+                return Redirect::intended('account')->with('success', Lang::get('account/account.account_updated'));
             } else {
                 return Redirect::to('account')->with('error', Lang::get('account/account.account_auth_failed'));
             }
@@ -92,12 +94,12 @@ class AccountController extends BaseController {
      *
      */
     public function postDelete($account) {
-        CloudAccount::where('id', $account->id)->delete();
+        CloudAccount::where('id', $account->id)->where('user_id', Auth::id())->delete();
         
         $id = $account->id;
         $account->delete();
         // Was the comment post deleted?
-        $account = CloudAccount::find($id);
+        $account = CloudAccount::where('user_id', Auth::id())->find($id);
         if (empty($account)) {
             // TODO needs to delete all of that user's content
             return Redirect::to('account')->with('success', 'Removed Account Successfully');

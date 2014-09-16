@@ -8,8 +8,8 @@
 
 return array(
     'Docker_Hub' => array(
-        'username' => 'sseshachala',
-        'password' => 'Java0man',
+        'username' => 'xdockeruser',
+        'password' => 'Java2763man',
         'search_url' => 'https://index.docker.io/v1/search?q='
     ) ,
 );

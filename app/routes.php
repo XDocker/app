@@ -110,11 +110,6 @@ Route::get('contact-us', function () {
 Route::get('{postSlug}', 'BlogController@getView');
 Route::post('{postSlug}', 'BlogController@postView');
 */
-# Index Page - Last route, no matches
-Route::get('/', array(
-    'before' => 'detectLang',
-    'uses' => 'HomeController@getIndex'
-));
 /** ------------------------------------------
  *  Authenticated User Routes
  *  ------------------------------------------
@@ -140,4 +135,10 @@ Route::group(array(
     });
     // Route::controller('account', 'AccountController');
     
+    
 });
+# Index Page - Last route, no matches
+Route::get('/', array(
+    'before' => 'detectLang',
+    'uses' => 'HomeController@getIndex'
+));
