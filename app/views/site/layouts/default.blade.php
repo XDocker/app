@@ -21,10 +21,9 @@ But when you are vetting a service, as to how it looks and works, you may need t
 
 		<!-- CSS
 		================================================== -->
-        <link rel="stylesheet" href="{{asset('bower_components/bootstrap/dist/css/bootstrap.min.css')}}">
-        <link rel="stylesheet" href="{{asset('bower_components/flat-ui/dist/css/flat-ui.css')}}">
+        <link rel="stylesheet" href="{{asset('bower_components/bootswatch/paper/bootstrap.min.css')}}">
         <link rel="stylesheet" href="{{asset('bower_components/font-awesome/css/font-awesome.min.css')}}">
-        <link rel="stylesheet" href="{{asset('assets/custom.css')}}">
+        <link rel="stylesheet" href="{{asset('assets/css/custom.css')}}">
 		<style>
         body {
             padding: 60px 0;
@@ -54,7 +53,7 @@ But when you are vetting a service, as to how it looks and works, you may need t
 		<div id="wrap">
 		<!-- Navbar -->
         	
-		<nav class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">
+		<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 			 <div class="container-fluid">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-target">
@@ -119,7 +118,6 @@ But when you are vetting a service, as to how it looks and works, you may need t
 		================================================== -->
         <script src="{{asset('bower_components/jquery/dist/jquery.min.js')}}"></script>
         <script src="{{asset('bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
-        <script src="{{asset('bower_components/flat-ui/dist/js/flat-ui.min.js')}}"></script>
 
         @yield('scripts')
 	</body>
