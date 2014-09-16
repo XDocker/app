@@ -48,6 +48,8 @@ But when you are vetting a service, as to how it looks and works, you may need t
 	</head>
 
 	<body>
+		<!-- Env: {{App::environment()}} -->
+
 		<!-- To make sticky footer need to wrap in a div -->
 		<div id="wrap">
 		<!-- Navbar -->
@@ -87,9 +89,7 @@ But when you are vetting a service, as to how it looks and works, you may need t
 		<div class="container">
 			<a {{ (Request::is('/') ? ' class="show"' : 'class="hide"') }} href="https://github.com/XDocker/app" target="_blank">
 		        <img style="position: absolute; top: 53px; right: 0; border: 0;" src="{{{ asset('assets/img/forkme_right_red_aa0000.png') }}}" alt="Fork me on GitHub">
-		      </a>
-
-		    {{App::environment()}}
+		    </a>
 			<!-- Notifications -->
 			@include('notifications')
 			<!-- ./ notifications -->
