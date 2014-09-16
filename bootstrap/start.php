@@ -28,7 +28,7 @@ $env = $app->detectEnvironment(array(
 
     'local' => array('lampstack'), // Change this to your local machine hostname.
     'dev' => array('xdocker.org'),
-    'production' => array('xdocker.org'),
+    //'production' => array('xdocker.org'),
 
 ));
 
