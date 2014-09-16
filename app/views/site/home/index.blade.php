@@ -36,10 +36,8 @@
 						</div>
 					</li>
 					@endforeach
+				@else {{{ Lang::get('home/home.empty_deployments') }}}
 				@endif
-				@if(empty($deployments)) {{{ Lang::get('home/home.empty_deployments') }}}
-				@endif
-			
 		</ul>
 	</div>
 @endif
