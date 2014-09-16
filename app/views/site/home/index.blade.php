@@ -15,7 +15,7 @@
 @section('content')
 @if (Auth::check())
 	<div class="media-block">
-		<h6 class="page-header">Your Deployments:</h6>
+		<h4 class="page-header">Your Deployments:</h4>
 		<ul class="list-group list-group-custom">
 				@if(!empty($deployments)) 
 					@foreach($deployments as $deployment)
@@ -45,7 +45,7 @@
 <div class="page-header">
 	<div class="row">
 		<div class="col-md-9">
-			<h6>Public Docker Images:</h6>
+			<h4>Public Docker Images:</h4>
 		</div>
 		<div class="col-md-3">
 			<form class="navbar-right" action="#" role="search" method="get">
@@ -53,7 +53,7 @@
                   <div class="input-group">
                     <input class="form-control" name="q" type="search" placeholder="Search" value="{{$search_term}}">
                     <span class="input-group-btn">
-                      <button type="submit" class="btn" title="Search"><span class="fa fa-search"></span></button>
+                      <button type="submit" class="btn btn-inverse" title="Search"><span class="fa fa-search"></span></button>
                     </span>
                   </div>
                 </div>
@@ -68,7 +68,7 @@
 		@foreach($dockerInstances as $instance)
   		<li class="list-group-item">
 			<div class="media">
-				<a href="{{ URL::to('deployment/create/') }}?name={{urlencode($instance -> name)}}" class="btn btn-inverse pull-right" role="button">Deploy</a>
+				<a href="{{ URL::to('deployment/create/') }}?name={{urlencode($instance -> name)}}" class="btn btn-primary pull-right" role="button">Deploy</a>
 				<div class="media-body">
 					<h4 class="media-heading">{{{!empty($instance -> name)?$instance -> name:''}}}</h4>
 				    <p>
