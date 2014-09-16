@@ -46,7 +46,7 @@
 			<div class="col-md-offset-2 col-md-10">
 				<a href="{{ URL::to('account') }}" class="btn btn-default">Back</a>
 				<button type="reset" class="btn btn-default">Reset</button>
-				<button type="submit" class="btn btn-success">Save</button>
+				<button type="submit" class="btn btn-primary">Save</button>
 			</div>
 		</div>
 		<!-- ./ form actions -->

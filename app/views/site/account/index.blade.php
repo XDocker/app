@@ -14,9 +14,9 @@
 					<!-- CSRF Token -->
 					<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
 					<!-- ./ csrf token -->
-					<button type="submit" class="btn btn-danger pull-right" role="button">Delete</button>
+					<button type="submit" class="btn btn-warning pull-right" role="button">Delete</button>
 				</form>
-				<a href="{{ URL::to('account/' . $account->id . '/edit') }}" class="btn btn-inverse pull-right" role="button">Edit</a>
+				<a href="{{ URL::to('account/' . $account->id . '/edit') }}" class="btn btn-success pull-right" role="button">Edit</a>
 				<div class="media-body">
 					<h4 class="media-heading">{{ String::title($account->name) }}</h4>
 					<p>
@@ -29,7 +29,7 @@
 	</ul>
 </div>
 <div>
-	<a href="{{ URL::to('account/create') }}" class="btn btn-inverse pull-right" role="button">Add New Cloud Account</a>
+	<a href="{{ URL::to('account/create') }}" class="btn btn-primary pull-right" role="button">Add New Cloud Account</a>
 </div>
 
 @stop
