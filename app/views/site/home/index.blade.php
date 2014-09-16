@@ -16,27 +16,29 @@
 <div class="media-block">
 	<h6 class="page-header">Your Deployments:</h6>
 	<ul class="list-group list-group-custom">
-		@if(!empty($deployments)) 
-			@foreach($deployments as $deployment)
-	  		<li class="list-group-item">
-				<div class="media">
-					<form class="pull-right" method="post" action="{{ URL::to('deployment/' . $deployment->id . '/delete') }}">
-						<!-- CSRF Token -->
-						<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
-						<!-- ./ csrf token -->
-						<button type="submit" class="btn btn-danger pull-right" role="button">Delete</button>
-					</form>				
-					<div class="media-body">
-						<h4 class="media-heading">{{{!empty($deployment -> name)?$deployment -> name:'Untitled'}}} - {{{!empty($deployment -> docker_name)?$deployment -> docker_name:'Untitled'}}}</h4>
-					    <p>
-					    	{{{!empty($deployment -> status)?$deployment -> status:''}}}
-						</p>
+		@if (Auth::check())
+			@if(!empty($deployments)) 
+				@foreach($deployments as $deployment)
+		  		<li class="list-group-item">
+					<div class="media">
+						<form class="pull-right" method="post" action="{{ URL::to('deployment/' . $deployment->id . '/delete') }}">
+							<!-- CSRF Token -->
+							<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
+							<!-- ./ csrf token -->
+							<button type="submit" class="btn btn-danger pull-right" role="button">Delete</button>
+						</form>				
+						<div class="media-body">
+							<h4 class="media-heading">{{{!empty($deployment -> name)?$deployment -> name:'Untitled'}}} - {{{!empty($deployment -> docker_name)?$deployment -> docker_name:'Untitled'}}}</h4>
+						    <p>
+						    	{{{!empty($deployment -> status)?$deployment -> status:''}}}
+							</p>
+						</div>
 					</div>
-				</div>
-			</li>
-			@endforeach
-		@endif
-		@if(empty($deployments)) {{{ Lang::get('home/home.empty_deployments') }}}
+				</li>
+				@endforeach
+			@endif
+			@if(empty($deployments)) {{{ Lang::get('home/home.empty_deployments') }}}
+			@endif
 		@endif
 	</ul>
 </div>
