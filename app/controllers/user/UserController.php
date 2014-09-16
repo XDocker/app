@@ -230,6 +230,7 @@ class UserController extends BaseController {
 				$user -> confirmed = 1;
 				// var_dump('created', $user->save() , $user->errors());
 				if (!$user -> save()) {
+					
 					throw new Exception($user -> errors());
 				}
 			}

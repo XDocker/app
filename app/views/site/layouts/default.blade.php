@@ -24,7 +24,7 @@ But when you are vetting a service, as to how it looks and works, you may need t
         <link rel="stylesheet" href="{{asset('bower_components/bootstrap/dist/css/bootstrap.min.css')}}">
         <link rel="stylesheet" href="{{asset('bower_components/flat-ui/dist/css/flat-ui.css')}}">
         <link rel="stylesheet" href="{{asset('bower_components/font-awesome/css/font-awesome.min.css')}}">
-        <link rel="stylesheet" href="{{asset('assets/custom.css')}}">
+        <link rel="stylesheet" href="{{asset('assets/css/custom.css')}}">
 		<style>
         body {
             padding: 60px 0;

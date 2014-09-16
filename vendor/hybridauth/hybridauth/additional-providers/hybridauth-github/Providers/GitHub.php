@@ -52,7 +52,7 @@ class Hybrid_Providers_GitHub extends Hybrid_Provider_Model_OAuth2
 		}
 
 		// request user emails from github api
-		if( ! $data->email ){
+		 if( empty($data->email) ){
 			try{
 				$emails = $this->api->api("user/emails");
 
