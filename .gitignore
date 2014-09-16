@@ -1,6 +1,5 @@
 # Laravel
 /bootstrap/compiled.php
-/vendor
 /app/storage/logs
 /app/storage/sessions
 
@@ -10,7 +9,8 @@
 /app/config/production
 
 # Composer
-composer.phar
+# composer.phar
+# /vendor
 composer.lock
 
 # OS
