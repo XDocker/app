@@ -20,7 +20,6 @@
 			<label class="col-md-2 control-label" for="email">Cloud Provider</label>
 			<div class="col-md-6">
 				<select class="form-control" name="cloudProvider" id="cloudProvider" required>
-					<option value="">Select </option>
 					@foreach ($providers as $key => $value)
 						<option value="{{$key}}" {{{ Input::old('cloudProvider', isset($account->cloudProvider) && ($account->cloudProvider == $key) ? 'selected="selected"' : '') }}}>{{{ $key }}}</option>
 					@endforeach
@@ -55,8 +54,8 @@
 @stop
 
 @section('scripts')
-<script src="{{asset('assets/bower_components/jsonform/deps/underscore.js')}}"></script>
-<script src="{{asset('assets/bower_components/jsonform/lib/jsonform.js')}}"></script>
+<script src="{{asset('bower_components/jsonform/deps/underscore.js')}}"></script>
+<script src="{{asset('bower_components/jsonform/lib/jsonform.js')}}"></script>
 <script type="text/javascript">
 	(function($){
 		'use strict';

@@ -27,7 +27,7 @@ class DeploymentController extends BaseController {
      */
     public function __construct(Deployment $deployments, User $user) {
         parent::__construct();
-        $this->deployments = $deployments;
+        $this->deployments = $deployments->where('user_id', Auth::id());
         $this->user = $user;
     }
     /**
@@ -36,8 +36,11 @@ class DeploymentController extends BaseController {
      */
     public function getCreate($id = false) {
         $mode = $id !== false ? 'edit' : 'create';
-        $deployment = $id !== false ? Deployment::findOrFail($id) : null;
+        $deployment = $id !== false ? Deployment::where('user_id', Auth::id())->findOrFail($id) : null;
         $cloud_account_ids = CloudAccount::where('user_id', Auth::id())->get();
+        if (empty($cloud_account_ids) || $cloud_account_ids->isEmpty()) {
+            return Redirect::to('account/create')->with('error', Lang::get('deployment/deployment.account_required'));
+        }
         $providers = Config::get('deployment_schema');
         return View::make('site/deployment/create', array(
             'mode' => $mode,
@@ -55,6 +58,8 @@ class DeploymentController extends BaseController {
         try {
             if (empty($deployment)) {
                 $deployment = new Deployment;
+            } else if ($deployment->user_id !== Auth::id()) {
+                throw new Exception('general.access_denied');
             }
             $deployment->name = Input::get('name');
             $deployment->cloud_account_id = Input::get('cloud_account_id');
@@ -106,9 +111,9 @@ class DeploymentController extends BaseController {
      *
      */
     public function postDelete($id) {
-        Deployment::where('id', $id)->delete();
+        Deployment::where('id', $id)->where('user_id', Auth::id())->delete();
         // Was the comment post deleted?
-        $deployment = Deployment::find($id);
+        $deployment = Deployment::where('user_id', Auth::id())->find($id);
         if (empty($deployment)) {
             // TODO needs to delete all of that user's content
             return Redirect::to('/')->with('success', 'Removed Deployment Successfully');

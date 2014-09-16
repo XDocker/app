@@ -22,9 +22,8 @@
 			<label class="col-md-2 control-label" for="cloud_account_id">Cloud Account</label>
 			<div class="col-md-6">
 				<select class="form-control" name="cloud_account_id" id="cloud_account_id" required>
-					<option value="">Select </option>
 					@foreach ($cloud_account_ids as $key => $value)
-						<option value="{{$key}}" data-cloud-provider="{{{$value->cloudProvider}}}" {{{ Input::old('cloud_account_id', isset($deployment->cloud_account_id) && ($deployment->cloud_account_id == $key) ? 'selected="selected"' : '') }}}>{{{$value->name}}}</option>
+						<option value="{{$value->id}}" data-cloud-provider="{{{$value->cloudProvider}}}" {{{ Input::old('cloud_account_id', isset($deployment->cloud_account_id) && ($deployment->cloud_account_id == $key) ? 'selected="selected"' : '') }}}>{{{$value->name}}}</option>
 					@endforeach
 				</select>
 			</div>
@@ -57,8 +56,8 @@
 @stop
 
 @section('scripts')
-<script src="{{asset('assets/bower_components/jsonform/deps/underscore.js')}}"></script>
-<script src="{{asset('assets/bower_components/jsonform/lib/jsonform.js')}}"></script>
+<script src="{{asset('bower_components/jsonform/deps/underscore.js')}}"></script>
+<script src="{{asset('bower_components/jsonform/lib/jsonform.js')}}"></script>
 <script type="text/javascript">
 	(function($){
 		'use strict';
