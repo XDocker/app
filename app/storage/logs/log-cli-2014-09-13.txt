@@ -1,0 +1,7 @@
+[2014-09-13 13:52:42] production.ERROR: 500 - Command "upgrade" is not defined. @ /
+exception 'InvalidArgumentException' with message 'Command "upgrade" is not defined.' in C:\wamp\www\ClientWork\xdocker\vendor\symfony\console\Symfony\Component\Console\Application.php:564
+Stack trace:
+#0 C:\wamp\www\ClientWork\xdocker\vendor\symfony\console\Symfony\Component\Console\Application.php(190): Symfony\Component\Console\Application->find('upgrade')
+#1 C:\wamp\www\ClientWork\xdocker\vendor\symfony\console\Symfony\Component\Console\Application.php(124): Symfony\Component\Console\Application->doRun(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#2 C:\wamp\www\ClientWork\xdocker\artisan(59): Symfony\Component\Console\Application->run()
+#3 {main} [] []
