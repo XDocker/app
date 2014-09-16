@@ -9,6 +9,5 @@
   },
   "_source": "git://github.com/joshfire/jsonform.git",
   "_target": "*",
-  "_originalSource": "jsonform",
-  "_direct": true
+  "_originalSource": "jsonform"
 }

@@ -44,9 +44,8 @@
 	<link rel="apple-touch-icon-precomposed" href="{{{ asset('assets/ico/apple-touch-icon-57-precomposed.png') }}}">
 
 	<!-- CSS -->
-	<!-- {{asset('assets/bower_components/bootstrap/dist/css/ -->
-    <link rel="stylesheet" href="{{asset('assets/bower_components/bootstrap/dist/css/bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/bower_components/bootstrap/dist/css/bootstrap-theme.min.css')}}">
+    <link rel="stylesheet" href="{{asset('bower_components/bootstrap/dist/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('bower_components/bootstrap/dist/css/bootstrap-theme.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/wysihtml5/prettify.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/wysihtml5/bootstrap-wysihtml5.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/datatables-bootstrap.css')}}">
@@ -133,8 +132,8 @@
 	<!-- ./ container -->
 
 	<!-- Javascripts -->
-    <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script src="{{asset('assets/bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
+    <script src="{{asset('bower_components/jquery/dist/jquery.min.js')}}"></script>
+    <script src="{{asset('bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('assets/js/wysihtml5/wysihtml5-0.3.0.js')}}"></script>
     <script src="{{asset('assets/js/wysihtml5/bootstrap-wysihtml5.js')}}"></script>
     <script src="//cdn.datatables.net/1.9.4/js/jquery.dataTables.min.js"></script>

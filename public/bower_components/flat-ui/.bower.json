@@ -40,6 +40,5 @@
   },
   "_source": "git://github.com/designmodo/Flat-UI.git",
   "_target": "~2.2.0",
-  "_originalSource": "flat-ui",
-  "_direct": true
+  "_originalSource": "flat-ui"
 }
