@@ -30,6 +30,17 @@ class DeploymentController extends BaseController {
         $this->deployments = $deployments->where('user_id', Auth::id());
         $this->user = $user;
     }
+	
+	 public function getIndex() {
+        // Get all the user's deployment
+        
+        $deployments = $this->deployments->where('user_id', Auth::id())->orderBy('created_at', 'DESC')->paginate(10);
+        // var_dump($accounts, $this->accounts, $this->accounts->owner);
+        // Show the page
+        return View::make('site/deployment/index', array(
+            'deployments' => $deployments
+        ));
+    }
     /**
      * Displays the form for cloud deployment creation
      *
