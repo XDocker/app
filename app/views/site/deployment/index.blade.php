@@ -40,7 +40,7 @@
 	@endif
 </div>
 <div>
-<a href="{{ URL::to('deployment/create') }}" class="btn btn-primary pull-right" role="button">Add New Cloud Deployment</a>
+<a href="{{ URL::to('deployment/create') }}" class="btn btn-primary pull-right" role="button">Add New Deployment</a>
 </div>
 
 @stop
