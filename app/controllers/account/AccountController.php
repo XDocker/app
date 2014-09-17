@@ -42,7 +42,16 @@ class AccountController extends BaseController {
         $accounts = $this->accounts->where('user_id', Auth::id())->orderBy('created_at', 'DESC')->paginate(10);
         // var_dump($accounts, $this->accounts, $this->accounts->owner);
         // Show the page
-        return View::make('site/account/index', compact('accounts'));
+        $arr = '';
+        foreach($accounts as $account)
+		{
+			switch($account ->cloudProvider)
+			{
+				case Lang::get('account/account.cp_amazon_aws') : $account-> image = URL::to('/').'/assets/img/aws-big.jpg'; break;
+			}
+			$arr[] = $account;
+		}
+        return View::make('site/account/index', compact('arr'));
     }
     /**
      * Displays the form for cloud account creation
