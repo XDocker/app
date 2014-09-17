@@ -2,6 +2,9 @@
 
 {{-- Content --}}
 @section('content')
+<div>
+<a href="{{ URL::to('account/create') }}" class="btn btn-primary pull-right" role="button">Add New Cloud Account</a>
+</div>
 <div class="media-block">
 	<ul class="list-group">
 @foreach ($accounts as $account)
@@ -29,7 +32,7 @@
 	</ul>
 </div>
 <div>
-<a href="{{ URL::to('account/create') }}" class="btn btn-primary btn-block pull-right" role="button">Add New Cloud Account</a>
+<a href="{{ URL::to('account/create') }}" class="btn btn-primary pull-right" role="button">Add New Cloud Account</a>
 </div>
 
 @stop
