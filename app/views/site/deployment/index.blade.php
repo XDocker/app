@@ -36,7 +36,7 @@
 		@endif
 	</ul>
 	@if(empty($deployments) || count($deployments) === 0) 
-		<div class="alert alert-info"> {{{ Lang::get('deployment/deployment.empty_deployment') }}}</div>
+		<div class="alert alert-info"> {{{ Lang::get('deployment/deployment.empty_deployments') }}}</div>
 	@endif
 </div>
 <div>
