@@ -35,7 +35,7 @@ class DeploymentController extends BaseController {
         // Get all the user's deployment
         $deployments = $this->deployments
         					->leftJoin('accounts', 'deployments.cloud_account_id', '=', 'accounts.id')
-							->where('user_id', Auth::id())
+							->where('deployments.user_id', Auth::id())
         					->orderBy('created_at', 'DESC')
         					->paginate(10);
         // var_dump($accounts, $this->accounts, $this->accounts->owner);
