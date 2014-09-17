@@ -3,6 +3,14 @@
 {{-- Content --}}
 @section('content')
 
+<div class="page-header">
+	<div class="row">
+		<div class="col-md-9">
+			<h4>Your Accounts:</h4>
+		</div>
+	</div>
+</div>
+
 <div class="media-block">
 	<ul class="list-group">
 @foreach ($accounts as $account)

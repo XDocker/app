@@ -1,3 +1,20 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+#wrap {
+    position: relative;
+    min-height: 100%;
+    padding: 75px 0 133px 0;
+}
+#footer {
+    margin-bottom: 0;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
 .social-login-icons {
     margin-right: 20px;
 }
@@ -41,7 +58,7 @@
     float: right;
 }
 .login-checkbox > label > #remember {
-  margin-top: 5px;
+    margin-top: 5px;
 }
 .home-search {
     margin-bottom: 0px;
@@ -73,5 +90,5 @@
     border: 0;
 }
 .label {
-  font-weight: 500;
+    font-weight: 500;
 }

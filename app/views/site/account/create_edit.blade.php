@@ -8,6 +8,14 @@
 		#additionalCloudProviderFields [type="submit"]{display:none;}
 	</style>
 
+	<div class="page-header">
+		<div class="row">
+			<div class="col-md-9">
+				<h4>{{isset($account->id)?'Edit':'Create'}} Account:</h4>
+			</div>
+		</div>
+	</div>
+
 	{{-- Create/Edit cloud account Form --}}
 	<form id="cloudProviderCredntialsForm" class="form-horizontal" method="post" action="@if (isset($account->id)){{ URL::to('account/' . $account->id . '/edit') }}@endif" autocomplete="off">
 		<!-- CSRF Token -->

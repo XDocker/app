@@ -25,9 +25,6 @@ But when you are vetting a service, as to how it looks and works, you may need t
         <link rel="stylesheet" href="{{asset('bower_components/font-awesome/css/font-awesome.min.css')}}">
         <link rel="stylesheet" href="{{asset('assets/css/custom.css')}}">
 		<style>
-        body {
-            padding: 75px 0;
-        }
 		@section('styles')
 		@show
 		</style>
@@ -51,69 +48,69 @@ But when you are vetting a service, as to how it looks and works, you may need t
 
 		<!-- To make sticky footer need to wrap in a div -->
 		<div id="wrap">
-		<!-- Navbar -->
-        	
-		<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-			 <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-target">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="{{{ URL::to('/') }}}"><img class="img-responsive" src="{{{ asset('assets/img/logo.png') }}}"></a>  
-                </div>
-                <div class="collapse navbar-collapse" id="navbar-collapse-target">
-                    <ul class="nav navbar-nav navbar-right">
-                        @if (Auth::check())
-                        @if (Auth::user()->hasRole('admin'))
-                        <li><a href="{{{ URL::to('admin') }}}">Admin Panel</a></li>
-                        @endif
-                        <li><a href="{{{ URL::to('account') }}}">Accounts</a></li>
-                        <li><a href="{{{ URL::to('user') }}}">Logged in as {{{ Auth::user()->username }}}</a></li>
-                        <li><a href="{{{ URL::to('user/logout') }}}">Logout</a></li>
-                        @else
-                        <li {{ (Request::is('user/login') ? ' class="active"' : '') }}><a href="{{{ URL::to('user/login') }}}">Login</a></li>
-                        <li {{ (Request::is('user/create') ? ' class="active"' : '') }}><a href="{{{ URL::to('user/create') }}}">{{{ Lang::get('site.sign_up') }}}</a></li>
-                        @endif
-                    </ul>
-					<!-- ./ nav-collapse -->
+
+			<!-- Navbar -->
+			<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+				 <div class="container-fluid">
+	                <div class="navbar-header">
+	                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-target">
+	                        <span class="sr-only">Toggle navigation</span>
+	                        <span class="icon-bar"></span>
+	                        <span class="icon-bar"></span>
+	                        <span class="icon-bar"></span>
+	                    </button>
+	                    <a class="navbar-brand" href="{{{ URL::to('/') }}}"><img class="img-responsive" src="{{{ asset('assets/img/logo.png') }}}"></a>  
+	                </div>
+	                <div class="collapse navbar-collapse" id="navbar-collapse-target">
+	                    <ul class="nav navbar-nav navbar-right">
+	                        @if (Auth::check())
+	                        @if (Auth::user()->hasRole('admin'))
+	                        <li><a href="{{{ URL::to('admin') }}}">Admin Panel</a></li>
+	                        @endif
+	                        <li><a href="{{{ URL::to('account') }}}">Accounts</a></li>
+	                        <li><a href="{{{ URL::to('user') }}}">Logged in as {{{ Auth::user()->username }}}</a></li>
+	                        <li><a href="{{{ URL::to('user/logout') }}}">Logout</a></li>
+	                        @else
+	                        <li {{ (Request::is('user/login') ? ' class="active"' : '') }}><a href="{{{ URL::to('user/login') }}}">Login</a></li>
+	                        <li {{ (Request::is('user/create') ? ' class="active"' : '') }}><a href="{{{ URL::to('user/create') }}}">{{{ Lang::get('site.sign_up') }}}</a></li>
+	                        @endif
+	                    </ul>
+						<!-- ./ nav-collapse -->
+					</div>
 				</div>
+			</nav>
+			<!-- ./ navbar -->
+
+			<a class="banner-github {{ (Request::is('/') ? '' : 'hide') }}" href="https://github.com/XDocker/app" target="_blank">
+		        <img src="{{{ asset('assets/img/forkme_right_red_aa0000.png') }}}" alt="Fork me on GitHub">
+		    </a>
+
+			<!-- Container -->
+			<div class="container clear-both">
+				<!-- Notifications -->
+				@include('notifications')
+				<!-- ./ notifications -->
+
+				<!-- Content -->
+				@yield('content')
+				<!-- ./ content -->
 			</div>
-		</nav>
-		<!-- ./ navbar -->
+			<!-- ./ container -->
 
-		<a class="banner-github {{ (Request::is('/') ? '' : 'hide') }}" href="https://github.com/XDocker/app" target="_blank">
-	        <img src="{{{ asset('assets/img/forkme_right_red_aa0000.png') }}}" alt="Fork me on GitHub">
-	    </a>
+			<!-- the following div is needed to make a sticky footer -->
+			<div id="push"></div>
 
-		<!-- Container -->
-		<div class="container clear-both">
-			<!-- Notifications -->
-			@include('notifications')
-			<!-- ./ notifications -->
-
-			<!-- Content -->
-			@yield('content')
-			<!-- ./ content -->
-		</div>
-		<!-- ./ container -->
-
-		<!-- the following div is needed to make a sticky footer -->
-		<div id="push"></div>
-		</div>
-		<!-- ./wrap -->
-
-		<hr>
-	    <div id="footer">
-	      <div class="container">
-	        <p class="muted credit text-center">xDocker : Test drive Docker images on any infrastructure. </p>
-	        <p class="text-center">
-	        	<iframe src="http://ghbtns.com/github-btn.html?user=xdocker&repo=app&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="170" height="30"></iframe>
-	        </p>
-	      </div>
+		    <footer id="footer" class="navbar navbar-default navbar-static-bottom">
+			  <hr>
+		      <div class="container">
+		        <p class="muted credit text-center">xDocker : Test drive Docker images on any infrastructure. </p>
+		        <p class="text-center">
+		        	<iframe src="http://ghbtns.com/github-btn.html?user=xdocker&repo=app&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="170" height="30"></iframe>
+		        </p>
+		      </div>
+		    </footer>
 	    </div>
+		<!-- ./wrap -->
 
 		<!-- Javascripts
 		================================================== -->
