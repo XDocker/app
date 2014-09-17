@@ -81,7 +81,7 @@ But when you are vetting a service, as to how it looks and works, you may need t
 	    									<span class="glyphicon glyphicon-user"></span> {{{ Auth::user()->username }}}	<span class="caret"></span>
 	    								</a>
 	    							<ul class="dropdown-menu">
-	    								<li><a href="{{{ URL::to('user') }}}"><span class="glyphicon glyphicon-wrench"></span> Edit Profile</a></li>
+	    								<li><a href="{{{ URL::to('user') }}}"><span class="glyphicon glyphicon-edit"></span> Edit Profile</a></li>
 	    								<li class="divider"></li>
 	    								<li><a href="{{{ URL::to('user/logout') }}}"><span class="glyphicon glyphicon-share"></span> Logout</a></li>
 	    							</ul>
