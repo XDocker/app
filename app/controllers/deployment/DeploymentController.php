@@ -27,7 +27,7 @@ class DeploymentController extends BaseController {
      */
     public function __construct(Deployment $deployments, User $user) {
         parent::__construct();
-        $this->deployments = $deployments->where('user_id', Auth::id());
+        $this->deployments = $deployments->where('deployments.user_id', Auth::id());
         $this->user = $user;
     }
 	
