@@ -61,8 +61,8 @@ But when you are vetting a service, as to how it looks and works, you may need t
 	                    </button>
 	                    <a class="navbar-brand" href="{{{ URL::to('/') }}}"><img class="img-responsive" src="{{{ asset('assets/img/logo.png') }}}"></a>  
 	                </div>
-	                <div class="collapse navbar-collapse" id="navbar-collapse-target">
-	                    <ul class="nav navbar-nav">
+	                <div class="collapse navbar-collapse navbar-ex1-collapse" id="navbar-collapse-target">
+	                    <ul class="nav navbar-nav pull-right">
 	                        @if (Auth::check())
 		                        @if (Auth::user()->hasRole('admin'))
 		                        	<li><a href="{{{ URL::to('admin') }}}">Admin Panel</a></li>
