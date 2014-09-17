@@ -69,11 +69,10 @@ But when you are vetting a service, as to how it looks and works, you may need t
 		                        @endif
 		                        <li class="dropdown">
 		                        	<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-	    								<span class="glyphicon glyphicon-user"></span> Services	<span class="caret"></span>
+	    								<span class="glyphicon glyphicon-cogwheel"></span> Services	<span class="caret"></span>
 	    							</a>
 		                        	<ul class="dropdown-menu">
 	    								<li><a href="{{{ URL::to('account') }}}"><span class="glyphicon glyphicon-wrench"></span> Accounts</a></li>
-	    								<li class="divider"></li>
 	    								<li><a href="{{{ URL::to('deployment') }}}"><span class="glyphicon glyphicon-share"></span> Deploymens</a></li>
 	    							</ul>
 		                        </li>
