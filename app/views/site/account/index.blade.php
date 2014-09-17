@@ -8,7 +8,7 @@
   		<li class="list-group-item">
 			<div class="media">
 				<span class="pull-left" href="#">
-				    <img class="media-object img-circle" src="{{ $account->image }}" alt="{{ $account->cloudProvider }}" />
+				    <img class="media-object img-responsive" src="{{ asset('/assets/img/providers/'.Config::get('provider_meta.'.$account->cloudProvider.'.logo')) }}" alt="{{ $account->cloudProvider }}" />
 				</span>
 				<form class="pull-right" method="post" action="{{ URL::to('account/' . $account->id . '/delete') }}">
 					<!-- CSRF Token -->
