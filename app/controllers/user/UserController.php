@@ -207,9 +207,9 @@ class UserController extends BaseController {
             // Log the user in
             $providerName = Input::get('provider');
             $email = isset($userProfile->emailVerified) ? $userProfile->emailVerified : $userProfile->email;
-            // @FIXME Generating a dummy email for github as it isn't passing along the email ID
-            if ($providerName === 'GitHub' && empty($email)) {
-                $email = preg_replace('/[\s\W]+/', '_', $userProfile->displayName) . '@github.com';
+            // @FIXME Generating a dummy email for github/linkedin as they aren't passing along the email ID
+            if (empty($email)) {
+                $email = preg_replace('/[\s\W]+/', '_', $userProfile->displayName) . '@' . $providerName . '.com';
             }
             
             $user = User::where('email', $email)->first();
