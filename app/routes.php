@@ -39,6 +39,7 @@ Route::pattern('role', '[0-9]+');
 Route::pattern('token', '[0-9a-z]+');
 
 Route::pattern('account', '[0-9]+');
+Route::pattern('deployment', '[0-9]+');
 /** ------------------------------------------
  *  Admin Routes
  *  ------------------------------------------
@@ -121,6 +122,7 @@ Route::group(array(
     Route::any('account/', 'AccountController@getIndex');
     Route::get('account/create', 'AccountController@getCreate');
     Route::get('account/{id}/edit', 'AccountController@getCreate');
+	Route::any('deployment/', 'DeploymentController@getIndex');
     Route::get('deployment/create', 'DeploymentController@getCreate');
     // Route::get('deployment/{id}/edit/', 'DeploymentController@getCreate');
     Route::group(array(
