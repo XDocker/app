@@ -8,7 +8,8 @@
   		<li class="list-group-item">
 			<div class="media">
 				<span class="pull-left" href="#">
-				    <img class="media-object img-circle" src="http://placehold.it/80x80" alt="{{ $account->cloudProvider }}">
+					<!-- http://placehold.it/80x80 -->
+				    <img class="media-object img-circle" src="{{ $account->image }}" alt="{{ $account->cloudProvider }}">
 				</span>
 				<form class="pull-right" method="post" action="{{ URL::to('account/' . $account->id . '/delete') }}">
 					<!-- CSRF Token -->
