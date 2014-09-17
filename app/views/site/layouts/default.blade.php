@@ -73,6 +73,7 @@ But when you are vetting a service, as to how it looks and works, you may need t
 	    							</a>
 		                        	<ul class="dropdown-menu">
 	    								<li><a href="{{{ URL::to('account') }}}"><span class="glyphicon glyphicon-wrench"></span> Accounts</a></li>
+	    								<li class="divider"></li>
 	    								<li><a href="{{{ URL::to('deployment') }}}"><span class="glyphicon glyphicon-play-circle"></span> Deployments</a></li>
 	    							</ul>
 		                        </li>
