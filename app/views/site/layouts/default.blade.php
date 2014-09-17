@@ -62,34 +62,38 @@ But when you are vetting a service, as to how it looks and works, you may need t
 	                    <a class="navbar-brand" href="{{{ URL::to('/') }}}"><img class="img-responsive" src="{{{ asset('assets/img/logo.png') }}}"></a>  
 	                </div>
 	                <div class="collapse navbar-collapse" id="navbar-collapse-target">
-	                    <ul class="nav navbar-nav navbar-right">
+	                    <ul class="nav navbar-nav pull-right">
 	                        @if (Auth::check())
-	                        @if (Auth::user()->hasRole('admin'))
-	                        <li><a href="{{{ URL::to('admin') }}}">Admin Panel</a></li>
-	                        @endif
-	                        <li><a href="{{{ URL::to('account') }}}">Accounts</a></li>
-	                        <li><a href="{{{ URL::to('user') }}}">Logged in as {{{ Auth::user()->username }}}</a></li>
-	                        <li><a href="{{{ URL::to('user/logout') }}}">Logout</a></li>
+		                        @if (Auth::user()->hasRole('admin'))
+		                        	<li><a href="{{{ URL::to('admin') }}}">Admin Panel</a></li>
+		                        @endif
+		                        <li><a href="{{{ URL::to('account') }}}">Accounts</a></li>
+		                        <li class="dropdown">
+		                        	<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+	    								<span class="glyphicon glyphicon-user"></span> Services	<span class="caret"></span>
+	    							</a>
+		                        	<ul class="dropdown-menu">
+	    								<li><a href="{{{ URL::to('account') }}}"><span class="glyphicon glyphicon-wrench"></span> Accounts</a></li>
+	    								<li class="divider"></li>
+	    								<li><a href="{{{ URL::to('deployment') }}}"><span class="glyphicon glyphicon-share"></span> Deploymens</a></li>
+	    							</ul>
+		                        </li>
+		                        <li class="dropdown">
+		    							<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+	    									<span class="glyphicon glyphicon-user"></span> {{{ Auth::user()->username }}}	<span class="caret"></span>
+	    								</a>
+	    							<ul class="dropdown-menu">
+	    								<li><a href="{{{ URL::to('user') }}}"><span class="glyphicon glyphicon-wrench"></span> Edit Profile</a></li>
+	    								<li class="divider"></li>
+	    								<li><a href="{{{ URL::to('user/logout') }}}"><span class="glyphicon glyphicon-share"></span> Logout</a></li>
+	    							</ul>
+	    						</li>
 	                        @else
 	                        <li {{ (Request::is('user/login') ? ' class="active"' : '') }}><a href="{{{ URL::to('user/login') }}}">Login</a></li>
 	                        <li {{ (Request::is('user/create') ? ' class="active"' : '') }}><a href="{{{ URL::to('user/create') }}}">{{{ Lang::get('site.sign_up') }}}</a></li>
 	                        @endif
 	                    </ul>
-	                    <ul class="nav navbar-nav pull-right">
-	    					<li><a href="{{{ URL::to('/') }}}">View Homepage</a></li>
-	    					<li class="divider-vertical"></li>
-	    					<li class="dropdown">
-	    							<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-    								<span class="glyphicon glyphicon-user"></span> {{{ Auth::user()->username }}}	<span class="caret"></span>
-    							</a>
-    							<ul class="dropdown-menu">
-    								<li><a href="{{{ URL::to('user/settings') }}}"><span class="glyphicon glyphicon-wrench"></span> Settings</a></li>
-    								<li class="divider"></li>
-    								<li><a href="{{{ URL::to('user/logout') }}}"><span class="glyphicon glyphicon-share"></span> Logout</a></li>
-    							</ul>
-    						</li>
-    					</ul>
-						<!-- ./ nav-collapse -->
+	                    <!-- ./ nav-collapse -->
 					</div>
 				</div>
 			</nav>
