@@ -87,8 +87,8 @@ But when you are vetting a service, as to how it looks and works, you may need t
 	    							</ul>
 	    						</li>
 	                        @else
-	                        <li {{ (Request::is('user/login') ? ' class="active"' : '') }}><a href="{{{ URL::to('user/login') }}}"><><span class="glyphicon glyphicon-log-in"></span>>Login</a></li>
-	                        <li {{ (Request::is('user/create') ? ' class="active"' : '') }}><a href="{{{ URL::to('user/create') }}}"><span class="glyphicon glyphicon-log-out"></span>>{{{ Lang::get('site.sign_up') }}}</a></li>
+	                        <li {{ (Request::is('user/login') ? ' class="active"' : '') }}><a href="{{{ URL::to('user/login') }}}"><span class="glyphicon glyphicon-log-in"></span>>Login</a></li>
+	                        <li {{ (Request::is('user/create') ? ' class="active"' : '') }}><a href="{{{ URL::to('user/create') }}}"><span class="glyphicon glyphicon-log-out"></span>{{{ Lang::get('site.sign_up') }}}</a></li>
 	                        @endif
 	                    </ul>
 	                    <!-- ./ nav-collapse -->
