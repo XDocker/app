@@ -53,7 +53,8 @@ class DeploymentController extends BaseController {
         $mode = $id !== false ? 'edit' : 'create';
         $deployment = $id !== false ? Deployment::where('user_id', Auth::id())->findOrFail($id) : null;
         $cloud_account_ids = CloudAccount::where('user_id', Auth::id())->get();
-        if (empty($cloud_account_ids) || $cloud_account_ids->isEmpty()) {
+        if (empty($cloud_account_ids) || $cloud_account_ids->isEmpty()) 
+        {
             return Redirect::to('account/create')->with('error', Lang::get('deployment/deployment.account_required'));
         }
         $providers = Config::get('deployment_schema');
@@ -113,7 +114,7 @@ class DeploymentController extends BaseController {
             // return var_dump($deployment);
             
             //$error = $deployment->errors()->all();
-            return Redirect::to('/')->with('success', Lang::get('deployment/deployment.deployment_deployment_updated'));
+            return Redirect::to('/')->with('success', Lang::get('deployment/deployment.deployment_updated'));
         }
         catch(Exception $e) {
             return Redirect::back()->with('error', $e->getMessage());

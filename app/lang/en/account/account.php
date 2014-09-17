@@ -14,6 +14,7 @@ return array(
 	'account_updated'          => 'Account updated.',
 	'account_created'          => 'Account created.',
 	'account_auth_failed'	   => 'Account authentication failed. Please check credentials',
-	'empty_accounts'  		   => 'You do not have any accounts. Create one by clicking on "Add New Cloud Account" below'
+	'empty_accounts'  		   => 'You do not have any accounts. Create one by clicking on "Add New Cloud Account" below',
+	'deployment.account_required'  => 'To deploy, please create the Account first'
 
 );
