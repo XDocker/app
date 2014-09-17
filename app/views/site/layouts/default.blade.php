@@ -51,7 +51,7 @@ But when you are vetting a service, as to how it looks and works, you may need t
 
 			<!-- Navbar -->
 			<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-				 <div class="container-fluid">
+				 <div class="container">
 	                <div class="navbar-header">
 	                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-target">
 	                        <span class="sr-only">Toggle navigation</span>
