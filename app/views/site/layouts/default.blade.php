@@ -65,16 +65,16 @@ But when you are vetting a service, as to how it looks and works, you may need t
 	                    <ul class="nav navbar-nav pull-right">
 	                        @if (Auth::check())
 		                        @if (Auth::user()->hasRole('admin'))
-		                        	<li><a href="{{{ URL::to('admin') }}}">Admin Panel</a></li>
+		                        	<li><a href="{{{ URL::to('admin') }}}">{{{ Lang::get('site.admin_panel') }}}</a></li>
 		                        @endif
 		                        <li class="dropdown">
 		                        	<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-	    								<span class="glyphicon glyphicon-cog"></span> Services	<span class="caret"></span>
+	    								<span class="glyphicon glyphicon-cog"></span> {{{ Lang::get('site.services') }}}	<span class="caret"></span>
 	    							</a>
 		                        	<ul class="dropdown-menu">
-	    								<li><a href="{{{ URL::to('account') }}}"><span class="glyphicon glyphicon-wrench"></span> Accounts</a></li>
+	    								<li><a href="{{{ URL::to('account') }}}"><span class="glyphicon glyphicon-wrench"></span> {{{ Lang::get('site.accounts') }}}</a></li>
 	    								<li class="divider"></li>
-	    								<li><a href="{{{ URL::to('deployment') }}}"><span class="glyphicon glyphicon-play-circle"></span> Deployments</a></li>
+	    								<li><a href="{{{ URL::to('deployment') }}}"><span class="glyphicon glyphicon-play-circle"></span> {{{ Lang::get('site.deployments') }}}</a></li>
 	    							</ul>
 		                        </li>
 		                        <li class="dropdown">
@@ -82,13 +82,13 @@ But when you are vetting a service, as to how it looks and works, you may need t
 	    									<span class="glyphicon glyphicon-user"></span> {{{ Auth::user()->username }}}	<span class="caret"></span>
 	    								</a>
 	    							<ul class="dropdown-menu">
-	    								<li><a href="{{{ URL::to('user') }}}"><span class="glyphicon glyphicon-edit"></span> Edit Profile</a></li>
+	    								<li><a href="{{{ URL::to('user') }}}"><span class="glyphicon glyphicon-edit"></span> {{{ Lang::get('site.edit-profile') }}}/a></li>
 	    								<li class="divider"></li>
-	    								<li><a href="{{{ URL::to('user/logout') }}}"><span class="glyphicon glyphicon-share"></span> Logout</a></li>
+	    								<li><a href="{{{ URL::to('user/logout') }}}"><span class="glyphicon glyphicon-share"></span> {{{ Lang::get('site.logut') }}}</a></li>
 	    							</ul>
 	    						</li>
 	                        @else
-	                        <li {{ (Request::is('user/login') ? ' class="active"' : '') }}><a href="{{{ URL::to('user/login') }}}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+	                        <li {{ (Request::is('user/login') ? ' class="active"' : '') }}><a href="{{{ URL::to('user/login') }}}"><span class="glyphicon glyphicon-log-in"></span> {{{ Lang::get('site.login') }}}</a></li>
 	                        <li {{ (Request::is('user/create') ? ' class="active"' : '') }}><a href="{{{ URL::to('user/create') }}}"><span class="glyphicon glyphicon-log-out"></span> {{{ Lang::get('site.sign_up') }}}</a></li>
 	                        @endif
 	                    </ul>
