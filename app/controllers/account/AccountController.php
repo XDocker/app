@@ -67,16 +67,14 @@ class AccountController extends BaseController {
             } else if ($account->user_id !== Auth::id()) {
                 throw new Exception('general.access_denied');
             }
+
             $account->name = Input::get('name');
             $account->cloudProvider = Input::get('cloudProvider');
             $account->credentials = json_encode(Input::get('credentials'));
             $account->user_id = Auth::id(); // logged in user id
             
             $conStatus = CloudProvider::authenticate($account);
-            //@TODO  based on the json template for provider to populate, load the field and values.
-            // Save it in credentials field of table as json.
-            // $account->prepareRules($oldAccount, $account);
-            // Save if valid.
+            
             if ($conStatus == 1) {
                 $success = $account->save();
                 return Redirect::intended('account')->with('success', Lang::get('account/account.account_updated'));
