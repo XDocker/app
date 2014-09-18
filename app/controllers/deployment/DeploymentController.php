@@ -3,6 +3,7 @@
  * Class and Function List:
  * Function list:
  * - __construct()
+ * - getIndex()
  * - getCreate()
  * - postEdit()
  * - postDelete()
@@ -30,15 +31,15 @@ class DeploymentController extends BaseController {
         $this->deployments = $deployments->where('deployments.user_id', Auth::id());
         $this->user = $user;
     }
-	
-	 public function getIndex() {
+    
+    public function getIndex() {
         // Get all the user's deployment
         $deployments = $this->deployments
-        					->select('accounts.name as "Account Name", accounts.cloudProvider ,deployments.name , deployments.created_at')
-        					->leftJoin('accounts', 'deployments.cloud_account_id', '=', 'accounts.id')
-							->where('deployments.user_id', Auth::id())
-        					->orderBy('deployments.created_at', 'DESC')
-        					->paginate(10);
+            ->select('cloud_accounts.name as "accountName"', 'cloud_accounts.cloudProvider', 'deployments.name', 'deployments.created_at')
+            ->leftJoin('cloud_accounts', 'deployments.cloud_account_id', '=', 'cloud_accounts.id')
+            ->where('deployments.user_id', Auth::id())
+            ->orderBy('deployments.created_at', 'DESC')
+            ->paginate(10);
         // var_dump($accounts, $this->accounts, $this->accounts->owner);
         // Show the page
         return View::make('site/deployment/index', array(
@@ -53,8 +54,7 @@ class DeploymentController extends BaseController {
         $mode = $id !== false ? 'edit' : 'create';
         $deployment = $id !== false ? Deployment::where('user_id', Auth::id())->findOrFail($id) : null;
         $cloud_account_ids = CloudAccount::where('user_id', Auth::id())->get();
-        if (empty($cloud_account_ids) || $cloud_account_ids->isEmpty()) 
-        {
+        if (empty($cloud_account_ids) || $cloud_account_ids->isEmpty()) {
             return Redirect::to('account/create')->with('error', Lang::get('deployment/deployment.account_required'));
         }
         $providers = Config::get('deployment_schema');

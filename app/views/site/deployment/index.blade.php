@@ -15,6 +15,7 @@
 	<ul class="list-group">
 		@if(!empty($deployments)) 
 			@foreach ($deployments as $deployment)
+			{{var_dump($deployment)}}
 	  			<li class="list-group-item">
 					<div class="media">
 						<form class="pull-right" method="post" action="{{ URL::to('deployment/' . $deployment->id . '/delete') }}">
