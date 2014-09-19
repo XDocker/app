@@ -2,7 +2,7 @@
 
 {{-- Web site Title --}}
 @section('title')
-{{{ Lang::get('home/home.settings') }}} ::
+{{{ Lang::get('site.title') }}} ::
 @parent
 @stop
 
@@ -25,7 +25,7 @@
 								<!-- CSRF Token -->
 								<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
 								<!-- ./ csrf token -->
-								<button type="submit" class="btn btn-danger pull-right" role="button">Delete</button>
+								<button type="submit" class="btn btn-danger pull-right" role="button">{{{ Lang::get('general.delete') }}}</button>
 							</form>				
 							<div class="media-body">
 								<h4 class="media-heading">{{{!empty($deployment -> name)?$deployment -> name:'Untitled'}}} - {{{!empty($deployment -> docker_name)?$deployment -> docker_name:'Untitled'}}}</h4>
