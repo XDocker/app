@@ -7,7 +7,7 @@
 * Classes list:
 * - CloudProvider
 */
-//require_once SHARED_ADDONPATH . 'libraries/aws/aws.phar';
+
 class CloudProvider {
     private static $aws;
     private static function AWSAuth($account) {
@@ -15,19 +15,25 @@ class CloudProvider {
         $config['key'] = $credentials->apiKey;
         $config['secret'] = $credentials->secretKey;
         $config['region'] = 'us-east-1';
-        self::$aws = Aws\Common\Aws::factory($config);
+		
+		
+		
+      
         
         $conStatus = FALSE;
         try {
-            $ec2Compute = self::$aws->get('ec2');
-			$images = $ec2Compute -> getIterator('DescribeImages');
-			$arr = '';
-			foreach ($images as $image)
-			{
-				$arr[] = $image;
-			}
-			
-            $conStatus = (!empty($arr) && count($arr) > 0);
+            $ec2Client = \Aws\Ec2\Ec2Client::factory($config);
+
+
+			$result = $ec2Client->DescribeInstances(array(
+		        'Filters' => array(
+		                array('Name' => 'instance-type', 'Values' => array('m1.small')),
+		        )
+			));
+		
+			$reservations = $result->toArray();
+			print_r($reservations); die();
+            //$conStatus = (!empty($arr) && count($arr) > 0);
         }
         catch(Exception $ex) {
             $conStatus = FALSE;
