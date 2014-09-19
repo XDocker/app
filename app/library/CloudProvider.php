@@ -20,8 +20,9 @@ class CloudProvider {
         $conStatus = FALSE;
         try {
             $ec2Compute = self::$aws->get('ec2');
-            $result = $ec2Compute->getRegions();
-            $conStatus = (!empty($result) && count($result) > 0);
+			$images = $ec2Compute -> getIterator('DescribeImages', $filter);
+			
+            $conStatus = (!empty($images) && count($images) > 0);
         }
         catch(Exception $ex) {
             $conStatus = FALSE;
