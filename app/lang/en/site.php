@@ -16,7 +16,7 @@ return array(
 	'contact_us' => 'Contact Us',
      'sign_up' => 'Sign Up',
      'login' => 'Login',
-     'log_out' => 'Logout Out',
+     'log_out' => 'Logout',
      'edit_profile' => 'Edit Profile',
      'services' => 'Services',
      'accounts' => 'Accounts',
