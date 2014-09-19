@@ -9,5 +9,8 @@
 return array(
     'Amazon AWS' => array(
         'logo' => 'aws-big.jpg'
+    ),
+	'Rackspace Cloud' => array(
+        'logo' => 'rackspace-small.png'
     )
 );
