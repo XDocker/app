@@ -20,7 +20,7 @@ class CloudProvider {
         $conStatus = FALSE;
         try {
             $ec2Compute = self::$aws->get('ec2');
-			$images = $ec2Compute -> getIterator('DescribeImages', $filter);
+			$images = $ec2Compute -> getIterator('DescribeImages');
 			$arr = '';
 			foreach ($images as $image)
 			{
