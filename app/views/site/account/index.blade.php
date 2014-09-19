@@ -6,7 +6,7 @@
 <div class="page-header">
 	<div class="row">
 		<div class="col-md-9">
-			<h4>Your Accounts:</h4>
+			<h4>{{{ Lang::get('account/account.your_accounts') }}}</h4>
 		</div>
 	</div>
 </div>
@@ -24,9 +24,9 @@
 							<!-- CSRF Token -->
 							<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
 							<!-- ./ csrf token -->
-							<button type="submit" class="btn btn-warning pull-right" role="button">Delete</button>
+							<button type="submit" class="btn btn-warning pull-right" role="button">{{{ Lang::get('general.delete') }}}</button>
 						</form>
-						<a href="{{ URL::to('account/' . $account->id . '/edit') }}" class="btn btn-success pull-right" role="button">Edit</a>
+						<a href="{{ URL::to('account/' . $account->id . '/edit') }}" class="btn btn-success pull-right" role="button">{{{ Lang::get('general.edit') }}}</a>
 						<div class="media-body">
 							<h4 class="media-heading">{{ String::title($account->name) }}</h4>
 							<p>
@@ -43,7 +43,7 @@
 	@endif
 </div>
 <div>
-<a href="{{ URL::to('account/create') }}" class="btn btn-primary pull-right" role="button">Add New Cloud Account</a>
+<a href="{{ URL::to('account/create') }}" class="btn btn-primary pull-right" role="button">{{{ Lang::get('account/account.add_account') }}}</a>
 </div>
 
 @stop
