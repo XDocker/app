@@ -6,14 +6,12 @@
 		<meta charset="utf-8" />
 		<title>
 			@section('title')
-			xDocker Test drive Docker Image on any Cloud IaaS
+			{{{ Lang::get('site.title') }}}
 			@show
 		</title>
-		<meta name="keywords" content="Docker, Amazon AWS Google Compute" />
-		<meta name="author" content="Team xDocker" />
-		<meta name="description" content="There are docker images for builds that are available in docker repository. We will only focus on public repositories. We list the repositories and any chosen repository could be deployed on any cloud. Now this could be run on your local machine too.
-But when you are vetting a service, as to how it looks and works, you may need to manually set up the service through multiple steps.
-" />
+		<meta name="keywords" content="{{{ Lang::get('site.keywords') }}}" />
+		<meta name="author" content="{{{ Lang::get('site.author') }}}" />
+		<meta name="description" content="{{{ Lang::get('site.description') }}}" />
 
 		<!-- Mobile Specific Metas
 		================================================== -->
@@ -82,9 +80,9 @@ But when you are vetting a service, as to how it looks and works, you may need t
 	    									<span class="glyphicon glyphicon-user"></span> {{{ Auth::user()->username }}}	<span class="caret"></span>
 	    								</a>
 	    							<ul class="dropdown-menu">
-	    								<li><a href="{{{ URL::to('user') }}}"><span class="glyphicon glyphicon-edit"></span> {{{ Lang::get('site.edit-profile') }}}/a></li>
+	    								<li><a href="{{{ URL::to('user') }}}"><span class="glyphicon glyphicon-edit"></span> {{{ Lang::get('site.edit_profile') }}}/a></li>
 	    								<li class="divider"></li>
-	    								<li><a href="{{{ URL::to('user/logout') }}}"><span class="glyphicon glyphicon-share"></span> {{{ Lang::get('site.logut') }}}</a></li>
+	    								<li><a href="{{{ URL::to('user/logout') }}}"><span class="glyphicon glyphicon-share"></span> {{{ Lang::get('site.log_out') }}}</a></li>
 	    							</ul>
 	    						</li>
 	                        @else
@@ -99,7 +97,7 @@ But when you are vetting a service, as to how it looks and works, you may need t
 			<!-- ./ navbar -->
 
 			<a class="banner-github {{ (Request::is('/') ? '' : 'hide') }}" href="https://github.com/XDocker/app" target="_blank">
-		        <img src="{{{ asset('assets/img/forkme_right_red_aa0000.png') }}}" alt="Fork me on GitHub">
+		        <img src="{{{ asset('assets/img/forkme_right_red_aa0000.png') }}}" alt="{{{ Lang::get('site.forkme') }}}">
 		    </a>
 
 			<!-- Container -->
@@ -120,7 +118,7 @@ But when you are vetting a service, as to how it looks and works, you may need t
 		    <footer id="footer" class="navbar navbar-default navbar-static-bottom">
 			  <hr>
 		      <div class="container">
-		        <p class="muted credit text-center">xDocker : Test drive Docker images on any infrastructure. </p>
+		        <p class="muted credit text-center">{{{ Lang::get('site.title') }}}</p>
 		        <p class="text-center">
 		        	<iframe src="http://ghbtns.com/github-btn.html?user=xdocker&repo=app&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="170" height="30"></iframe>
 		        </p>
