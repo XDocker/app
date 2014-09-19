@@ -25,7 +25,7 @@
 		
 		<!-- cloudProvider -->
 		<div class="form-group {{{ $errors->has('email') ? 'error' : '' }}}">
-			<label class="col-md-2 control-label" for="email">Cloud Provider</label>
+			<label class="col-md-2 control-label" for="email">Cloud Provider <font color="red">*</font></label>
 			<div class="col-md-6">
 				<select class="form-control" name="cloudProvider" id="cloudProvider" required>
 					@foreach ($providers as $key => $value)
@@ -38,7 +38,7 @@
 		
 		<!-- name -->
 		<div class="form-group {{{ $errors->has('username') ? 'error' : '' }}}">
-			<label class="col-md-2 control-label" for="name">Name</label>
+			<label class="col-md-2 control-label" for="name">Name <font color="red">*</font></label>
 			<div class="col-md-6">
 				<input class="form-control" type="text" name="name" id="name" value="{{{ Input::old('name', isset($account->name) ? $account->name : null) }}}" required />
 			</div>
