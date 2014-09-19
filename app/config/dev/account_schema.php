@@ -24,4 +24,21 @@ return array(
             'required' => true
         ) ,
     ) ,
+    'Rackspace Cloud' => array(
+        'credentials[accountId]' => array(
+            'type' => 'string',
+            'title' => 'Account ID',
+            'required' => true
+        ) ,
+        'credentials[username]' => array(
+            'type' => 'string',
+            'title' => 'API Key',
+            'required' => true
+        ) ,
+        'credentials[apiKey]' => array(
+            'type' => 'string',
+            'title' => 'Api Key',
+            'required' => true
+        ) ,
+    ) ,
 );
