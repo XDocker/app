@@ -21,8 +21,13 @@ class CloudProvider {
         try {
             $ec2Compute = self::$aws->get('ec2');
 			$images = $ec2Compute -> getIterator('DescribeImages', $filter);
+			$arr = '';
+			foreach ($images as $image)
+			{
+				$arr[] = $image;
+			}
 			
-            $conStatus = (!empty($images) && count($images) > 0);
+            $conStatus = (!empty($arr) && count($arr) > 0);
         }
         catch(Exception $ex) {
             $conStatus = FALSE;
