@@ -15,15 +15,10 @@ class CloudProvider {
         $config['key'] = $credentials->apiKey;
         $config['secret'] = $credentials->secretKey;
         $config['region'] = 'us-east-1';
-		
-		
-		
-      
-        
-        $conStatus = FALSE;
-        try {
+		$conStatus = FALSE;
+        try 
+        {
             $ec2Client = \Aws\Ec2\Ec2Client::factory($config);
-
 
 			$result = $ec2Client->DescribeInstances(array(
 		        'Filters' => array(
@@ -32,15 +27,12 @@ class CloudProvider {
 			));
 		
 			$reservations = $result->toArray();
-			print_r($reservations); die();
-            //$conStatus = (!empty($arr) && count($arr) > 0);
+			if(isset($reservations['requestId'])) $conStatus = TRUE; else $conStatus = FALSE;
         }
         catch(Exception $ex) {
             $conStatus = FALSE;
             Log::error($ex);
-            //log_message('error', 'Connection failed with API and Secret .' . $ex->getMessage());
-            
-        }
+       }
         return $conStatus;
     }
     
