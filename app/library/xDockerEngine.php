@@ -2,10 +2,10 @@
 /**
 * Class and Function List:
 * Function list:
-* - AWSAuth()
-* - authenticate()
+* - __construct()
+* - server()
 * Classes list:
-* - CloudProvider
+* - xDockerEngine
 */
 class xDockerEngine 
 {

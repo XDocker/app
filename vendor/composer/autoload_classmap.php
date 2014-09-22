@@ -979,6 +979,7 @@ return array(
     'ClassPreloader\\Parser\\NodeTraverser' => $vendorDir . '/classpreloader/classpreloader/src/ClassPreloader/Parser/NodeTraverser.php',
     'CloudAccount' => $baseDir . '/app/models/CloudAccount.php',
     'CloudProvider' => $baseDir . '/app/library/CloudProvider.php',
+    'xDockerEngine' => $baseDir . '/app/library/xDockerEngine.php',
     'Comment' => $baseDir . '/app/models/Comment.php',
     'CommentsTableSeeder' => $baseDir . '/app/database/seeds/CommentsTableSeeder.php',
     'ConfideSetupUsersTable' => $baseDir . '/app/database/migrations/2013_02_05_024934_confide_setup_users_table.php',
