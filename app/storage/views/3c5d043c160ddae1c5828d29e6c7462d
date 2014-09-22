@@ -1,0 +1,50 @@
+<?php /* Content */ ?>
+<?php $__env->startSection('content'); ?>
+
+<div class="page-header">
+	<div class="row">
+		<div class="col-md-9">
+			<h4>Your Deployments:</h4>
+		</div>
+	</div>
+</div>
+
+<div class="media-block">
+	<ul class="list-group">
+		<?php if(!empty($deployments)): ?> 
+			<?php foreach($deployments as $deployment): ?>
+	  			<li class="list-group-item">
+					<div class="media">
+						<a href="<?php echo URL::to('account/'.$deployment->cloud_account_id.'/edit'); ?>" class="pull-left" href="#">
+						    <img class="media-object img-responsive" src="<?php echo asset('/assets/img/providers/'.Config::get('provider_meta.'.$deployment->cloudProvider.'.logo')); ?>" alt="<?php echo $deployment->cloudProvider; ?>" />
+						    <p class="text-center"><?php echo e($deployment->accountName); ?></p>
+						</a>
+						<form class="pull-right" method="post" action="<?php echo URL::to('deployment/' . $deployment->id . '/delete'); ?>">
+							<!-- CSRF Token -->
+							<input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>" />
+							<!-- ./ csrf token -->
+							<button type="submit" class="btn btn-warning pull-right" role="button">Delete</button>
+						</form>
+						<div class="media-body">
+							
+							<h4 class="media-heading"><?php echo String::title($deployment->name); ?></h4>
+							<p>
+								<span title="Created At"><span class="glyphicon glyphicon-calendar"></span> <!--Sept 16th, 2012--><?php echo e($deployment->created_at); ?></span>
+							</p>
+						</div>
+					</div>
+				</li>
+			<?php endforeach; ?>
+		<?php endif; ?>
+	</ul>
+	<?php if(empty($deployments) || count($deployments) === 0): ?> 
+		<div class="alert alert-info"> <?php echo e(Lang::get('deployment/deployment.empty_deployments')); ?></div>
+	<?php endif; ?>
+</div>
+<div>
+<a href="<?php echo URL::to('deployment/create'); ?>" class="btn btn-primary pull-right" role="button">Add New Deployment</a>
+</div>
+
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('site.layouts.default', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

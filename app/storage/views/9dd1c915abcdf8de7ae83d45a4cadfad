@@ -1,0 +1,16 @@
+<?php /* Web site Title */ ?>
+<?php $__env->startSection('title'); ?>
+<?php echo e(Lang::get('user/user.forgot_password')); ?> ::
+@parent
+<?php $__env->stopSection(); ?>
+
+<?php /* Content */ ?>
+<?php $__env->startSection('content'); ?>
+<div class="page-header">
+    <h1><?php echo e(Lang::get('user/user.forgot_password')); ?></h1>
+</div>
+<?php echo Confide::makeForgotPasswordForm(); ?>
+
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('site.layouts.default', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

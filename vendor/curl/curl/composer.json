@@ -1,0 +1,34 @@
+{
+  "name": "curl/curl",
+  "description": "cURL class for PHP",
+  "keywords": ["dot", "curl"],
+  "homepage": "https://github.com/php-mod/curl",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "php-curl-class",
+      "homepage": "https://github.com/php-curl-class"
+    },
+    {
+      "name": "Hassan Amouhzi",
+      "email": "hassan@anezi.net",
+      "homepage": "http://hassan.amouhzi.com"
+    },
+    {
+      "name": "user52",
+      "homepage": "https://github.com/user52"
+    }
+  ],
+  "require": {
+    "php": ">=5.3.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "3.7.*"
+  },
+  "autoload": {
+    "psr-0": {
+      "Curl": "src/"
+    }
+  }
+}

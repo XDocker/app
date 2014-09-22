@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!-- Basic Page Needs
+		================================================== -->
+		<meta charset="utf-8" />
+		<title>
+			<?php $__env->startSection('title'); ?>
+			<?php echo e(Lang::get('site.title')); ?>
+
+			<?php echo $__env->yieldSection(); ?>
+		</title>
+		<meta name="keywords" content="<?php echo e(Lang::get('site.keywords')); ?>" />
+		<meta name="author" content="<?php echo e(Lang::get('site.author')); ?>" />
+		<meta name="description" content="<?php echo e(Lang::get('site.description')); ?>" />
+
+		<!-- Mobile Specific Metas
+		================================================== -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<!-- CSS
+		================================================== -->
+        <link rel="stylesheet" href="<?php echo asset('bower_components/bootswatch/paper/bootstrap.min.css'); ?>">
+        <link rel="stylesheet" href="<?php echo asset('bower_components/font-awesome/css/font-awesome.min.css'); ?>">
+        <link rel="stylesheet" href="<?php echo asset('assets/css/custom.css'); ?>">
+		<style>
+		<?php $__env->startSection('styles'); ?>
+		<?php echo $__env->yieldSection(); ?>
+		</style>
+
+		<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+		<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+
+		<!-- Favicons
+		================================================== -->
+		<link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?php echo e(asset('assets/ico/apple-touch-icon-144-precomposed.png')); ?>">
+		<link rel="apple-touch-icon-precomposed" sizes="114x114" href="<?php echo e(asset('assets/ico/apple-touch-icon-114-precomposed.png')); ?>">
+		<link rel="apple-touch-icon-precomposed" sizes="72x72" href="<?php echo e(asset('assets/ico/apple-touch-icon-72-precomposed.png')); ?>">
+		<link rel="apple-touch-icon-precomposed" href="<?php echo e(asset('assets/ico/apple-touch-icon-57-precomposed.png')); ?>">
+		<link rel="shortcut icon" href="<?php echo e(asset('assets/ico/favicon.ico')); ?>">
+	</head>
+
+	<body>
+		<!-- Env: <?php echo App::environment(); ?> -->
+
+		<!-- To make sticky footer need to wrap in a div -->
+		<div id="wrap">
+
+			<!-- Navbar -->
+			<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+				 <div class="container">
+	                <div class="navbar-header">
+	                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-target">
+	                        <span class="sr-only">Toggle navigation</span>
+	                        <span class="icon-bar"></span>
+	                        <span class="icon-bar"></span>
+	                        <span class="icon-bar"></span>
+	                    </button>
+	                    <a class="navbar-brand" href="<?php echo e(URL::to('/')); ?>"><img class="img-responsive" src="<?php echo e(asset('assets/img/logo.png')); ?>"></a>  
+	                </div>
+	                <div class="collapse navbar-collapse navbar-ex1-collapse" id="navbar-collapse-target">
+	                    <ul class="nav navbar-nav pull-right">
+	                        <?php if(Auth::check()): ?>
+		                        <?php if(Auth::user()->hasRole('admin')): ?>
+		                        	<li><a href="<?php echo e(URL::to('admin')); ?>"><?php echo e(Lang::get('site.admin_panel')); ?></a></li>
+		                        <?php endif; ?>
+		                        <li class="dropdown">
+		                        	<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+	    								<span class="glyphicon glyphicon-cog"></span> <?php echo e(Lang::get('site.services')); ?>	<span class="caret"></span>
+	    							</a>
+		                        	<ul class="dropdown-menu">
+	    								<li><a href="<?php echo e(URL::to('account')); ?>"><span class="glyphicon glyphicon-wrench"></span> <?php echo e(Lang::get('site.accounts')); ?></a></li>
+	    								<li class="divider"></li>
+	    								<li><a href="<?php echo e(URL::to('deployment')); ?>"><span class="glyphicon glyphicon-play-circle"></span> <?php echo e(Lang::get('site.deployments')); ?></a></li>
+	    							</ul>
+		                        </li>
+		                        <li class="dropdown">
+		    							<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+	    									<span class="glyphicon glyphicon-user"></span> <?php echo e(Auth::user()->username); ?>	<span class="caret"></span>
+	    								</a>
+	    							<ul class="dropdown-menu">
+	    								<li><a href="<?php echo e(URL::to('user')); ?>"><span class="glyphicon glyphicon-edit"></span> <?php echo e(Lang::get('site.edit_profile')); ?></a></li>
+	    								<li class="divider"></li>
+	    								<li><a href="<?php echo e(URL::to('user/logout')); ?>"><span class="glyphicon glyphicon-share"></span> <?php echo e(Lang::get('site.log_out')); ?></a></li>
+	    							</ul>
+	    						</li>
+	                        <?php else: ?>
+	                        <li <?php echo (Request::is('user/login') ? ' class="active"' : ''); ?>><a href="<?php echo e(URL::to('user/login')); ?>"><span class="glyphicon glyphicon-log-in"></span> <?php echo e(Lang::get('site.login')); ?></a></li>
+	                        <li <?php echo (Request::is('user/create') ? ' class="active"' : ''); ?>><a href="<?php echo e(URL::to('user/create')); ?>"><span class="glyphicon glyphicon-log-out"></span> <?php echo e(Lang::get('site.sign_up')); ?></a></li>
+	                        <?php endif; ?>
+	                    </ul>
+	                    <!-- ./ nav-collapse -->
+					</div>
+				</div>
+			</nav>
+			<!-- ./ navbar -->
+
+			<a class="banner-github <?php echo (Request::is('/') ? '' : 'hide'); ?>" href="https://github.com/XDocker/app" target="_blank">
+		        <img src="<?php echo e(asset('assets/img/forkme_right_red_aa0000.png')); ?>" alt="<?php echo e(Lang::get('site.forkme')); ?>">
+		    </a>
+
+			<!-- Container -->
+			<div class="container clear-both">
+				<!-- Notifications -->
+				<?php echo $__env->make('notifications', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+				<!-- ./ notifications -->
+
+				<!-- Content -->
+				<?php echo $__env->yieldContent('content'); ?>
+				<!-- ./ content -->
+			</div>
+			<!-- ./ container -->
+
+			<!-- the following div is needed to make a sticky footer -->
+			<div id="push"></div>
+
+		    <footer id="footer" class="navbar navbar-default navbar-static-bottom">
+			  <hr>
+		      <div class="container">
+		        <p class="muted credit text-center"><?php echo e(Lang::get('site.title')); ?></p>
+		        <p class="text-center">
+		        	<iframe src="http://ghbtns.com/github-btn.html?user=xdocker&repo=app&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="170" height="30"></iframe>
+		        </p>
+		      </div>
+		    </footer>
+	    </div>
+		<!-- ./wrap -->
+
+		<!-- Javascripts
+		================================================== -->
+        <script src="<?php echo asset('bower_components/jquery/dist/jquery.min.js'); ?>"></script>
+        <script src="<?php echo asset('bower_components/bootstrap/dist/js/bootstrap.min.js'); ?>"></script>
+
+        <?php echo $__env->yieldContent('scripts'); ?>
+	</body>
+</html>

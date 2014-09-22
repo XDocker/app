@@ -1,0 +1,26 @@
+<?php /* Content */ ?>
+<?php $__env->startSection('content'); ?>
+    <!-- Tabs -->
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#tab-general" data-toggle="tab">General</a></li>
+        </ul>
+    <!-- ./ tabs -->
+
+    <?php /* Delete User Form */ ?>
+    <form id="deleteForm" class="form-horizontal" method="post" action="<?php if(isset($user)): ?><?php echo URL::to('admin/users/' . $user->id . '/delete'); ?><?php endif; ?>" autocomplete="off">
+        <!-- CSRF Token -->
+        <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>" />
+        <input type="hidden" name="id" value="<?php echo $user->id; ?>" />
+        <!-- ./ csrf token -->
+
+        <!-- Form Actions -->
+        <div class="form-group">
+            <div class="controls">
+                <element class="btn-cancel close_popup">Cancel</element>
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </div>
+        </div>
+        <!-- ./ form actions -->
+    </form>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('admin.layouts.modal', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -1,0 +1,24 @@
+<?php /* Web site Title */ ?>
+<?php $__env->startSection('title'); ?>
+<?php echo e(Lang::get('user/user.register')); ?> ::
+@parent
+<?php $__env->stopSection(); ?>
+
+<?php /* Content */ ?>
+<?php $__env->startSection('content'); ?>
+<div class="page-header">
+	<h4>Signup</h4>
+</div>
+<div class="row">
+	<div class="col-md-8">
+		<?php echo Confide::makeSignupForm()->render(); ?>
+
+	</div>
+	<div class="col-md-4">
+		<legend class="text-center"><?php echo e(Lang::get('user/user.signup_social')); ?></legend>
+		<?php echo $__env->make('site.user.social', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+	</div>
+</div>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('site.layouts.default', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

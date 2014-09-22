@@ -998,6 +998,7 @@ return array(
     'Crypt_Rijndael' => $vendorDir . '/phpseclib/phpseclib/phpseclib/Crypt/Rijndael.php',
     'Crypt_TripleDES' => $vendorDir . '/phpseclib/phpseclib/phpseclib/Crypt/TripleDES.php',
     'Crypt_Twofish' => $vendorDir . '/phpseclib/phpseclib/phpseclib/Crypt/Twofish.php',
+    'Curl\\Curl' => $vendorDir . '/curl/curl/src/Curl/Curl.php',
     'DatabaseSeeder' => $baseDir . '/app/database/seeds/DatabaseSeeder.php',
     'Deployment' => $baseDir . '/app/models/Deployment.php',
     'DeploymentController' => $baseDir . '/app/controllers/deployment/DeploymentController.php',
