@@ -36,5 +36,11 @@ class TestController extends BaseController {
      */
     public function getIndex() {
     	echo 'Test Controller';
+		
+		 $engine = new xDockerEngine();
+		 $orchestrationParams = Config::get('orchestration');
+		 echo '<pre>';
+		 print_r($orchestrationParams);
+		 //$engine ->server($orchestrationParams)
 	}
 }
