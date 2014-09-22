@@ -32,7 +32,7 @@ return array(
         ) ,
         'credentials[username]' => array(
             'type' => 'string',
-            'title' => 'API Key',
+            'title' => 'Username',
             'required' => true
         ) ,
         'credentials[apiKey]' => array(
