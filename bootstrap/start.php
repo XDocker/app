@@ -41,7 +41,7 @@ if (isset($_SERVER['XDOCKER_ENV'])) {
             '127.0.0.1'
         ) , // Change this to your local machine hostname.
         'dev' => array(
-            'xdocker.org'
+            'xdocker'
         ) ,
         //'production' => array('xdocker.org'),
         
