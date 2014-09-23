@@ -49,12 +49,13 @@ class TestController extends BaseController {
                     'password' => 'sudhi'
         );
                 //url-ify the data for the POST
-       $fields_string = '';
-                foreach ($fields as $key => $value) {
-                    $fields_string.= $key . '=' . $value . '&';
-       }
-	   curl_setopt($process, CURLOPT_POST, count($fields));
-       curl_setopt($process, CURLOPT_POSTFIELDS, $fields);			
+	curl_setopt($process, CURLOPT_CUSTOMREQUEST, "POST");                                                                     
+curl_setopt($process, CURLOPT_POSTFIELDS, json_encode($fields));                                                                  
+curl_setopt($process, CURLOPT_RETURNTRANSFER, true);                                                                      
+curl_setopt($process, CURLOPT_HTTPHEADER, array(                                                                          
+    'Content-Type: application/json',                                                                                
+    'Content-Length: ' . strlen(json_encode($fields)))                                                                       
+);                                             
        $status = curl_exec($process);
        curl_close($process);
 		
