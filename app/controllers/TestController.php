@@ -40,7 +40,8 @@ class TestController extends BaseController {
 		$orchestrationParams = Config::get('orchestration');
 		echo '<pre>';
 		print_r($orchestrationParams);
-		$process = curl_init(Config::get('orchestration.endpoint_ip') . Config::get('orchestration.register'));
+		$process = curl_init();
+		curl_setopt($process, CURLOPT_URL, Config::get('orchestration.endpoint_ip') . Config::get('orchestration.register'));
         curl_setopt($process, CURLOPT_RETURNTRANSFER, TRUE);
         curl_setopt($process, CURLOPT_SSL_VERIFYPEER, FALSE);
         $fields = array(
@@ -53,7 +54,7 @@ class TestController extends BaseController {
                     $fields_string.= $key . '=' . $value . '&';
        }
 	   curl_setopt($process, CURLOPT_POST, count($fields));
-       curl_setopt($process, CURLOPT_POSTFIELDS, $fields_string);			
+       curl_setopt($process, CURLOPT_POSTFIELDS, $fields);			
        $status = curl_exec($process);
        curl_close($process);
 		
