@@ -119,7 +119,7 @@ Route::group(array(
     'before' => 'auth'
 ) , function () {
     # Resource route for the cloud account API crendentials
-    Route::any('account/', 'AccountController@getIndex');
+    Route::any('account/', 'AccountController@getIndex'); 
 	Route::any('test/', 'TestController@getIndex');
     Route::get('account/create', 'AccountController@getCreate');
     Route::get('account/{id}/edit', 'AccountController@getCreate');
