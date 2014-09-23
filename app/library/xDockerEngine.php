@@ -11,20 +11,30 @@ class xDockerEngine
 {
     private $connection;
 	private $curl;
-
 	
-	function __construct() 
+	function __construct($url) 
 	{
-		$this->curl = new Curl();
-		$this->curl->setOpt(CURLOPT_SSL_VERIFYPEER, FALSE);
-		$this->curl->setOpt(CURLOPT_SSL_VERIFYHOST, FALSE);
+		$this->connection = curl_init();
+		curl_setopt($this->connection, CURLOPT_CUSTOMREQUEST, "POST"); 
+		curl_setopt($this->connection, CURLOPT_RETURNTRANSFER, TRUE);
+        curl_setopt($this->connection, CURLOPT_SSL_VERIFYPEER, FALSE);
 	}
 	
-	function server($url, $request_method, $data='') 
+	public function request($url, $data='') 
 	{
-		$request_method = strtolower($request_method);
-		$this->curl->$request_method($url . $request_method, $data);
-		return $this->curl->response;
+		curl_setopt($this->connection, CURLOPT_URL, $url);
+		$strData = json_encode($data);
+		curl_setopt($this->connection, CURLOPT_POSTFIELDS, $strData);  
+		
+		curl_setopt($this->connection, CURLOPT_HTTPHEADER, array(                                                                          
+    	'Content-Type: application/json',                                                                                
+    	'Content-Length: ' . strlen(json_encode($strData)))                                                                       
+		);                                             
+       $status = curl_exec($this->connection);
+       curl_close($this->connection);
+	   
+	   return $status;
+		
 	} 
 	
 }
