@@ -3,15 +3,13 @@
 * Class and Function List:
 * Function list:
 * - __construct()
-* - server()
+* - request()
 * Classes list:
 * - xDockerEngine
 */
 class xDockerEngine 
 {
     private $connection;
-	private $curl;
-	
 	function __construct($url) 
 	{
 		$this->connection = curl_init();
