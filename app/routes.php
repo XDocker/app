@@ -28,6 +28,7 @@ Route::model('post', 'Post');
 Route::model('role', 'Role');
 
 Route::model('account', 'CloudAccount');
+Route::model('test', 'Test');
 /** ------------------------------------------
  *  Route constraint patterns
  *  ------------------------------------------
@@ -40,6 +41,7 @@ Route::pattern('token', '[0-9a-z]+');
 
 Route::pattern('account', '[0-9]+');
 Route::pattern('deployment', '[0-9]+');
+Route::pattern('test', '[0-9]+');
 /** ------------------------------------------
  *  Admin Routes
  *  ------------------------------------------
@@ -120,11 +122,15 @@ Route::group(array(
 ) , function () {
     # Resource route for the cloud account API crendentials
     Route::any('account/', 'AccountController@getIndex'); 
-	Route::any('test/', 'TestController@getIndex');
-    Route::get('account/create', 'AccountController@getCreate');
+	Route::get('account/create', 'AccountController@getCreate');
     Route::get('account/{id}/edit', 'AccountController@getCreate');
 	Route::any('deployment/', 'DeploymentController@getIndex');
     Route::get('deployment/create', 'DeploymentController@getCreate');
+	
+	Route::any('test/', 'TestController@getIndex');
+	Route::get('test/create', 'TestController@getCreate');
+    Route::get('test/{id}/edit', 'TestController@getCreate');
+	
     // Route::get('deployment/{id}/edit/', 'DeploymentController@getCreate');
     Route::group(array(
         'before' => 'csrf'
@@ -135,6 +141,10 @@ Route::group(array(
         Route::post('deployment/create', 'DeploymentController@postEdit');
         // Route::post('deployment/{deployment}/edit', 'DeploymentController@postEdit');
         Route::post('deployment/{id}/delete', 'DeploymentController@postDelete');
+		
+		Route::post('test/create', 'TestController@postEdit');
+        Route::post('test/{test}/edit', 'TestController@postEdit');
+        Route::post('test/{test}/delete', 'TestController@postDelete');
     });
     // Route::controller('account', 'AccountController');
     

@@ -8,33 +8,57 @@
  * - HomeController extends BaseController
  */
 class TestController extends BaseController {
-    /**
-     * Post Model
-     * @var Post
+    
+     /**
+     * Test Model
+     * @var tests
      */
-    /**
-     * User Model
-     * @var User
-     */
-    protected $user;
+    protected $tests;
+   
     /**
      * Inject the models.
      * @param Post $post
      * @param User $user
      */
-    public function __construct() 
+    public function __construct(Test $test) 
     {
         parent::__construct();
-            
-       
+		$this->tests = $test;
     }
+	
+	
+	public function getIndex()
+	{
+		echo 'Index test';
+		$tests = $this->tests->orderBy('created_at', 'DESC')->paginate(10);
+        // var_dump($accounts, $this->accounts, $this->accounts->owner);
+        // Show the page
+        return View::make('site/tests/index', array(
+            'tests' => $tests
+        ));
+	}
+	
+	public function getCreate()
+	{
+		echo 'Create';
+	}
+	
+	public function postEdit()
+	{
+		echo 'postEdit';
+	}
+	
+	public function postDelete()
+	{
+		echo 'postDelete';
+	}
 	
 	 /**
      * Returns all the blog posts.
      *
      * @return View
      */
-    public function getIndex() {
+    public function getIndex2() {
     	echo 'Test Controller';
 		
 		$orchestrationParams = Config::get('orchestration');
