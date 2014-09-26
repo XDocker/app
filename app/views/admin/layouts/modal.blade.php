@@ -35,7 +35,7 @@
 	 - size: 16x16 or 32x32
 	 - transparency is OK
 	 - see wikipedia for info on browser support: http://mky.be/favicon/ -->
-	<link rel="shortcut icon" href="{{{ asset('assets/ico/favicon.png') }}}">
+	<link rel="shortcut icon" href="{{{ asset('assets/ico/favicon.ico') }}}">
 
 	<!-- iOS favicons. -->
 	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{{ asset('assets/ico/apple-touch-icon-144-precomposed.png') }}}">
