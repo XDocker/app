@@ -35,9 +35,9 @@ class xDockerEngine {
         
         curl_setopt(self::$connection, CURLOPT_HTTPHEADER, array(
             'Content-Type: application/json',
-            'Content-Length: ' . strlen(json_encode($strData))
+            'Content-Length: ' . strlen($strData)
         ));
-        $status = curl_exec($this->connection);
+        $status = curl_exec(self::connection);
         curl_close(self::$connection);
         
         return $status;
