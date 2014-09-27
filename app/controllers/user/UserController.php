@@ -75,10 +75,22 @@ class UserController extends BaseController {
             unset($this->user->password);
             unset($this->user->password_confirmation);
         }
+        $this->user->display_name = $this->user->username;
+        $user->engine_password = Hash::make(uniqid(mt_rand() , true));
         // Save if valid. Password field will be hashed before save
         $this->user->save();
         
         if ($this->user->id) {
+            try {
+                // Register the user on the engine
+                xDockerEngine::register(array(
+                    'username' => $this->user->username,
+                    'password' => $this->user->engine_password
+                ));
+            }
+            catch(Exception $e) {
+                return Redirect::to('user/create')->withInput(Input::except('password'))->with('error', $e->getMessage());
+            }
             // Redirect with success message, You may replace "Lang::get(..." for your custom message.
             return Redirect::to('user/login')->with('success', Lang::get('user/user.user_account_created'));
         } else {
@@ -98,7 +110,7 @@ class UserController extends BaseController {
         
         if ($validator->passes()) {
             $oldUser = clone $user;
-            $user->username = Input::get('username');
+            $user->display_name = Input::get('username');
             $user->email = Input::get('email');
             
             $password = Input::get('password');
@@ -163,14 +175,12 @@ class UserController extends BaseController {
             'password' => Input::get('password') ,
             'remember' => Input::get('remember') ,
         );
-		
-		
         // If you wish to only allow login from confirmed users, call logAttempt
         // with the second parameter as true.
         // logAttempt will check if the 'email' perhaps is the username.
         // Check that the user is confirmed.
         if (Confide::logAttempt($input, true)) {
-        	return Redirect::intended('/');
+            return Redirect::intended('/');
         } else {
             // Check if there was too many login attempts
             if (Confide::isThrottled($input)) {
@@ -228,10 +238,17 @@ class UserController extends BaseController {
                 $user->confirmation_code = md5(uniqid(mt_rand() , true));
                 // Set as confirmed by default since we have social proof
                 $user->confirmed = 1;
+                $user->display_name = $user->username;
+                $user->engine_password = Hash::make(uniqid(mt_rand() , true));
                 // var_dump('created', $user->save() , $user->errors());
                 if (!$user->save()) {
                     throw new Exception($user->errors());
                 }
+                // Register the user on the engine
+                xDockerEngine::register(array(
+                    'username' => $user->username,
+                    'password' => $user->engine_password
+                ));
             }
             Auth::loginUsingId($user->id);
             // Confide::logAttempt((array) $user);
