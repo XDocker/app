@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'AccountController' => $baseDir . '/app/controllers/account/AccountController.php',
+    'AddEngineKeyToUsers' => $baseDir . '/app/database/migrations/2014_09_27_041347_add_engine_key_to_users.php',
     'AddTypeToCloudAccounts' => $baseDir . '/app/database/migrations/2014_09_09_133324_add_type_to_cloud_accounts.php',
     'AdminBlogsController' => $baseDir . '/app/controllers/admin/AdminBlogsController.php',
     'AdminCommentsController' => $baseDir . '/app/controllers/admin/AdminCommentsController.php',
@@ -3288,6 +3289,7 @@ return array(
     'Symfony\\Component\\Yaml\\Yaml' => $vendorDir . '/symfony/yaml/Symfony/Component/Yaml/Yaml.php',
     'System_SSH_Agent' => $vendorDir . '/phpseclib/phpseclib/phpseclib/System/SSH/Agent.php',
     'System_SSH_Agent_Identity' => $vendorDir . '/phpseclib/phpseclib/phpseclib/System/SSH/Agent.php',
+    'Test' => $baseDir . '/app/models/Test.php',
     'TestCase' => $baseDir . '/app/tests/library/TestCase.php',
     'TestController' => $baseDir . '/app/controllers/TestController.php',
     'Text_Template' => $vendorDir . '/phpunit/php-text-template/Text/Template.php',
