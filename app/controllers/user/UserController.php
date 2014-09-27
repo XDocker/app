@@ -110,7 +110,7 @@ class UserController extends BaseController {
         
         if ($validator->passes()) {
             $oldUser = clone $user;
-            $user->display_name = Input::get('username');
+            // $user->display_name = Input::get('username'); //@TODO: Replace all public username instances with display_name and make it editable
             $user->email = Input::get('email');
             
             $password = Input::get('password');
