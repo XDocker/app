@@ -76,7 +76,7 @@ class UserController extends BaseController {
             unset($this->user->password_confirmation);
         }
         $this->user->display_name = $this->user->username;
-        $this->user->engine_password = Hash::make(uniqid(mt_rand() , true));
+        $this->user->engine_key = Hash::make(uniqid(mt_rand() , true));
         // Save if valid. Password field will be hashed before save
         $this->user->save();
         
@@ -85,7 +85,7 @@ class UserController extends BaseController {
                 // Register the user on the engine
                 xDockerEngine::register(array(
                     'username' => $this->user->username,
-                    'password' => $this->user->engine_password
+                    'password' => $this->user->engine_key
                 ));
             }
             catch(Exception $e) {
@@ -239,7 +239,7 @@ class UserController extends BaseController {
                 // Set as confirmed by default since we have social proof
                 $user->confirmed = 1;
                 $user->display_name = $user->username;
-                $user->engine_password = Hash::make(uniqid(mt_rand() , true));
+                $user->engine_key = Hash::make(uniqid(mt_rand() , true));
                 // var_dump('created', $user->save() , $user->errors());
                 if (!$user->save()) {
                     throw new Exception($user->errors());
