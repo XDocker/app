@@ -26,7 +26,7 @@
 
 		
 		<!-- cloud_account_id -->
-		<div class="form-group {{{ $errors->has('email') ? 'error' : '' }}}">
+		<div class="form-group {{{ $errors->has('username') ? 'error' : '' }}}">
 			<label class="col-md-2 control-label" for="cloud_account_id">Cloud Account</label>
 			<div class="col-md-6">
 				<select class="form-control" name="cloud_account_id" id="cloud_account_id" required>
