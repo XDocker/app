@@ -17,17 +17,7 @@ return array(
             'type' => 'string',
             'title' => 'KeyPair',
             'required' => false
-        ) ,
-        'parameters[vpcId]' => array(
-            'type' => 'string',
-            'title' => 'VPC',
-            'required' => false
-        ) ,
-        'parameters[subnet]' => array(
-            'type' => 'string',
-            'title' => 'Subnet',
-            'required' => false
-        ) ,
+        )
     ) ,
     'Rackspace Cloud' => array(
         'parameters[securityGroupId]' => array(
