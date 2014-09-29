@@ -107,31 +107,40 @@ class DeploymentController extends BaseController {
 				{
 					$deployment -> token = $obj->token;
 					$this->prepare($user, $deployment);
-				}
-				
-				$responseJson = xDockerEngine::run(json_decode($deployment->wsParams));
-				EngineLog::logIt(array('user_id' => Auth::id(), 'method' => 'run', 'return' => $responseJson));
-				$obj = json_decode($responseJson);
-				if($obj->status == 'OK')
-				{
-					$deployment -> job_id = $obj->job_id;
-					$deployment -> status = 'In Progress';
-				}
-				unset($deployment -> token );
-				 //$deployment->status = $status;
-	            $success = $deployment->save();
-	            if (!$success) {
-	            	print_r($deployment->errors());
-	            	Log::error('Error while saving deployment : '.json_encode( $deployment->errors()));
-	                //throw new Exception($deployment->errors());
+					$responseJson = xDockerEngine::run(json_decode($deployment->wsParams));
+					EngineLog::logIt(array('user_id' => Auth::id(), 'method' => 'run', 'return' => $responseJson));
+					$obj = json_decode($responseJson);
+					if($obj->status == 'OK')
+					{
+						$deployment -> job_id = $obj->job_id;
+						$deployment -> status = 'In Progress';
+						unset($deployment -> token );
+						 //$deployment->status = $status;
+		            	$success = $deployment->save();
+		            	if (!$success) {
+		            		print_r($deployment->errors());
+		            		Log::error('Error while saving deployment : '.json_encode( $deployment->errors()));
+		                //throw new Exception($deployment->errors());
+						}
+					}
+					else if($obj->status == 'error')
+					{
+						Log::error('Failed during deployment!'. $obj->message);
+						return Redirect::to('deployment')->with('error', 'Failed during deployment!'. $obj->message);
+					}
 	            }
+				else if($obj->status == 'error')
+				{
+					Log::error('Failed to authenticate before deployment!'. $obj->message);
+					return Redirect::to('deployment')->with('error', 'Failed to authenticate before deployment!'. $obj->message);
+				}
             }
             catch(Exception $err) {
                 $status = 'Unexpected Error: ' . $err->getMessage();
 				Log::error('Error while saving deployment : '. $status);
                 throw new Exception($err->getMessage());
             }
-            return Redirect::to('/')->with('success', Lang::get('deployment/deployment.deployment_updated'));
+            return Redirect::to('deployment')->with('success', Lang::get('deployment/deployment.deployment_updated'));
         }
         catch(Exception $e) {
         	Log::error('Error while saving deployment : '. $e->getMessage());
@@ -183,4 +192,18 @@ class DeploymentController extends BaseController {
             return Redirect::to('/')->with('error', 'Error while deleting');
         }
     }
+	
+	public function checkStatus($id)
+	{
+		 $deployment = Deployment::where('user_id', Auth::id())->find($id);
+		 $user = Auth::user();
+		 $responseJson = xDockerEngine::authenticate(array('username' => $user->username, 'password' => md5($user->engine_key)));
+		 EngineLog::logIt(array('user_id' => Auth::id(), 'method' => 'authenticate', 'return' => $responseJson));
+		 $obj = json_decode($responseJson);
+		 if($obj->status == 'OK')
+		 {
+				 $responseJson = xDockerEngine::authenticate(array('token' => $user->username, 'job_id' => $deployment->kob_id));
+			
+		 }		
+	}
 }
