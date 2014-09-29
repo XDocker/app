@@ -95,7 +95,11 @@ class DeploymentController extends BaseController {
             $deployment->user_id = Auth::id(); // logged in user id
             try {
                 // Get and save status from external WS
-                $process = curl_init(Config::get('deployment_api.url'));
+                
+                $responseJson = xDockerEngine::authenticate(array('username' => Auth::username(), 'password' => Auth::engine_key()));
+				
+				print_r($responseJson); die();
+                /*$process = curl_init(Config::get('deployment_api.url'));
                 curl_setopt($process, CURLOPT_RETURNTRANSFER, TRUE);
                 curl_setopt($process, CURLOPT_SSL_VERIFYPEER, FALSE);
                 $fields = array(
@@ -112,6 +116,7 @@ class DeploymentController extends BaseController {
                 curl_setopt($process, CURLOPT_POST, count($fields));
                 curl_setopt($process, CURLOPT_POSTFIELDS, $fields_string);
                 curl_close($process);
+				 * */
             }
             catch(Exception $err) {
                 $status = 'Unexpected Error: ' . $err->getMessage();
