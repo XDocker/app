@@ -7,7 +7,7 @@
 // Schema for the Provider specific fields, will be converted into JSON and used on the front-end with https://github.com/joshfire/jsonform
 
 return array(
-    'Amazon AWS' => array(
+    /*'Amazon AWS' => array(
         'parameters[securityGroupId]' => array(
             'type' => 'string',
             'title' => 'Security Group',
@@ -40,5 +40,5 @@ return array(
             'title' => 'Subnet',
             'required' => false
         ) ,
-    ) ,
+    ) ,*/
 );
