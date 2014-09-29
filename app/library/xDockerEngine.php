@@ -27,8 +27,9 @@ class xDockerEngine {
         self::$orchestrationParams = Config::get('orchestration');
     }
     
-    public static function request($url, $data = '') {
+    public static function request($url, $data ) {
         self::init($url);
+		echo $url;
         curl_setopt(self::$connection, CURLOPT_URL, $url);
         $strData = json_encode($data);
         curl_setopt(self::$connection, CURLOPT_POSTFIELDS, $strData);
@@ -38,6 +39,7 @@ class xDockerEngine {
             'Content-Length: ' . strlen($strData)
         ));
         $status = curl_exec(self::$connection);
+		print_r($status);
         curl_close(self::$connection);
         
         return $status;
