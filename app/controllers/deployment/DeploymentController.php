@@ -195,16 +195,16 @@ class DeploymentController extends BaseController {
 	
 	public function checkStatus($id)
 	{
-		print_r($id); 
-		 $deployment = Deployment::where('user_id', Auth::id())->find($id);
-		 print_r($deployment); die();
+		$deployment = Deployment::where('user_id', Auth::id())->find($id);
 		 $user = Auth::user();
 		 $responseJson = xDockerEngine::authenticate(array('username' => $user->username, 'password' => md5($user->engine_key)));
 		 EngineLog::logIt(array('user_id' => Auth::id(), 'method' => 'authenticate', 'return' => $responseJson));
 		 $obj = json_decode($responseJson);
+		 print_r($obj);
 		 if($obj->status == 'OK')
 		 {
-			$responseJson = xDockerEngine::getDeploymentStatus(array('token' => $user->username, 'job_id' => $deployment->kob_id));
+			$responseJson = xDockerEngine::getDeploymentStatus(array('token' => $obj->token, 'job_id' => $deployment->job_id));
+			print_r($responseJson);
 			print_r($responseJson);
 		 }		
 	}
