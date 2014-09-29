@@ -121,7 +121,7 @@ class DeploymentController extends BaseController {
 				 //$deployment->status = $status;
 	            $success = $deployment->save();
 	            if (!$success) {
-	            	Log::error('Error while saving deployment : '. $deployment->errors());
+	            	Log::error('Error while saving deployment : '.json_encode( $deployment->errors()));
 	                throw new Exception($deployment->errors());
 	            }
             }
