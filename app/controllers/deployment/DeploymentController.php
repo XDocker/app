@@ -202,8 +202,8 @@ class DeploymentController extends BaseController {
 		 $obj = json_decode($responseJson);
 		 if($obj->status == 'OK')
 		 {
-				 $responseJson = xDockerEngine::authenticate(array('token' => $user->username, 'job_id' => $deployment->kob_id));
-			
+			$responseJson = xDockerEngine::getDeploymentStatus(array('token' => $user->username, 'job_id' => $deployment->kob_id));
+			print_r($responseJson);
 		 }		
 	}
 }

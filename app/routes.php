@@ -142,6 +142,7 @@ Route::group(array(
         Route::post('deployment/create', 'DeploymentController@postEdit');
         // Route::post('deployment/{deployment}/edit', 'DeploymentController@postEdit');
         Route::post('deployment/{deployment}/delete', 'DeploymentController@postDelete');
+		 Route::post('deployment/{deployment}/refresh', 'DeploymentController@checkStatus');
     });
     // Route::controller('account', 'AccountController');
     
