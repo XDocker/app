@@ -45,34 +45,34 @@ class xDockerEngine {
     
     public static function register($data) {
     	self::init();
-        return self::request(self::$orchestrationParams['endpoint_ip'] . '/' . self::$orchestrationParams['register'], $data);
+        return self::request(self::$orchestrationParams['endpoint_ip'] .  self::$orchestrationParams['register'], $data);
     }
     
     public static function authenticate($data) {
-        return self::request(self::$orchestrationParams['endpoint_ip'] . '/' . self::$orchestrationParams['authenticate'], $data);
+        return self::request(self::$orchestrationParams['endpoint_ip'] . self::$orchestrationParams['authenticate'], $data);
     }
     
     public static function run($data) {
-        return self::request(self::$orchestrationParams['endpoint_ip'] . '/' . self::$orchestrationParams['run'], $data);
+        return self::request(self::$orchestrationParams['endpoint_ip'] . self::$orchestrationParams['run'], $data);
     }
     
     public static function instance($data) {
-        return self::request(self::$orchestrationParams['endpoint_ip'] . '/' . self::$orchestrationParams['instance'], $data);
+        return self::request(self::$orchestrationParams['endpoint_ip'] . self::$orchestrationParams['instance'], $data);
     }
     
     public static function getDeploymentStatus($data) {
-        return self::request(self::$orchestrationParams['endpoint_ip'] . '/' . self::$orchestrationParams['getDeploymentStatus'], $data);
+        return self::request(self::$orchestrationParams['endpoint_ip'] . self::$orchestrationParams['getDeploymentStatus'], $data);
     }
     
     public static function getLog($data) {
-      return self::request(self::$orchestrationParams['endpoint_ip'] . '/' . self::$orchestrationParams['getLog'], $data);
+      return self::request(self::$orchestrationParams['endpoint_ip'] . self::$orchestrationParams['getLog'], $data);
     }
     
     public static function uploadKey($data) {
-        return self::request(self::$orchestrationParams['endpoint_ip'] . '/' . self::$orchestrationParams['uploadKey'], $data);
+        return self::request(self::$orchestrationParams['endpoint_ip'] . self::$orchestrationParams['uploadKey'], $data);
     }
     
     public static function downloadKey($data) {
-        return self::request(self::$orchestrationParams['endpoint_ip'] . '/' . self::$orchestrationParams['downloadKey'], $data);
+        return self::request(self::$orchestrationParams['endpoint_ip'] . self::$orchestrationParams['downloadKey'], $data);
     }
 }
