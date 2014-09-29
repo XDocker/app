@@ -12,14 +12,15 @@ class AddEngineKeyLog extends Migration {
 	 */
 	public function up()
 	{
-		Schema::table('engine_key_logs', function(Blueprint $table)
+		Schema::create('engine_logs', function($table)
 		{
-			$table->increments('id');
+            $table->engine = 'InnoDB';
 			$table->integer('user_id')->unsigned()->index();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 			$table->string('method');
 			$table->text('status_message');
 			$table->timestamps();
+			
 		});
 	}
 
@@ -31,7 +32,7 @@ class AddEngineKeyLog extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('engine_key_logs');
+		Schema::drop('engine_logs');
 	}
 
 }
