@@ -90,20 +90,23 @@ class DeploymentController extends BaseController {
             }
             $deployment->name = Input::get('name');
             $deployment->cloud_account_id = Input::get('cloud_account_id');
+			
             $deployment->parameters = json_encode(Input::get('parameters'));
             $deployment->docker_name = Input::get('docker_name');
             $deployment->user_id = Auth::id(); // logged in user id
+            
+            
             try {
                 // Get and save status from external WS
                 $user = Auth::user();
 				$responseJson = xDockerEngine::authenticate(array('username' => $user->username, 'password' => md5($user->engine_key)));
-				print_r($responseJson);
 				EngineLog::logIt(array('user_id' => Auth::id(), 'method' => 'authenticate', 'return' => $responseJson));
 				$obj = json_decode($responseJson);
-				print_r($obj);
+				
 				if($obj->status == 'OK')
 				{
 					echo ' Ready for deployment:'. $obj->token;
+					$thhis->prepare($obj->token, $deployment);
 				}
 				
                 /*$process = curl_init(Config::get('deployment_api.url'));
@@ -143,6 +146,21 @@ class DeploymentController extends BaseController {
             return Redirect::back()->with('error', $e->getMessage());
         }
     }
+
+	private function prepare($token, $deployment)
+	{
+		/* "token": "<token>",
+    "secretKey": "<api secret>",
+    "packageName": "xdocker/securitymonkey",
+    "dockerParams": {"ports": [443, 5000], "env": {}, "tag": "v1"},
+    "apiKey": "<api key>",
+    "cloudProvider": "amazon"
+		 * */
+		$account = CloudAccount::where('user_id', Auth::id())->findOrFail($deployment->cloud_account_id) ;
+        print_r($account);    
+        
+		
+	}
     /**
      * Remove the specified Account .
      *
