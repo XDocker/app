@@ -26,7 +26,7 @@ Route::model('user', 'User');
 Route::model('comment', 'Comment');
 Route::model('post', 'Post');
 Route::model('role', 'Role');
-
+Route::model('deployments', 'Deployment');
 Route::model('account', 'CloudAccount');
 Route::model('engine_logs', 'EngineLog');
 Route::model('test', 'Test');
