@@ -105,10 +105,25 @@ class DeploymentController extends BaseController {
 				
 				if($obj->status == 'OK')
 				{
-					echo ' Ready for deployment:'. $obj->token;
-					$this->prepare($obj->token, $deployment);
+					$deployment -> token = $obj->token;
+					$this->prepare($user, $deployment);
 				}
 				
+				$responseJson = xDockerEngine::run($deployment->parameters);
+				EngineLog::logIt(array('user_id' => Auth::id(), 'method' => 'run', 'return' => $responseJson));
+				$obj = json_decode($responseJson);
+				if($obj->status == 'OK')
+				{
+					$deployment -> job_id = $obj->job_id;
+					$deployment -> status = 'In Progress';
+				}
+				
+				 //$deployment->status = $status;
+	            $success = $deployment->save();
+	            if (!$success) {
+	            	Log::eror('Error while saving deployment : '. $deployment->errors());
+	                throw new Exception($deployment->errors());
+	            }
                 /*$process = curl_init(Config::get('deployment_api.url'));
                 curl_setopt($process, CURLOPT_RETURNTRANSFER, TRUE);
                 curl_setopt($process, CURLOPT_SSL_VERIFYPEER, FALSE);
@@ -132,14 +147,6 @@ class DeploymentController extends BaseController {
                 $status = 'Unexpected Error: ' . $err->getMessage();
                 throw new Exception($err->getMessage());
             }
-            $deployment->status = $status;
-            $success = $deployment->save();
-            if (!$success) {
-                throw new Exception($deployment->errors());
-            }
-            // return var_dump($deployment);
-            
-            //$error = $deployment->errors()->all();
             return Redirect::to('/')->with('success', Lang::get('deployment/deployment.deployment_updated'));
         }
         catch(Exception $e) {
@@ -147,7 +154,7 @@ class DeploymentController extends BaseController {
         }
     }
 
-	private function prepare($token, $deployment)
+	private function prepare($user, & $deployment)
 	{
 		/* "token": "<token>",
     "secretKey": "<api secret>",
@@ -157,9 +164,18 @@ class DeploymentController extends BaseController {
     "cloudProvider": "amazon"
 		 * */
 		$account = CloudAccount::where('user_id', Auth::id())->findOrFail($deployment->cloud_account_id) ;
-        print_r($account);    
-        
+		$credentials = json_decode($account->credentials);
 		
+		$deployment->parameters = array (
+						'token' => $deployment->token,
+						'cloudProvider' => $account ->cloudProvider,
+						'apiKey' => $credentials ->apiKey,
+						'secretKey' => $credentials ->secretKey,
+						'packageName' => $deployment -> docker_name,
+						'dockerParams' => array('ports' => array(443,5000), 
+												'env' => array('mail' =>$user->email, 'host'=> '{host}'), 
+												'tag'=> 'v1')
+					);				
 	}
     /**
      * Remove the specified Account .
