@@ -96,10 +96,14 @@ class DeploymentController extends BaseController {
             try {
                 // Get and save status from external WS
                 $user = Auth::user();
-				print_r($user);
-                $responseJson = xDockerEngine::authenticate(array('username' => $user->username, 'password' => md5($user->engine_key)));
+				$responseJson = xDockerEngine::authenticate(array('username' => $user->username, 'password' => md5($user->engine_key)));
+				EngineLog::logIt(array('user_id' => Auth::id(), 'method' => 'authenticate', 'return' => $responseJson));
+				$obj = json_decode($responseJson);
+				if($obj->status == 'OK')
+				{
+					echo ' Ready for deployment:'. $obj->token;
+				}
 				
-				print_r($responseJson); die();
                 /*$process = curl_init(Config::get('deployment_api.url'));
                 curl_setopt($process, CURLOPT_RETURNTRANSFER, TRUE);
                 curl_setopt($process, CURLOPT_SSL_VERIFYPEER, FALSE);
