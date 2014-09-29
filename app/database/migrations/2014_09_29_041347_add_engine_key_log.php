@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class AddEngineKeyLogs extends Migration {
+class AddEngineKeyLog extends Migration {
 
 	/**
 	 * Run the migrations.
