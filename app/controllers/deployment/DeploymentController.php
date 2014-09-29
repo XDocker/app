@@ -117,6 +117,7 @@ class DeploymentController extends BaseController {
 					$deployment -> job_id = $obj->job_id;
 					$deployment -> status = 'In Progress';
 				}
+				unset($deployment -> token );
 				 //$deployment->status = $status;
 	            $success = $deployment->save();
 	            if (!$success) {
