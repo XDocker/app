@@ -118,8 +118,8 @@ class DeploymentController extends BaseController {
 						 //$deployment->status = $status;
 		            	$success = $deployment->save();
 		            	if (!$success) {
-		            		print_r($deployment->errors());
 		            		Log::error('Error while saving deployment : '.json_encode( $deployment->errors()));
+							return Redirect::to('deployment')->with('error', 'Error saving deployment!' );
 		                //throw new Exception($deployment->errors());
 						}
 					}
@@ -200,12 +200,39 @@ class DeploymentController extends BaseController {
 		 $responseJson = xDockerEngine::authenticate(array('username' => $user->username, 'password' => md5($user->engine_key)));
 		 EngineLog::logIt(array('user_id' => Auth::id(), 'method' => 'authenticate', 'return' => $responseJson));
 		 $obj = json_decode($responseJson);
-		 print_r($obj);
+		
 		 if($obj->status == 'OK')
 		 {
 			$responseJson = xDockerEngine::getDeploymentStatus(array('token' => $obj->token, 'job_id' => $deployment->job_id));
-			print_r($responseJson);
-			print_r($responseJson);
+			 EngineLog::logIt(array('user_id' => Auth::id(), 'method' => 'getDeploymentStatus', 'return' => $responseJson));
+		
+			$obj2 = json_decode($responseJson);
+			if($obj2->status == 'OK')
+			{
+				if($obj2->job_status == 'Completed')
+				{
+					$deployment->status = $obj2->job_status;
+					$deployment -> wsResults = $obj2 -> result;
+					$success = $deployment->save();
+		            if (!$success) {
+		            	Log::error('Error while saving deployment : '.json_encode( $deployment->errors()));
+						return Redirect::to('deployment')->with('error', 'Error saving deployment!' );
+		                //throw new Exception($deployment->errors());
+					}
+					return Redirect::to('deployment')->with('success', $deployment->name .' is refreshed' );
+				}
+			}
+			else  if($obj2->status == 'error')
+			 {
+				 // There was a problem deleting the user
+	            return Redirect::to('deployment')->with('error', $obj2->message );
+			 }	
+			
+		 }	
+		 if($obj->status == 'error')
+		 {
+			 // There was a problem deleting the user
+            return Redirect::to('deployment')->with('error', $obj->message );
 		 }		
 	}
 }
