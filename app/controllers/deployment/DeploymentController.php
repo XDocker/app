@@ -168,6 +168,7 @@ class DeploymentController extends BaseController {
 		
 		$deployment->wsParams = array (
 						'token' => $deployment->token,
+						'username' => $user->username,
 						'cloudProvider' => $account ->cloudProvider,
 						'apiKey' => $credentials ->apiKey,
 						'secretKey' => $credentials ->secretKey,
