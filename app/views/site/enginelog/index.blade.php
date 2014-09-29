@@ -18,7 +18,7 @@
 	  			<li class="list-group-item">
 					<div class="media">
 						<div class="media-body">
-							<h4 class="media-heading">{{ String::title($log->method) }}</h4>
+							<h4 class="media-heading">{{{ Lang::get('enginelog/enginelog.method') }}} : {{ String::title($log->method) }}</h4>
 							<p>
 								<span class="glyphicon glyphicon-calendar"></span> <!--Sept 16th, 2012-->{{{ $log->created_at }}}
 							</p>
