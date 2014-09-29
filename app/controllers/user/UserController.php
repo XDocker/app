@@ -246,10 +246,11 @@ class UserController extends BaseController {
                     throw new Exception($user->errors());
                 }
                 // Register the user on the engine
-                xDockerEngine::register(array(
+                $return = xDockerEngine::register(array(
                     'username' => $user->username,
                     'password' => $user->engine_password
                 ));
+				Log::info("Return Status : " . $return);
             }
             Auth::loginUsingId($user->id);
             // Confide::logAttempt((array) $user);
@@ -257,7 +258,6 @@ class UserController extends BaseController {
         }
         catch(Exception $e) {
             // exception codes can be found on HybBridAuth's web site
-            var_dump('$e', $e);
             Log::error($e);
             try {
                 // Logout older providers - clear expired connections
