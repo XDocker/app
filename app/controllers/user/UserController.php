@@ -76,7 +76,7 @@ class UserController extends BaseController {
             unset($this->user->password_confirmation);
         }
         $this->user->display_name = $this->user->username;
-        $user->engine_password = Hash::make(uniqid(mt_rand() , true));
+        $this->user->engine_password = Hash::make(uniqid(mt_rand() , true));
         // Save if valid. Password field will be hashed before save
         $this->user->save();
         
