@@ -74,7 +74,7 @@
 	    								<li class="divider"></li>
 	    								<li><a href="{{{ URL::to('deployment') }}}"><span class="glyphicon glyphicon-play-circle"></span> {{{ Lang::get('site.deployments') }}}</a></li>
 	    								<li class="divider"></li>
-	    								<li><a href="{{{ URL::to('enginelog') }}}"><span class="glyphicon glyphicon-play-circle"></span> {{{ Lang::get('site.enginelog') }}}</a></li>
+	    								<li><a href="{{{ URL::to('enginelog') }}}"><span class="glyphicon glyphicon-inbox"></span> {{{ Lang::get('site.enginelog') }}}</a></li>
 	    								
 	    							</ul>
 		                        </li>
