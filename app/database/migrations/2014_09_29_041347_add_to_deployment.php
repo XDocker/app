@@ -14,8 +14,6 @@ class AddToDeployment extends Migration {
 	{
 		Schema::table('deployments', function(Blueprint $table)
 		{
-			$table->string('token');
-			$table->text('parameters');
 			$table->text('job_id');
 		});
 	}
@@ -30,8 +28,6 @@ class AddToDeployment extends Migration {
 	{
 		Schema::table('deployments', function(Blueprint $table)
 		{
-			$table->dropColumn('token');
-			$table->dropColumn('parameters');
 			$table->dropColumn('job_id');
 		});
 	}
