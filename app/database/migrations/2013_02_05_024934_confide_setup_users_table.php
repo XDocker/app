@@ -17,7 +17,9 @@ class ConfideSetupUsersTable extends Migration {
             $table->increments('id');
             $table->string('username');
             $table->string('email');
-            $table->string('password');
+			$table->string('engine_key');
+			$table->string('password');
+            $table->string('display_name');
             $table->string('confirmation_code');
             $table->string('remember_token')->nullable();
             $table->boolean('confirmed')->default(false);
