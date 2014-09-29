@@ -57,7 +57,8 @@ class DeploymentController extends BaseController {
         if (empty($cloud_account_ids) || $cloud_account_ids->isEmpty()) {
             return Redirect::to('account/create')->with('error', Lang::get('deployment/deployment.account_required'));
         }
-        $providers = Config::get('deployment_schema');
+		$dockerName = Input::get('name');
+		$providers = Config::get('deployment_schema');
         return View::make('site/deployment/create', array(
             'mode' => $mode,
             'deployment' => $deployment,
