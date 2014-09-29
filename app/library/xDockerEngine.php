@@ -18,10 +18,24 @@
 class xDockerEngine {
     private static $connection;
     private static $orchestrationParams;
+	private static $dockerHubCredentials;
     private static function init() 
     {
         self::$orchestrationParams = Config::get('orchestration');
+		self::$dockerHubCredentials = Config::get('thirdparty_integration.Docker_Hub');
     }
+	
+	public static function dockerHubGet($search_term)
+	{
+		self::init();
+		$process = curl_init(self::$dockerHubCredentials['search_url'] . $search_term);
+        curl_setopt($process, CURLOPT_USERPWD, self::$dockerHubCredentials['username'] . ":" . self::$dockerHubCredentials['password']);
+        curl_setopt($process, CURLOPT_RETURNTRANSFER, TRUE);
+        curl_setopt($process, CURLOPT_SSL_VERIFYPEER, FALSE);
+        $response = curl_exec($process);
+        curl_close($process);
+        return json_decode($response);
+	}
     
     public static function request($url, $data ) {
         Log::info ('URL :' . $url);

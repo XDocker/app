@@ -39,19 +39,13 @@ class HomeController extends BaseController {
             $deployments = array();
         }
         try {
-            $dockerHubCredentials = Config::get('thirdparty_integration.Docker_Hub');
-            $search_term = Input::get('q');
+        	
+			$search_term = Input::get('q');
             if (empty($search_term)) {
                 $search_term = 'xdocker';
             }
-            $process = curl_init($dockerHubCredentials['search_url'] . $search_term);
-            curl_setopt($process, CURLOPT_USERPWD, $dockerHubCredentials['username'] . ":" . $dockerHubCredentials['password']);
-            curl_setopt($process, CURLOPT_RETURNTRANSFER, TRUE);
-            curl_setopt($process, CURLOPT_SSL_VERIFYPEER, FALSE);
-            $response = curl_exec($process);
-            curl_close($process);
-            
-            $response = json_decode($response);
+           
+            $response = xDockerEngine::dockerHubGet($search_term);
             
             $dockerInstances = $response->results;
             // var_dump($dockerHubCredentials, $dockerInstances, json_decode($dockerInstances));
