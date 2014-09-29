@@ -124,24 +124,6 @@ class DeploymentController extends BaseController {
 	            	Log::eror('Error while saving deployment : '. $deployment->errors());
 	                throw new Exception($deployment->errors());
 	            }
-                /*$process = curl_init(Config::get('deployment_api.url'));
-                curl_setopt($process, CURLOPT_RETURNTRANSFER, TRUE);
-                curl_setopt($process, CURLOPT_SSL_VERIFYPEER, FALSE);
-                $fields = array(
-                    'parameters' => $deployment->parameters,
-                    'cloud_account' => CloudAccount::findOrFail($deployment->cloud_account_id) ,
-                    'docker_name' => $deployment->docker_name
-                );
-                //url-ify the data for the POST
-                $fields_string = '';
-                foreach ($fields as $key => $value) {
-                    $fields_string.= $key . '=' . $value . '&';
-                }
-                $status = curl_exec($process);
-                curl_setopt($process, CURLOPT_POST, count($fields));
-                curl_setopt($process, CURLOPT_POSTFIELDS, $fields_string);
-                curl_close($process);
-				 * */
             }
             catch(Exception $err) {
                 $status = 'Unexpected Error: ' . $err->getMessage();
