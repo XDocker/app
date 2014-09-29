@@ -44,8 +44,10 @@
 	@endif
 </div>
 <div>
-<a href="{{ URL::to('deployment/create') }}" class="btn btn-primary pull-right" role="button">Add New Deployment</a>
 
+<!--
+<a href="{{ URL::to('deployment/create') }}" class="btn btn-primary pull-right" role="button">Add New Deployment</a>
+-->
 <div class="page-header">
 	<div class="row">
 		<div class="col-md-9">
@@ -65,6 +67,42 @@
 		</div>
 	</div>
 </div>
+<p>
+</p>
+<div class="media-block">
+	<ul class="list-group list-group-custom">
+		@foreach($dockerInstances as $instance)
+  		<li class="list-group-item">
+			<div class="media">
+				<a href="{{ URL::to('deployment/create/') }}?name={{urlencode($instance -> name)}}" class="btn btn-primary pull-right" role="button">Deploy</a>
+				<div class="media-body">
+					<h4 class="media-heading">{{{!empty($instance -> name)?$instance -> name:''}}}</h4>
+				    <p>
+				    	{{{!empty($instance -> description)?$instance -> description:''}}}
+					</p>
+				</div>
+			</div>
+		</li>
+		@endforeach
+	</ul>
+	<!-- <div class="text-center">
+		<div class="pagination">
+			<ul>
+	        	<li class="previous"><a href="#fakelink" class="fui-arrow-left"></a></li>
+	            <li class="active"><a href="#fakelink">1</a></li>
+	            <li><a href="#fakelink">2</a></li>
+	            <li><a href="#fakelink">3</a></li>
+	            <li><a href="#fakelink">4</a></li>
+	            <li><a href="#fakelink">5</a></li>
+	            <li><a href="#fakelink">6</a></li>
+	            <li><a href="#fakelink">7</a></li>
+	            <li><a href="#fakelink">8</a></li>
+	            <li class="next"><a href="#fakelink" class="fui-arrow-right"></a></li>
+			</ul>
+		</div>
+	</div> -->
+</div>
+@stop
 </div>
 
 @stop

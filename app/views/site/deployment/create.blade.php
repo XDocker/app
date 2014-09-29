@@ -22,8 +22,16 @@
 		<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
 		<!-- ./ csrf token -->
 
+		<!--
 		<input type="hidden" name="docker_name" value="{{ $docker_name }}" />
-
+		-->
+		<!-- name -->
+		<div class="form-group {{{ $errors->has('username') ? 'error' : '' }}}">
+			<label class="col-md-2 control-label" for="docker_name">Docker Name</label>
+			<div class="col-md-6">
+				<input class="form-control" type="text" name="docker_name" id="docker_name" value="{{ $docker_name }}" required />
+			</div>
+		</div>
 		
 		<!-- cloud_account_id -->
 		<div class="form-group {{{ $errors->has('username') ? 'error' : '' }}}">

@@ -57,9 +57,10 @@ class HomeController extends BaseController {
         }
         // Show the page
         return View::make('site/home/index', array(
-            'dockerInstances' => $dockerInstances,
-            'search_term' => $search_term,
-            'deployments' => $deployments
+        	'deployments' => $deployments,
+        	'search_term' => $search_term,
+            'dockerInstances' => $dockerInstances
+            
         ));
     }
 }

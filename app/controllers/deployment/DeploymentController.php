@@ -53,7 +53,8 @@ class DeploymentController extends BaseController {
         // Show the page
         return View::make('site/deployment/index', array(
             'deployments' => $deployments,
-            'search_term' => $search_term
+            'search_term' => $search_term,
+            'dockerInstances' => $dockerInstances,
         ));
     }
     /**
