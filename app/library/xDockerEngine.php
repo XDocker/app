@@ -28,7 +28,7 @@ class xDockerEngine {
     }
     
     public static function request($url, $data ) {
-        self::init();
+        Log::info ('URL :' . $url);
 		curl_setopt(self::$connection, CURLOPT_URL, $url);
         $strData = json_encode($data);
         curl_setopt(self::$connection, CURLOPT_POSTFIELDS, $strData);
