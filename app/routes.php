@@ -28,6 +28,7 @@ Route::model('post', 'Post');
 Route::model('role', 'Role');
 
 Route::model('account', 'CloudAccount');
+Route::model('engineKeyLog', 'EngineKeyLog');
 Route::model('test', 'Test');
 /** ------------------------------------------
  *  Route constraint patterns
