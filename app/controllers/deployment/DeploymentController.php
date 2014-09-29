@@ -109,10 +109,10 @@ class DeploymentController extends BaseController {
 					$this->prepare($user, $deployment);
 					$responseJson = xDockerEngine::run(json_decode($deployment->wsParams));
 					EngineLog::logIt(array('user_id' => Auth::id(), 'method' => 'run', 'return' => $responseJson));
-					$obj = json_decode($responseJson);
-					if($obj->status == 'OK')
+					$obj1 = json_decode($responseJson);
+					if($obj1->status == 'OK')
 					{
-						$deployment -> job_id = $obj->job_id;
+						$deployment -> job_id = $obj1->job_id;
 						$deployment -> status = 'In Progress';
 						unset($deployment -> token );
 						 //$deployment->status = $status;
@@ -123,10 +123,10 @@ class DeploymentController extends BaseController {
 		                //throw new Exception($deployment->errors());
 						}
 					}
-					else if($obj->status == 'error')
+					else if($obj1->status == 'error')
 					{
-						Log::error('Failed during deployment!'. $obj->message);
-						return Redirect::to('deployment')->with('error', 'Failed during deployment!'. $obj->message);
+						Log::error('Failed during deployment!'. $obj1->message);
+						return Redirect::to('deployment')->with('error', 'Failed during deployment!'. $obj1->message);
 					}
 	            }
 				else if($obj->status == 'error')
