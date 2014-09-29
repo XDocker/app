@@ -42,6 +42,7 @@ Route::pattern('token', '[0-9a-z]+');
 
 Route::pattern('account', '[0-9]+');
 Route::pattern('deployment', '[0-9]+');
+Route::pattern('enginelog', '[0-9]+');
 Route::pattern('test', '[0-9]+');
 /** ------------------------------------------
  *  Admin Routes
@@ -127,10 +128,9 @@ Route::group(array(
     Route::get('account/{id}/edit', 'AccountController@getCreate');
 	Route::any('deployment/', 'DeploymentController@getIndex');
     Route::get('deployment/create', 'DeploymentController@getCreate');
+	Route::any('enginelog/', 'EnginelogController@getIndex'); 
 	
-	Route::any('test/', 'TestController@getIndex');
-	Route::get('test/create', 'TestController@getCreate');
-    Route::get('test/{id}/edit', 'TestController@getCreate');
+	
 	
     // Route::get('deployment/{id}/edit/', 'DeploymentController@getCreate');
     Route::group(array(
@@ -142,10 +142,6 @@ Route::group(array(
         Route::post('deployment/create', 'DeploymentController@postEdit');
         // Route::post('deployment/{deployment}/edit', 'DeploymentController@postEdit');
         Route::post('deployment/{id}/delete', 'DeploymentController@postDelete');
-		
-		Route::post('test/create', 'TestController@postEdit');
-        Route::post('test/{test}/edit', 'TestController@postEdit');
-        Route::post('test/{test}/delete', 'TestController@postDelete');
     });
     // Route::controller('account', 'AccountController');
     

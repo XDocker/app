@@ -73,6 +73,9 @@
 	    								<li><a href="{{{ URL::to('account') }}}"><span class="glyphicon glyphicon-wrench"></span> {{{ Lang::get('site.accounts') }}}</a></li>
 	    								<li class="divider"></li>
 	    								<li><a href="{{{ URL::to('deployment') }}}"><span class="glyphicon glyphicon-play-circle"></span> {{{ Lang::get('site.deployments') }}}</a></li>
+	    								<li class="divider"></li>
+	    								<li><a href="{{{ URL::to('enginelog') }}}"><span class="glyphicon glyphicon-play-circle"></span> {{{ Lang::get('site.enginelog') }}}</a></li>
+	    								
 	    							</ul>
 		                        </li>
 		                        <li class="dropdown">

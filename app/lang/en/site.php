@@ -21,6 +21,7 @@ return array(
      'services' => 'Services',
      'accounts' => 'Accounts',
      'deployments' => 'Deployments',
+     'enginelog' => 'Request Logs',
      'admin_panel' => 'Admin Panel',
      'title' => 'xDocker : Test drive Docker images on any Cloud infrastructure.',
      'forkme' => 'Fork me on Github',
