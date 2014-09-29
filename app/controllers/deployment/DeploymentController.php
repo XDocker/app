@@ -40,10 +40,20 @@ class DeploymentController extends BaseController {
             ->where('deployments.user_id', Auth::id())
             ->orderBy('deployments.created_at', 'DESC')
             ->paginate(10);
+			
+			$search_term = Input::get('q');
+            if (empty($search_term)) {
+                $search_term = 'xdocker';
+            }
+           
+            $response = xDockerEngine::dockerHubGet($search_term);
+            
+            $dockerInstances = $response->results;
         // var_dump($accounts, $this->accounts, $this->accounts->owner);
         // Show the page
         return View::make('site/deployment/index', array(
-            'deployments' => $deployments
+            'deployments' => $deployments,
+            'search_term' => $search_term
         ));
     }
     /**
