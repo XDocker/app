@@ -81,7 +81,7 @@ class xDockerEngine {
     
     public static function getDeploymentStatus($data) {
     	self::init();
-        return self::request(self::$orchestrationParams['endpoint_ip'] . self::$orchestrationParams['getDeploymentStatus'], $data);
+        return self::request(self::$orchestrationParams['endpoint_ip'] . self::$orchestrationParams['getDeploymentStatus'] .'/'.$data['job_id'], $data);
     }
     
     public static function getLog($data) {
