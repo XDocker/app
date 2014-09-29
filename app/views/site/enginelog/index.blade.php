@@ -20,7 +20,7 @@
 						<div class="media-body">
 							<h4 class="media-heading">{{ String::title($log->method) }}</h4>
 							<p>
-								<span class="glyphicon glyphicon-calendar"></span> <!--Sept 16th, 2012-->{{{ $account->created_at }}}
+								<span class="glyphicon glyphicon-calendar"></span> <!--Sept 16th, 2012-->{{{ $log->created_at }}}
 							</p>
 						</div>
 					</div>
@@ -28,12 +28,11 @@
 			@endforeach
 		@endif
 	</ul>
-	@if(empty($accounts) || count($accounts) === 0) 
+	@if(empty($enginelog) || count($enginelog) === 0) 
 		<div class="alert alert-info"> {{{ Lang::get('account/account.empty_accounts') }}}</div>
 	@endif
 </div>
 <div>
-<a href="{{ URL::to('account/create') }}" class="btn btn-primary pull-right" role="button">{{{ Lang::get('account/account.add_account') }}}</a>
 </div>
 
 @stop
