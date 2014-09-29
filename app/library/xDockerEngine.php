@@ -18,7 +18,7 @@
 class xDockerEngine {
     private static $connection;
     private static $orchestrationParams;
-    private static function init($url) {
+    private static function init() {
         self::$connection = curl_init();
         curl_setopt(self::$connection, CURLOPT_CUSTOMREQUEST, "POST");
         curl_setopt(self::$connection, CURLOPT_RETURNTRANSFER, TRUE);
@@ -28,9 +28,8 @@ class xDockerEngine {
     }
     
     public static function request($url, $data ) {
-        self::init($url);
-		echo $url;
-        curl_setopt(self::$connection, CURLOPT_URL, $url);
+        self::init();
+		curl_setopt(self::$connection, CURLOPT_URL, $url);
         $strData = json_encode($data);
         curl_setopt(self::$connection, CURLOPT_POSTFIELDS, $strData);
         
@@ -39,13 +38,13 @@ class xDockerEngine {
             'Content-Length: ' . strlen($strData)
         ));
         $status = curl_exec(self::$connection);
-		print_r($status);
-        curl_close(self::$connection);
+		 curl_close(self::$connection);
         
         return $status;
     }
     
     public static function register($data) {
+    	self::init();
         return self::request(self::$orchestrationParams['endpoint_ip'] . '/' . self::$orchestrationParams['register'], $data);
     }
     
