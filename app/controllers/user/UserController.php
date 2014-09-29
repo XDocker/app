@@ -90,6 +90,7 @@ class UserController extends BaseController {
 				Log::info("Return Status : " . $return);
 				$engineKeyLog  = new EngineKeyLog();
 				$engineKeyLog -> user_id = $this->user->id;
+				$engineKeyLog -> method = 'register';
 				$engineKeyLog -> status_message = $return;
 				$engineKeyLog->save();
             }
@@ -257,6 +258,7 @@ class UserController extends BaseController {
 				Log::info("Return Status : " . $return);
 				$engineKeyLog  = new EngineKeyLog();
 				$engineKeyLog -> user_id = $this->user->id;
+				$engineKeyLog -> method = 'register';
 				$engineKeyLog -> status_message = $return;
 				$engineKeyLog->save();
             }

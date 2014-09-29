@@ -17,9 +17,8 @@ class AddEngineKeyLogs extends Migration {
 			$table->increments('id');
 			$table->integer('user_id')->unsigned()->index();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-			$table->string('status');
-			$table->string('message');
-			$table->text('raw_status');
+			$table->string('method');
+			$table->text('status_message');
 			$table->timestamps();
 		});
 	}
