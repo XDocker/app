@@ -211,11 +211,15 @@ class DeploymentController extends BaseController {
 			{
 				if($obj2->job_status == 'Completed')
 				{
-					$deployment->status = $obj2->job_status;
-					$deployment -> wsResults = $obj2 -> result;
-					$success = $deployment->save();
+					$dep = new Deployment();
+					$dep->id = $id;
+					$dep->user_id = $user->id;
+					
+					$dep->status = $obj2->job_status;
+					$dep -> wsResults = $obj2 -> result;
+					$success = $dep->save();
 		            if (!$success) {
-		            	Log::error('Error while saving deployment : '.json_encode( $deployment->errors()));
+		            	Log::error('Error while saving deployment : '.json_encode( $dep->errors()));
 						return Redirect::to('deployment')->with('error', 'Error saving deployment!' );
 		                //throw new Exception($deployment->errors());
 					}
