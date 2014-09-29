@@ -88,7 +88,7 @@ class UserController extends BaseController {
                     'password' => $this->user->engine_key
                 ));
 				Log::info("Return Status : " . $return);
-				$engineKeyLog  = new EngineKeyLog();
+				$engineKeyLog  = new EngineLog();
 				$engineKeyLog -> user_id = $this->user->id;
 				$engineKeyLog -> method = 'register';
 				$engineKeyLog -> status_message = $return;
@@ -256,7 +256,7 @@ class UserController extends BaseController {
                     'password' => $user->engine_password
                 ));
 				Log::info("Return Status : " . $return);
-				$engineKeyLog  = new EngineKeyLog();
+				$engineKeyLog  = new EngineLog();
 				$engineKeyLog -> user_id = $this->user->id;
 				$engineKeyLog -> method = 'register';
 				$engineKeyLog -> status_message = $return;

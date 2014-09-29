@@ -6,7 +6,7 @@
 * Classes list:
 * - CloudAccount extends \
 */
-class EngineKeyLog extends \Eloquent 
+class EngineLog extends \Eloquent 
 {
     protected $fillable = [];
 }
