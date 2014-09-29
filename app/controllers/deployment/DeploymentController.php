@@ -121,12 +121,13 @@ class DeploymentController extends BaseController {
 				 //$deployment->status = $status;
 	            $success = $deployment->save();
 	            if (!$success) {
-	            	Log::eror('Error while saving deployment : '. $deployment->errors());
+	            	Log::error('Error while saving deployment : '. $deployment->errors());
 	                throw new Exception($deployment->errors());
 	            }
             }
             catch(Exception $err) {
                 $status = 'Unexpected Error: ' . $err->getMessage();
+				Log::error('Error while saving deployment : '. $status);
                 throw new Exception($err->getMessage());
             }
             return Redirect::to('/')->with('success', Lang::get('deployment/deployment.deployment_updated'));
