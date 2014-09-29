@@ -18,29 +18,30 @@
 class xDockerEngine {
     private static $connection;
     private static $orchestrationParams;
-    private static function init() {
-        self::$connection = curl_init();
-        curl_setopt(self::$connection, CURLOPT_CUSTOMREQUEST, "POST");
-        curl_setopt(self::$connection, CURLOPT_RETURNTRANSFER, TRUE);
-        curl_setopt(self::$connection, CURLOPT_SSL_VERIFYPEER, FALSE);
-        
+    private static function init() 
+    {
         self::$orchestrationParams = Config::get('orchestration');
     }
     
     public static function request($url, $data ) {
         Log::info ('URL :' . $url);
-		curl_setopt(self::$connection, CURLOPT_URL, $url);
-        $strData = json_encode($data);
-        curl_setopt(self::$connection, CURLOPT_POSTFIELDS, $strData);
+		$process = curl_init();
+		curl_setopt($process, CURLOPT_URL, $url);
+        curl_setopt($process, CURLOPT_RETURNTRANSFER, TRUE);
+        curl_setopt($process, CURLOPT_SSL_VERIFYPEER, FALSE);
+       
+                //url-ify the data for the POST
+		curl_setopt($process, CURLOPT_CUSTOMREQUEST, "POST");                                                                     
+		curl_setopt($process, CURLOPT_POSTFIELDS, json_encode($data));                                                                  
+		curl_setopt($process, CURLOPT_RETURNTRANSFER, true);                                                                      
+		curl_setopt($process, CURLOPT_HTTPHEADER, array(                                                                          
+		    'Content-Type: application/json',                                                                                
+		    'Content-Length: ' . strlen(json_encode($data)))                                                                       	
+		);                                             
+       $status = curl_exec($process);
+       curl_close($process);
         
-        curl_setopt(self::$connection, CURLOPT_HTTPHEADER, array(
-            'Content-Type: application/json',
-            'Content-Length: ' . strlen($strData)
-        ));
-        $status = curl_exec(self::$connection);
-		 curl_close(self::$connection);
-        
-        return $status;
+       return $status;
     }
     
     public static function register($data) {
