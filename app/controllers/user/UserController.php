@@ -83,10 +83,11 @@ class UserController extends BaseController {
         if ($this->user->id) {
             try {
                 // Register the user on the engine
-                xDockerEngine::register(array(
+                $return = xDockerEngine::register(array(
                     'username' => $this->user->username,
                     'password' => $this->user->engine_key
                 ));
+				Log::info("Return Status : " . $return);
             }
             catch(Exception $e) {
                 return Redirect::to('user/create')->withInput(Input::except('password'))->with('error', $e->getMessage());
