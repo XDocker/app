@@ -109,7 +109,7 @@ class DeploymentController extends BaseController {
 					$this->prepare($user, $deployment);
 				}
 				
-				$responseJson = xDockerEngine::run($deployment->wsParams);
+				$responseJson = xDockerEngine::run(json_decode($deployment->wsParams));
 				EngineLog::logIt(array('user_id' => Auth::id(), 'method' => 'run', 'return' => $responseJson));
 				$obj = json_decode($responseJson);
 				if($obj->status == 'OK')
@@ -117,7 +117,6 @@ class DeploymentController extends BaseController {
 					$deployment -> job_id = $obj->job_id;
 					$deployment -> status = 'In Progress';
 				}
-				
 				 //$deployment->status = $status;
 	            $success = $deployment->save();
 	            if (!$success) {
@@ -127,15 +126,14 @@ class DeploymentController extends BaseController {
 	            }
             }
             catch(Exception $err) {
-            	print_r($err);
                 $status = 'Unexpected Error: ' . $err->getMessage();
 				Log::error('Error while saving deployment : '. $status);
-                //throw new Exception($err->getMessage());
+                throw new Exception($err->getMessage());
             }
             return Redirect::to('/')->with('success', Lang::get('deployment/deployment.deployment_updated'));
         }
         catch(Exception $e) {
-        	print_r($e);
+        	Log::error('Error while saving deployment : '. $e->getMessage());
             return Redirect::back()->with('error', $e->getMessage());
         }
     }
@@ -152,7 +150,8 @@ class DeploymentController extends BaseController {
 		$account = CloudAccount::where('user_id', Auth::id())->findOrFail($deployment->cloud_account_id) ;
 		$credentials = json_decode($account->credentials);
 		
-		$deployment->wsParams = array (
+		$deployment->wsParams = json_encode(
+							array (
 						'token' => $deployment->token,
 						'username' => $user->username,
 						'cloudProvider' => $account ->cloudProvider,
@@ -162,7 +161,8 @@ class DeploymentController extends BaseController {
 						'dockerParams' => array('ports' => array(443,5000), 
 												'env' => array('mail' =>$user->email, 'host'=> '{host}'), 
 												'tag'=> 'v1')
-					);				
+						)
+						);				
 	}
     /**
      * Remove the specified Account .
