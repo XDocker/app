@@ -15,12 +15,11 @@ class AddEngineKeyLogs extends Migration {
 		Schema::table('engine_key_logs', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->string('engine_key');
-			$table->string('username');
-			$table->string('status');
-			$table->string('message');
 			$table->integer('user_id')->unsigned()->index();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+			$table->string('status');
+			$table->string('message');
+			$table->text('raw_status');
 			$table->timestamps();
 		});
 	}
