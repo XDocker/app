@@ -106,7 +106,7 @@ class DeploymentController extends BaseController {
 				if($obj->status == 'OK')
 				{
 					echo ' Ready for deployment:'. $obj->token;
-					$thhis->prepare($obj->token, $deployment);
+					$this->prepare($obj->token, $deployment);
 				}
 				
                 /*$process = curl_init(Config::get('deployment_api.url'));
