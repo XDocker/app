@@ -88,6 +88,7 @@ class UserController extends BaseController {
                     'password' => $this->user->engine_key
                 ));
 				Log::info("Return Status : " . $return);
+
             }
             catch(Exception $e) {
                 return Redirect::to('user/create')->withInput(Input::except('password'))->with('error', $e->getMessage());
