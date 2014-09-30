@@ -31,7 +31,7 @@
 							<!-- CSRF Token -->
 							<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
 							<!-- ./ csrf token -->
-							<button type="submit" class="btn btn-warning pull-right" role="button"><span class="glyphicon glyphicon-trash"></span></button>
+							<button type="submit" class="btn btn-danger pull-right" role="button"><span class="glyphicon glyphicon-trash"></span></button>
 						</form>
 						<div class="media-body">
 							
@@ -90,7 +90,7 @@
             [description] => -->
 			<div class="media">
 				
-				<a href="{{ URL::to('deployment/create/') }}?name={{urlencode($instance -> name)}}" class="btn btn-primary pull-right" role="button">Deploy</a>
+				<a href="{{ URL::to('deployment/create/') }}?name={{urlencode($instance -> name)}}" class="btn btn-primary pull-right" role="button"><span class="glyphicon glyphicon-play"</a>
 				<div class="media-body">
 					<h4 class="media-heading">{{{!empty($instance -> name)?$instance -> name:''}}}</h4>
 				    <p>

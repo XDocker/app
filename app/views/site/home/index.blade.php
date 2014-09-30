@@ -21,12 +21,18 @@
 					@foreach($deployments as $deployment)
 			  		<li class="list-group-item">
 						<div class="media">
+							<form class="pull-right" method="post" action="{{ URL::to('deployment/' . $deployment->id . '/refresh') }}">
+								<!-- CSRF Token -->
+								<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
+								<!-- ./ csrf token -->
+								<button type="submit" class="btn btn-success pull-right" role="button"><span class="glyphicon glyphicon-refresh"</a></button>
+							</form>		
 							<form class="pull-right" method="post" action="{{ URL::to('deployment/' . $deployment->id . '/delete') }}">
 								<!-- CSRF Token -->
 								<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
 								<!-- ./ csrf token -->
-								<button type="submit" class="btn btn-danger pull-right" role="button">{{{ Lang::get('general.delete') }}}</button>
-							</form>				
+								<button type="submit" class="btn btn-danger pull-right" role="button"><span class="glyphicon glyphicon-trash"</a></button>
+							</form>					
 							<div class="media-body">
 								<h4 class="media-heading">{{{!empty($deployment -> name)?$deployment -> name:'Untitled'}}} - {{{!empty($deployment -> docker_name)?$deployment -> docker_name:'Untitled'}}}</h4>
 							    <p>
@@ -69,7 +75,7 @@
 		@foreach($dockerInstances as $instance)
   		<li class="list-group-item">
 			<div class="media">
-				<a href="{{ URL::to('deployment/create/') }}?name={{urlencode($instance -> name)}}" class="btn btn-primary pull-right" role="button">Deploy</a>
+				<a href="{{ URL::to('deployment/create/') }}?name={{urlencode($instance -> name)}}" class="btn btn-primary pull-right" role="button"><span class="glyphicon glyphicon-play"</a></a>
 				<div class="media-body">
 					<h4 class="media-heading">{{{!empty($instance -> name)?$instance -> name:''}}}</h4>
 				    <p>
