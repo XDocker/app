@@ -82,12 +82,28 @@
 	<ul class="list-group list-group-custom">
 		@foreach($dockerInstances as $instance)
   		<li class="list-group-item">
+  			<!--[is_automated] => 1
+            [name] => vubui/ubuntu
+            [is_trusted] => 1
+            [is_official] => 
+            [star_count] => 0
+            [description] => -->
 			<div class="media">
+				
 				<a href="{{ URL::to('deployment/create/') }}?name={{urlencode($instance -> name)}}" class="btn btn-primary pull-right" role="button">Deploy</a>
 				<div class="media-body">
 					<h4 class="media-heading">{{{!empty($instance -> name)?$instance -> name:''}}}</h4>
 				    <p>
 				    	{{{!empty($instance -> description)?$instance -> description:''}}}
+					</p>
+					<p>
+				    	{{{!empty($instance -> is_automated)?$instance -> is_automated:''}}}
+				    	|
+				    	{{{!empty($instance -> is_trusted)?$instance -> is_trusted:''}}}
+				    	|
+				    	{{{!empty($instance -> is_official)?$instance -> is_official:''}}}
+				    	|
+				    	{{{!empty($instance -> star_count)?$instance -> star_count:''}}}
 					</p>
 				</div>
 			</div>
