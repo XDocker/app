@@ -41,7 +41,17 @@
 									if($deployment->status == 'Completed') 
 									{
 										$result = json_decode($deployment->wsResults);
-										echo $result->instance_id . ' | ' . $result->public_dns;
+										echo $result->instance_id . ' | ' . $result->public_dns . '<br/>';
+								?>
+									<button type="submit" class="btn btn-warning pull-right" role="button">
+											<span class="glyphicon glyphicon-stop"></span></button>
+									| 	
+									<button type="submit" class="btn btn-danger pull-right" role="button">
+											<span class="glyphicon glyphicon-circle-arrow-right"></span></button>
+									|
+									<button type="submit" class="btn btn-danger pull-right" role="button">
+											<span class="glyphicon glyphicon-remove"></span></button>
+								<?php
 									}
 								?>
 								
