@@ -204,27 +204,19 @@ class DeploymentController extends BaseController {
 		 if($obj->status == 'OK')
 		 {
 			$responseJson = xDockerEngine::getDeploymentStatus(array('token' => $obj->token, 'job_id' => $deployment->job_id));
-			 EngineLog::logIt(array('user_id' => Auth::id(), 'method' => 'getDeploymentStatus', 'return' => $responseJson));
+			EngineLog::logIt(array('user_id' => Auth::id(), 'method' => 'getDeploymentStatus', 'return' => $responseJson));
 		
 			$obj2 = json_decode($responseJson);
 			if($obj2->status == 'OK')
 			{
-				if($obj2->job_status == 'Completed')
-				{
-					$dep = new Deployment();
-					$dep->id = $id;
-					$dep->user_id = $user->id;
-					
-					$dep->status = $obj2->job_status;
-					$dep -> wsResults = $obj2 -> result;
-					$success = $dep->save();
-		            if (!$success) {
-		            	Log::error('Error while saving deployment : '.json_encode( $dep->errors()));
-						return Redirect::to('deployment')->with('error', 'Error saving deployment!' );
-		                //throw new Exception($deployment->errors());
-					}
-					return Redirect::to('deployment')->with('success', $deployment->name .' is refreshed' );
-				}
+				$deployment->status = $obj2->job_status;
+				$deployment -> wsResults = $obj2 -> result;
+				$success = $deployment->save();
+		        if (!$success) {
+		        	Log::error('Error while saving deployment : '.json_encode( $dep->errors()));
+					return Redirect::to('deployment')->with('error', 'Error saving deployment!' );
+		        }
+				return Redirect::to('deployment')->with('success', $deployment->name .' is refreshed' );
 			}
 			else  if($obj2->status == 'error')
 			 {
