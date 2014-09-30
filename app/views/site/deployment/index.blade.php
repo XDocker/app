@@ -43,14 +43,27 @@
 										$result = json_decode($deployment->wsResults);
 										echo $result->instance_id . ' | ' . $result->public_dns . '<br/>';
 								?>
-									<button type="submit" class="btn btn-warning pull-right" role="button">
-											<span class="glyphicon glyphicon-stop"></span></button>
-									| 	
-									<button type="submit" class="btn btn-danger pull-right" role="button">
-											<span class="glyphicon glyphicon-circle-arrow-right"></span></button>
-									|
-									<button type="submit" class="btn btn-danger pull-right" role="button">
-											<span class="glyphicon glyphicon-remove"></span></button>
+								<form class="pull-right" method="post" action="{{ URL::to('deployment/' . $deployment->id . '/stop') }}">
+									<!-- CSRF Token -->
+									<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
+									<!-- ./ csrf token -->
+									<button type="submit" class="btn btn-warning" role="button"><span class="glyphicon glyphicon-stop"></span></button>
+								</form>
+								|
+								<form class="pull-right" method="post" action="{{ URL::to('deployment/' . $deployment->id . '/restart') }}">
+									<!-- CSRF Token -->
+									<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
+									<!-- ./ csrf token -->
+									<button type="submit" class="btn btn-success" role="button"><span class="glyphicon glyphicon-circle-arrow-right"></span></button>
+								</form>
+								| 
+								<form class="pull-right" method="post" action="{{ URL::to('deployment/' . $deployment->id . '/terminate') }}">
+									<!-- CSRF Token -->
+									<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
+									<!-- ./ csrf token -->
+									<button type="submit" class="btn btn-success" role="button"><span class="glyphicon glyphicon-remove"></span></button>
+								</form>	
+				
 								<?php
 									}
 								?>
