@@ -38,7 +38,7 @@
 							<h4 class="media-heading">{{ String::title($deployment->name) }}</h4>
 							<p>
 								@if($deployment->status == 'Completed') 
-									<?php echo "string"; ?>
+									<?php $obj = json_decode($deployment->wsResults); ?>
 								@endif
 							</p>
 							<p>
