@@ -37,6 +37,11 @@
 							
 							<h4 class="media-heading">{{ String::title($deployment->name) }}</h4>
 							<p>
+								@if($deployment->status == 'Completed') 
+									<?php echo "string"; ?>
+								@endif
+							</p>
+							<p>
 								<span title="Created At"><span class="glyphicon glyphicon-calendar"></span> <!--Sept 16th, 2012-->{{{ $deployment->created_at }}}</span>
 							</p>
 							<p>
