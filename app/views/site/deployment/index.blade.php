@@ -42,27 +42,9 @@
 									{
 										$result = json_decode($deployment->wsResults);
 										echo $result->instance_id . ' | ' . $result->public_dns . '<br/>';
+										echo '<a href="#" onclick="stop('.$deployment->id.')">Stop</a>';
 								?>
-								<form class="pull-right" method="post" action="{{ URL::to('deployment/' . $deployment->id . '/stop') }}">
-									<!-- CSRF Token -->
-									<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
-									<!-- ./ csrf token -->
-									<button type="submit" class="btn btn-warning" role="button"><span class="glyphicon glyphicon-stop"></span></button>
-								</form>
-								|
-								<form class="pull-right" method="post" action="{{ URL::to('deployment/' . $deployment->id . '/restart') }}">
-									<!-- CSRF Token -->
-									<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
-									<!-- ./ csrf token -->
-									<button type="submit" class="btn btn-success" role="button"><span class="glyphicon glyphicon-circle-arrow-right"></span></button>
-								</form>
-								| 
-								<form class="pull-right" method="post" action="{{ URL::to('deployment/' . $deployment->id . '/terminate') }}">
-									<!-- CSRF Token -->
-									<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
-									<!-- ./ csrf token -->
-									<button type="submit" class="btn btn-success" role="button"><span class="glyphicon glyphicon-remove"></span></button>
-								</form>	
+								
 				
 								<?php
 									}
@@ -85,6 +67,13 @@
 		<div class="alert alert-info"> {{{ Lang::get('deployment/deployment.empty_deployments') }}}</div>
 	@endif
 </div>
+
+<script>
+	function stop(id)
+	{
+		alert('Id :' . id);
+	}
+</script>
 
 
 <!--
