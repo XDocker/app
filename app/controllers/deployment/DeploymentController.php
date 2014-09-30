@@ -167,6 +167,7 @@ class DeploymentController extends BaseController {
 						'cloudProvider' => $account ->cloudProvider,
 						'apiKey' => $credentials ->apiKey,
 						'secretKey' => $credentials ->secretKey,
+						'instanceName' => $deployment->name,
 						'packageName' => $deployment -> docker_name,
 						'dockerParams' => array('ports' => array(443,5000), 
 												'env' => array('mail' =>$user->email, 'host'=> '{host}'), 
