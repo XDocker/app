@@ -52,7 +52,7 @@
 		<div class="alert alert-info"> {{{ Lang::get('deployment/deployment.empty_deployments') }}}</div>
 	@endif
 </div>
-<div>
+
 
 <!--
 <a href="{{ URL::to('deployment/create') }}" class="btn btn-primary pull-right" role="button">Add New Deployment</a>
