@@ -97,13 +97,13 @@
 				    	{{{!empty($instance -> description)?$instance -> description:''}}}
 					</p>
 					<p>
-				    	{{{!empty($instance -> is_automated)?$instance -> is_automated:''}}}
+				    	{{{!empty($instance -> is_automated)?$instance -> is_automated:'Not Automated'}}}
 				    	|
-				    	{{{!empty($instance -> is_trusted)?$instance -> is_trusted:''}}}
+				    	{{{!empty($instance -> is_trusted)?$instance -> is_trusted:'Not Trusted'}}}
 				    	|
-				    	{{{!empty($instance -> is_official)?$instance -> is_official:''}}}
+				    	{{{!empty($instance -> is_official)?$instance -> is_official:'Not Official'}}}
 				    	|
-				    	{{{!empty($instance -> star_count)?$instance -> star_count:''}}}
+				    	{{{!empty($instance -> star_count)?$instance -> star_count:'0'}}}
 					</p>
 				</div>
 			</div>
