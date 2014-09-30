@@ -31,7 +31,7 @@
 							<!-- CSRF Token -->
 							<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
 							<!-- ./ csrf token -->
-							<button type="submit" class="btn btn-warning pull-right" role="button">Delete</button>
+							<button type="submit" class="glyphicon glyphicon-trash" role="button">Delete</button>
 						</form>
 						<div class="media-body">
 							
