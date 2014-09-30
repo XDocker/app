@@ -41,8 +41,7 @@
 									if($deployment->status == 'Completed') 
 									{
 										$result = json_decode($deployment->wsResults);
-										echo $result->instance_id . '|' . $result->public_dns;
-										print_r($deployment->wsResults);
+										echo $result->instance_id . ' | ' . $result->public_dns;
 									}
 								?>
 								
