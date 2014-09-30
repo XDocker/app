@@ -9,44 +9,19 @@
 return array(
     'Amazon AWS' => array(
         'parameters[instanceRegion]' => array(
-            'type' => 'selectfieldset',
+            'type' => 'string',
             'title' => 'Region',
             'required' => true,
-                  "items"=> array(
-                  		array(
-			          "key"=> "us-east-1",
-			          "legend"=> "us-east-1"
-			        ),
-			        array(
-			          "key"=> "us-west-1",
-			          "legend"=> "us-west-1"
-			        ),
-			         array(
-			          "key"=> "us-west-2",
-			          "legend"=> "us-west-2"
-			        ),
-			        array(
-			          "key"=> "ap-northeast-1",
-			          "legend"=> "ap-northeast-1"
-			        ),
-			         array(
-			          "key"=> "ap-southeast-1",
-			          "legend"=> "ap-southeast-1"
-			        ),
-			         array(
-			          "key"=> "ap-southeast-2",
-			          "legend"=> "ap-southeast-2"
-			        ),
-			         array(
-			          "key"=> "eu-west-1",
-			          "legend"=> "eu-west-1"
-			        ),
-			         array(
-			          "key"=> "sa-east-1",
-			          "legend"=> "sa-east-1"
-			        )
-					
-      			)
+            'enum' => array(
+                'us-east-1',
+                'us-west-1',
+                'us-west-2',
+                'ap-northeast-1',
+                'ap-southeast-1',
+                'ap-southeast-2',
+                'eu-west-1',
+                'sa-east-1'
+            )
         ) ,
         'parameters[instanceType]' => array(
             'type' => 'string',
