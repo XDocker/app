@@ -159,7 +159,7 @@ class DeploymentController extends BaseController {
 		 * */
 		$account = CloudAccount::where('user_id', Auth::id())->findOrFail($deployment->cloud_account_id) ;
 		$credentials = json_decode($account->credentials);
-		
+		$parameters = json_decode($deployment->parameters);
 		$deployment->wsParams = json_encode(
 							array (
 						'token' => $deployment->token,
@@ -168,6 +168,8 @@ class DeploymentController extends BaseController {
 						'apiKey' => $credentials ->apiKey,
 						'secretKey' => $credentials ->secretKey,
 						'instanceName' => $deployment->name,
+						'instanceType' => $parameters->instanceType,
+						'instanceRegion' => $parameters->instanceRegion,
 						'packageName' => $deployment -> docker_name,
 						'dockerParams' => array('ports' => array(443,5000), 
 												'env' => array('mail' =>$user->email, 'host'=> '{host}'), 
