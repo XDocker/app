@@ -42,7 +42,8 @@
 									{
 										$result = json_decode($deployment->wsResults);
 										echo $result->instance_id . ' | ' . $result->public_dns . '<br/>';
-										echo '<a href="#" onclick="stop('.$deployment->id.')">Stop</a>';
+										echo '<a href="#" onclick="restart('.$deployment->id.')">Restart</a> |' .
+											'<a href="#" onclick="terminate('.$deployment->id.')">Terminate</a>' ;
 								?>
 								
 				
@@ -69,9 +70,13 @@
 </div>
 
 <script>
-	function stop(id)
+	function restart(id)
 	{
-		alert('Id :' . id);
+		alert('Id :' + id);
+	}
+	function terminate(id)
+	{
+		alert('Id :' + id);
 	}
 </script>
 
