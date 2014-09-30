@@ -26,7 +26,13 @@ return array(
         'parameters[instanceType]' => array(
             'type' => 'string',
             'title' => 'Instance Type',
-            'required' => false
+            'required' => false,
+            'enum' => array(
+                'm3.medium',
+                'm3.large',
+                'm3.xlarge',
+                'm3.2xlarge'
+            )
         )
     ) ,
     /*'Rackspace Cloud' => array(
