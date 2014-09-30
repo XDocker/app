@@ -210,7 +210,7 @@ class DeploymentController extends BaseController {
 			if($obj2->status == 'OK')
 			{
 				$deployment->status = $obj2->job_status;
-				$deployment -> wsResults = $obj2 -> result;
+				$deployment -> wsResults = json_encode($obj2 -> result);
 				$success = $deployment->save();
 		        if (!$success) {
 		        	Log::error('Error while saving deployment : '.json_encode( $dep->errors()));
