@@ -154,32 +154,24 @@ class DeploymentController extends BaseController {
 
 	private function prepare($user, & $deployment)
 	{
-		/* "token": "<token>",
-    "secretKey": "<api secret>",
-    "packageName": "xdocker/securitymonkey",
-    "dockerParams": {"ports": [443, 5000], "env": {}, "tag": "v1"},
-    "apiKey": "<api key>",
-    "cloudProvider": "amazon"
-		 * */
 		$account = CloudAccount::where('user_id', Auth::id())->findOrFail($deployment->cloud_account_id) ;
 		$credentials = json_decode($account->credentials);
 		$parameters = json_decode($deployment->parameters);
 		$deployment->wsParams = json_encode(
-							array (
-						'token' => $deployment->token,
-						'username' => $user->username,
-						'cloudProvider' => $account ->cloudProvider,
-						'apiKey' => $credentials ->apiKey,
-						'secretKey' => $credentials ->secretKey,
-						'instanceName' => $deployment->name,
-						'instanceType' => $parameters->instanceType,
-						'instanceRegion' => $parameters->instanceRegion,
-						'packageName' => $deployment -> docker_name,
-						'dockerParams' => array('ports' => array(443,5000), 
-												'env' => array('mail' =>$user->email, 'host'=> '{host}'), 
-												'tag'=> 'v1')
-						)
-						);				
+                                    array (
+                                        'token' => $deployment->token,
+                                        'username' => $user->username,
+                                        'cloudProvider' => $account ->cloudProvider,
+                                        'apiKey' => $credentials ->apiKey,
+                                        'secretKey' => $credentials ->secretKey,
+                                        'instanceName' => $deployment->name,
+                                        'instanceType' => $parameters->instanceType,
+                                        'instanceRegion' => $parameters->instanceRegion,
+                                        'packageName' => $deployment -> docker_name,
+                                        'dockerParams' => array('ports' => array(443,5000), 
+                                                                'env' => array('mail' =>$user->email, 'host'=> '{host}'), 
+                                                                'tag'=> 'v1')   )
+                                      );				
 	}
     /**
      * Remove the specified Account .
@@ -187,10 +179,10 @@ class DeploymentController extends BaseController {
      * @param $deployment
      *
      */
-    public function postDelete($id) {
-        Deployment::where('id', $id)->where('user_id', Auth::id())->delete();
+    public function postDelete($deployment) {
+        Deployment::where('id', $deployment->id)->where('user_id', Auth::id())->delete();
         // Was the comment post deleted?
-        $deployment = Deployment::where('user_id', Auth::id())->find($id);
+        $deployment = Deployment::where('user_id', Auth::id())->find($deployment->id);
         if (empty($deployment)) {
             // TODO needs to delete all of that user's content
             return Redirect::to('/')->with('success', 'Removed Deployment Successfully');

@@ -140,9 +140,8 @@ Route::group(array(
         Route::post('account/{account}/edit', 'AccountController@postEdit');
         Route::post('account/{account}/delete', 'AccountController@postDelete');
         Route::post('deployment/create', 'DeploymentController@postEdit');
-        // Route::post('deployment/{deployment}/edit', 'DeploymentController@postEdit');
         Route::post('deployment/{deployment}/delete', 'DeploymentController@postDelete');
-		 Route::post('deployment/{deployment}/refresh', 'DeploymentController@checkStatus');
+        Route::post('deployment/{deployment}/refresh', 'DeploymentController@checkStatus');
     });
     
     
