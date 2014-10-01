@@ -129,7 +129,7 @@ Route::group(array(
 	Route::any('deployment/', 'DeploymentController@getIndex');
     Route::get('deployment/create', 'DeploymentController@getCreate');
 	Route::any('enginelog/', 'EnginelogController@getIndex'); 
-	Route::post('deployment/{deployment}/log', 'DeploymentController@getLogs');
+	Route::get('deployment/{deployment}/log', 'DeploymentController@getLogs');
 	
 	
 	
