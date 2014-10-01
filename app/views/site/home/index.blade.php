@@ -70,6 +70,10 @@
 					@foreach($deployments as $deployment)
 			  		<li class="list-group-item">
 						<div class="media">
+							<a href="{{ URL::to('account/'.$deployment->cloud_account_id.'/edit') }}" class="pull-left" href="#">
+						   	 <img class="media-object img-responsive" src="{{ asset('/assets/img/providers/'.Config::get('provider_meta.'.$deployment->cloudProvider.'.logo')) }}" alt="{{ $deployment->cloudProvider }}" />
+						    	<p class="text-center">{{{$deployment->accountName}}}</p>
+							</a>
 							<form class="pull-right" method="post" action="{{ URL::to('deployment/' . $deployment->id . '/refresh') }}">
 								<!-- CSRF Token -->
 								<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
@@ -85,7 +89,27 @@
 							<div class="media-body">
 								<h4 class="media-heading">{{{!empty($deployment -> name)?$deployment -> name:'Untitled'}}} - {{{!empty($deployment -> docker_name)?$deployment -> docker_name:'Untitled'}}}</h4>
 							    <p>
-							    	{{{!empty($deployment -> status)?$deployment -> status:''}}}
+								<?php
+									if($deployment->status == 'Completed') 
+									{
+										$result = json_decode($deployment->wsResults);
+										echo $result->instance_id . ' | ' . $result->public_dns . '<br/>';
+										echo '<a href="#" onclick="restart('.$deployment->id.')">Restart</a> |'  .
+											'<a href="#" onclick="terminate('.$deployment->id.')">Terminate</a>|' .
+											'<a href="'. URL::to('deployment/' . $deployment->id . '/getLog').'">View Log</a>' ;
+								?>
+								
+				
+								<?php
+									}
+								?>
+								
+							</p>
+								<p>
+									<span title="Created At"><span class="glyphicon glyphicon-calendar"></span> <!--Sept 16th, 2012-->{{{ $deployment->created_at }}}</span>
+								</p>
+								<p>
+									<span title="Status"><span class="glyphicon glyphicon-asterisk"></span> <!--Sept 16th, 2012-->{{{ $deployment->status }}}</span>
 								</p>
 							</div>
 						</div>
