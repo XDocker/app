@@ -12,6 +12,7 @@ class HomeController extends BaseController {
      * Post Model
      * @var Post
      */
+     protected $deployments;
     /**
      * User Model
      * @var User
@@ -22,9 +23,9 @@ class HomeController extends BaseController {
      * @param Post $post
      * @param User $user
      */
-    public function __construct(Post $post, User $user) {
+    public function __construct(Deployment $deployment, User $user) {
         parent::__construct();
-        
+        $this->deployments = $deployment;
         $this->user = $user;
     }
     /**
