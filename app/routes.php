@@ -129,6 +129,7 @@ Route::group(array(
 	Route::any('deployment/', 'DeploymentController@getIndex');
     Route::get('deployment/create', 'DeploymentController@getCreate');
 	Route::any('enginelog/', 'EnginelogController@getIndex'); 
+	Route::post('deployment/{deployment}/log', 'DeploymentController@getLogs');
 	
 	
 	
@@ -142,7 +143,6 @@ Route::group(array(
         Route::post('deployment/create', 'DeploymentController@postEdit');
         Route::post('deployment/{deployment}/delete', 'DeploymentController@postDelete');
         Route::post('deployment/{deployment}/refresh', 'DeploymentController@checkStatus');
-		Route::post('deployment/{deployment}/log', 'DeploymentController@getLogs');
     });
     
     
