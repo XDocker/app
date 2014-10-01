@@ -102,3 +102,13 @@ body {
 .process-next-arrow-vertical {
     margin: 0.2em;
 }
+.display-initial {
+    display: initial;
+}
+/* Reset whitespace wrapping on .btn in smaller screens to allow them to bend */
+
+@media (max-width: 980px) {
+    .btn {
+        white-space: inherit;
+   }
+}
