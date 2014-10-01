@@ -29,7 +29,7 @@ Route::model('role', 'Role');
 Route::model('deployments', 'Deployment');
 Route::model('account', 'CloudAccount');
 Route::model('engine_logs', 'EngineLog');
-Route::model('test', 'Test');
+
 /** ------------------------------------------
  *  Route constraint patterns
  *  ------------------------------------------
@@ -43,7 +43,7 @@ Route::pattern('token', '[0-9a-z]+');
 Route::pattern('account', '[0-9]+');
 Route::pattern('deployment', '[0-9]+');
 Route::pattern('enginelog', '[0-9]+');
-Route::pattern('test', '[0-9]+');
+
 /** ------------------------------------------
  *  Admin Routes
  *  ------------------------------------------
@@ -144,7 +144,6 @@ Route::group(array(
         Route::post('deployment/{deployment}/delete', 'DeploymentController@postDelete');
 		 Route::post('deployment/{deployment}/refresh', 'DeploymentController@checkStatus');
     });
-    // Route::controller('account', 'AccountController');
     
     
 });
