@@ -240,7 +240,7 @@ class DeploymentController extends BaseController {
 		 }		
 	}
 
-	public function getLog($id)
+	public function getLogs($id)
 	{
 		$deployment = Deployment::where('user_id', Auth::id())->find($id);
 		
