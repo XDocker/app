@@ -53,6 +53,7 @@ class HomeController extends BaseController {
             
         }
         catch(Exception $e) {
+        	Log::error('Exception while loading docker images!');
             $dockerInstances = array();
         }
         // Show the page
