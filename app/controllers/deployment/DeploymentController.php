@@ -203,6 +203,10 @@ class DeploymentController extends BaseController {
 	public function checkStatus($id)
 	{
 		$deployment = Deployment::where('user_id', Auth::id())-> whereNotIn('status', array('Completed'))->find($id);
+		if(empty($deployment))
+		{
+			return Redirect::to('deployment')->with('info', 'Selected deployment do not need refresh!');
+		}
 		$user = Auth::user();
 		$responseJson = xDockerEngine::authenticate(array('username' => $user->username, 'password' => md5($user->engine_key)));
 		 EngineLog::logIt(array('user_id' => Auth::id(), 'method' => 'authenticate', 'return' => $responseJson));
