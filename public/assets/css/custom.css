@@ -92,3 +92,13 @@ body {
 .label {
     font-weight: 500;
 }
+/* The main xDocker CSS stuff */
+
+.process-next-arrow-horizontal {
+    position: absolute;
+    top: 2em;
+    right: -0.5em;
+}
+.process-next-arrow-vertical {
+    margin: 0.2em;
+}
