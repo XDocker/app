@@ -121,6 +121,16 @@
 		    <footer id="footer" class="navbar navbar-default navbar-static-bottom">
 			  <hr>
 		      <div class="container">
+		      	<div class="row-fluid">
+		      		<div class="span6">
+		      			Test
+		      			test
+		      		</div>
+		      		<div class="span6">
+		      			test2
+		      			test2
+		      		</div>
+		      	</div>
 		        <p class="muted credit text-center">{{{ Lang::get('site.title') }}}</p>
 		        <p class="text-center">
 		        	<iframe src="http://ghbtns.com/github-btn.html?user=xdocker&repo=app&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="170" height="30"></iframe>
