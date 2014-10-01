@@ -239,4 +239,32 @@ class DeploymentController extends BaseController {
             return Redirect::to('deployment')->with('error', $obj->message );
 		 }		
 	}
+
+	public function getLog($id)
+	{
+		$deployment = Deployment::where('user_id', Auth::id())->find($id);
+		if(!empty($deployment) && isset($deployment->job_id))
+		{
+			$responseJson = xDockerEngine::authenticate(array('username' => Auth::user()->username, 'password' => md5(Auth::user()->engine_key)));
+		 	EngineLog::logIt(array('user_id' => Auth::id(), 'method' => 'authenticate', 'return' => $responseJson));
+		 	$obj = json_decode($responseJson);
+			
+			if($obj->status == 'OK')
+		 	{
+				$response = xDockerEngine::getLog(array('token' => $obj->token, 'job_id' => $deployment->job_id));
+				return View::make('site/deployment/log', array(
+            	'response' => $response,
+            	'deployment' => $deployment));
+				
+			}
+			else if($obj->status == 'error')
+			{
+				 return Redirect::to('deployment')->with('error', $obj->message );
+			}
+		}
+		else {
+			 return Redirect::to('deployment')->with('info', 'No Log found '. isset($deployment->name) ? $deployment->name : '' );
+		}
+		
+	}
 }

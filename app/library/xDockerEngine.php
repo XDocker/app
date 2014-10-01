@@ -85,7 +85,7 @@ class xDockerEngine {
     
     public static function getLog($data) {
         self::init();
-        return self::request(self::$orchestrationParams['endpoint_ip'] . self::$orchestrationParams['getLog'], $data);
+        return self::request(self::$orchestrationParams['endpoint_ip'] . self::$orchestrationParams['getLog'] . '/' . $data['job_id'], $data);
     }
     
     public static function uploadKey($data) {
