@@ -125,7 +125,7 @@ Route::group(array(
     # Resource route for the cloud account API crendentials
     Route::any('account/', 'AccountController@getIndex'); 
 	Route::get('account/create', 'AccountController@getCreate');
-    Route::get('account/{id}/edit', 'AccountController@getCreate');
+    Route::get('account/{account}/edit', 'AccountController@getCreate');
 	Route::any('deployment/', 'DeploymentController@getIndex');
     Route::get('deployment/create', 'DeploymentController@getCreate');
 	Route::any('enginelog/', 'EnginelogController@getIndex'); 
