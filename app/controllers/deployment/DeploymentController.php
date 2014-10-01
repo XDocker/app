@@ -243,6 +243,7 @@ class DeploymentController extends BaseController {
 	public function getLog($id)
 	{
 		$deployment = Deployment::where('user_id', Auth::id())->find($id);
+		
 		if(!empty($deployment) && isset($deployment->job_id))
 		{
 			$responseJson = xDockerEngine::authenticate(array('username' => Auth::user()->username, 'password' => md5(Auth::user()->engine_key)));
