@@ -179,10 +179,10 @@ class DeploymentController extends BaseController {
      * @param $deployment
      *
      */
-    public function postDelete($deployment) {
-        Deployment::where('id', $deployment->id)->where('user_id', Auth::id())->delete();
+    public function postDelete($id) {
+    	Deployment::where('id', $id)->where('user_id', Auth::id())->delete();
         // Was the comment post deleted?
-        $deployment = Deployment::where('user_id', Auth::id())->find($deployment->id);
+        $deployment = Deployment::where('user_id', Auth::id())->find($id);
         if (empty($deployment)) {
             // TODO needs to delete all of that user's content
             return Redirect::to('/')->with('success', 'Removed Deployment Successfully');
