@@ -39,29 +39,25 @@ class HomeController extends BaseController {
             $deployments = array();
         }
         try {
-        	
-			$search_term = Input::get('q');
+            $search_term = Input::get('q');
             if (empty($search_term)) {
                 $search_term = 'xdocker';
             }
-           
+            
             $response = xDockerEngine::dockerHubGet($search_term);
             
             $dockerInstances = $response->results;
             // var_dump($dockerHubCredentials, $dockerInstances, json_decode($dockerInstances));
-            
-            
         }
         catch(Exception $e) {
-        	Log::error('Exception while loading docker images!');
+            Log::error('Exception while loading docker images!');
             $dockerInstances = array();
         }
         // Show the page
         return View::make('site/home/index', array(
-        	'deployments' => $deployments,
-        	'search_term' => $search_term,
+            'deployments' => $deployments,
+            'search_term' => $search_term,
             'dockerInstances' => $dockerInstances
-            
         ));
     }
 }

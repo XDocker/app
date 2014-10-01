@@ -13,7 +13,9 @@
 
 {{-- Content --}}
 @section('content')
-@if (Auth::check())
+@if (!Auth::check())
+	{{-- Home page welcome content for new users --}}
+@else
 	<div class="media-block">
 		<h4 class="page-header">Your Deployments:</h4>
 		<ul class="list-group list-group-custom">
@@ -72,19 +74,21 @@
 </p>
 <div class="media-block">
 	<ul class="list-group list-group-custom">
-		@foreach($dockerInstances as $instance)
-  		<li class="list-group-item">
-			<div class="media">
-				<a href="{{ URL::to('deployment/create/') }}?name={{urlencode($instance -> name)}}" class="btn btn-primary pull-right" role="button"><span class="glyphicon glyphicon-play"</a></a>
-				<div class="media-body">
-					<h4 class="media-heading">{{{!empty($instance -> name)?$instance -> name:''}}}</h4>
-				    <p>
-				    	{{{!empty($instance -> description)?$instance -> description:''}}}
-					</p>
+		@forelse($dockerInstances as $instance)
+	  		<li class="list-group-item">
+				<div class="media">
+					<a href="{{ URL::to('deployment/create/') }}?name={{urlencode($instance -> name)}}" class="btn btn-primary pull-right" role="button"><span class="glyphicon glyphicon-play"</a></a>
+					<div class="media-body">
+						<h4 class="media-heading">{{{!empty($instance -> name)?$instance -> name:''}}}</h4>
+					    <p>
+					    	{{{!empty($instance -> description)?$instance -> description:''}}}
+						</p>
+					</div>
 				</div>
-			</div>
-		</li>
-		@endforeach
+			</li>
+		@empty
+			<li class="list-group-item alert alert-info">No matching docker images found for '{{ $search_term }}'</li>
+		@endforelse
 	</ul>
 	<!-- <div class="text-center">
 		<div class="pagination">
