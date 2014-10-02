@@ -30,8 +30,8 @@
 							}
 						?>
 						<div class="media-body">
-							<div class="media-heading">{{{ Lang::get('site.webserivce') }}}
-							</div>
+							<h4 class="media-heading">{{{ Lang::get('site.webserivce') }}}
+							</h4>
 						</div>
 					</div>
 				</li>
