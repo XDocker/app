@@ -30,7 +30,7 @@
 							}
 						?>
 						<div class="media-body">
-							<div class="media-heading">xDocker Webservice Engine
+							<div class="media-heading">{{{ Lang::get('site.webserivce') }}}
 							</div>
 						</div>
 					</div>
