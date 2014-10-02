@@ -215,7 +215,7 @@ class DeploymentController extends BaseController {
 				if(!isset($obj2 -> result))
 				{
 					Log::error('No Result in the checkStatus Request to be saved!');
-					return Redirect::to('deployment')->with('info', 'Selected deployment do not need refresh or saved');
+					$obj2 -> result ='';
 				} 
 				$deployment->status = $obj2->job_status;
 				$deployment -> wsResults = json_encode($obj2 -> result);
