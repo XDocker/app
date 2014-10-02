@@ -11,9 +11,22 @@
 	</div>
 </div>
 
-<?php
-print_r($response);
-?>
+<div class="media-block">
+	<ul class="list-group">
+
+	  			<li class="list-group-item">
+					<div class="media">
+						<button type="submit" class="btn btn-danger pull-right" role="button">{{{ $status }}}</button>
+						<div class="media-body">
+							
+							<h4 class="media-heading">xDocker Webservice Engine</h4>
+							
+						</div>
+					</div>
+				</li>
+	</ul>
+</div>
+
 <div>
 </div>
 

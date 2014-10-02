@@ -35,9 +35,18 @@ class WebserviceController extends BaseController {
             $responseJson = '';
         }
        
+	   	$status = 'error';
         // Show the page
+        if(!empty($responseJson))
+		{
+			$obj = json_decode($responseJson);
+			if($obj->status == 'OK')
+			{
+				$status = 'OK';
+			}
+		}
         return View::make('site/serviceStatus/index', array(
-            'response' => $responseJson
+            'status' => $status
         ));
     }
 }
