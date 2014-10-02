@@ -130,6 +130,7 @@ Route::group(array(
     Route::get('deployment/create', 'DeploymentController@getCreate');
 	Route::any('enginelog/', 'EnginelogController@getIndex'); 
 	Route::get('deployment/{deployment}/log', 'DeploymentController@getLogs');
+	Route::get('ServiceStatus/', 'WebserviceController@getIndex');
 	
 	
 	

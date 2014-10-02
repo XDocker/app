@@ -75,6 +75,8 @@
 	    								<li><a href="{{{ URL::to('deployment') }}}"><span class="glyphicon glyphicon-play-circle"></span> {{{ Lang::get('site.deployments') }}}</a></li>
 	    								<li class="divider"></li>
 	    								<li><a href="{{{ URL::to('enginelog') }}}"><span class="glyphicon glyphicon-inbox"></span> {{{ Lang::get('site.enginelog') }}}</a></li>
+	    								<li class="divider"></li>
+	    								<li><a href="{{{ URL::to('ServiceStatus') }}}"><span class="glyphicon glyphicon-inbox"></span> {{{ Lang::get('site.webserivce_status') }}}</a></li>
 	    								
 	    							</ul>
 		                        </li>
@@ -86,6 +88,7 @@
 	    								<li><a href="{{{ URL::to('user') }}}"><span class="glyphicon glyphicon-edit"></span> {{{ Lang::get('site.edit_profile') }}}</a></li>
 	    								<li class="divider"></li>
 	    								<li><a href="{{{ URL::to('user/logout') }}}"><span class="glyphicon glyphicon-share"></span> {{{ Lang::get('site.log_out') }}}</a></li>
+	    							
 	    							</ul>
 	    						</li>
 	                        @else
