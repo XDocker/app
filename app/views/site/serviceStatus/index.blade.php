@@ -18,9 +18,9 @@
 					<div class="media">
 						<button type="submit" class="btn btn-danger pull-right" role="button">{{{ $status }}}</button>
 						<div class="media-body">
-							
-							<h4 class="media-heading">xDocker Webservice Engine</h4>
-							
+							<div class="alert alert-success" role="alert">
+ 								 <a href="#" class="alert-link"><h4 class="media-heading">xDocker Webservice Engine</h4></a>
+							</div>
 						</div>
 					</div>
 				</li>
