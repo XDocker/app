@@ -30,8 +30,7 @@
 							}
 						?>
 						<div class="media-body">
-							<div class="alert alert-success" role="alert">
- 								 <a href="#" class="alert-link media-heading">xDocker Webservice Engine</a>
+							<div class="media-heading">xDocker Webservice Engine
 							</div>
 						</div>
 					</div>
