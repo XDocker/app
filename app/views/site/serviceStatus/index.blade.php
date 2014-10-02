@@ -31,7 +31,7 @@
 						?>
 						<div class="media-body">
 							<div class="alert alert-success" role="alert">
- 								 <a href="#" class="alert-link"><h5 class="media-heading">xDocker Webservice Engine</h5></a>
+ 								 <a href="#" class="alert-link media-heading">xDocker Webservice Engine</a>
 							</div>
 						</div>
 					</div>
