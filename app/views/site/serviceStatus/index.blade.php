@@ -16,7 +16,19 @@
 
 	  			<li class="list-group-item">
 					<div class="media">
-						<button type="submit" class="btn btn-danger pull-right" role="button">{{{ $status }}}</button>
+						<?php
+							if($status == 'OK')
+							{
+						?>
+						<span type="submit" class="btn btn-success pull-right" role="button">{{{ $status }}}</span>
+						<?php
+							}
+							else if($status == 'error') {
+						?>
+						<span type="submit" class="btn btn-danger pull-right" role="button">{{{ $status }}}</span>
+						<?php		
+							}
+						?>
 						<div class="media-body">
 							<div class="alert alert-success" role="alert">
  								 <a href="#" class="alert-link"><h4 class="media-heading">xDocker Webservice Engine</h4></a>
