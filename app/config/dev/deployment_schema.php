@@ -22,7 +22,7 @@ return array(
                 'eu-west-1',
                 'sa-east-1'
             ),
-            'event' => 'onchange="loadImages(this.val())"'
+            'event' => 'onchange="loadImages(this)"'
         ) ,
         'parameters[instanceType]' => array(
             'type' => 'string',
