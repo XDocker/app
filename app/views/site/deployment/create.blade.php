@@ -143,7 +143,7 @@
 		request.done(function( msg ) {
   			var option = '';
   			for(var i = 0; i < msg.length; i++) {
-    			option + = '<option name="' + msg[i] + '">' + msg[i] + '</option>';
+    			option += '<option name="' + msg[i] + '">' + msg[i] + '</option>';
 			}
   			var str = '<div class="form-group {{{ $errors->has('username') ? 'error' : '' }}}"> ' +
 					  ' <label class="col-md-2 control-label" for="name">Instance Image</label> '+
