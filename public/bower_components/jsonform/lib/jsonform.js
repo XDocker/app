@@ -618,9 +618,7 @@ jsonform.elementTypes = {
     'template':'<select name="<%= node.name %>" id="<%= id %>"' +
       '<%= (fieldHtmlClass ? " class=\'" + fieldHtmlClass + "\'" : "") %>' +
       '<%= (node.disabled? " disabled" : "")%>' +
-      
-      '<%= (node.schemaElement && node.schemaElement.required ? " required=\'required\+'" : "") %>' +
-      'onchange="<%= (node.schemaElement && node.schemaElement.onchange ?  node.schemaElement.onchange : "") %>"'+
+      '<%= (node.schemaElement && node.schemaElement.required ? " required=\'required\'" : "") %>' +
       '> ' +
       '<% _.each(node.options, function(key, val) { if(key instanceof Object) { if (value === key.value) { %> <option selected value="<%= key.value %>"><%= key.title %></option> <% } else { %> <option value="<%= key.value %>"><%= key.title %></option> <% }} else { if (value === key) { %> <option selected value="<%= key %>"><%= key %></option> <% } else { %><option value="<%= key %>"><%= key %></option> <% }}}); %> ' +
       '</select>',
