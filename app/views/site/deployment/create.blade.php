@@ -136,7 +136,7 @@
 		var region = val.value;
 		var request = $.ajax({
 					  url: "{{ URL::to('deployment/images') }}",
-					  type: "POST",
+					  type: "GET",
 					  data: { "cloudProvider" : cloudProvider, "region" : val.value },
 					  dataType: "json"
 					});

@@ -131,6 +131,7 @@ Route::group(array(
 	Route::any('enginelog/', 'EnginelogController@getIndex'); 
 	Route::get('deployment/{deployment}/log', 'DeploymentController@getLogs');
 	Route::get('ServiceStatus/', 'WebserviceController@getIndex');
+	Route::get('deployment/images', 'DeploymentController@getImages');
 	
 	
 	
