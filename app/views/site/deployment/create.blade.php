@@ -126,8 +126,9 @@
 	
 	function loadImages()
 	{
-		var $cloud_account_id = $('#cloud_account_id');
-		alert($('#cloud_account_id').find('option:selected').data('cloud-provider'));
+		var cloudProvider = $('#cloud_account_id').find('option:selected').data('cloud-provider');
+		var region  = $('#jsonform-0-elt-parameters[instanceRegion]').val();
+		alert(cloudProvider + ' ' + region);
 
 	}
 </script>
