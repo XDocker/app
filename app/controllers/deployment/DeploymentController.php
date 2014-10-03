@@ -94,8 +94,9 @@ class DeploymentController extends BaseController {
             }
             $deployment->name = Input::get('name');
             $deployment->cloud_account_id = Input::get('cloud_account_id');
-			
-            $deployment->parameters = json_encode(Input::get('parameters'));
+			$params = Input::get('parameters');
+			$params['instanceImage'] = Input::get('instanceImage');
+			$deployment->parameters = json_encode($params);
             $deployment->docker_name = Input::get('docker_name');
             $deployment->user_id = Auth::id(); // logged in user id
             
