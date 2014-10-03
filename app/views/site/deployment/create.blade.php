@@ -115,21 +115,19 @@
 		      		.addClass('col-md-6');
 			}).trigger('change');
 			
+			var $region = $('#parameters[instanceRegion]');
+			alert($region.val());
+			
 			var $cloud_account_idCredntialsForm = $('#cloud_account_idCredntialsForm');
 			$cloud_account_idCredntialsForm.on('submit', function(e){
 				
 			});
+			
 		});
 		
 		
 	})(jQuery);
 	
-	function loadImages()
-	{
-		var cloudProvider = $('#cloud_account_id').find('option:selected').data('cloud-provider');
-		var region  = $('#jsonform-0-elt-parameters[instanceRegion]').val();
-		alert(cloudProvider + ' ' + region);
-
-	}
+	
 </script>
 @stop
