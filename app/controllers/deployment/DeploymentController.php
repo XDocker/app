@@ -274,7 +274,7 @@ class DeploymentController extends BaseController {
 		$cloudProvider = Input::get('cloudProvider');
 		$region = Input::get('region');
 		$images = Config::get('images');
-		foreach($images as $provider => $region)
+		foreach($images as $provider => $image)
 		{
 			if($provider == $cloudProvider)
 			{
