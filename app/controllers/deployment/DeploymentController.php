@@ -278,10 +278,16 @@ class DeploymentController extends BaseController {
 		{
 			if($provider == $cloudProvider)
 			{
+				foreach($region as $key => $val)
+				{
+					if($key == $region)
+					{
+						echo json_encode($val);
+					}
+				}
 				print_r($region);
 			}
 		}
-		echo json_encode ('AMI');
 	}
 	
 }
