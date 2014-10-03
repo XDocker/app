@@ -273,6 +273,14 @@ class DeploymentController extends BaseController {
 	{
 		$cloudProvider = Input::get('cloudProvider');
 		$region = Input::get('region');
+		$images = Config::get('images');
+		foreach($images as $provider => $region)
+		{
+			if($provider == $cloudProvider)
+			{
+				print_r($region);
+			}
+		}
 		echo json_encode ('AMI');
 	}
 	
