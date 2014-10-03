@@ -142,7 +142,7 @@
 					});
 		request.done(function( msg ) {
   			
-  			var str = '<div class="form-group {{{ $errors->has(\'username\') ? \'error\' : \'\' }}}"> ' +
+  			var str = '<div class="form-group {{{ $errors->has('username') ? 'error' : '' }}}"> ' +
 					  ' <label class="col-md-2 control-label" for="name">Instance Image</label> '+
 					  '<div class="col-md-6"> '+
 					  '		<input class="form-control" type="text" name="parameters[instanceImage]" id="jsonform-0-elt-parameters[instanceImage]" value="" readonly /> '+
