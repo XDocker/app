@@ -57,7 +57,9 @@
 		<!-- ./ username -->
 		<div id="additionalCloudProviderFields">
 			
-		</div>				
+		</div>	
+		
+			
 
 		<!-- Form Actions -->
 		<div class="form-group">
@@ -112,10 +114,7 @@
 		      		.removeClass('controls')
 		      		.addClass('col-md-6');
 			}).trigger('change');
-			var $instanceRegion = $('#jsonform-0-elt-parameters[instanceRegion]');
-				$instanceRegion.on('change', function(){
-				alert($instanceRegion.val());
-			}).trigger('change');;
+			
 			var $cloud_account_idCredntialsForm = $('#cloud_account_idCredntialsForm');
 			$cloud_account_idCredntialsForm.on('submit', function(e){
 				

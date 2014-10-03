@@ -21,7 +21,8 @@ return array(
                 'ap-southeast-2',
                 'eu-west-1',
                 'sa-east-1'
-            )
+            ),
+            'onchange'=>"loadImages()"
         ) ,
         'parameters[instanceType]' => array(
             'type' => 'string',
