@@ -124,6 +124,11 @@
 		
 	})(jQuery);
 	
-	
+	function loadImages()
+	{
+		var $cloud_account_id = $('#cloud_account_id');
+		alert($('#cloud_account_id').find('option:selected').data('cloud-provider'));
+
+	}
 </script>
 @stop
