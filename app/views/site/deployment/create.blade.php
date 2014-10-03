@@ -112,19 +112,19 @@
 		      		.removeClass('controls')
 		      		.addClass('col-md-6');
 			}).trigger('change');
+			var $instanceRegion = $('#jsonform-0-elt-parameters[instanceRegion]');
+				$instanceRegion.on('change', function(){
+				alert($instanceRegion.val());
+			}).trigger('change');;
 			var $cloud_account_idCredntialsForm = $('#cloud_account_idCredntialsForm');
 			$cloud_account_idCredntialsForm.on('submit', function(e){
-
+				
 			});
 		});
 		
 		
 	})(jQuery);
 	
-	$( document ).ready(function() {
-  	$( "#jsonform-0-elt-parameters[instanceRegion]" ).change(function() {
- 			alert( "Handler for .change() called." );
-		});
-});
+	
 </script>
 @stop
