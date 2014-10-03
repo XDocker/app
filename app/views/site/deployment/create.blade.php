@@ -59,8 +59,11 @@
 			
 		</div>	
 		
+		<div id="instanceImage">
 			
-
+		</div>	
+		
+		
 		<!-- Form Actions -->
 		<div class="form-group">
 			<div class="col-md-offset-2 col-md-10">
@@ -129,7 +132,29 @@
 	
 	loadImages = function(val)
 	{
-		alert(val);
+		var cloudProvider = $('#cloud_account_id').find('option:selected').data('cloud-provider');
+		var region = val.value
+		var request = $.ajax({
+					  url: ""{{ URL::to('deployment/images') }}",
+					  type: "POST",
+					  data: { "cloudProvider" : cloudProvider, "region" : region },
+					  dataType: "json"
+					});
+		request.done(function( msg ) {
+  			
+  			var str = '<div class="form-group {{{ $errors->has('username') ? 'error' : '' }}}"> ' +
+					  ' <label class="col-md-2 control-label" for="name">Instance Image</label> '+
+					  '<div class="col-md-6"> '+
+					  '		<input class="form-control" type="text" name="parameters[instanceImage]" id="jsonform-0-elt-parameters[instanceImage]" value="" readonly /> '+
+					  '</div> ' +
+						 '</div> ';
+  			$( "#instanceImage" ).html( str );
+  			
+		});
+ 
+		request.fail(function( jqXHR, textStatus ) {
+		  alert( "Request failed: " + textStatus );
+		});
 	}
 </script>
 @stop

@@ -268,4 +268,12 @@ class DeploymentController extends BaseController {
 		}
 		
 	}
+	
+	public function getImages()
+	{
+		$cloudProvider = Input::get('cloudProvider');
+		$region = Input::get('region');
+		echo json_encode ('AMI');
+	}
+	
 }
