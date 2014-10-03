@@ -143,12 +143,12 @@
 		request.done(function( msg ) {
   			var option = '';
   			for(var i = 0; i < msg.length; i++) {
-    			option += '<option name="' + msg[i] + '">' + msg[i] + '</option>';
+    			option += '<option value="' + msg[i] + '">' + msg[i] + '</option>';
 			}
   			var str = '<div class="form-group {{{ $errors->has('username') ? 'error' : '' }}}"> ' +
 					  ' <label class="col-md-2 control-label" for="name">Instance Image</label> '+
 					  '<div class="col-md-6"> '+
-					  '<select class="form-control" id="parameters[instanceImage]" id="jsonform-0-elt-parameters[instanceImage]" >' +
+					  '<select class="form-control" id="instanceImage" id="jsonform-0-elt-instanceImage" >' +
 					  option +
 					  '</select>' +
 					  '</div> ' +
