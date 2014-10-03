@@ -115,7 +115,7 @@
 		      		.addClass('col-md-6');
 			}).trigger('change');
 			
-			var $region = $('#parameters[instanceRegion]');
+			var $region = $('#jsonform-0-elt-parameters[instanceRegion]');
 			alert($region.val());
 			
 			var $cloud_account_idCredntialsForm = $('#cloud_account_idCredntialsForm');
