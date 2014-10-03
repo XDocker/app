@@ -8,7 +8,7 @@
 
 return array(
     'Amazon AWS' => array(
-        'parameters[instanceRegion]' => array(
+     'parameters[instanceRegion]' => array(
             'type' => 'string',
             'title' => 'Region',
             'required' => true,

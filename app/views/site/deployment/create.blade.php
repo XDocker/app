@@ -74,6 +74,7 @@
 <script src="{{asset('bower_components/jsonform/deps/underscore.js')}}"></script>
 <script src="{{asset('bower_components/jsonform/lib/jsonform.js')}}"></script>
 <script type="text/javascript">
+	
 	(function($){
 		'use strict';
 		var PROVIDERS = {{ json_encode($providers) }};
@@ -115,6 +116,10 @@
 			$cloud_account_idCredntialsForm.on('submit', function(e){
 
 			});
+		});
+		
+		$( "#jsonform-0-elt-parameters[instanceRegion]" ).change(function() {
+ 			alert( "Handler for .change() called." );
 		});
 	})(jQuery);
 </script>
