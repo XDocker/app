@@ -135,15 +135,20 @@
 		var cloudProvider = $('#cloud_account_id').find('option:selected').data('cloud-provider');
 		var region = val.value;
 		var request = $.ajax({
-					  url: ""{{ URL::to('deployment/images') }}",
+					  url: "{{ URL::to('deployment/images') }}",
 					  type: "POST",
 					  data: { "cloudProvider" : cloudProvider, "region" : val.value },
 					  dataType: "json"
 					});
 		request.done(function( msg ) {
   			
-  			
-  			$( "#instanceImage" ).html( msg );
+  			var str = '<div class="form-group {{{ $errors->has('username') ? 'error' : '' }}}"> ' +
+					  ' <label class="col-md-2 control-label" for="name">Instance Image</label> '+
+					  '<div class="col-md-6"> '+
+					  '		<input class="form-control" type="text" name="parameters[instanceImage]" id="jsonform-0-elt-parameters[instanceImage]" value="" readonly /> '+
+					  '</div> ' +
+						 '</div> ';
+  			$( "#instanceImage" ).html( str );
   			
 		});
  
