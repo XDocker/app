@@ -167,6 +167,7 @@ class DeploymentController extends BaseController {
                                         'instanceName' => $deployment->name,
                                         'instanceType' => $parameters->instanceType,
                                         'instanceRegion' => $parameters->instanceRegion,
+                                        'instanceImage' => $parameters->instanceImage,
                                         'packageName' => $deployment -> docker_name,
                                         'dockerParams' => array('ports' => array(443,5000), 
                                                                 'env' => array('mail' =>$user->email, 'host'=> '{host}'), 
