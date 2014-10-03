@@ -141,13 +141,15 @@
 					  dataType: "json"
 					});
 		request.done(function( msg ) {
-  			
-  			console.log(msg);
+  			var option = '';
+  			for(var i = 0; i < msg.length; i++) {
+    			option + = '<option name="' + msg[i] + '">' + msg[i] + '</option>';
+			}
   			var str = '<div class="form-group {{{ $errors->has('username') ? 'error' : '' }}}"> ' +
 					  ' <label class="col-md-2 control-label" for="name">Instance Image</label> '+
 					  '<div class="col-md-6"> '+
 					  '<select class="form-control" id="parameters[instanceImage]" id="jsonform-0-elt-parameters[instanceImage]" >' +
-					
+					  option +
 					  '</select>' +
 					  '</div> ' +
 						 '</div> ';
