@@ -115,8 +115,7 @@
 		      		.addClass('col-md-6');
 			}).trigger('change');
 			
-			var $region = $('#jsonform-0-elt-parameters[instanceRegion]');
-			alert($region.val());
+			
 			
 			var $cloud_account_idCredntialsForm = $('#cloud_account_idCredntialsForm');
 			$cloud_account_idCredntialsForm.on('submit', function(e){
@@ -128,6 +127,9 @@
 		
 	})(jQuery);
 	
-	
+	loadImages = function(val)
+	{
+		alert(val);
+	}
 </script>
 @stop
