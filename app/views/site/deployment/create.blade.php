@@ -118,9 +118,13 @@
 			});
 		});
 		
-		$( "#jsonform-0-elt-parameters[instanceRegion]" ).change(function() {
+		
+	})(jQuery);
+	
+	$( document ).ready(function() {
+  	$( "#jsonform-0-elt-parameters[instanceRegion]" ).change(function() {
  			alert( "Handler for .change() called." );
 		});
-	})(jQuery);
+});
 </script>
 @stop
