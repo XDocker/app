@@ -616,6 +616,7 @@ jsonform.elementTypes = {
   },
   'select':{
     'template':'<select name="<%= node.name %>" id="<%= id %>"' +
+      '<%= (node.schemaElement && node.schemaElement.event ?  node.schemaElement.event : "") %>' +
       '<%= (fieldHtmlClass ? " class=\'" + fieldHtmlClass + "\'" : "") %>' +
       '<%= (node.disabled? " disabled" : "")%>' +
       '<%= (node.schemaElement && node.schemaElement.required ? " required=\'required\'" : "") %>' +
