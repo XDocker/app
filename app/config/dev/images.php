@@ -9,14 +9,14 @@
 return array(
     'Amazon AWS' =>
 				array(
-						'ap-northeast-1' => array('ami-e7138ddd', 'ami-d54b60d4', 'ami-21072820'),
-						'ap-southeast-1' =>  array('ami-a08fd9f2', 'ami-24e7c076', 'ami-20e1c572'),
-						'ap-southeast-2' =>  array('ami-e7138ddd', 'ami-2111731b', 'ami-8b4724b1'),
-						'eu-west-1' =>  array('ami-42718735', 'ami-00b11177', 'ami-aa8f28dd'),
-						'sa-east-1' => array('ami-7d02a260', 'ami-79d26764', 'ami-9d6cc680'),
-						'us-east-1' => array('ami-8997afe0', 'ami-8caa1ce4', 'ami-50842d38'),
-						'us-west-1' => array('ami-b6bdde86', 'ami-696e652c', 'ami-c7a8a182'),
-						'us-west-2' => array('ami-1a013c5f','ami-cd5311fd','ami-af86c69f')
+						'ap-northeast-1' => array('Ubuntu 14.04:ami-e7138ddd', 'CentOs 6.5:ami-d54b60d4', 'Amazon Linux:ami-21072820'),
+						'ap-southeast-1' =>  array('Ubuntu 14.04:ami-a08fd9f2', 'CentOs 6.5:ami-24e7c076', 'Amazon Linux:ami-20e1c572'),
+						'ap-southeast-2' =>  array('Ubuntu 14.04:ami-e7138ddd', 'CentOs 6.5:ami-2111731b', 'Amazon Linux:ami-8b4724b1'),
+						'eu-west-1' =>  array('Ubuntu 14.04:ami-42718735', 'CentOs 6.5:ami-00b11177', 'Amazon Linux:ami-aa8f28dd'),
+						'sa-east-1' => array('Ubuntu 14.04:ami-7d02a260', 'CentOs 6.5:ami-79d26764', 'Amazon Linux:ami-9d6cc680'),
+						'us-east-1' => array('Ubuntu 14.04:ami-8997afe0', 'CentOs 6.5:ami-8caa1ce4', 'Amazon Linux:ami-50842d38'),
+						'us-west-1' => array('Ubuntu 14.04:ami-b6bdde86', 'CentOs 6.5:ami-696e652c', 'Amazon Linux:ami-c7a8a182'),
+						'us-west-2' => array('Ubuntu 14.04:ami-1a013c5f','CentOs 6.5:ami-cd5311fd','Amazon Linux:ami-af86c69f')
 				)
 				);
 
