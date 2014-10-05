@@ -12,7 +12,7 @@ return array(
             'type' => 'string',
             'title' => 'Region',
             'required' => true,
-            'enum' => array( 
+            'enum' => array('',
                 'us-east-1',
                 'us-west-1',
                 'us-west-2',
