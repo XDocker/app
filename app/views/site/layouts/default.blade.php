@@ -124,7 +124,7 @@
 		    <footer id="footer" class="navbar navbar-default navbar-static-bottom">
 			  <hr>
 		      <div class="container">
-		      	<p class="muted credit text-center"><a href="https://www.xervmon.com">{{{ Lang::get('site.title') }}}</a></p>
+		      	<p class="muted credit text-center"><a href="https://www.xervmon.com">{{{ Lang::get('site.footertitle') }}}</a></p>
 		        <p class="text-center">
 		        	<iframe src="http://ghbtns.com/github-btn.html?user=xdocker&repo=app&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="170" height="30"></iframe>
 		        </p>
