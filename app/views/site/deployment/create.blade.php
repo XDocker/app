@@ -148,7 +148,7 @@
   			var str = '<div class="form-group {{{ $errors->has('username') ? 'error' : '' }}}"> ' +
 					  ' <label class="col-md-2 control-label" for="name">Instance Image</label> '+
 					  '<div class="col-md-6"> '+
-					  '<select class="form-control" name="instanceImage" id="jsonform-0-elt-instanceImage" >' +
+					  '<select class="form-control" name="instanceAmi" id="jsonform-0-elt-instanceAmi" >' +
 					  option +
 					  '</select>' +
 					  '</div> ' +

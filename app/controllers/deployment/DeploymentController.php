@@ -96,7 +96,7 @@ class DeploymentController extends BaseController {
             $deployment->cloud_account_id = Input::get('cloud_account_id');
 			$params = Input::get('parameters');
 			//$params['instanceImage'] = Input::get('instanceImage');
-			$arr = explode(':', Input::get('instanceImage'));
+			$arr = explode(':', Input::get('instanceAmi'));
 			$params['instanceAmi'] = $arr[1];
 			$params['OS'] = $arr[0];
 			$deployment->parameters = json_encode($params);
