@@ -97,7 +97,7 @@ class DeploymentController extends BaseController {
 			$params = Input::get('parameters');
 			//$params['instanceImage'] = Input::get('instanceImage');
 			$arr = explode(':', Input::get('instanceImage'));
-			$params['instanceImage'] = $arr[1];
+			$params['instanceAmi'] = $arr[1];
 			$params['OS'] = $arr[0];
 			$deployment->parameters = json_encode($params);
             $deployment->docker_name = Input::get('docker_name');
@@ -171,7 +171,7 @@ class DeploymentController extends BaseController {
                                         'instanceName' => $deployment->name,
                                         'instanceType' => $parameters->instanceType,
                                         'instanceRegion' => $parameters->instanceRegion,
-                                        'instanceImage' => $parameters->instanceImage,
+                                        'instanceAmi' => $parameters->instanceAmi,
                                         'OS' => $parameters->OS,
                                         'packageName' => $deployment -> docker_name,
                                         'dockerParams' => array('ports' => array(443,5000), 
