@@ -12,15 +12,17 @@ return array(
             'type' => 'string',
             'title' => 'Region',
             'required' => true,
-            'enum' => array( '',
+            'enum' => array( 
                 'us-east-1',
                 'us-west-1',
                 'us-west-2',
+                'eu-west-1',
+                'sa-east-1',
                 'ap-northeast-1',
                 'ap-southeast-1',
                 'ap-southeast-2',
-                'eu-west-1',
-                'sa-east-1'
+                'cn-north-1'
+                
             ),
             'event' => 'onchange="loadImages(this)"'
         ) ,
