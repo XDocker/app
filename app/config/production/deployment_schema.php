@@ -8,6 +8,51 @@
 
 return array(
     'Amazon AWS' => array(
+     'parameters[instanceRegion]' => array(
+            'type' => 'string',
+            'title' => 'Region',
+            'required' => true,
+            'enum' => array('',
+                'us-east-1',
+                'us-west-1',
+                'us-west-2',
+                'eu-west-1',
+                'sa-east-1',
+                'ap-northeast-1',
+                'ap-southeast-1',
+                'ap-southeast-2',
+                'cn-north-1'
+                
+            ),
+            'event' => 'onchange="loadImages(this)"'
+        ) ,
+        'parameters[instanceType]' => array(
+            'type' => 'string',
+            'title' => 'Instance Type',
+            'required' => false,
+            'enum' => array(
+                'm3.medium',
+                'm3.large',
+                'm3.xlarge',
+                'm3.2xlarge'
+            )
+        ),
+		 'parameters[ports]' => array(
+            'type' => 'string',
+            'title' => 'Ports',
+            'required' => false,
+            'multiple' => true,
+            'default' => array('443','5000'),
+            'enum' => array(
+                '443',
+                '5000',
+                '8080'
+            )
+        )
+    ) ,
+    
+	
+    /*'Rackspace Cloud' => array(
         'parameters[securityGroupId]' => array(
             'type' => 'string',
             'title' => 'Security Group',
@@ -28,5 +73,5 @@ return array(
             'title' => 'Subnet',
             'required' => false
         ) ,
-    ) ,
+    ) ,*/
 );
