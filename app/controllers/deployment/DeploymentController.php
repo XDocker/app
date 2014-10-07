@@ -177,8 +177,7 @@ class DeploymentController extends BaseController {
                                         'dockerParams' => array('ports' => $parameters->ports, 
                                                                 'env' => array('mail' =>$user->email, 'host'=> '{host}'), 
                                                                 'tag'=> $this->getTagIfApplicable($deployment -> docker_name))   )
-                                      );
-					print_r($deployment->wsParams);				  				
+                                      );			  				
 	}
 
 	private function getTagIfApplicable($dockerName)
