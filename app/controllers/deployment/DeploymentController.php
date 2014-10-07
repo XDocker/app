@@ -174,10 +174,17 @@ class DeploymentController extends BaseController {
                                         'instanceAmi' => $parameters->instanceAmi,
                                         'OS' => $parameters->OS,
                                         'packageName' => $deployment -> docker_name,
-                                        'dockerParams' => array('ports' => array(443,5000), 
+                                        'dockerParams' => array('ports' => $parameters->ports, 
                                                                 'env' => array('mail' =>$user->email, 'host'=> '{host}'), 
-                                                                'tag'=> 'v1')   )
-                                      );				
+                                                                'tag'=> $this->getTagIfApplicable($deployment -> docker_name))   )
+                                      );
+					print_r($deployment->wsParams);				  				
+	}
+
+	private function getTagIfApplicable($dockerName)
+	{
+		$setting = Config::get('docker_settings');
+		return $setting[$dockerName];
 	}
     /**
      * Remove the specified Account .
