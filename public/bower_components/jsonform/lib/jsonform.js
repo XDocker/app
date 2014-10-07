@@ -196,7 +196,7 @@ jsonform.fieldTemplate = function(inner) {
     '<%= (node.disabled ? " jsonform-disabled" : "") %>' +
     '">' +
     '<% if (node.title && !elt.notitle) { %>' +
-      '<label class="control-label" for="<%= node.id %>"><%= node.title %></label>' +
+      '<label class="control-label" for="<%= node.id %>"><%= node.title (node.schemaElement && node.schemaElement.required) ? "<font color=\'red\'>*</font>" : "" %></label>' +
     '<% } %>' +
     '<div class="controls">' +
       '<% if (node.prepend || node.append) { %>' +
