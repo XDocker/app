@@ -615,7 +615,7 @@ jsonform.elementTypes = {
     }
   },
   'select':{
-    'template':'<select name="<%= node.name %><%= (node.schemaElement && node.schemaElement.multiple ? "[]" : "") %>" <%= (node.schemaElement && node.schemaElement.multiple ? "multiple" : "") %>" id="<%= id %>"' +
+    'template':'<select name="<%= node.name %><%= (node.schemaElement && node.schemaElement.multiple ? "[]" : "") %>" <%= (node.schemaElement && node.schemaElement.multiple ? "multiple" : "") %> id="<%= id %>"' +
        '<%= (node.schemaElement && node.schemaElement.event ?  node.schemaElement.event : "") %>' +
       '<%= (fieldHtmlClass ? " class=\'" + fieldHtmlClass + "\'" : "") %>' +
       '<%= (node.disabled? " disabled" : "")%>' +
