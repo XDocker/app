@@ -35,7 +35,7 @@
 		
 		<!-- cloud_account_id -->
 		<div class="form-group {{{ $errors->has('username') ? 'error' : '' }}}">
-			<label class="col-md-2 control-label" for="cloud_account_id">Cloud Account</label>
+			<label class="col-md-2 control-label" for="cloud_account_id">Cloud Account <font color="red"> * </font></label>
 			<div class="col-md-6">
 				<select class="form-control" name="cloud_account_id" id="cloud_account_id" required>
 					@foreach ($cloud_account_ids as $key => $value)
@@ -48,7 +48,7 @@
 		
 		<!-- name -->
 		<div class="form-group {{{ $errors->has('username') ? 'error' : '' }}}">
-			<label class="col-md-2 control-label" for="name">Name</label>
+			<label class="col-md-2 control-label" for="name">Name <font color="red"> * </font></label>
 			<div class="col-md-6">
 				<input class="form-control" type="text" name="name" id="name" value="{{{ Input::old('name', isset($deployment->name) ? $deployment->name : null) }}}" required />
 			</div>
