@@ -36,8 +36,22 @@ return array(
                 'm3.xlarge',
                 'm3.2xlarge'
             )
+        ),
+		 'parameters[ports]' => array(
+            'type' => 'string',
+            'title' => 'Ports',
+            'required' => false,
+            'multiple' => true,
+            'default' => array('443','5000'),
+            'enum' => array(
+                '443',
+                '5000',
+                '8080'
+            )
         )
     ) ,
+    
+	
     /*'Rackspace Cloud' => array(
         'parameters[securityGroupId]' => array(
             'type' => 'string',
