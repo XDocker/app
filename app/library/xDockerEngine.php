@@ -39,7 +39,7 @@ class xDockerEngine {
     }
     
     public static function request($url, $data) {
-        Log::info(Auth::user()->username . ' URL : ' . $url);
+        Log::info((Auth::check() ? Auth::user()->username : json_encode($data)) . ' URL : ' . $url);
         $process = curl_init();
         curl_setopt($process, CURLOPT_URL, $url);
         curl_setopt($process, CURLOPT_RETURNTRANSFER, TRUE);
