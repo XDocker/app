@@ -99,7 +99,7 @@ class UserController extends BaseController {
         } else {
             // Get validation errors (see Ardent package)
             $error = $this->user->errors()->all();
-            Log::error('Error while registering the user!' . $error);
+            Log::error('Error while registering the user!' . json_encode($error));
             return Redirect::to('user/create')->withInput(Input::except('password'))->with('error', $error);
         }
     }
