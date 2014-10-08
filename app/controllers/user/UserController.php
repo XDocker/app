@@ -91,7 +91,7 @@ class UserController extends BaseController {
 				EngineLog::logIt(array('user_id' => $this->user->id, 'method' => 'register', 'return' => $return));
             }
             catch(Exception $e) {
-            	Log::error('Error while registering the user!' . $e.getMessage());
+            	Log::error('Error while registering the user!' . $e->getMessage());
                 return Redirect::to('user/create')->withInput(Input::except('password'))->with('error', $e->getMessage());
             }
             // Redirect with success message, You may replace "Lang::get(..." for your custom message.
