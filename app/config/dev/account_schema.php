@@ -23,7 +23,7 @@ return array(
             'title' => 'Secret Key',
             'required' => true
         ) ,
-        'credentials[bucketName]' => array(
+        'credentials[billingBucket]' => array(
             'type' => 'string',
             'title' => 'Billing Bucket',
             'required' => false
