@@ -25,7 +25,7 @@ return array(
         ) ,
         'credentials[bucketName]' => array(
             'type' => 'string',
-            'title' => 'Billing',
+            'title' => 'Billing Bucket',
             'required' => false
         ) ,
     ) ,
