@@ -1,4 +1,12 @@
 app
 ===
 
-Test drive Docker images on any infrastructure
+Deploy and manage docker images on any IaaS/On-Premise
+
+Installation
+```shell
+   git clone https://github.com/XDocker/app.git
+```
+```shell
+  The app is based on Laravel framework
+```
