@@ -14,11 +14,11 @@ return array(
         ),
         'configure' => array(
             'title' => 'Configure',
-            'description' => 'Choose where and how you\'d like to to be deployed (instance, size, etc)'
+            'description' => 'Choose where and how you\'d like to to be deployed (instance, size, ports, security keys, groups etc)'
         ),
         'manage' => array(
             'title' => 'Manage',
-            'description' => 'xDocker let\'s allows you to easily refresh or delte your deployment'
+            'description' => 'xDocker let\'s allows you to easily refresh or delete your deployment'
         )
     ),
     'xervmon_intro'=>'xDocker is a part of the powerful Xervmon cloud management suite',

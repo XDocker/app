@@ -59,7 +59,7 @@
         <br/>
         <div class="alert alert-info text-center">
         	<h4>{{{ Lang::get('home.xervmon_intro') }}}</h4>
-        	<a href="http://xervmon.com/xdocker" class="btn btn-primary">{{{ Lang::get('home.xervmon_call_to_action') }}}</a>
+        	<a target="_blank" href="https://www.xervmon.com/product" class="btn btn-primary">{{{ Lang::get('home.xervmon_call_to_action') }}}</a>
         </div>
     </section>
 @else
