@@ -129,7 +129,7 @@
 		      		<a href="https://www.xervmon.com">{{{ Lang::get('site.footertitle') }}}</a>
 		      	</p>
 		      	<p class="pull-right">
-		      			<a href="https://www.facebook.com/pages/XDocker/687711791303636">Facebook</a>
+		      			<a href="https://www.facebook.com/pages/XDocker/687711791303636"><img src="{{{ asset('assets/img/facebook.png') }}}" alt="{{{ Lang::get('site.footertitle') }}}"/></a>
 		      	</p>
 		        <p class="text-center">
 		        	<iframe src="http://ghbtns.com/github-btn.html?user=xdocker&repo=app&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="170" height="30"></iframe>
