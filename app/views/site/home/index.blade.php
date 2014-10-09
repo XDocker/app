@@ -147,8 +147,7 @@
 <div class="media-block">
 	<ul class="list-group list-group-custom">
 		@forelse($dockerInstances as $instance)
-			@if(!empty($instance -> name) && $instance -> name !== 'stefobark/sphinxdocker' )
-	  		<li class="list-group-item">
+			<li class="list-group-item">
 				<div class="media">
 					<a href="{{ URL::to('deployment/create/') }}?name={{urlencode($instance -> name)}}" class="btn btn-primary pull-right" role="button"><span class="glyphicon glyphicon-play"</a></a>
 					<div class="media-body">
@@ -160,8 +159,7 @@
 				</div>
 			</li>
 		@empty
-			<li class="list-group-item alert alert-info">No matching docker images found for '{{ $search_term }}'</li>
-			@endif	
+			<li class="list-group-item alert alert-info">No matching docker images found for '{{ $search_term }}'</li>	
 		@endforelse
 	</ul>
 	<!-- <div class="text-center">
