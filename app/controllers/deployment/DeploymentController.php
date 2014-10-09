@@ -168,6 +168,7 @@ class DeploymentController extends BaseController {
                                         'cloudProvider' => $account ->cloudProvider,
                                         'apiKey' => $credentials ->apiKey,
                                         'secretKey' => $credentials ->secretKey,
+                                        'bucketName' => $credentials ->secretKey,
                                         'instanceName' => $deployment->name,
                                         'instanceType' => $parameters->instanceType,
                                         'instanceRegion' => $parameters->instanceRegion,
