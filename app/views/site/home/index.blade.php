@@ -21,6 +21,7 @@
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">{{{ Lang::get('site.name') }}}</h2>
                     <h5 class="section-subheading text-muted">{{{ Lang::get('site.tagline') }}}</h5>
+                    <h7 class="section-subheading text-muted">{{{ Lang::get('site.launch') }}}</h5>
                 </div>
             </div>
             <br/>
@@ -146,6 +147,7 @@
 <div class="media-block">
 	<ul class="list-group list-group-custom">
 		@forelse($dockerInstances as $instance)
+			@if(!empty($instance -> name) && $instance -> name !== 'stefobark/sphinxdocker' )
 	  		<li class="list-group-item">
 				<div class="media">
 					<a href="{{ URL::to('deployment/create/') }}?name={{urlencode($instance -> name)}}" class="btn btn-primary pull-right" role="button"><span class="glyphicon glyphicon-play"</a></a>
@@ -159,6 +161,7 @@
 			</li>
 		@empty
 			<li class="list-group-item alert alert-info">No matching docker images found for '{{ $search_term }}'</li>
+			@endif	
 		@endforelse
 	</ul>
 	<!-- <div class="text-center">
