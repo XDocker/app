@@ -42,8 +42,8 @@
 									{
 										$result = json_decode($deployment->wsResults);
 										echo $result->instance_id . ' | ' . $result->public_dns . '<br/>';
-										echo '<a href="#" onclick="start('.$deployment->id.')">Restart</a> |'  .
-										'<a href="#" onclick="stop('.$deployment->id.')">Restart</a> |'  .
+										echo '<a href="#" onclick="start('.$deployment->id.')">Start</a> |'  .
+										'<a href="#" onclick="stop('.$deployment->id.')">Stop</a> |'  .
 										'<a href="#" onclick="restart('.$deployment->id.')">Restart</a> |'  .
 										'<a href="#" onclick="terminate('.$deployment->id.')">Terminate</a>|' ;
 								?>
