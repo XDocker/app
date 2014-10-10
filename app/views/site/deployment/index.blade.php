@@ -37,9 +37,6 @@
 							
 							<h4 class="media-heading">{{ String::title($deployment->name) }}</h4>
 							<p>
-								@if($deployment->status == 'Completed')
-								{{ $result = json_decode($deployment->wsResults) }}
-								{{ $result->instance_id . ' | ' . $result->public_dns }}
 								<?php
 									if($deployment->status == 'Completed') 
 									{
