@@ -16,10 +16,10 @@ return array(
     | you want to customize your views to better match your application.
     |
     */
-    
     'contact_us' => 'Contact Us',
     'sign_up' => 'Sign Up',
     'login' => 'Login',
+    'launch' => 'We are days away from launch!',
     'log_out' => 'Logout',
     'edit_profile' => 'Edit Profile',
     'services' => 'Services',
