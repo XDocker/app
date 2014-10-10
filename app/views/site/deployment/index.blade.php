@@ -42,10 +42,10 @@
 									{
 										$result = json_decode($deployment->wsResults);
 										echo $result->instance_id . ' | ' . $result->public_dns . '<br/>';
-										echo '<a href="#" onclick="start('.$deployment->id.')">Start</a> |'  .
+										echo '<a href="#" onclick="start('.$deployment->id.',"$result->instance_id")">Start</a> |'  .
 										'<a href="#" onclick="stop('.$deployment->id.')">Stop</a> |'  .
 										'<a href="#" onclick="restart('.$deployment->id.')">Restart</a> |'  .
-										'<a href="#" onclick="terminate('.$deployment->id.')">Terminate</a>|' ;
+										'<a href="#" onclick="terminate('.$deployment->id.')">Terminate</a>' ;
 								?>
 								
 				
@@ -72,14 +72,14 @@
 </div>
 
 <script>
-	function start(id)
+	function start(id, instanceId)
 	{
 		alert('Id :' + id);
 		var jqxhr = $.ajax(  )
 				$.ajax({
 		  type: "POST",
-		  url: "{{URL::to('deployment/' . $deployment->id . '/instanceAction') }} ",
-		  data: { instanceAction: "start", "_token" : "{{{ csrf_token() }}}" }
+		  url: " {{ URL::to('deployment/' . $deployment->id . '/instanceAction') }} ",
+		  data: { "instanceAction": instanceId, "instanceAction": "start", "_token" : "{{{ csrf_token() }}}" }
 		  })
 		  .done(function(resonse) {
 		    alert( "success" );

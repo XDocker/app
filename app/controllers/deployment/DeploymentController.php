@@ -298,14 +298,17 @@ class DeploymentController extends BaseController {
 				$response = xDockerEngine::instance(array('token' => $obj->token, 
 														   'apiKey' => $credentials ->apiKey,
                                         				   'secretKey' => $credentials ->secretKey,
-                                        				   "instanceAction" => $instanceAction,
-   														  "cloudProvider" => $account -> cloudProvider));
+                                        				   'instanceAction' => $instanceAction,
+   														   'cloudProvider' => $account -> cloudProvider));
+														   
 				EngineLog::logIt(array('user_id' => Auth::id(), 'method' => 'instance:' . $instanceAction, 'return' => $response));
+			    
 			    $obj2 = json_decode($response);
+				
 				if($obj2->status == 'OK' && !empty($obj2->job_id))
 				{
 					$deployment->status = $instanceAction;
-					$deployment->job_id= $obj2->job_id;
+					$deployment->job_id = $obj2->job_id;
 					$success = $deployment->save();
 		        	if (!$success) {
 		        		Log::error('Error while saving deployment -  : '.$instanceAction.' '.json_encode( $dep->errors()));
@@ -317,9 +320,9 @@ class DeploymentController extends BaseController {
 				}
 				else if($obj2->status == 'error')
 				{
-					Log::error('Error occured - while submitting '. $instanceAction .'request');
+					Log::error('Error occured - while submitting '. $instanceAction .' request');
 					//return Redirect::to('deployment')->with('error', 'Error while submitting  '.$instanceAction .'request ' );
-					print json_encode(array('status' => 'error', 'message' => 'Error while submitting  '.$instanceAction .'request ' ));
+					print json_encode(array('status' => 'error', 'message' => 'Error while submitting '.$instanceAction .' request ' ));
 				}
 			}
 			else {
