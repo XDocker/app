@@ -299,7 +299,7 @@ class DeploymentController extends BaseController {
 				$response = xDockerEngine::instance(array('token' => $obj->token, 
 														   'apiKey' => $credentials ->apiKey,
                                         				   'secretKey' => $credentials ->secretKey,
-                                        				   'instanceId' => $result->instanceId,
+                                        				   'instanceId' => $result->instance_id,
                                         				   'instanceAction' => $instanceAction,
    														   'cloudProvider' => $account -> cloudProvider));
 														   
