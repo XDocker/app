@@ -289,7 +289,8 @@ class DeploymentController extends BaseController {
 		$account = CloudAccount::where('user_id', Auth::id())->findOrFail($deployment->cloud_account_id) ;
 		$credentials = json_decode($account->credentials);
 		
-		
+		$result = json_decode($deployment->wsResults);
+										
 		$responseJson = xDockerEngine::authenticate(array('username' => Auth::user()->username, 'password' => md5(Auth::user()->engine_key)));
 		EngineLog::logIt(array('user_id' => Auth::id(), 'method' => 'authenticate', 'return' => $responseJson));
 		$obj = json_decode($responseJson);
@@ -298,7 +299,7 @@ class DeploymentController extends BaseController {
 				$response = xDockerEngine::instance(array('token' => $obj->token, 
 														   'apiKey' => $credentials ->apiKey,
                                         				   'secretKey' => $credentials ->secretKey,
-                                        				   'instanceId' => Input::get('instanceId'),
+                                        				   'instanceId' => $result->instanceId,
                                         				   'instanceAction' => $instanceAction,
    														   'cloudProvider' => $account -> cloudProvider));
 														   
