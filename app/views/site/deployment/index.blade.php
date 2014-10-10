@@ -79,7 +79,7 @@
 				$.ajax({
 		  type: "POST",
 		  url: "{{URL::to('deployment/' . $deployment->id . '/instanceAction') }} ",
-		  data: { instanceAction: "start", '_token' : {{{ csrf_token() }}} }
+		  data: { instanceAction: "start", "_token" : "{{{ csrf_token() }}}" }
 		  })
 		  .done(function(resonse) {
 		    alert( "success" );
