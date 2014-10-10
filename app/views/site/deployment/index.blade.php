@@ -37,14 +37,16 @@
 							
 							<h4 class="media-heading">{{ String::title($deployment->name) }}</h4>
 							<p>
+								@if($deployment->status == 'Completed')
+								{{ $result = json_decode($deployment->wsResults) }}
+								{{ $result->instance_id . ' | ' . $result->public_dns }}
 								<?php
 									if($deployment->status == 'Completed') 
 									{
 										$result = json_decode($deployment->wsResults);
 										echo $result->instance_id . ' | ' . $result->public_dns . '<br/>';
 										echo '<a href="#" onclick="restart('.$deployment->id.')">Restart</a> |'  .
-											'<a href="#" onclick="terminate('.$deployment->id.')">Terminate</a>|' .
-											'<a href="'. URL::to('deployment/' . $deployment->id . '/log').'">View Log</a>' ;
+										'<a href="#" onclick="terminate('.$deployment->id.')">Terminate</a>|' ;
 								?>
 								
 				
