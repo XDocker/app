@@ -320,6 +320,7 @@ class DeploymentController extends BaseController {
 				}
 				else if($obj2->status == 'error')
 				{
+					print
 					Log::error('Error occured - while submitting '. $instanceAction .' request');
 					//return Redirect::to('deployment')->with('error', 'Error while submitting  '.$instanceAction .'request ' );
 					print json_encode(array('status' => 'error', 'message' => 'Error while submitting '.$instanceAction .' request ' ));
