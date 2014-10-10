@@ -22,8 +22,7 @@
                     <h2 class="section-heading">{{{ Lang::get('site.name') }}}</h2>
                     <h5 class="section-subheading text-muted">{{{ Lang::get('site.tagline') }}}</h5>
                     <h7 class="section-subheading text-muted btn btn-success">{{{ Lang::get('site.launch') }}}</h7>
-                    <hr/>
-                		@include('laravel-newsletter-signup::signup')
+                		
 				</div>
             </div>
             <br/>
@@ -63,7 +62,10 @@
         <div class="alert alert-info text-center">
         	<h4>{{{ Lang::get('home.xervmon_intro') }}}</h4>
         	<a target="_blank" href="https://www.xervmon.com/product" class="btn btn-primary">{{{ Lang::get('home.xervmon_call_to_action') }}}</a>
+        	<br/>
+        	 @include('laravel-newsletter-signup::signup')
         </div>
+       
     </section>
 @else
 	<div class="media-block">
