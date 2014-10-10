@@ -108,6 +108,9 @@
 
 			<!-- Container -->
 			<div class="container clear-both">
+				
+				@include('laravel-newsletter-signup::signup')
+				
 				<!-- Notifications -->
 				@include('notifications')
 				<!-- ./ notifications -->
