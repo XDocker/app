@@ -24,7 +24,7 @@ class SignupsController extends \BaseController {
 	    }
 
 		//$signup = Signup::onlyTrashed()->where('email','=',\Input::get('newsletter_signup_email'))->first();
-		$signup = Signup::withTrashed()->where('email','=',\Input::get('newsletter_signup_email'))->get();
+		$signup = Signup::where('email','=',\Input::get('newsletter_signup_email'))->get();
 		if ($signup)
 		{
 			$signup->restore();
