@@ -41,8 +41,9 @@
 									if($deployment->status == 'Completed') 
 									{
 										$result = json_decode($deployment->wsResults);
+										$var = $deployment->id .',"'.$result->instance_id.'"';
 										echo $result->instance_id . ' | ' . $result->public_dns . '<br/>';
-										echo '<a href="#" onclick="start('.$deployment->id.',"$result->instance_id")">Start</a> |'  .
+										echo '<a href="#" onclick="start('.$var.')">Start</a> |'  .
 										'<a href="#" onclick="stop('.$deployment->id.')">Stop</a> |'  .
 										'<a href="#" onclick="restart('.$deployment->id.')">Restart</a> |'  .
 										'<a href="#" onclick="terminate('.$deployment->id.')">Terminate</a>' ;
