@@ -38,15 +38,15 @@
 							<h4 class="media-heading">{{ String::title($deployment->name) }}</h4>
 							<p>
 								<?php
-									if($deployment->status == 'Completed') 
+								if(in_array($deployment->status, array('Completed', 'start', 'stop')))
 									{
 										$result = json_decode($deployment->wsResults);
 										$url = URL::to('deployment/'.$deployment->id.'/instanceAction');
 										echo $result->instance_id . ' | ' . $result->public_dns . '<br/>';
 										echo '<a href="#" onclick="start(\''.$url.'\')">Start</a> |'  .
-										'<a href="#" onclick="stop('.$deployment->id.')">Stop</a> |'  .
-										'<a href="#" onclick="restart('.$deployment->id.')">Restart</a> |'  .
-										'<a href="#" onclick="terminate('.$deployment->id.')">Terminate</a>' ;
+										'<a href="#" onclick="stop(\''.$url.'\')">Stop</a> |'  .
+										'<a href="#" onclick="restart(\''.$url.'\')">Restart</a> |'  .
+										'<a href="#" onclick="terminate(\''.$url.'\')">Terminate</a>' ;
 								?>
 								
 				
@@ -84,12 +84,45 @@
 		   
 		    showMessage(response)
 		  });
- 
-	}
-	function terminate(id)
+ 	}
+	function stop(url)
 	{
-		alert('Id :' + id);
-	}
+		$.ajax({
+		  type: "POST",
+		  url: url,
+		  data: { "instanceAction": "stop", "_token" : "{{{ csrf_token() }}}" }
+		  })
+		  .done(function(response) {
+		   
+		    showMessage(response)
+		  });
+ 	}
+ 	
+ 	function restart(url)
+	{
+		$.ajax({
+		  type: "POST",
+		  url: url,
+		  data: { "instanceAction": "restart", "_token" : "{{{ csrf_token() }}}" }
+		  })
+		  .done(function(response) {
+		   
+		    showMessage(response)
+		  });
+ 	}
+ 	
+ 	function terminate(url)
+	{
+		$.ajax({
+		  type: "POST",
+		  url: url,
+		  data: { "instanceAction": "terminate", "_token" : "{{{ csrf_token() }}}" }
+		  })
+		  .done(function(response) {
+		   
+		    showMessage(response)
+		  });
+ 	}
 	
 	showMessage = function (response)
 	{
