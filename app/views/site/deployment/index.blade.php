@@ -72,14 +72,13 @@
 </div>
 
 <script>
-	function start(id, instanceId)
+	function start(id)
 	{
 		alert('Id :' + id);
-		var jqxhr = $.ajax(  )
-				$.ajax({
+		$.ajax({
 		  type: "POST",
-		  url: " {{ URL::to('deployment/' . $deployment->id . '/instanceAction') }} ",
-		  data: { "instanceAction": instanceId, "instanceAction": "start", "_token" : "{{{ csrf_token() }}}" }
+		  url: "deployment/" +id + "instanceAction",
+		  data: { "instanceAction": "start", "_token" : "{{{ csrf_token() }}}" }
 		  })
 		  .done(function(resonse) {
 		    alert( "success" );
