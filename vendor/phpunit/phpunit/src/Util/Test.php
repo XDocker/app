@@ -245,6 +245,58 @@ class PHPUnit_Util_Test
     }
 
     /**
+     * Returns the missing requirements for a test.
+     *
+     * @param  string $className
+     * @param  string $methodName
+     * @return array
+     * @since  Method available since Release 4.3.0
+     */
+    public static function getMissingRequirements($className, $methodName)
+    {
+        $required = static::getRequirements($className, $methodName);
+        $missing = array();
+
+        if (!empty($required['PHP']) && version_compare(PHP_VERSION, $required['PHP'], '<')) {
+            $missing[] = sprintf('PHP %s (or later) is required.', $required['PHP']);
+        }
+
+        if (!empty($required['PHPUnit'])) {
+            $phpunitVersion = PHPUnit_Runner_Version::id();
+            if (version_compare($phpunitVersion, $required['PHPUnit'], '<')) {
+                $missing[] = sprintf('PHPUnit %s (or later) is required.', $required['PHPUnit']);
+            }
+        }
+
+        if (!empty($required['OS']) && !preg_match($required['OS'], PHP_OS)) {
+            $missing[] = sprintf('Operating system matching %s is required.', $required['OS']);
+        }
+
+        if (!empty($required['functions'])) {
+            foreach ($required['functions'] as $function) {
+                $pieces = explode('::', $function);
+                if (2 === count($pieces) && method_exists($pieces[0], $pieces[1])) {
+                    continue;
+                }
+                if (function_exists($function)) {
+                    continue;
+                }
+                $missing[] = sprintf('Function %s is required.', $function);
+            }
+        }
+
+        if (!empty($required['extensions'])) {
+            foreach ($required['extensions'] as $extension) {
+                if (!extension_loaded($extension)) {
+                    $missing[] = sprintf('Extension %s is required.', $extension);
+                }
+            }
+        }
+
+        return $missing;
+    }
+
+    /**
      * Returns the expected exception for a test.
      *
      * @param  string $className
@@ -267,12 +319,19 @@ class PHPUnit_Util_Test
             $class   = $matches[1];
             $code    = null;
             $message = '';
+            $messageRegExp = '';
 
             if (isset($matches[2])) {
                 $message = trim($matches[2]);
             } elseif (isset($annotations['method']['expectedExceptionMessage'])) {
                 $message = self::parseAnnotationContent(
                     $annotations['method']['expectedExceptionMessage'][0]
+                );
+            }
+
+            if (isset($annotations['method']['expectedExceptionMessageRegExp'])) {
+                $messageRegExp = self::parseAnnotationContent(
+                    $annotations['method']['expectedExceptionMessageRegExp'][0]
                 );
             }
 
@@ -291,7 +350,7 @@ class PHPUnit_Util_Test
             }
 
             return array(
-              'class' => $class, 'code' => $code, 'message' => $message
+              'class' => $class, 'code' => $code, 'message' => $message, 'message_regex' => $messageRegExp
             );
         }
 

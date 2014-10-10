@@ -1,6 +1,26 @@
 CHANGELOG
 =========
 
+2.7.0 (2014-10-08)
+------------------
+
+* Added document model support to the Amazon DynamoDB client, including support
+  for the new data types (`L`, `M`, `BOOL`, and `NULL`), nested attributes, and
+  expressions.
+* Deprecated the `Aws\DynamoDb\Model\Attribute`, `Aws\DynamoDb\Model\Item`,
+  and `Aws\DynamoDb\Iterator\ItemIterator` classes, and the
+  `Aws\DynamoDb\DynamoDbClient::formatValue` and
+  `Aws\DynamoDb\DynamoDbClient::formatAttribute` methods, since they do not
+  support the new types in the DynamoDB document model. These deprecated classes
+  and methods still work reliably with `S`, `N`, `B`, `SS`, `NS`, and `BS`
+  attributes.
+* Updated the Amazon DynamoDB client to permanently disable client-side
+  parameter validation. This needed to be done in order to support the new
+  document model features.
+* Updated the Amazon EC2 client to sign requests with Signature V4.
+* Fixed an issue in the S3 service description to make the `VersionId`
+  work in `S3Client::restoreObject`.
+
 2.6.16 (2014-09-11)
 -------------------
 
