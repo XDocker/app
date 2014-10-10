@@ -42,7 +42,9 @@
 									{
 										$result = json_decode($deployment->wsResults);
 										echo $result->instance_id . ' | ' . $result->public_dns . '<br/>';
-										echo '<a href="#" onclick="restart('.$deployment->id.')">Restart</a> |'  .
+										echo '<a href="#" onclick="start('.$deployment->id.')">Restart</a> |'  .
+										'<a href="#" onclick="stop('.$deployment->id.')">Restart</a> |'  .
+										'<a href="#" onclick="restart('.$deployment->id.')">Restart</a> |'  .
 										'<a href="#" onclick="terminate('.$deployment->id.')">Terminate</a>|' ;
 								?>
 								
@@ -70,9 +72,25 @@
 </div>
 
 <script>
-	function restart(id)
+	function start(id)
 	{
 		alert('Id :' + id);
+		var jqxhr = $.ajax(  )
+				$.ajax({
+		  type: "POST",
+		  url: "{{URL::to('deployment/' . $deployment->id . '/instanceAction') }} ",
+		  data: { instanceAction: "start" }
+		  })
+		  .done(function(resonse) {
+		    alert( "success" );
+		  })
+		  .fail(function() {
+		    alert( "error" );
+		  })
+		  .always(function() {
+		    alert( "complete" );
+		  });
+ 
 	}
 	function terminate(id)
 	{
