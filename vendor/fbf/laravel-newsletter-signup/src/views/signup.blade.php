@@ -20,6 +20,6 @@
 
 	</div>
 
-	{{ Form::submit(trans('laravel-newsletter-signup::copy.signup.submit'), array('class' => 'btn btn-success')) }}
+	{{ Form::submit(trans('laravel-newsletter-signup::copy.signup.submit'), array('class' => 'btn btn-primary')) }}
 
 {{ Form::close() }}
