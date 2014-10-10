@@ -43,7 +43,7 @@
 										$result = json_decode($deployment->wsResults);
 										$url = URL::to('deployment/'.$deployment->id.'/instanceAction');
 										echo $result->instance_id . ' | ' . $result->public_dns . '<br/>';
-										echo '<a href="#" onclick="start("'.$url.'")">Start</a> |'  .
+										echo '<a href="#" onclick="start(\''.$url.'\')">Start</a> |'  .
 										'<a href="#" onclick="stop('.$deployment->id.')">Stop</a> |'  .
 										'<a href="#" onclick="restart('.$deployment->id.')">Restart</a> |'  .
 										'<a href="#" onclick="terminate('.$deployment->id.')">Terminate</a>' ;
@@ -75,26 +75,39 @@
 <script>
 	function start(url)
 	{
-		
 		$.ajax({
 		  type: "POST",
 		  url: url,
 		  data: { "instanceAction": "start", "_token" : "{{{ csrf_token() }}}" }
 		  })
-		  .done(function(resonse) {
-		    alert( "success" );
-		  })
-		  .fail(function() {
-		    alert( "error" );
-		  })
-		  .always(function() {
-		    alert( "complete" );
+		  .done(function(response) {
+		   
+		    showMessage(response)
 		  });
  
 	}
 	function terminate(id)
 	{
 		alert('Id :' + id);
+	}
+	
+	showMessage = function (response)
+	{
+		if(response.status == 'OK')
+		{
+			return '<div class="alert alert-success alert-block"> ' +
+					' <button type="button" class="close" data-dismiss="alert">&times;</button> '+
+						'<h4> Success </h4> ' + response.message +
+   				  '</div>';
+   		}
+   		else if(response.status == 'error')
+   		{
+   			return '<div class="alert alert-danger alert-block"> ' +
+					' <button type="button" class="close" data-dismiss="alert">&times;</button> '+
+						'<h4> Error </h4> ' + response.message +
+   				  '</div>';
+   		}
+		
 	}
 </script>
 
