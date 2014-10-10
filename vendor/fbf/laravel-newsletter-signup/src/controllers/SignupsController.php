@@ -23,8 +23,7 @@ class SignupsController extends \BaseController {
 		    return \Redirect::to(\Input::get('from'))->withInput()->withErrors($validator);
 	    }
 
-		//$signup = Signup::onlyTrashed()->where('email','=',\Input::get('newsletter_signup_email'))->first();
-		$signup = Signup::where('email','=',\Input::get('newsletter_signup_email'))->get();
+		$signup = Signup::onlyTrashed()->where('email','=',\Input::get('newsletter_signup_email'))->first();
 		if ($signup)
 		{
 			$signup->restore();
