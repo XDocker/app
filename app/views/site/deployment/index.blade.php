@@ -41,8 +41,9 @@
 									if($deployment->status == 'Completed') 
 									{
 										$result = json_decode($deployment->wsResults);
+										$url = URL::to('deployment/'.$deployment->id.'/instanceAction');
 										echo $result->instance_id . ' | ' . $result->public_dns . '<br/>';
-										echo '<a href="#" onclick="start('.$deployment->id.')">Start</a> |'  .
+										echo '<a href="#" onclick="start("'.$url.'")">Start</a> |'  .
 										'<a href="#" onclick="stop('.$deployment->id.')">Stop</a> |'  .
 										'<a href="#" onclick="restart('.$deployment->id.')">Restart</a> |'  .
 										'<a href="#" onclick="terminate('.$deployment->id.')">Terminate</a>' ;
@@ -72,12 +73,12 @@
 </div>
 
 <script>
-	function start(id)
+	function start(url)
 	{
-		alert('Id :' + id);
+		
 		$.ajax({
 		  type: "POST",
-		  url: "deployment/" +id + "instanceAction",
+		  url: url,
 		  data: { "instanceAction": "start", "_token" : "{{{ csrf_token() }}}" }
 		  })
 		  .done(function(resonse) {
