@@ -23,6 +23,11 @@ return array(
             'title' => 'Secret Key',
             'required' => true
         ) ,
+        'credentials[billingBucket]' => array(
+            'type' => 'string',
+            'title' => 'Billing Bucket',
+            'required' => false
+        ) ,
     ) ,
     'Rackspace Cloud' => array(
         'credentials[accountId]' => array(

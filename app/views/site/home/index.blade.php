@@ -21,7 +21,12 @@
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">{{{ Lang::get('site.name') }}}</h2>
                     <h5 class="section-subheading text-muted">{{{ Lang::get('site.tagline') }}}</h5>
-                </div>
+                    <h7 class="section-subheading text-muted btn btn-success">{{{ Lang::get('site.launch') }}}</h7>
+                    
+                    <br/><br/>
+        	 			@include('laravel-newsletter-signup::signup')
+                		
+				</div>
             </div>
             <br/>
             <br/>
@@ -59,8 +64,10 @@
         <br/>
         <div class="alert alert-info text-center">
         	<h4>{{{ Lang::get('home.xervmon_intro') }}}</h4>
-        	<a href="http://xervmon.com/xdocker" class="btn btn-primary">{{{ Lang::get('home.xervmon_call_to_action') }}}</a>
+        	<a target="_blank" href="https://www.xervmon.com/product" class="btn btn-primary">{{{ Lang::get('home.xervmon_call_to_action') }}}</a>
+        	
         </div>
+       
     </section>
 @else
 	<div class="media-block">
@@ -96,7 +103,7 @@
 										echo $result->instance_id . ' | ' . $result->public_dns . '<br/>';
 										echo '<a href="#" onclick="restart('.$deployment->id.')">Restart</a> |'  .
 											'<a href="#" onclick="terminate('.$deployment->id.')">Terminate</a>|' .
-											'<a href="'. URL::to('deployment/' . $deployment->id . '/getLog').'">View Log</a>' ;
+											'<a href="'. URL::to('deployment/' . $deployment->id . '/log').'">View Log</a>' ;
 								?>
 								
 				
@@ -146,7 +153,7 @@
 <div class="media-block">
 	<ul class="list-group list-group-custom">
 		@forelse($dockerInstances as $instance)
-	  		<li class="list-group-item">
+			<li class="list-group-item">
 				<div class="media">
 					<a href="{{ URL::to('deployment/create/') }}?name={{urlencode($instance -> name)}}" class="btn btn-primary pull-right" role="button"><span class="glyphicon glyphicon-play"</a></a>
 					<div class="media-body">
@@ -158,7 +165,7 @@
 				</div>
 			</li>
 		@empty
-			<li class="list-group-item alert alert-info">No matching docker images found for '{{ $search_term }}'</li>
+			<li class="list-group-item alert alert-info">No matching docker images found for '{{ $search_term }}'</li>	
 		@endforelse
 	</ul>
 	<!-- <div class="text-center">

@@ -16,7 +16,8 @@
         "bllim/datatables": "~1.3",
         "hybridauth/hybridauth": "*",
         "aws/aws-sdk-php": "~2.6",
-        "curl/curl": "*"
+        "curl/curl": "*",
+        "fbf/laravel-newsletter-signup": "dev-master"
     },
     "require-dev": {
         "way/generators": "~2.6",

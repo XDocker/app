@@ -168,6 +168,7 @@ class DeploymentController extends BaseController {
                                         'cloudProvider' => $account ->cloudProvider,
                                         'apiKey' => $credentials ->apiKey,
                                         'secretKey' => $credentials ->secretKey,
+                                        'billingBucket' => !empty($credentials ->billingBucket) ? $credentials ->billingBucket : '' ,
                                         'instanceName' => $deployment->name,
                                         'instanceType' => $parameters->instanceType,
                                         'instanceRegion' => $parameters->instanceRegion,
@@ -264,8 +265,8 @@ class DeploymentController extends BaseController {
 			
 			if($obj->status == 'OK')
 		 	{
-				$response = xDockerEngine::getLog(array('token' => $obj->token, 'job_id' => $deployment->job_id));
-				return View::make('site/deployment/log', array(
+				$response = xDockerEngine::getLog(array('token' => $obj->token, 'job_id' => $deployment->job_id, "line_num"> 10));
+				return View::make('site/deployment/logs', array(
             	'response' => $response,
             	'deployment' => $deployment));
 				
@@ -279,6 +280,59 @@ class DeploymentController extends BaseController {
 			 return Redirect::to('deployment')->with('info', 'No Log found '. isset($deployment->name) ? $deployment->name : '' );
 		}
 		
+	}
+	
+	public function postInstanceAction($id)
+	{
+		$instanceAction = Input::get('instanceAction');
+		$deployment = Deployment::where('user_id', Auth::id())->find($id);
+		$account = CloudAccount::where('user_id', Auth::id())->findOrFail($deployment->cloud_account_id) ;
+		$credentials = json_decode($account->credentials);
+		
+		$result = json_decode($deployment->wsResults);
+										
+		$responseJson = xDockerEngine::authenticate(array('username' => Auth::user()->username, 'password' => md5(Auth::user()->engine_key)));
+		EngineLog::logIt(array('user_id' => Auth::id(), 'method' => 'authenticate', 'return' => $responseJson));
+		$obj = json_decode($responseJson);
+		if($obj->status == 'OK')
+		 	{
+				$response = xDockerEngine::instance(array('token' => $obj->token, 
+														   'apiKey' => $credentials ->apiKey,
+                                        				   'secretKey' => $credentials ->secretKey,
+                                        				   'instanceId' => $result->instance_id,
+                                        				   'instanceAction' => $instanceAction,
+   														   'cloudProvider' => $account -> cloudProvider));
+														   
+				EngineLog::logIt(array('user_id' => Auth::id(), 'method' => 'instance:' . $instanceAction, 'return' => $response));
+			    
+			    $obj2 = json_decode($response);
+				
+				if($obj2->status == 'OK' && !empty($obj2->job_id))
+				{
+					$deployment->status = $instanceAction;
+					$deployment->job_id = $obj2->job_id;
+					$success = $deployment->save();
+		        	if (!$success) {
+		        		Log::error('Error while saving deployment -  : '.$instanceAction.' '.json_encode( $dep->errors()));
+						//return Redirect::to('deployment')->with('error', 'Error saving deployment in '.$instanceAction );
+						print json_encode(array('status' => 'error', 'message' => 'Error saving deployment in '.$instanceAction));
+		        	}
+					//return Redirect::to('deployment')->with('success', $deployment->name .' : '.$instanceAction.' submitted! ' );
+					print json_encode(array('status' => 'OK', 'message' => $deployment->name .' : '.$instanceAction.' submitted! ' ));
+				}
+				else if($obj2->status == 'error')
+				{
+					print
+					Log::error('Error occured - while submitting '. $instanceAction .' request');
+					//return Redirect::to('deployment')->with('error', 'Error while submitting  '.$instanceAction .'request ' );
+					print json_encode(array('status' => 'error', 'message' => 'Error while submitting '.$instanceAction .' request ' ));
+				}
+			}
+			else {
+				Log::error('Error occured - while submitting '. $instanceAction .'request');
+				//return Redirect::to('deployment')->with('error', 'Error while submitting  '.$instanceAction .'request ' );
+				print json_encode(array('status' => 'error', 'message' => 'Error while submitting  '.$instanceAction .'request ' ));
+			}
 	}
 	
 	public function getImages()

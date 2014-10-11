@@ -108,6 +108,7 @@
 
 			<!-- Container -->
 			<div class="container clear-both">
+				
 				<!-- Notifications -->
 				@include('notifications')
 				<!-- ./ notifications -->
@@ -128,6 +129,9 @@
 		      		<img src="{{{ asset('assets/ico/favicon.ico') }}}" alt="{{{ Lang::get('site.footertitle') }}}"/>
 		      		<a href="https://www.xervmon.com">{{{ Lang::get('site.footertitle') }}}</a>
 		      	</p>
+		      	<p class="pull-right">
+		      			<a href="https://www.facebook.com/pages/XDocker/687711791303636"><img width="25px" height="25px" src="{{{ asset('assets/img/facebook.png') }}}" alt="{{{ Lang::get('site.footertitle') }}}"/></a>
+		      	</p>
 		        <p class="text-center">
 		        	<iframe src="http://ghbtns.com/github-btn.html?user=xdocker&repo=app&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="170" height="30"></iframe>
 		        </p>
@@ -144,6 +148,8 @@
         @yield('scripts')
 
         {{-- Load SumoMe for the marketing stuff --}}
+        <!--
         <script src="//load.sumome.com/" data-sumo-site-id="d9c34610bfb1f1b8f5c8cbfdce3a831f7e81aac9ef616668be06e0ffed04f25b" async></script>
+		-->
 	</body>
 </html>

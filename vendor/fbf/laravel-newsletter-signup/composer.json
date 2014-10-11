@@ -1,0 +1,26 @@
+{
+    "name": "fbf/laravel-newsletter-signup",
+    "description": "A Laravel 4 Package for adding newsletter signup (and unsubscribe) functionality to a web site",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Neil Crookes",
+            "email": "neil.crookes@fivebyfiveuk.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "illuminate/support": "4.*"
+    },
+    "autoload": {
+        "classmap": [
+            "src/controllers",
+            "src/migrations",
+            "src/models"
+        ],
+        "psr-0": {
+            "Fbf\\LaravelNewsletterSignup\\": "src/"
+        }
+    },
+    "minimum-stability": "dev"
+}

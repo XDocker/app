@@ -16,10 +16,10 @@ return array(
     | you want to customize your views to better match your application.
     |
     */
-    
     'contact_us' => 'Contact Us',
     'sign_up' => 'Sign Up',
     'login' => 'Login',
+    'launch' => 'We are days away from launch!',
     'log_out' => 'Logout',
     'edit_profile' => 'Edit Profile',
     'services' => 'Services',
@@ -28,11 +28,11 @@ return array(
     'enginelog' => 'Request Logs',
     'admin_panel' => 'Admin Panel',
     'name'=>'xDocker',
-    'tagline'=>'Deploy docker images on any Cloud',
-    'title'=>'Deploy docker images on any Cloud',
+    'tagline'=>'Deploy & manage docker images on any IaaS/On-Premise',
+    'title'=>'Deploy & manage docker images on any IaaS/On-Premise',
     'footertitle' => 'Powered By Xervmon',
     'forkme' => 'Fork me on Github',
-    'keywords' => 'Docker, Amazon AWS, Orchestration, Cloud Management',
+    'keywords' => 'Docker, Amazon AWS, Rackspace, DigitalOcean, Softlayer, Google Compute (GCE), Orchestration, Cloud Management',
     'author' => 'Team xDocker',
     'webserivce_status' => 'Service Status',
     'webserivce' => 'xDocker Webservice Engine',

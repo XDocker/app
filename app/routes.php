@@ -132,6 +132,7 @@ Route::group(array(
 	Route::get('deployment/{deployment}/log', 'DeploymentController@getLogs');
 	Route::get('ServiceStatus/', 'WebserviceController@getIndex');
 	Route::get('deployment/images', 'DeploymentController@getImages');
+	Route::any('deployment/{deployment}/refresh', 'DeploymentController@checkStatus');
 	
 	
 	
@@ -144,7 +145,7 @@ Route::group(array(
         Route::post('account/{account}/delete', 'AccountController@postDelete');
         Route::post('deployment/create', 'DeploymentController@postEdit');
         Route::post('deployment/{deployment}/delete', 'DeploymentController@postDelete');
-        Route::post('deployment/{deployment}/refresh', 'DeploymentController@checkStatus');
+		Route::post('deployment/{deployment}/instanceAction', 'DeploymentController@postInstanceAction');
     });
     
     
