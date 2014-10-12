@@ -7,6 +7,6 @@
 // Schema for the CloudAccount specific fields, will be converted into JSON and used on the front-end with https://github.com/joshfire/jsonform
 
 return array(
-   'xdocker/securitymonkey' => 'v1',
-   'xdocker/netflix_ice' => ''
+   'xdocker/securitymonkey' => array('tags' => 'v1', 'logo' => ''),
+   'xdocker/netflix_ice' => array('tags' => 'v2', 'logo' => ''),
 );

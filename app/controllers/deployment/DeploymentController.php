@@ -184,7 +184,7 @@ class DeploymentController extends BaseController {
 	private function getTagIfApplicable($dockerName)
 	{
 		$setting = Config::get('docker_settings');
-		return $setting[$dockerName];
+		return $setting[$dockerName]['tags'];
 	}
     /**
      * Remove the specified Account .
@@ -285,54 +285,40 @@ class DeploymentController extends BaseController {
 	public function postInstanceAction($id)
 	{
 		$instanceAction = Input::get('instanceAction');
-		$deployment = Deployment::where('user_id', Auth::id())->find($id);
-		$account = CloudAccount::where('user_id', Auth::id())->findOrFail($deployment->cloud_account_id) ;
-		$credentials = json_decode($account->credentials);
+		$instanceID 	= Input::get('instanceID');
+		$deployment 	= Deployment::where('user_id', Auth::id())->find($id);
+		$account 		= CloudAccount::where('user_id', Auth::id())->findOrFail($deployment->cloud_account_id) ;
+		$credentials 	= json_decode($account->credentials);
 		
-		$result = json_decode($deployment->wsResults);
+		$result			= json_decode($deployment->wsResults);
+		$arr = $this->executeAction($instanceAction, $account, $deployment, $instanceId);
 										
-		$responseJson = xDockerEngine::authenticate(array('username' => Auth::user()->username, 'password' => md5(Auth::user()->engine_key)));
-		EngineLog::logIt(array('user_id' => Auth::id(), 'method' => 'authenticate', 'return' => $responseJson));
-		$obj = json_decode($responseJson);
-		if($obj->status == 'OK')
-		 	{
-				$response = xDockerEngine::instance(array('token' => $obj->token, 
-														   'apiKey' => $credentials ->apiKey,
-                                        				   'secretKey' => $credentials ->secretKey,
-                                        				   'instanceId' => $result->instance_id,
-                                        				   'instanceAction' => $instanceAction,
-   														   'cloudProvider' => $account -> cloudProvider));
-														   
-				EngineLog::logIt(array('user_id' => Auth::id(), 'method' => 'instance:' . $instanceAction, 'return' => $response));
-			    
-			    $obj2 = json_decode($response);
-				
-				if($obj2->status == 'OK' && !empty($obj2->job_id))
-				{
-					$deployment->status = $instanceAction;
-					$deployment->job_id = $obj2->job_id;
-					$success = $deployment->save();
-		        	if (!$success) {
-		        		Log::error('Error while saving deployment -  : '.$instanceAction.' '.json_encode( $dep->errors()));
-						//return Redirect::to('deployment')->with('error', 'Error saving deployment in '.$instanceAction );
-						print json_encode(array('status' => 'error', 'message' => 'Error saving deployment in '.$instanceAction));
-		        	}
+		if($arr['status'] == 'OK')
+		{
+			$deployment->status = $instanceAction .':' .$arr['result'];
+			$success = $deployment->save();
+		    if (!$success) 
+		    {
+		    	Log::error('Error while saving deployment -  : '.$instanceAction.' '.json_encode( $arr['message']));
+				print json_encode(array('status' => 'error', 'message' => $arr['message']));
+		    }
 					//return Redirect::to('deployment')->with('success', $deployment->name .' : '.$instanceAction.' submitted! ' );
-					print json_encode(array('status' => 'OK', 'message' => $deployment->name .' : '.$instanceAction.' submitted! ' ));
-				}
-				else if($obj2->status == 'error')
-				{
-					print
-					Log::error('Error occured - while submitting '. $instanceAction .' request');
+			print json_encode(array('status' => 'OK', 'message' =>  $arr['message'] ));
+		}
+		else if($arr['status'] == 'error')
+		{
+			Log::error('Error occured - while submitting '. $instanceAction .' request');
 					//return Redirect::to('deployment')->with('error', 'Error while submitting  '.$instanceAction .'request ' );
-					print json_encode(array('status' => 'error', 'message' => 'Error while submitting '.$instanceAction .' request ' ));
-				}
-			}
-			else {
-				Log::error('Error occured - while submitting '. $instanceAction .'request');
-				//return Redirect::to('deployment')->with('error', 'Error while submitting  '.$instanceAction .'request ' );
-				print json_encode(array('status' => 'error', 'message' => 'Error while submitting  '.$instanceAction .'request ' ));
-			}
+			print json_encode(array('status' => 'error', 'message' => 'Error while submitting '.$instanceAction .' request ' ));
+		}
+		
+	}
+
+	private function executeAction($instanceAction, $account, $deployment , $instanceId)
+	{
+		$param 			= json_decode($deployment->parameters);
+		$account -> instanceRegion = & $param->instanceRegion;
+		return CloudProvider::executeAction($instanceAction, $account, $instanceId);
 	}
 	
 	public function getImages()

@@ -1,28 +1,34 @@
 <?php
 /**
-* Class and Function List:
-* Function list:
-* - AWSAuth()
+* class implements IProvder and Function List:
+* Interface list:
 * - authenticate()
 * - startInstance()
-* Classes list:
+* - stopInstances()
+* - restartInstances()
+* - terminateInstances()
+* * Classes list:
 * - CloudProvider
 */
 
-class CloudProvider {
-    private static $aws;
-	private static $ec2Compute;
-    private static function AWSAuth($account) {
-        $credentials = json_decode($account->credentials);
+
+class AWSPRoviderImpl implements IProvider
+{
+	private $ec2Compute;
+	private $ec2Client;
+	private $account;
+	
+	private function init() {
+	 	$credentials = json_decode($this->account->credentials);
         $config['key'] = $credentials->apiKey;
         $config['secret'] = $credentials->secretKey;
         $config['region'] = empty($credentials -> instanceRegion) ? 'us-east-1' : $credentials->instanceRegion;
 		$conStatus = FALSE;
         try 
         {
-            $ec2Client = \Aws\Ec2\Ec2Client::factory($config);
-			self::$ec2Compute = $ec2Client -> get('ec2');
-			$result = $ec2Client->DescribeInstances(array(
+            $this->ec2Client = \Aws\Ec2\Ec2Client::factory($config);
+			$this->ec2Compute = $this->ec2Client -> get('ec2');
+			$result = $this->ec2Client->DescribeInstances(array(
 		        'Filters' => array(
 		                array('Name' => 'instance-type', 'Values' => array('m1.small')),
 		        )
@@ -37,51 +43,25 @@ class CloudProvider {
        }
         return $conStatus;
     }
-    
-   public static function authenticate($account) 
+	
+	public function __construct($acct) 
 	{
-	 	return self::getDriver($account)->authenticate();
+	   $this->account = $acct;
     }
 	 
-	public static function getDriver($account)
-	{
-		$iProvider = '';
-        switch ($account->cloudProvider) {
-            case 'Amazon AWS':
-				$iProvider = new AWSPRoviderImpl($account);
-                return $iProvider;
-            break;
-        }
-	}
+	 public function authenticate() 
+	 {
+       	return $this->init();
+    }
 	 
-	public static function executeAction($instanceAction, $account)
+	
+	public function startInstances($params)
 	{
-		$response = '';
-		switch ($instanceAction)
-		{
-			case 'start' :
-				$response = CloudProvider::startInstance($account, array('DryRun' => false, 'InstanceIds' =>array($instanceID)));
-				break;
-			case 'stop' :
-				$response = CloudProvider::stopInstance($account, array('DryRun' => false, 'InstanceIds' =>array($instanceID)));
-				break;
-			case 'restart' :
-				$response = CloudProvider::restartInstance($account, array('DryRun' => false, 'InstanceIds' =>array($instanceID)));
-				break;
-			case 'terminate' :
-				$response = CloudProvider::terminateInstance($account, array('DryRun' => false, 'InstanceIds' =>array($instanceID)));
-				break;	
-		}
-		return $response;
-	}
-	
-	
-	public static function startInstances($account, $params){
-		if(self::AWSAuth($account))
+		if($this->init())
 		{
 			try
 			{	
-				$instanceResult = self::$ec2Compute -> startInstances($params);
+				$instanceResult = $this->ec2Compute -> startInstances($params);
 				if (!empty($instanceResult))
 				{
 					return array('status' => 'OK', 'message'  => $instanceResult-> toArray());
@@ -102,12 +82,13 @@ class CloudProvider {
 		}
 	}
 
-	public static function stopInstances($account, $params){
-		if(self::AWSAuth($account))
+	public function stopInstances($params)
+	{
+		if($this->init())
 		{
 			try
 			{	
-				$nstanceResult = self::$ec2Compute -> stopInstances($params);
+				$nstanceResult = $this->ec2Compute -> stopInstances($params);
 				if (!empty($nstanceResult))
 				{
 					return array('status' => 'OK', 'message'  => $nstanceResult-> toArray());
@@ -128,12 +109,13 @@ class CloudProvider {
 		}
 	}
 	
-	public static function restartInstances($account, $params){
-		if(self::AWSAuth($account))
+	public function restartInstances($params)
+	{
+		if($this->init())
 		{
 			try
 			{	
-				$nstanceResult = self::$ec2Compute -> restartInstances($params);
+				$nstanceResult = $this->ec2Compute -> restartInstances($params);
 				if (!empty($nstanceResult))
 				{
 					return array('status' => 'OK', 'message'  => $nstanceResult-> toArray());
@@ -154,12 +136,12 @@ class CloudProvider {
 		}
 	}
 
-	public static function terminateInstances($account, $params){
-		if(self::AWSAuth($account))
+	public function terminateInstances($params){
+		if($this->init())
 		{
 			try
 			{	
-				$nstanceResult = self::$ec2Compute -> terminateInstances($params);
+				$nstanceResult = $this->ec2Compute -> terminateInstances($params);
 				if (!empty($nstanceResult))
 				{
 					return array('status' => 'OK', 'message'  => $nstanceResult-> toArray());
