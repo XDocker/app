@@ -184,7 +184,7 @@ class DeploymentController extends BaseController {
 	private function getTagIfApplicable($dockerName)
 	{
 		$setting = Config::get('docker_settings');
-		return $setting[$dockerName];
+		return $setting[$dockerName]['tags'];
 	}
     /**
      * Remove the specified Account .
