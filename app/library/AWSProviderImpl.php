@@ -44,7 +44,7 @@ class AWSPRoviderImpl implements IProvider
         return $conStatus;
     }
 	
-	public function __construct($account) 
+	public function __construct($acct) 
 	{
 	   $this->account = $acct;
     }
