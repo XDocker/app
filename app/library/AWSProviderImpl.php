@@ -46,7 +46,7 @@ class AWSPRoviderImpl implements IProvider
 	 {
         switch ($account->cloudProvider) {
             case 'Amazon AWS':
-                return self::AWSAuth($account);
+                return $this->init($account);
             break;
         }
     }
@@ -54,7 +54,7 @@ class AWSPRoviderImpl implements IProvider
 	
 	public function startInstances($account, $params)
 	{
-		if(self::AWSAuth($account))
+		if($this->init($account))
 		{
 			try
 			{	
@@ -81,7 +81,7 @@ class AWSPRoviderImpl implements IProvider
 
 	public function stopInstances($account, $params)
 	{
-		if(self::AWSAuth($account))
+		if($this->init($account))
 		{
 			try
 			{	
@@ -108,7 +108,7 @@ class AWSPRoviderImpl implements IProvider
 	
 	public function restartInstances($account, $params)
 	{
-		if(self::AWSAuth($account))
+		if($this->init($account))
 		{
 			try
 			{	
@@ -134,7 +134,7 @@ class AWSPRoviderImpl implements IProvider
 	}
 
 	public function terminateInstances($account, $params){
-		if(self::AWSAuth($account))
+		if($this->init($account))
 		{
 			try
 			{	
