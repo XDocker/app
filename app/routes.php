@@ -134,8 +134,6 @@ Route::group(array(
 	Route::get('deployment/images', 'DeploymentController@getImages');
 	Route::any('deployment/{deployment}/refresh', 'DeploymentController@checkStatus');
 	
-	
-	
     // Route::get('deployment/{id}/edit/', 'DeploymentController@getCreate');
     Route::group(array(
         'before' => 'csrf'

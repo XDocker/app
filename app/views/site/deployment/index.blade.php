@@ -15,6 +15,10 @@
 	<ul class="list-group">
 		@if(!empty($deployments)) 
 			@foreach ($deployments as $deployment)
+			
+			<?php 
+				$result = json_decode($deployment->wsResults);
+			?>
 	  			<li class="list-group-item">
 					<div class="media">
 						<a href="{{ URL::to('account/'.$deployment->cloud_account_id.'/edit') }}" class="pull-left" href="#">
@@ -31,6 +35,10 @@
 							<!-- CSRF Token -->
 							<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
 							<!-- ./ csrf token -->
+							
+							<input type="hidden" name="instanceID" value="{{{ $result->instance_id }}}" />
+							<input type="hidden" name="instanceAction" value="terminate" />
+							
 							<button type="submit" class="btn btn-danger pull-right" role="button"><span class="glyphicon glyphicon-trash"></span></button>
 						</form>
 						<div class="media-body">
@@ -40,13 +48,11 @@
 								<?php
 								if(in_array($deployment->status, array('Completed', 'start', 'stop')))
 									{
-										$result = json_decode($deployment->wsResults);
 										$url = URL::to('deployment/'.$deployment->id.'/instanceAction');
 										echo $result->instance_id . ' | ' . $result->public_dns . '<br/>';
 										echo '<a href="#" onclick="start(\''.$url.'\',\''.$result->instance_id.'\')">Start</a> |'  .
 										'<a href="#" onclick="stop(\''.$url.'\',\''.$result->instance_id.'\')">Stop</a> |'  .
-										'<a href="#" onclick="restart(\''.$url.'\',\''.$result->instance_id.'\')">Restart</a> |'  .
-										'<a href="#" onclick="terminate(\''.$url.'\',\''.$result->instance_id.'\')">Terminate</a>' ;
+										'<a href="#" onclick="restart(\''.$url.'\',\''.$result->instance_id.'\')">Restart</a> ';
 								?>
 								
 				
