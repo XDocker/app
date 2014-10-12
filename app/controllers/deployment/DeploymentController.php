@@ -286,6 +286,8 @@ class DeploymentController extends BaseController {
 	{
 		$instanceAction = Input::get('instanceAction');
 		$deployment = Deployment::where('user_id', Auth::id())->find($id);
+		
+		
 		$account = CloudAccount::where('user_id', Auth::id())->findOrFail($deployment->cloud_account_id) ;
 		$credentials = json_decode($account->credentials);
 		
