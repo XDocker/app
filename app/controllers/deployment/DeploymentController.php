@@ -291,11 +291,7 @@ class DeploymentController extends BaseController {
 		$credentials 	= json_decode($account->credentials);
 		
 		$result			= json_decode($deployment->wsResults);
-		$param 			= json_decode($deployment->parameters);
-		
-		$account -> instanceRegion = & $param->instanceRegion;
-		
-		$arr = $this->executeAction($instanceAction, $account, $instanceId);
+		$arr = $this->executeAction($instanceAction, $account, $deployment, $instanceId);
 										
 		if($arr['status'] == 'OK')
 		{
@@ -318,27 +314,11 @@ class DeploymentController extends BaseController {
 		
 	}
 
-	private function executeAction($instanceAction, $deployment , $account, $instanceId)
+	private function executeAction($instanceAction, $account, $deployment , $instanceId)
 	{
-		$response = '';
-		$param = json_decode($deployment->parameters);
+		$param 			= json_decode($deployment->parameters);
 		$account -> instanceRegion = & $param->instanceRegion;
-		switch ($instanceAction)
-		{
-			case 'start' :
-				$response = CloudProvider::startInstance($account, array('DryRun' => false, 'InstanceIds' =>array($instanceID)));
-				break;
-			case 'stop' :
-				$response = CloudProvider::stopInstance($account, array('DryRun' => false, 'InstanceIds' =>array($instanceID)));
-				break;
-			case 'restart' :
-				$response = CloudProvider::restartInstance($account, array('DryRun' => false, 'InstanceIds' =>array($instanceID)));
-				break;
-			case 'terminate' :
-				$response = CloudProvider::terminateInstance($account, array('DryRun' => false, 'InstanceIds' =>array($instanceID)));
-				break;	
-		}
-		return $response;
+		return CloudProvider::executeAction($instanceAction, $account, $instanceId);
 	}
 	
 	public function getImages()
