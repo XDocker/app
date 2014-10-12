@@ -38,24 +38,42 @@ class CloudProvider {
         return $conStatus;
     }
     
-    public static function authenticate($account) {
+   public static function authenticate($account) 
+	{
+	 	return self::getDriver($account)->authenticate();
+    }
+	 
+	public static function getDriver($account)
+	{
+		$iProvider = '';
         switch ($account->cloudProvider) {
             case 'Amazon AWS':
-                return self::AWSAuth($account);
+				$iProvider = new AWSPRoviderImpl($account);
+                return $iProvider;
             break;
         }
-    }
-	
-	public static function authenticate2($account) 
-	 {
-	 	$iProvider = '';
-        switch ($account->cloudProvider) {
-            case 'Amazon AWS':
-				$iProvider = new AWSPRoviderImpl();
-                return $iProvider->authenticate($account);
-            break;
-        }
-    }
+	}
+	 
+	public static function executeAction($instanceAction, $account)
+	{
+		$response = '';
+		switch ($instanceAction)
+		{
+			case 'start' :
+				$response = CloudProvider::startInstance($account, array('DryRun' => false, 'InstanceIds' =>array($instanceID)));
+				break;
+			case 'stop' :
+				$response = CloudProvider::stopInstance($account, array('DryRun' => false, 'InstanceIds' =>array($instanceID)));
+				break;
+			case 'restart' :
+				$response = CloudProvider::restartInstance($account, array('DryRun' => false, 'InstanceIds' =>array($instanceID)));
+				break;
+			case 'terminate' :
+				$response = CloudProvider::terminateInstance($account, array('DryRun' => false, 'InstanceIds' =>array($instanceID)));
+				break;	
+		}
+		return $response;
+	}
 	
 	
 	public static function startInstances($account, $params){

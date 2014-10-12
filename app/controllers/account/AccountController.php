@@ -73,7 +73,7 @@ class AccountController extends BaseController {
             $account->credentials = json_encode(Input::get('credentials'));
             $account->user_id = Auth::id(); // logged in user id
             
-            $conStatus = CloudProvider::authenticate2($account);
+            $conStatus = CloudProvider::authenticate($account);
             
             if ($conStatus == 1) {
                 $success = $account->save();

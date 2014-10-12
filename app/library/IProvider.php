@@ -14,13 +14,13 @@
 
 interface IProvider
 {
-	public function authenticate($account);
+	public function authenticate();
 	
-	public function startInstances($account, $params);
+	public function startInstances($params);
 	
-	public function stopInstances($account, $params);
+	public function stopInstances($params);
 	
-	public function restartInstances($account, $params);
+	public function restartInstances($params);
 	
-	public function terminateInstances($account, $params);
+	public function terminateInstances($params);
 }

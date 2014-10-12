@@ -16,8 +16,10 @@ class AWSPRoviderImpl implements IProvider
 {
 	private $ec2Compute;
 	private $ec2Client;
-	 private function init($account) {
-        $credentials = json_decode($account->credentials);
+	private $account;
+	
+	private function init() {
+	 	$credentials = json_decode($this->account->credentials);
         $config['key'] = $credentials->apiKey;
         $config['secret'] = $credentials->secretKey;
         $config['region'] = empty($credentials -> instanceRegion) ? 'us-east-1' : $credentials->instanceRegion;
@@ -41,20 +43,21 @@ class AWSPRoviderImpl implements IProvider
        }
         return $conStatus;
     }
+	
+	public function __construct($account) 
+	{
+	   $this->account = $acct;
+    }
 	 
-	 public function authenticate($account) 
+	 public function authenticate() 
 	 {
-        switch ($account->cloudProvider) {
-            case 'Amazon AWS':
-                return $this->init($account);
-            break;
-        }
+       	return $this->init();
     }
 	 
 	
-	public function startInstances($account, $params)
+	public function startInstances($params)
 	{
-		if($this->init($account))
+		if($this->init())
 		{
 			try
 			{	
@@ -79,9 +82,9 @@ class AWSPRoviderImpl implements IProvider
 		}
 	}
 
-	public function stopInstances($account, $params)
+	public function stopInstances($params)
 	{
-		if($this->init($account))
+		if($this->init())
 		{
 			try
 			{	
@@ -106,9 +109,9 @@ class AWSPRoviderImpl implements IProvider
 		}
 	}
 	
-	public function restartInstances($account, $params)
+	public function restartInstances($params)
 	{
-		if($this->init($account))
+		if($this->init())
 		{
 			try
 			{	
@@ -133,8 +136,8 @@ class AWSPRoviderImpl implements IProvider
 		}
 	}
 
-	public function terminateInstances($account, $params){
-		if($this->init($account))
+	public function terminateInstances($params){
+		if($this->init())
 		{
 			try
 			{	

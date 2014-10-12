@@ -285,14 +285,17 @@ class DeploymentController extends BaseController {
 	public function postInstanceAction($id)
 	{
 		$instanceAction = Input::get('instanceAction');
-		$instanceID = Input::get('instanceID');
-		$deployment = Deployment::where('user_id', Auth::id())->find($id);
-		$account = CloudAccount::where('user_id', Auth::id())->findOrFail($deployment->cloud_account_id) ;
-		$credentials = json_decode($account->credentials);
+		$instanceID 	= Input::get('instanceID');
+		$deployment 	= Deployment::where('user_id', Auth::id())->find($id);
+		$account 		= CloudAccount::where('user_id', Auth::id())->findOrFail($deployment->cloud_account_id) ;
+		$credentials 	= json_decode($account->credentials);
 		
-		$result = json_decode($deployment->wsResults);
+		$result			= json_decode($deployment->wsResults);
+		$param 			= json_decode($deployment->parameters);
 		
-		$arr = $this->executeAction($instanceAction, $deployment , $account, $instanceId);
+		$account -> instanceRegion = & $param->instanceRegion;
+		
+		$arr = $this->executeAction($instanceAction, $account, $instanceId);
 										
 		if($arr['status'] == 'OK')
 		{
