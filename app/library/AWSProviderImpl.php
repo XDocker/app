@@ -14,7 +14,6 @@
 
 class AWSPRoviderImpl implements IProvider
 {
-	private $ec2Compute;
 	private $ec2Client;
 	private $account;
 	
@@ -27,7 +26,6 @@ class AWSPRoviderImpl implements IProvider
         try 
         {
             $this->ec2Client = \Aws\Ec2\Ec2Client::factory($config);
-			$this->ec2Compute = $this->ec2Client -> get('ec2');
 			$result = $this->ec2Client->DescribeInstances(array(
 		        'Filters' => array(
 		                array('Name' => 'instance-type', 'Values' => array('m1.small')),
@@ -61,7 +59,7 @@ class AWSPRoviderImpl implements IProvider
 		{
 			try
 			{	
-				$instanceResult = $this->ec2Compute -> startInstances($params);
+				$instanceResult = $this->ec2Client -> startInstances($params);
 				if (!empty($instanceResult))
 				{
 					return array('status' => 'OK', 'message'  => $instanceResult-> toArray());
@@ -88,7 +86,7 @@ class AWSPRoviderImpl implements IProvider
 		{
 			try
 			{	
-				$nstanceResult = $this->ec2Compute -> stopInstances($params);
+				$nstanceResult = $this->ec2Client -> stopInstances($params);
 				if (!empty($nstanceResult))
 				{
 					return array('status' => 'OK', 'message'  => $nstanceResult-> toArray());
@@ -115,7 +113,7 @@ class AWSPRoviderImpl implements IProvider
 		{
 			try
 			{	
-				$nstanceResult = $this->ec2Compute -> restartInstances($params);
+				$nstanceResult = $this->ec2Client -> restartInstances($params);
 				if (!empty($nstanceResult))
 				{
 					return array('status' => 'OK', 'message'  => $nstanceResult-> toArray());
@@ -141,7 +139,7 @@ class AWSPRoviderImpl implements IProvider
 		{
 			try
 			{	
-				$nstanceResult = $this->ec2Compute -> terminateInstances($params);
+				$nstanceResult = $this->ec2Client -> terminateInstances($params);
 				if (!empty($nstanceResult))
 				{
 					return array('status' => 'OK', 'message'  => $nstanceResult-> toArray());

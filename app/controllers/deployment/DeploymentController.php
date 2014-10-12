@@ -291,7 +291,7 @@ class DeploymentController extends BaseController {
 		$credentials 	= json_decode($account->credentials);
 		
 		$result			= json_decode($deployment->wsResults);
-		$arr = $this->executeAction($instanceAction, $account, $deployment, $instanceId);
+		$arr = $this->executeAction($instanceAction, $account, $deployment, $instanceID);
 										
 		if($arr['status'] == 'OK')
 		{
@@ -314,11 +314,11 @@ class DeploymentController extends BaseController {
 		
 	}
 
-	private function executeAction($instanceAction, $account, $deployment , $instanceId)
+	private function executeAction($instanceAction, $account, $deployment , $instanceID)
 	{
 		$param 			= json_decode($deployment->parameters);
-		$account -> instanceRegion = & $param->instanceRegion;
-		return CloudProvider::executeAction($instanceAction, $account, $instanceId);
+		$account -> instanceRegion =  $param->instanceRegion;
+		return CloudProvider::executeAction($instanceAction, $account, $instanceID);
 	}
 	
 	public function getImages()
