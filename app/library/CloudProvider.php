@@ -52,7 +52,7 @@ class CloudProvider {
         switch ($account->cloudProvider) {
             case 'Amazon AWS':
 				$iProvider = new AWSPRoviderImpl();
-                return $iProvider->authenticate($acount);
+                return $iProvider->authenticate($account);
             break;
         }
     }
