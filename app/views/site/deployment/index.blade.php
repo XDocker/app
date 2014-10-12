@@ -43,10 +43,10 @@
 										$result = json_decode($deployment->wsResults);
 										$url = URL::to('deployment/'.$deployment->id.'/instanceAction');
 										echo $result->instance_id . ' | ' . $result->public_dns . '<br/>';
-										echo '<a href="#" onclick="start(\''.$url.'\')">Start</a> |'  .
-										'<a href="#" onclick="stop(\''.$url.'\')">Stop</a> |'  .
-										'<a href="#" onclick="restart(\''.$url.'\')">Restart</a> |'  .
-										'<a href="#" onclick="terminate(\''.$url.'\')">Terminate</a>' ;
+										echo '<a href="#" onclick="start(\''.$url.'\',\''.$result->instance_id.'\')">Start</a> |'  .
+										'<a href="#" onclick="stop(\''.$url.'\',\''.$result->instance_id.'\')">Stop</a> |'  .
+										'<a href="#" onclick="restart(\''.$url.'\',\''.$result->instance_id.'\')">Restart</a> |'  .
+										'<a href="#" onclick="terminate(\''.$url.'\',\''.$result->instance_id.'\')">Terminate</a>' ;
 								?>
 								
 				
@@ -73,37 +73,24 @@
 </div>
 
 <script>
-	function start(url)
+	function start(url, instanceID)
 	{
 		$.ajax({
 		  type: "POST",
 		  url: url,
-		  data: { "instanceAction": "start", "_token" : "{{{ csrf_token() }}}" }
+		  data: { "instanceAction": "start", "instanceID": instanceID, "_token" : "{{{ csrf_token() }}}"}
 		  })
 		  .done(function(response) {
 		   
 		    showMessage(response)
 		  });
  	}
-	function stop(url)
+	function stop(url, instanceID)
 	{
 		$.ajax({
 		  type: "POST",
 		  url: url,
-		  data: { "instanceAction": "stop", "_token" : "{{{ csrf_token() }}}" }
-		  })
-		  .done(function(response) {
-		   
-		    showMessage(response)
-		  });
- 	}
- 	
- 	function restart(url)
-	{
-		$.ajax({
-		  type: "POST",
-		  url: url,
-		  data: { "instanceAction": "restart", "_token" : "{{{ csrf_token() }}}" }
+		  data: { "instanceAction": "stop", "instanceID": instanceID, "_token" : "{{{ csrf_token() }}}" }
 		  })
 		  .done(function(response) {
 		   
@@ -111,12 +98,25 @@
 		  });
  	}
  	
- 	function terminate(url)
+ 	function restart(url, instanceID)
 	{
 		$.ajax({
 		  type: "POST",
 		  url: url,
-		  data: { "instanceAction": "terminate", "_token" : "{{{ csrf_token() }}}" }
+		  data: { "instanceAction": "restart", "instanceID": instanceID, "_token" : "{{{ csrf_token() }}}" }
+		  })
+		  .done(function(response) {
+		   
+		    showMessage(response)
+		  });
+ 	}
+ 	
+ 	function terminate(url, instanceID)
+	{
+		$.ajax({
+		  type: "POST",
+		  url: url,
+		  data: { "instanceAction": "terminate", "instanceID": instanceID, "_token" : "{{{ csrf_token() }}}" }
 		  })
 		  .done(function(response) {
 		   

@@ -1,18 +1,22 @@
 <?php
 /**
-* Class and Function List:
-* Function list:
-* - AWSAuth()
+* class implements IProvder and Function List:
+* Interface list:
 * - authenticate()
 * - startInstance()
-* Classes list:
+* - stopInstances()
+* - restartInstances()
+* - terminateInstances()
+* * Classes list:
 * - CloudProvider
 */
 
-class CloudProvider {
-    private static $aws;
-	private static $ec2Compute;
-    private static function AWSAuth($account) {
+
+class AWSPRoviderImpl implements IProvider
+{
+	private $ec2Compute;
+	private $ec2Client;
+	 private function init($account) {
         $credentials = json_decode($account->credentials);
         $config['key'] = $credentials->apiKey;
         $config['secret'] = $credentials->secretKey;
@@ -20,9 +24,9 @@ class CloudProvider {
 		$conStatus = FALSE;
         try 
         {
-            $ec2Client = \Aws\Ec2\Ec2Client::factory($config);
-			self::$ec2Compute = $ec2Client -> get('ec2');
-			$result = $ec2Client->DescribeInstances(array(
+            $this->ec2Client = \Aws\Ec2\Ec2Client::factory($config);
+			$this->ec2Compute = $this->ec2Client -> get('ec2');
+			$result = $this->ec2Client->DescribeInstances(array(
 		        'Filters' => array(
 		                array('Name' => 'instance-type', 'Values' => array('m1.small')),
 		        )
@@ -37,28 +41,19 @@ class CloudProvider {
        }
         return $conStatus;
     }
-    
-    public static function authenticate($account) {
+	 
+	 public function authenticate($account) 
+	 {
         switch ($account->cloudProvider) {
             case 'Amazon AWS':
                 return self::AWSAuth($account);
             break;
         }
     }
+	 
 	
-	public static function authenticate2($account) 
-	 {
-	 	$iProvider = '';
-        switch ($account->cloudProvider) {
-            case 'Amazon AWS':
-				$iProvider = new AWSPRoviderImpl();
-                return $iProvider->authenticate($acount);
-            break;
-        }
-    }
-	
-	
-	public static function startInstances($account, $params){
+	public function startInstances($account, $params)
+	{
 		if(self::AWSAuth($account))
 		{
 			try
@@ -84,7 +79,8 @@ class CloudProvider {
 		}
 	}
 
-	public static function stopInstances($account, $params){
+	public function stopInstances($account, $params)
+	{
 		if(self::AWSAuth($account))
 		{
 			try
@@ -110,7 +106,8 @@ class CloudProvider {
 		}
 	}
 	
-	public static function restartInstances($account, $params){
+	public function restartInstances($account, $params)
+	{
 		if(self::AWSAuth($account))
 		{
 			try
@@ -136,7 +133,7 @@ class CloudProvider {
 		}
 	}
 
-	public static function terminateInstances($account, $params){
+	public function terminateInstances($account, $params){
 		if(self::AWSAuth($account))
 		{
 			try
