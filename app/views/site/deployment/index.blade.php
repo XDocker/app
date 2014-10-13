@@ -148,5 +148,6 @@
 		</div>
 	</div> -->
 </div>
+<script src="{{asset('assets/js/deployment.js')}}"></script>
 @stop
 
