@@ -62,7 +62,7 @@
 							</p>
 							<p>
 								
-								<span title="Status">{{{ UIHelper::getLabel($deployment->status) }}}</span>
+								<span title="Status">{{ UIHelper::getLabel($deployment->status) }}</span>
 							</p>
 						</div>
 					</div>
