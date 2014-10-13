@@ -58,7 +58,7 @@
 								
 							</p>
 							<p>
-								<span title="Created At"><span class="glyphicon glyphicon-calendar"></span> <!--Sept 16th, 2012-->{{{ $deployment->created_at }}}</span>
+								<span title="Created At"><span class="glyphicon glyphicon-calendar"></span> <strong>Build Date</strong>{{{ $deployment->created_at }}}</span>
 							</p>
 							<p>
 								<span title="Status"><span class="glyphicon glyphicon-asterisk"></span> <!--Sept 16th, 2012-->{{{ $deployment->status }}}</span>
