@@ -61,8 +61,8 @@
 								<span title="Created At"><span class="glyphicon glyphicon-calendar"></span> <strong>Build Date</strong>:{{{ $deployment->created_at }}}</span>
 							</p>
 							<p>
-								{{{ UIHelper::getLabel($deployment->status) }}}
-								<span title="Status"><span class="glyphicon glyphicon-asterisk"></span> <!--Sept 16th, 2012-->{{{ UIHelper::getLabel($deployment->status) }}}</span>
+								
+								<span title="Status">{{{ UIHelper::getLabel($deployment->status) }}}</span>
 							</p>
 						</div>
 					</div>
