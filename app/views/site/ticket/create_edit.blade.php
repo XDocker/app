@@ -29,14 +29,14 @@
 		
 		<div class="form-group {{{ $errors->has('description') ? 'has-error' : '' }}}">
 			<div class="col-md-12">
-            	<label class="control-label" for="content">Description</label>
+            	<label class="control-label" for="content">Description <font color="red">*</font></label>
 					<textarea class="form-control full-width wysihtml5" name="description" value="description" rows="5" required>{{{ Input::old('description', isset($post) ? $post->description : null) }}}</textarea>
 					{{{ $errors->first('description', '<span class="help-block">:message</span>') }}}
 			</div>
 		</div>
 		
 		<div class="form-group {{{ $errors->has('email') ? 'error' : '' }}}">
-			<label class="col-md-2 control-label" for="email">Priority <</label>
+			<label class="col-md-2 control-label" for="email">Priority </label>
 			<div class="col-md-6">
 				<select class="form-control" name="priority" id="priority" required>
 					@foreach ($priorities as $key )
