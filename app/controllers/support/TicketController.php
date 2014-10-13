@@ -53,7 +53,7 @@ class TicketController extends BaseController {
     public function getCreate($ticket = false) {
         $mode = $ticket !== false ? 'edit' : 'create';
         $ticket = $ticket !== false ? Ticket::where('user_id', Auth::id())->findOrFail($ticket->id) : null;
-        return View::make('site/account/create_edit', compact('mode', 'account'));
+        return View::make('site/ticket/create_edit', compact('mode', 'account'));
     }
     /**
      * Saves/Edits an account
