@@ -26,7 +26,7 @@
 							    <p class="text-center">{{{$deployment->accountName}}}</p>
 							</a> |
 							<a href="#" class="pull-left" href="#">
-							    <img class="media-object img-responsive" src="{{ asset('/assets/img/providers/'.xDockerEngine::getLogo($deployment->docker_name) }}" alt="{{ $deployment->docker_name }}" />
+							    <img class="media-object img-responsive" src="{{ asset('/assets/img/providers/'.xDockerEngine::getLogo($deployment->docker_name)) }}" alt="{{ $deployment->docker_name }}" />
 							    <p class="text-center">{{{$deployment->docker_name}}}</p>
 							</a>
 						</p>
