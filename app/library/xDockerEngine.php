@@ -97,4 +97,15 @@ class xDockerEngine {
         self::init();
         return self::request(self::$orchestrationParams['endpoint_ip'] . self::$orchestrationParams['downloadKey'], $data);
     }
+	
+	public static function getTag($dockerName)
+	{
+		$setting = Config::get('docker_settings');
+		return $setting[$dockerName]['tags'];
+	}
+	public static function getLogo($dockerName)
+	{
+		$setting = Config::get('docker_settings');
+		return $setting[$dockerName]['logo'];
+	}
 }

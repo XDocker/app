@@ -17,6 +17,7 @@
 			@foreach ($deployments as $deployment)
 	  			<li class="list-group-item">
 					<div class="media">
+						
 						<a href="{{ URL::to('account/'.$deployment->cloud_account_id.'/edit') }}" class="pull-left" href="#">
 						    <img class="media-object img-responsive" src="{{ asset('/assets/img/providers/'.Config::get('provider_meta.'.$deployment->cloudProvider.'.logo')) }}" alt="{{ $deployment->cloudProvider }}" />
 						    <p class="text-center">{{{$deployment->accountName}}}</p>
@@ -180,7 +181,9 @@
             [star_count] => 0
             [description] => -->
 			<div class="media">
-				
+				<span class="pull-left" href="#">
+					<img class="media-object img-responsive" src="{{ asset('/assets/img/providers/'.xDockerEngine::getLogo($instance -> name)) }}" alt="{{ $account->cloudProvider }}" />
+				</span>
 				<a href="{{ URL::to('deployment/create/') }}?name={{urlencode($instance -> name)}}" class="btn btn-primary pull-right" role="button"><span class="glyphicon glyphicon-play"></span></a>
 				<div class="media-body">
 					<h4 class="media-heading">{{{!empty($instance -> name)?$instance -> name:''}}}</h4>
