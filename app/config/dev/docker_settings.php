@@ -8,5 +8,5 @@
 
 return array(
    'xdocker/securitymonkey' => array('tags' => 'v1', 'logo' => 'securitymonkeyHead.png'),
-   'xdocker/netflix_ice' => array('tags' => 'v2', 'logo' => ''),
+   'xdocker/netflix_ice' => array('tags' => 'v2', 'logo' => 'placeholder.jpg'),
 );
