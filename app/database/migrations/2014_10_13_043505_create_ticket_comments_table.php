@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTicketsCommentsTable extends Migration {
+class CreateTicketCommentsTable extends Migration {
 
 	/**
 	 * Run the migrations.
