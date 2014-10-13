@@ -43,7 +43,7 @@ class TicketController extends BaseController {
         // var_dump($accounts, $this->accounts, $this->accounts->owner);
         // Show the page
         return View::make('site/ticket/index', array(
-            'ticket' => $tickets
+            'tickets' => $tickets
         ));
     }
     /**
