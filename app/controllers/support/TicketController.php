@@ -97,12 +97,11 @@ class TicketController extends BaseController {
 	}
 	
 	 public function postReply($ticket = false) {
+	 	
         try {
             if (empty($ticket)) {
                 return Redirect::to('ticket')->with('error', 'You need a ticket to comment');
-            } else if ($ticket->user_id !== Auth::id()) {
-                throw new Exception('general.access_denied');
-            }
+            } 
 
             $ticketComment = new TicketComments;
             $ticketComment->user_id = Auth::id(); // logged in user id
