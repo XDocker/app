@@ -123,7 +123,7 @@ class xDockerEngine {
 	{
 		$settings = Config::get('docker_settings');
 		$url = isset($settings[$dockerName]) ? $settings[$dockerName]['docker_url'] : '';
-		return '<a href="'.$url.'">' . $dockerName.'</a>';
+		return '<a target="_blank" href="'.$url.'">' . $dockerName.'</a>';
 		
 	}
 }
