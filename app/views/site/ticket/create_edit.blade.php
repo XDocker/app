@@ -29,7 +29,7 @@
 		
 		<div class="form-group {{{ $errors->has('description') ? 'has-error' : '' }}}">
 			<div class="col-md-12">
-            	<label class="control-label" for="content">Content</label>
+            	<label class="control-label" for="content">Description</label>
 					<textarea class="form-control full-width wysihtml5" name="description" value="description" rows="10">{{{ Input::old('description', isset($post) ? $post->description : null) }}}</textarea>
 					{{{ $errors->first('description', '<span class="help-block">:message</span>') }}}
 			</div>
