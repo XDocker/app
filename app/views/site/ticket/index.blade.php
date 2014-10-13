@@ -28,6 +28,10 @@
 						<div class="media-body">
 							<h4 class="media-heading">{{ String::title($ticket->title) }}</h4>
 							<p>
+								{{{ $ticket->description }}}
+							</p>
+							<p>{{{ $ticket->priority }}} | {{{ $ticket->active }}} </p>
+							<p>
 								<span class="glyphicon glyphicon-calendar"></span> <!--Sept 16th, 2012-->{{{ $ticket->created_at }}}
 							</p>
 						</div>
