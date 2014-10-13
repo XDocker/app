@@ -187,9 +187,11 @@ class DeploymentController extends BaseController {
      * @param $deployment
      *
      */
-    public function postDelete($id) {
+    public function postDelete($id) 
+    {
+    	$this->terminateInstance($id);
     	Deployment::where('id', $id)->where('user_id', Auth::id())->delete();
-		$this->terminateInstance($id);
+		
         // Was the comment post deleted?
         $deployment = Deployment::where('user_id', Auth::id())->find($id);
         if (empty($deployment)) {
