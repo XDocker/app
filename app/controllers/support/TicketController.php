@@ -71,10 +71,10 @@ class TicketController extends BaseController {
             $ticket->title = Input::get('name');
             $ticket->description = Input::get('description');
             $ticket->active = 1;
-			$ticket->priorities = '';
+			$ticket->priority = Input::get('priority');
             $ticket->user_id = Auth::id(); // logged in user id
             
-             $success = $account->save();
+             $success = $ticket->save();
             
             if ($success) {
                 return Redirect::intended('ticket')->with('success', Lang::get('ticket/ticket.ticket_updated'));
