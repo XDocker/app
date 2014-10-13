@@ -23,14 +23,14 @@
 		<div class="form-group {{{ $errors->has('username') ? 'error' : '' }}}">
 			<label class="col-md-2 control-label" for="name">Title </label>
 			<div class="col-md-6">
-				<input class="form-control" type="text" name="title" id="title" value="{{{ Input::old('title', isset($ticket->name) ? $ticket->name : null) }}}" readonly />
+				<input class="form-control" type="text" name="title" id="title" value="{{{ Input::old('title', isset($ticket->title) ? $ticket->title : null) }}}" readonly />
 			</div>
 		</div>
 		
 		<div class="form-group {{{ $errors->has('description') ? 'has-error' : '' }}}">
 			<label class="col-md-2 control-label" for="email">Description </label>
 			<div class="col-md-6">
-            		<textarea class="form-control full-width wysihtml5" name="description" value="description" rows="5" readonly>{{{ Input::old('description', isset($post) ? $post->description : null) }}}</textarea>
+            		<textarea class="form-control full-width wysihtml5" name="description" value="description" rows="5" readonly>{{{ Input::old('description', isset($ticket) ? $ticket->description : null) }}}</textarea>
 					{{{ $errors->first('description', '<span class="help-block">:message</span>') }}}
 			</div>
 		</div>
