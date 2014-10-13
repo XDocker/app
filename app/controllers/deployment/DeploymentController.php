@@ -193,35 +193,17 @@ class DeploymentController extends BaseController {
      *
      */
     public function postDelete($id) {
-    	$deployment = Deployment::where('user_id', Auth::id())->find($id);
-		
-		$account 		= CloudAccount::where('user_id', Auth::id())->findOrFail($deployment->cloud_account_id) ;
-		$arr = $this->executeAction(Input::get('instanceAction'), $account, $deployment, Input::get('instanceID'));
-										
-		if($arr['status'] == 'OK' && $this->delete($id))
-		{
-			return Redirect::to('deployment')->with('success', $deployment->name . ' and instance is terminated' );
-			
-		}
-		else {
-			return Redirect::to('deployment')->with('error', 'Error deleting the deployment and instance.' );
-		}
-    }
-	
-	private function delete($id)
-	{
-		Deployment::where('id', $id)->where('user_id', Auth::id())->delete();
+    	Deployment::where('id', $id)->where('user_id', Auth::id())->delete();
+        // Was the comment post deleted?
         $deployment = Deployment::where('user_id', Auth::id())->find($id);
-        if (empty($deployment)) 
-        {
-        	return TRUE;
-        } 
-        else 
-        {
-        	return FALSE;
+        if (empty($deployment)) {
+            // TODO needs to delete all of that user's content
+            return Redirect::to('/')->with('success', 'Removed Deployment Successfully');
+        } else {
+            // There was a problem deleting the user
+            return Redirect::to('/')->with('error', 'Error while deleting');
         }
-		
-	}
+    }
 	
 	public function checkStatus($id)
 	{
