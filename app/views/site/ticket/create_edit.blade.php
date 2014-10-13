@@ -39,7 +39,7 @@
 			<label class="col-md-2 control-label" for="email">Priority <</label>
 			<div class="col-md-6">
 				<select class="form-control" name="priority" id="priority" required>
-					@foreach ($priorities as $key => $value)
+					@foreach ($priorities as $key )
 						<option value="{{$key}}" {{{ Input::old('priority', isset($ticket->priority) && ($ticket->priority == $key) ? 'selected="selected"' : '') }}}>{{{ $key }}}</option>
 					@endforeach
 				</select>

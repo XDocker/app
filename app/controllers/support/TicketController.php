@@ -53,7 +53,8 @@ class TicketController extends BaseController {
     public function getCreate($ticket = false) {
         $mode = $ticket !== false ? 'edit' : 'create';
         $ticket = $ticket !== false ? Ticket::where('user_id', Auth::id())->findOrFail($ticket->id) : null;
-        return View::make('site/ticket/create_edit', compact('mode', 'account'));
+		$priorities =array('urgent', 'high', 'medium', 'low');
+        return View::make('site/ticket/create_edit', compact('mode', 'account', 'priorities'));
     }
     /**
      * Saves/Edits an account
@@ -70,6 +71,7 @@ class TicketController extends BaseController {
             $ticket->title = Input::get('name');
             $ticket->description = Input::get('description');
             $ticket->active = 1;
+			$ticket->priorities = '';
             $ticket->user_id = Auth::id(); // logged in user id
             
              $success = $account->save();
