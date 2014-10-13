@@ -14,7 +14,7 @@ class ModifyAccount extends Migration {
 	{
 		Schema::table('accounts', function(Blueprint $table)
 		{
-			//$table->softDeletes();
+			$table->softDeletes();
 		});
 	}
 
