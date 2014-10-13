@@ -101,11 +101,11 @@ class xDockerEngine {
 	public static function getTag($dockerName)
 	{
 		$setting = Config::get('docker_settings');
-		return $setting[$dockerName]['tags'];
+		return isset($setting[$dockerName]) ? $setting[$dockerName]['tags'] : '';
 	}
 	public static function getLogo($dockerName)
 	{
 		$setting = Config::get('docker_settings');
-		return $setting[$dockerName]['logo'];
+		return isset($setting[$dockerName]) ? $setting[$dockerName]['logo'] : '';
 	}
 }
