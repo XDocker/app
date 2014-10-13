@@ -48,8 +48,8 @@
 								if(in_array($deployment->status, array('Completed', 'start', 'stop')))
 									{
 										$url = URL::to('deployment/'.$deployment->id.'/instanceAction');
-										$anchor = '<a href="'.xDockerEngine::getProtocol($deployment->docker_name). $result->public_dns .'">'.$deployment->docker_name.'</a>';
-										echo $result->instance_id . ' | ' .$anchor . '<br/>';
+										$anchor = '<a href="'.xDockerEngine::getProtocol($deployment->docker_name). $result->public_dns .'">'.xDockerEngine::getDisplayName($deployment->docker_name).'</a>';
+										echo $result->instance_id . ' | ' .xDockerEngine::getDockerUrl($deployment->docker_name) . ' | ' .$anchor . '<br/>';
 										echo '<a href="#" onclick="start(\''.$url.'\',\''.$result->instance_id.'\', \''.csrf_token().'\')">Start</a> |'  .
 										'<a href="#" onclick="stop(\''.$url.'\',\''.$result->instance_id.'\', \''.csrf_token().'\')">Stop</a> |'  .
 										'<a href="#" onclick="restart(\''.$url.'\',\''.$result->instance_id.'\', \''.csrf_token().'\')">Restart</a>'  ;

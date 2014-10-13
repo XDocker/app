@@ -119,4 +119,11 @@ class xDockerEngine {
 		$settings = Config::get('docker_settings');
 		return isset($settings[$dockerName]) ? $settings[$dockerName]['displayName'] : '';
 	}
+	public static function getDockerUrl($dockerName)
+	{
+		$settings = Config::get('docker_settings');
+		$url = isset($settings[$dockerName]) ? $settings[$dockerName]['docker_url'] : '';
+		return '<a href="'.$url.'">' . $dockerName.'</a>';
+		
+	}
 }
