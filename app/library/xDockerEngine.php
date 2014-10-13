@@ -114,4 +114,9 @@ class xDockerEngine {
 		$settings = Config::get('docker_settings');
 		return isset($settings[$dockerName]) ? $settings[$dockerName]['protocol'] : '';
 	}
+	public static function getDisplayName($dockerName)
+	{
+		$settings = Config::get('docker_settings');
+		return isset($settings[$dockerName]) ? $settings[$dockerName]['displayName'] : '';
+	}
 }

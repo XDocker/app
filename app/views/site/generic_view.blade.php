@@ -48,7 +48,7 @@
 								if(in_array($deployment->status, array('Completed', 'start', 'stop')))
 									{
 										$url = URL::to('deployment/'.$deployment->id.'/instanceAction');
-										$anchor = '<a href="'.xDockerEngine::getProtocol($deployment->docker_name). $result->public_dns .'">App link</a>';
+										$anchor = '<a href="'.xDockerEngine::getProtocol($deployment->docker_name). $result->public_dns .'">'.$deployment->docker_name.'</a>';
 										echo $result->instance_id . ' | ' .$anchor . '<br/>';
 										echo '<a href="#" onclick="start(\''.$url.'\',\''.$result->instance_id.'\', \''.csrf_token().'\')">Start</a> |'  .
 										'<a href="#" onclick="stop(\''.$url.'\',\''.$result->instance_id.'\', \''.csrf_token().'\')">Stop</a> |'  .
