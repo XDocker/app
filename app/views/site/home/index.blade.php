@@ -71,5 +71,6 @@
     </section>
 @else
 	@include('site.generic_view')
+@endif
        
 @stop
