@@ -108,4 +108,10 @@ class xDockerEngine {
 		$setting = Config::get('docker_settings');
 		return isset($setting[$dockerName]) ? $setting[$dockerName]['logo'] : '';
 	}
+	
+	public static function getLogo($dockerName)
+	{
+		$setting = Config::get('docker_settings');
+		return isset($setting[$dockerName]) ? $setting[$dockerName]['protocol'] : '';
+	}
 }
