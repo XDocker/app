@@ -28,7 +28,8 @@ Route::model('post', 'Post');
 Route::model('role', 'Role');
 Route::model('deployments', 'Deployment');
 Route::model('account', 'CloudAccount');
-Route::model('tickets', 'ticket');
+Route::model('tickets', 'Ticket');
+Route::model('ticket_comments', 'TicketComments');
 Route::model('engine_logs', 'EngineLog');
 
 /** ------------------------------------------
