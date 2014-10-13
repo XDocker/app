@@ -12,8 +12,10 @@
 		    <a href="https://www.facebook.com/pages/XDocker/687711791303636"><img width="32px" height="32px" src="{{{ asset('assets/img/facebook.png') }}}" alt="{{{ Lang::get('site.footertitle') }}}"/></a>
 		    <a href="https://www.twitter.com/xdocker"><img width="32px" height="32px" src="{{{ asset('assets/img/Twitter_logo.png') }}}" alt="{{{ Lang::get('site.footertitle') }}}"/></a>
 		</p>
+		<!--
 		<p class="text-center">
 			<iframe src="http://ghbtns.com/github-btn.html?user=xdocker&repo=app&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="170" height="30"></iframe>
 		</p>
+		-->
 	</div>
 </footer>
