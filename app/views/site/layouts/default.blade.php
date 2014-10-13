@@ -129,7 +129,7 @@
 		      		<img src="{{{ asset('assets/ico/favicon.ico') }}}" alt="{{{ Lang::get('site.footertitle') }}}"/>
 		      		<a href="https://www.xervmon.com">{{{ Lang::get('site.footertitle') }}}</a>
 		      	</p>
-		      	<p class="text-right"> <h4>Follow Us</h4></>
+		      	<p class="text-right"> <strong>Follow Us</strong></>
 		      	<p class="pull-right">
 		      		
 		      			<a href="https://www.linkedin.com/groups/Xdocker-Users-6789160?gid=6789160"><img width="25px" height="25px" src="{{{ asset('assets/img/LinkedIn.png') }}}" alt="{{{ Lang::get('site.footertitle') }}}"/></a>
