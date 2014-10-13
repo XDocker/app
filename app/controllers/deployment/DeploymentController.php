@@ -177,16 +177,11 @@ class DeploymentController extends BaseController {
                                         'packageName' => $deployment -> docker_name,
                                         'dockerParams' => array('ports' => $parameters->ports, 
                                                                 'env' => array('mail' =>$user->email, 'host'=> '{host}'), 
-                                                                'tag'=> $this->getTagIfApplicable($deployment -> docker_name))   )
+                                                                'tag'=> xDockerEngine::getTag($deployment -> docker_name))   )
                                       );			  				
 	}
 
-	private function getTagIfApplicable($dockerName)
-	{
-		$setting = Config::get('docker_settings');
-		return $setting[$dockerName]['tags'];
-	}
-    /**
+	/**
      * Remove the specified Account .
      *
      * @param $deployment
