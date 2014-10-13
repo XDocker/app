@@ -88,6 +88,14 @@ class TicketController extends BaseController {
         }
     }
 	
+	public function getReply($ticket = false)
+	{
+		$ticket = $ticket !== false ? Ticket::where('user_id', Auth::id())->findOrFail($ticket->id) : null;
+		//@TODO get all comments for the tickets.
+		$priorities =array('urgent', 'high', 'medium', 'low');
+        return View::make('site/ticket/reply', compact('mode', 'ticket', 'priorities'));
+	}
+	
 	
     /**
      * Remove the specified Ticket .

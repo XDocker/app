@@ -22,9 +22,9 @@
 							<!-- CSRF Token -->
 							<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
 							<!-- ./ csrf token -->
-							<button type="submit" class="btn btn-warning pull-right" role="button"><span class="glyphicon glyphicon-trash"></span></button>
+							<button type="submit" class="btn btn-warning pull-right" role="button"><span class="glyphicon glyphicon-eye-close"></span></button>
 						</form>
-						<a href="{{ URL::to('ticket/' . $ticket->id . '/edit') }}" class="btn btn-success pull-right" role="button"><span class="glyphicon glyphicon-edit"></span></a>
+						<a href="{{ URL::to('ticket/' . $ticket->id . '/reply') }}" class="btn btn-success pull-right" role="button"><span class="glyphicon glyphicon glyphicon-share"></span></a>
 						<div class="media-body">
 							<h4 class="media-heading">{{ String::title($ticket->title) }}</h4>
 							<p>

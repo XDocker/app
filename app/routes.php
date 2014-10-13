@@ -132,6 +132,7 @@ Route::group(array(
 	Route::any('ticket/', 'TicketController@getIndex'); 
 	Route::get('ticket/create', 'TicketController@getCreate');
     Route::get('ticket/{ticket}/edit', 'TicketController@getCreate');
+	Route::get('ticket/{ticket}/reply', 'TicketController@getReply');
 	
 	Route::any('deployment/', 'DeploymentController@getIndex');
     Route::get('deployment/create', 'DeploymentController@getCreate');
@@ -153,6 +154,7 @@ Route::group(array(
 		Route::post('deployment/{deployment}/instanceAction', 'DeploymentController@postInstanceAction');
 		 Route::post('ticket/create', 'TicketController@postEdit');
         Route::post('ticket/{ticket}/edit', 'TicketController@postEdit');
+		 Route::post('ticket/{ticket}/reply', 'TicketController@postReply');
         Route::post('ticket/{ticket}/delete', 'TicketController@postDelete');
     });
     
