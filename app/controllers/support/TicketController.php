@@ -68,7 +68,7 @@ class TicketController extends BaseController {
                 throw new Exception('general.access_denied');
             }
 
-            $ticket->title = Input::get('name');
+            $ticket->title = Input::get('title');
             $ticket->description = Input::get('description');
             $ticket->active = 1;
 			$ticket->priority = Input::get('priority');
