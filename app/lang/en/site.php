@@ -31,6 +31,7 @@ return array(
     'tagline'=>'Deploy & manage docker images on any IaaS/On-Premise',
     'title'=>'Deploy & manage docker images on any IaaS/On-Premise',
     'footertitle' => 'Powered By Xervmon',
+    'follow_us' => 'Follow Us',
     'forkme' => 'Fork me on Github',
     'keywords' => 'Docker, Amazon AWS, Rackspace, DigitalOcean, Softlayer, Google Compute (GCE), Orchestration, Cloud Management',
     'author' => 'Team xDocker',
