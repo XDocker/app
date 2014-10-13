@@ -101,11 +101,11 @@
 				</div>
 			</nav>
 			<!-- ./ navbar -->
-
+			<!--
 			<a class="banner-github {{ (Request::is('/') ? '' : 'hide') }}" href="https://github.com/XDocker/app" target="_blank">
 		        <img src="{{{ asset('assets/img/forkme_right_red_aa0000.png') }}}" alt="{{{ Lang::get('site.forkme') }}}">
 		    </a>
-
+			-->
 			<!-- Container -->
 			<div class="container clear-both">
 				
