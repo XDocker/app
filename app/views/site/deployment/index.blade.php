@@ -44,14 +44,9 @@
 										$result = json_decode($deployment->wsResults);
 										$url = URL::to('deployment/'.$deployment->id.'/instanceAction');
 										echo $result->instance_id . ' | ' . $result->public_dns . '<br/>';
-										echo '<a href="#" onclick="start(\''.$url.'\',\''.$result->instance_id.'\')">Start</a> |'  .
-										'<a href="#" onclick="stop(\''.$url.'\',\''.$result->instance_id.'\')">Stop</a> |'  .
-										'<a href="#" onclick="restart(\''.$url.'\',\''.$result->instance_id.'\')">Restart</a> |'  .
-										'<a href="#" onclick="terminate(\''.$url.'\',\''.$result->instance_id.'\')">Terminate</a>' ;
-								?>
-								
-				
-								<?php
+										echo '<a href="#" onclick="start(\''.$url.'\',\''.$result->instance_id.'\', \''.csrf_token().'\')">Start</a> |'  .
+										'<a href="#" onclick="stop(\''.$url.'\',\''.$result->instance_id.'\', \''.csrf_token().'\')">Stop</a> |'  .
+										'<a href="#" onclick="restart(\''.$url.'\',\''.$result->instance_id.'\', \''.csrf_token().'\')">Restart</a> |'  ;
 									}
 								?>
 								
@@ -74,75 +69,7 @@
 </div>
 
 <script>
-	function start(url, instanceID)
-	{
-		$.ajax({
-		  type: "POST",
-		  url: url,
-		  data: { "instanceAction": "start", "instanceID": instanceID, "_token" : "{{{ csrf_token() }}}"}
-		  })
-		  .done(function(response) {
-		   
-		    showMessage(response)
-		  });
- 	}
-	function stop(url, instanceID)
-	{
-		$.ajax({
-		  type: "POST",
-		  url: url,
-		  data: { "instanceAction": "stop", "instanceID": instanceID, "_token" : "{{{ csrf_token() }}}" }
-		  })
-		  .done(function(response) {
-		   
-		    showMessage(response)
-		  });
- 	}
- 	
- 	function restart(url, instanceID)
-	{
-		$.ajax({
-		  type: "POST",
-		  url: url,
-		  data: { "instanceAction": "restart", "instanceID": instanceID, "_token" : "{{{ csrf_token() }}}" }
-		  })
-		  .done(function(response) {
-		   
-		    showMessage(response)
-		  });
- 	}
- 	
- 	function terminate(url, instanceID)
-	{
-		$.ajax({
-		  type: "POST",
-		  url: url,
-		  data: { "instanceAction": "terminate", "instanceID": instanceID, "_token" : "{{{ csrf_token() }}}" }
-		  })
-		  .done(function(response) {
-		   
-		    showMessage(response)
-		  });
- 	}
 	
-	showMessage = function (response)
-	{
-		if(response.status == 'OK')
-		{
-			return '<div class="alert alert-success alert-block"> ' +
-					' <button type="button" class="close" data-dismiss="alert">&times;</button> '+
-						'<h4> Success </h4> ' + response.message +
-   				  '</div>';
-   		}
-   		else if(response.status == 'error')
-   		{
-   			return '<div class="alert alert-danger alert-block"> ' +
-					' <button type="button" class="close" data-dismiss="alert">&times;</button> '+
-						'<h4> Error </h4> ' + response.message +
-   				  '</div>';
-   		}
-		
-	}
 </script>
 
 

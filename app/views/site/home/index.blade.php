@@ -152,37 +152,39 @@
 </p>
 <div class="media-block">
 	<ul class="list-group list-group-custom">
-		@forelse($dockerInstances as $instance)
-			<li class="list-group-item">
-				<div class="media">
-					<a href="{{ URL::to('deployment/create/') }}?name={{urlencode($instance -> name)}}" class="btn btn-primary pull-right" role="button"><span class="glyphicon glyphicon-play"</a></a>
-					<div class="media-body">
-						<h4 class="media-heading">{{{!empty($instance -> name)?$instance -> name:''}}}</h4>
-					    <p>
-					    	{{{!empty($instance -> description)?$instance -> description:''}}}
-						</p>
-					</div>
+		@foreach($dockerInstances as $instance)
+  		<li class="list-group-item">
+  			<!--[is_automated] => 1
+            [name] => vubui/ubuntu
+            [is_trusted] => 1
+            [is_official] => 
+            [star_count] => 0
+            [description] => -->
+			<div class="media">
+				<span class="pull-left" href="#">
+					<img style="width:25px;height:25px" class="media-object img-responsive" src="{{ asset('/assets/img/providers/'.xDockerEngine::getLogo($instance -> name)) }}" alt="{{ $instance -> name }}" />
+				</span>
+				<a href="{{ URL::to('deployment/create/') }}?name={{urlencode($instance -> name)}}" class="btn btn-primary pull-right" role="button"><span class="glyphicon glyphicon-play"></span></a>
+				<div class="media-body">
+					<h4 class="media-heading">{{{!empty($instance -> name)?$instance -> name:''}}}</h4>
+				    <p>
+				    	{{{!empty($instance -> description)?$instance -> description:''}}}
+					</p>
+					<p>
+				    	{{{!empty($instance -> is_automated)?$instance -> is_automated:'Not Automated'}}}
+				    	|
+				    	{{{!empty($instance -> is_trusted)?$instance -> is_trusted:'Not Trusted'}}}
+				    	|
+				    	{{{!empty($instance -> is_official)?$instance -> is_official:'Not Official'}}}
+				    	|
+				    	{{{!empty($instance -> star_count)?$instance -> star_count:'0'}}}
+					</p>
 				</div>
-			</li>
-		@empty
-			<li class="list-group-item alert alert-info">No matching docker images found for '{{ $search_term }}'</li>	
-		@endforelse
+			</div>
+		</li>
+		@endforeach
 	</ul>
-	<!-- <div class="text-center">
-		<div class="pagination">
-			<ul>
-	        	<li class="previous"><a href="#fakelink" class="fui-arrow-left"></a></li>
-	            <li class="active"><a href="#fakelink">1</a></li>
-	            <li><a href="#fakelink">2</a></li>
-	            <li><a href="#fakelink">3</a></li>
-	            <li><a href="#fakelink">4</a></li>
-	            <li><a href="#fakelink">5</a></li>
-	            <li><a href="#fakelink">6</a></li>
-	            <li><a href="#fakelink">7</a></li>
-	            <li><a href="#fakelink">8</a></li>
-	            <li class="next"><a href="#fakelink" class="fui-arrow-right"></a></li>
-			</ul>
-		</div>
-	</div> -->
 </div>
+ <script src="{{asset('assets/js/deployment.js')}}"></script>
+       
 @stop
