@@ -12,7 +12,11 @@
 			@foreach ($deployments as $deployment)
 			
 			<?php $result = json_decode($deployment->wsResults); 
-				  if(empty($result) || !isset($result->instance_id))  $result->instance_id = '';
+				if(empty($result)) 
+				{
+					$result = new stdClass();
+					$result ->instance_id = '';
+				}
 			?>
 	  			<li class="list-group-item">
 					<div class="media">
