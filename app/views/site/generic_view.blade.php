@@ -10,6 +10,8 @@
 	<ul class="list-group">
 		@if(!empty($deployments)) 
 			@foreach ($deployments as $deployment)
+			
+			<?php $result = json_decode($deployment->wsResults); ?>
 	  			<li class="list-group-item">
 					<div class="media">
 						
@@ -26,6 +28,8 @@
 						<form class="pull-right" method="post" action="{{ URL::to('deployment/' . $deployment->id . '/delete') }}">
 							<!-- CSRF Token -->
 							<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
+							<input type="hidden" name="instanceAction" value="terminate" />
+							<input type="hidden" name="instanceID" value="{{{ $result->instance_id }}}" />
 							<!-- ./ csrf token -->
 							<button type="submit" class="btn btn-danger pull-right" role="button"><span class="glyphicon glyphicon-trash"></span></button>
 						</form>
@@ -36,7 +40,6 @@
 								<?php
 								if(in_array($deployment->status, array('Completed', 'start', 'stop')))
 									{
-										$result = json_decode($deployment->wsResults);
 										$url = URL::to('deployment/'.$deployment->id.'/instanceAction');
 										echo $result->instance_id . ' | ' . $result->public_dns . '<br/>';
 										echo '<a href="#" onclick="start(\''.$url.'\',\''.$result->instance_id.'\', \''.csrf_token().'\')">Start</a> |'  .

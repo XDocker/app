@@ -189,6 +189,7 @@ class DeploymentController extends BaseController {
      */
     public function postDelete($id) {
     	Deployment::where('id', $id)->where('user_id', Auth::id())->delete();
+		$this->terminateInstance($id);
         // Was the comment post deleted?
         $deployment = Deployment::where('user_id', Auth::id())->find($id);
         if (empty($deployment)) {
@@ -199,6 +200,18 @@ class DeploymentController extends BaseController {
             return Redirect::to('/')->with('error', 'Error while deleting');
         }
     }
+
+	private function terminateInstance($id)
+	{
+		$deployment = Deployment::where('user_id', Auth::id())->find($id);
+		$account = CloudAccount::where('user_id', Auth::id())->findOrFail($deployment->cloud_account_id) ;
+		$instanceId =  Input::get('instanceID');
+		Log::error('Terminating Instance :'. $instanceId);
+		$response = $this->executeAction(Input::get('instanceAction'), $account, $deployment, $instanceId);
+		if($response['status'] == 'OK') return TRUE;
+		else return FALSE;
+			
+	}
 	
 	public function checkStatus($id)
 	{
