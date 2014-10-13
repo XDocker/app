@@ -60,123 +60,20 @@ class CloudProvider {
 		switch ($instanceAction)
 		{
 			case 'start' :
-				$response = CloudProvider::startInstances($account, array('InstanceIds' =>array($instanceID), 'DryRun' => false, ));
+				$response = self::getDriver($account)->startInstances(array('InstanceIds' =>array($instanceID), 'DryRun' => false, ));
 				break;
 			case 'stop' :
-				$response = CloudProvider::stopInstances($account, array('DryRun' => false, 'InstanceIds' =>array($instanceID)));
+				$response = self::getDriver($account)->stopInstances(array('DryRun' => false, 'InstanceIds' =>array($instanceID)));
 				break;
 			case 'restart' :
-				$response = CloudProvider::restartInstances($account, array('DryRun' => false, 'InstanceIds' =>array($instanceID)));
+				$response =  self::getDriver($account)->restartInstances(array('DryRun' => false, 'InstanceIds' =>array($instanceID)));
 				break;
 			case 'terminate' :
-				$response = CloudProvider::terminateInstances($account, array('DryRun' => false, 'InstanceIds' =>array($instanceID)));
+				$response = self::getDriver($account)->terminateInstances(array('DryRun' => false, 'InstanceIds' =>array($instanceID)));
 				break;	
 		}
 		return $response;
 	}
 	
 	
-	public static function startInstances($account, $params){
-		if(self::AWSAuth($account))
-		{
-			try
-			{	
-				$instanceResult = self::$ec2Compute->startInstances($params);
-				if (!empty($instanceResult))
-				{
-					return array('status' => 'OK', 'result' => 'start', 'message'  => $instanceResult-> toArray());
-				} 
-			}
-			catch(Exception $ex)
-			{
-				Log::error($ex);
-				return array('status' => 'error', 'message' => 'Error occured during startingInstances - '.$params['InstanceIds'][0]);
-			}
-		} 
-		else
-		{
-			Log::error(Auth::check() ? Auth::user()->username : '__Guest__');
-			Log::error('startInstances '. $instanceAction .' request');
-			Log::error('startInstances '. $instanceAction .' Authentication failure! API key and secret key for account is not correct');
-			return array('status' => 'error', 'message' => 'Authentication failure! API key and secret key for account is not correct');
-		}
-	}
-
-	public static function stopInstances($account, $params){
-		if(self::AWSAuth($account))
-		{
-			try
-			{	
-				$instanceResult = self::$ec2Compute -> stopInstances($params);
-				if (!empty($instanceResult))
-				{
-					return array('status' => 'OK', 'result' => 'stop', 'message'  => $instanceResult-> toArray());
-				} 
-			}
-			catch(Exception $ex)
-			{
-				Log::error($ex);
-				return array('status' => 'error', 'message' => 'Error occured during stopInstances - '.$params['InstanceIds'][0]);
-			}
-		} 
-		else
-		{
-			Log::error(Auth::check() ? Auth::user()->username : '__Guest__');
-			Log::error('stopInstances '. $instanceAction .' request');
-			Log::error('stopInstances '. $instanceAction .' Authentication failure! API key and secret key for account is not correct');
-			return array('status' => 'error', 'message' => 'Authentication failure! API key and secret key for account is not correct');
-		}
-	}
-	
-	public static function restartInstances($account, $params){
-		if(self::AWSAuth($account))
-		{
-			try
-			{	
-				$instanceResult = self::$ec2Compute -> restartInstances($params);
-				if (!empty($instanceResult))
-				{
-					return array('status' => 'OK', 'message'  => $instanceResult-> toArray());
-				} 
-			}
-			catch(Exception $ex)
-			{
-				Log::error($ex);
-				return array('status' => 'error', 'message' => 'Error occured during restartInstances - '.$params['InstanceIds'][0]);
-			}
-		} 
-		else
-		{
-			Log::error(Auth::check() ? Auth::user()->username : '__Guest__');
-			Log::error('restartInstances '. $instanceAction .' request');
-			Log::error('restartInstances '. $instanceAction .' Authentication failure! API key and secret key for account is not correct');
-			return array('status' => 'error', 'message' => 'Authentication failure! API key and secret key for account is not correct');
-		}
-	}
-
-	public static function terminateInstances($account, $params){
-		if(self::AWSAuth($account))
-		{
-			try
-			{	
-				$instanceResult = self::$ec2Compute -> terminateInstances($params);
-				if (!empty($instanceResult))
-				{
-					return array('status' => 'OK', 'message'  => $instanceResult-> toArray());
-				} 
-			}
-			catch(Exception $ex)
-			{
-				Log::error($ex);
-				return array('status' => 'error', 'message' => 'Error occured during terminateInstances - '.$params['InstanceIds'][0]);
-			}
-		} 
-		else
-		{
-			Log::error(Auth::check() ? Auth::user()->username : '__Guest__');
-			Log::error('terminateInstances '. $instanceAction .' request');
-			Log::error('terminateInstances '. $instanceAction .' Authentication failure! API key and secret key for account is not correct');
-			return array('status' => 'error', 'message' => 'Authentication failure! API key and secret key for account is not correct');
-		}
-	}
 }
