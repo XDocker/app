@@ -17,9 +17,11 @@
 			@foreach ($tickets as $ticket)
 	  			<li class="list-group-item">
 					<div class="media">
+						<!--
 						<span class="pull-left" href="#">
 						    <img class="media-object img-responsive" src="{{ asset('/assets/img/providers/'.Config::get('provider_meta.'.$account->cloudProvider.'.logo')) }}" alt="{{ $account->cloudProvider }}" />
 						</span>
+						-->
 						<form class="pull-right" method="post" action="{{ URL::to('ticket/' . $ticket->id . '/ticket') }}">
 							<!-- CSRF Token -->
 							<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
