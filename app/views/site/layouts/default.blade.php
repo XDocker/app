@@ -129,8 +129,9 @@
 		      		<img src="{{{ asset('assets/ico/favicon.ico') }}}" alt="{{{ Lang::get('site.footertitle') }}}"/>
 		      		<a href="https://www.xervmon.com">{{{ Lang::get('site.footertitle') }}}</a>
 		      	</p>
+		      	<p class="text-right"> <h4>Follow Us</h4></>
 		      	<p class="pull-right">
-		      		<p class="text-right"> Follow Us</>
+		      		
 		      			<a href="https://www.linkedin.com/groups/Xdocker-Users-6789160?gid=6789160"><img width="25px" height="25px" src="{{{ asset('assets/img/LinkedIn.png') }}}" alt="{{{ Lang::get('site.footertitle') }}}"/></a>
 		      			<a href="https://www.facebook.com/pages/XDocker/687711791303636"><img width="25px" height="25px" src="{{{ asset('assets/img/facebook.png') }}}" alt="{{{ Lang::get('site.footertitle') }}}"/></a>
 		      			<a href="https://www.twitter.com/xdocker"><img width="25px" height="25px" src="{{{ asset('assets/img/Twitter_logo.png') }}}" alt="{{{ Lang::get('site.footertitle') }}}"/></a>
