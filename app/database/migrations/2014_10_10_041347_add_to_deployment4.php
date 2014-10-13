@@ -14,7 +14,7 @@ class AddToDeployment4 extends Migration {
 	{
 		Schema::table('deployments', function(Blueprint $table)
 		{
-			//->softDeletes();
+			//$table->softDeletes();
 		});
 	}
 
@@ -28,7 +28,7 @@ class AddToDeployment4 extends Migration {
 	{
 		Schema::table('deployments', function(Blueprint $table)
 		{
-			//$table->dropColumn('deleted_at');
+			$table->dropColumn('deleted_at');
 		});
 	}
 
