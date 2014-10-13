@@ -460,6 +460,7 @@ return array(
     'TestCase' => $baseDir . '/app/tests/library/TestCase.php',
     'Text_Template' => $vendorDir . '/phpunit/php-text-template/Text/Template.php',
     'Ticket' => $baseDir . '/app/models/Ticket.php',
+    'TicketComments' => $baseDir . '/app/models/TicketComments.php',
     'TicketController' => $baseDir . '/app/controllers/support/TicketController.php',
     'UIHelper' => $baseDir . '/app/library/UIHelper.php',
     'User' => $baseDir . '/app/models/User.php',
