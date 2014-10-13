@@ -49,7 +49,7 @@
 		<div class="form-group {{{ $errors->has('description') ? 'has-error' : '' }}}">
 			<label class="col-md-2 control-label" for="email">Comment <font color="red">*</font></label>
 			<div class="col-md-6">
-            		<textarea class="form-control full-width wysihtml5" name="comment" value="comment" rows="5" readonly>{{{ Input::old('comment', isset($post) ? $post->comment : null) }}}</textarea>
+            		<textarea class="form-control full-width wysihtml5" name="comment" value="comment" rows="5" required>{{{ Input::old('comment', isset($post) ? $post->comment : null) }}}</textarea>
 					{{{ $errors->first('comment', '<span class="help-block">:message</span>') }}}
 			</div>
 		</div>
