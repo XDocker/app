@@ -86,7 +86,7 @@
 	    								<span class="glyphicon glyphicon-cog"></span> {{{ Lang::get('site.support') }}}	<span class="caret"></span>
 	    							</a>
 	    							<ul class="dropdown-menu">
-	    								<li><a href="{{{ URL::to('account') }}}"><span class="glyphicon glyphicon-wrench"></span> {{{ Lang::get('site.tickets') }}}</a></li>
+	    								<li><a href="{{{ URL::to('ticket') }}}"><span class="glyphicon glyphicon-wrench"></span> {{{ Lang::get('site.tickets') }}}</a></li>
 	    							</ul>
 	    						</li>
 		                        <li class="dropdown">

@@ -25,6 +25,7 @@ return array(
     'services' => 'Services',
     'support' => 'Support',
     'accounts' => 'Accounts',
+    'tickets' => 'Tickets',
     'deployments' => 'Deployments',
     'enginelog' => 'Request Logs',
     'admin_panel' => 'Admin Panel',
