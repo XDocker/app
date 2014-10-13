@@ -117,13 +117,13 @@ class xDockerEngine {
 	public static function getDisplayName($dockerName)
 	{
 		$settings = Config::get('docker_settings');
-		$img = '<img width="32px" height="32px" src="' . asset('/assets/img/'.$settings[$dockerName]['logo']).'" />';
+		$img = '<img width="32px" height="32px" src="' . asset('/assets/img/provider/'.$settings[$dockerName]['logo']).'" />';
 		return isset($settings[$dockerName]) ? $img.$settings[$dockerName]['displayName'] : '';
 	}
 	public static function getDockerUrl($dockerName)
 	{
 		$settings = Config::get('docker_settings');
-		$img = '<img width="32px" height="32px" src="' . asset('/assets/img/docker.jpg').'" />';
+		$img = '<img width="32px" height="32px" src="' . asset('/assets/img/providers/docker.jpg').'" />';
 		$url = isset($settings[$dockerName]) ? $settings[$dockerName]['docker_url'] : '';
 		return '<a target="_blank" href="'.$url.'">' .$img.  $dockerName.'</a>';
 		
