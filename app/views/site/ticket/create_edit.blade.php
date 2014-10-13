@@ -28,9 +28,9 @@
 		</div>
 		
 		<div class="form-group {{{ $errors->has('description') ? 'has-error' : '' }}}">
-			<div class="col-md-12">
-            	<label class="control-label" for="content">Description <font color="red">*</font></label>
-					<textarea class="form-control full-width wysihtml5" name="description" value="description" rows="5" required>{{{ Input::old('description', isset($post) ? $post->description : null) }}}</textarea>
+			<label class="col-md-2 control-label" for="email">Description <font color="red">*</font></label>
+			<div class="col-md-6">
+            		<textarea class="form-control full-width wysihtml5" name="description" value="description" rows="5" required>{{{ Input::old('description', isset($post) ? $post->description : null) }}}</textarea>
 					{{{ $errors->first('description', '<span class="help-block">:message</span>') }}}
 			</div>
 		</div>
