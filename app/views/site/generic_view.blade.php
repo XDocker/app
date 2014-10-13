@@ -58,10 +58,11 @@
 								
 							</p>
 							<p>
-								<span title="Created At"><span class="glyphicon glyphicon-calendar"></span> <strong>Build Date</strong>{{{ $deployment->created_at }}}</span>
+								<span title="Created At"><span class="glyphicon glyphicon-calendar"></span> <strong>Build Date</strong>:{{{ $deployment->created_at }}}</span>
 							</p>
 							<p>
-								<span title="Status"><span class="glyphicon glyphicon-asterisk"></span> <!--Sept 16th, 2012-->{{{ $deployment->status }}}</span>
+								<span class="label label-success">Success</span>
+								<span title="Status"><span class="glyphicon glyphicon-asterisk"></span> <!--Sept 16th, 2012-->{{{ UIHelper::getLabel($deployment->status) }}}</span>
 							</p>
 						</div>
 					</div>
