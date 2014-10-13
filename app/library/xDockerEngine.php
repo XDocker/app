@@ -100,18 +100,18 @@ class xDockerEngine {
 	
 	public static function getTag($dockerName)
 	{
-		$setting = Config::get('docker_settings');
-		return isset($setting[$dockerName]) ? $setting[$dockerName]['tags'] : '';
+		$settings = Config::get('docker_settings');
+		return isset($settings[$dockerName]) ? $settings[$dockerName]['tags'] : '';
 	}
 	public static function getLogo($dockerName)
 	{
-		$setting = Config::get('docker_settings');
-		return isset($setting[$dockerName]) ? $setting[$dockerName]['logo'] : '';
+		$settings = Config::get('docker_settings');
+		return isset($settings[$dockerName]) ? $settings[$dockerName]['logo'] : '';
 	}
 	
 	public static function getProtocol($dockerName)
 	{
 		$settings = Config::get('docker_settings');
-		return isset($setting[$dockerName]) ? $setting[$dockerName]['protocol'] : '';
+		return isset($settings[$dockerName]) ? $settings[$dockerName]['protocol'] : '';
 	}
 }
