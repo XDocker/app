@@ -28,6 +28,7 @@ Route::model('post', 'Post');
 Route::model('role', 'Role');
 Route::model('deployments', 'Deployment');
 Route::model('account', 'CloudAccount');
+Route::model('tickets', 'ticket');
 Route::model('engine_logs', 'EngineLog');
 
 /** ------------------------------------------
@@ -41,6 +42,7 @@ Route::pattern('role', '[0-9]+');
 Route::pattern('token', '[0-9a-z]+');
 
 Route::pattern('account', '[0-9]+');
+Route::pattern('ticket', '[0-9]+');
 Route::pattern('deployment', '[0-9]+');
 Route::pattern('enginelog', '[0-9]+');
 
@@ -126,6 +128,11 @@ Route::group(array(
     Route::any('account/', 'AccountController@getIndex'); 
 	Route::get('account/create', 'AccountController@getCreate');
     Route::get('account/{account}/edit', 'AccountController@getCreate');
+	
+	Route::any('ticket/', 'TicketController@getIndex'); 
+	Route::get('ticket/create', 'TicketController@getCreate');
+    Route::get('ticket/{ticket}/edit', 'TicketController@getCreate');
+	
 	Route::any('deployment/', 'DeploymentController@getIndex');
     Route::get('deployment/create', 'DeploymentController@getCreate');
 	Route::any('enginelog/', 'EnginelogController@getIndex'); 
@@ -144,6 +151,9 @@ Route::group(array(
         Route::post('deployment/create', 'DeploymentController@postEdit');
         Route::post('deployment/{deployment}/delete', 'DeploymentController@postDelete');
 		Route::post('deployment/{deployment}/instanceAction', 'DeploymentController@postInstanceAction');
+		 Route::post('ticket/create', 'TicketController@postEdit');
+        Route::post('ticket/{ticket}/edit', 'TicketController@postEdit');
+        Route::post('ticket/{ticket}/delete', 'TicketController@postDelete');
     });
     
     

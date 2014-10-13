@@ -65,6 +65,7 @@
 		                        @if (Auth::user()->hasRole('admin'))
 		                        	<li><a href="{{{ URL::to('admin') }}}">{{{ Lang::get('site.admin_panel') }}}</a></li>
 		                        @endif
+		                        
 		                        <li class="dropdown">
 		                        	<a class="dropdown-toggle" data-toggle="dropdown" href="#">
 	    								<span class="glyphicon glyphicon-cog"></span> {{{ Lang::get('site.services') }}}	<span class="caret"></span>
@@ -80,6 +81,14 @@
 	    								
 	    							</ul>
 		                        </li>
+		                        <li class="dropdown">
+		                        	<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+	    								<span class="glyphicon glyphicon-cog"></span> {{{ Lang::get('site.support') }}}	<span class="caret"></span>
+	    							</a>
+	    							<ul class="dropdown-menu">
+	    								<li><a href="{{{ URL::to('account') }}}"><span class="glyphicon glyphicon-wrench"></span> {{{ Lang::get('site.accounts') }}}</a></li>
+	    							</ul>
+	    						</li>
 		                        <li class="dropdown">
 		    							<a class="dropdown-toggle" data-toggle="dropdown" href="#">
 	    									<span class="glyphicon glyphicon-user"></span> {{{ Auth::user()->username }}}	<span class="caret"></span>

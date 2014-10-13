@@ -23,6 +23,7 @@ return array(
     'log_out' => 'Logout',
     'edit_profile' => 'Edit Profile',
     'services' => 'Services',
+    'support' => 'Support',
     'accounts' => 'Accounts',
     'deployments' => 'Deployments',
     'enginelog' => 'Request Logs',
