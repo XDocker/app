@@ -111,7 +111,10 @@ class xDockerEngine {
 	
 	public static function getProtocol($dockerName)
 	{
-		$setting = Config::get('docker_settings');
-		return isset($setting[$dockerName]) ? $setting[$dockerName]['protocol'] : '';
+		$settings = Config::get('docker_settings');
+		foreach($settings as $key => $value)
+		{
+			if($key == $dockerName )  return $value['protocol'];
+		}
 	}
 }
