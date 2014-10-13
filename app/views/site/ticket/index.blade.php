@@ -18,7 +18,7 @@
 	  			<li class="list-group-item">
 					<div class="media">
 						
-						<form class="pull-right" method="post" action="{{ URL::to('ticket/' . $ticket->id . '/ticket') }}">
+						<form class="pull-right" method="post" action="{{ URL::to('ticket/' . $ticket->id . '/close') }}">
 							<!-- CSRF Token -->
 							<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
 							<!-- ./ csrf token -->

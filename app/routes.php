@@ -133,6 +133,7 @@ Route::group(array(
 	Route::get('ticket/create', 'TicketController@getCreate');
     Route::get('ticket/{ticket}/edit', 'TicketController@getCreate');
 	Route::get('ticket/{ticket}/reply', 'TicketController@getReply');
+	Route::any('ticket/{ticket}/close', 'TicketController@closeTicket');
 	
 	Route::any('deployment/', 'DeploymentController@getIndex');
     Route::get('deployment/create', 'DeploymentController@getCreate');

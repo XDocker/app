@@ -96,6 +96,18 @@ class TicketController extends BaseController {
         return View::make('site/ticket/reply', compact('mode', 'ticket', 'priorities'));
 	}
 	
+	public function closeTicket($id = false)
+	{
+		$ticket = $id !== false ? Ticket::where('user_id', Auth::id())->findOrFail($id) : null;
+		$ticket->active = FALSE;
+		$success = $ticket->save();
+		if ($success) {
+                return Redirect::intended('ticket')->with('success', Lang::get('ticket/ticket.ticket_updated'));
+        } else {
+                return Redirect::to('ticket')->with('error', Lang::get('ticket/ticket.ticket_auth_failed'));
+        }
+	}
+	
 	
     /**
      * Remove the specified Ticket .
