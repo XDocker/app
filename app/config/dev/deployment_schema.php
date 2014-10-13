@@ -34,8 +34,7 @@ return array(
                 'm3.medium',
                 'm3.large',
                 'm3.xlarge',
-                'm3.2xlarge',
-                't1.micro'
+                'm3.2xlarge'
             )
         ),
 		 'parameters[ports]' => array(
