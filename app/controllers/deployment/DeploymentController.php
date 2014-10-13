@@ -37,6 +37,7 @@ class DeploymentController extends BaseController {
         $deployments = $this->deployments
             ->select('deployments.id', 'cloud_accounts.name as accountName', 
             		 'cloud_accounts.cloudProvider', 'deployments.name', 
+            		 'deployments.docker_name', 
             		 'deployments.cloud_account_id', 'deployments.status', 
             		 'deployments.wsResults',
             		 'deployments.created_at')
