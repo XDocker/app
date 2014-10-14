@@ -15,7 +15,9 @@ return array(
    									 				  				'AWS_ACCESS_KEY_ID' => '{AWS_ACCESS_KEY_ID}',
 																	'AWS_SECRET_ACCESS_KEY' => '{AWS_SECRET_ACCESS_KEY}',
 																	'BILLING_BUCKET' =>'{BILLING_BUCKET}'), 
-   									 				  				'tag' => 'v1'),
+   									 				  				'tag' => 'v1',
+																	'cmd' => '/home/ubuntu/securitymonkey.sh',
+   									 				  ),
    									 'protocol' => 'https://',
 									 'enabled' => TRUE),
    									 
@@ -23,8 +25,9 @@ return array(
    'xdocker/netflix_ice' => array('displayName' => 'Netflix ICE',
    								  'docker_url' => 'https://registry.hub.docker.com/u/xdocker/netflix_ice/', 
    								  'dockerParams' => array('ports' => array(443, 5000, 8080), 
-   									 				  'env' => array('host' => '{host}', 
-   									 				  				 'tag' => 'v2'),),
+   								  					 'env' => array('host' => '{host}', 
+   									 				  				 'tag' => 'v2',
+																	 'cmd' => ''),),
    								  'logo' => 'placeholder.jpg', 'protocol' => 'http://',  'enabled' => TRUE),
    								  
    'stefobark/sphinxdocker' => array('displayName' => 'Sphinx', 
