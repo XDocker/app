@@ -29,7 +29,7 @@ class AWSPricingController extends BaseController {
      * @return View
      */
     public function getIndex() {
-        $ec2 = new Ec2InstancePrices();
+        $ec2 = new EC2InstancePrices();
 		
         return View::make('site/aws/index', array(
             'ec2Data' => $ec2->getEc2Data()
