@@ -96,8 +96,8 @@ class TicketController extends BaseController {
         return View::make('site/ticket/reply', compact('mode', 'ticket', 'priorities'));
 	}
 	
-	 public function postReply($ticket = false) {
-	 	
+	 public function postReply($id = false) {
+	 	$ticket = $id !== false ? Ticket::where('user_id', Auth::id())->findOrFail($id) : null;
         try {
             if (empty($ticket)) {
                 return Redirect::to('ticket')->with('error', 'You need a ticket to comment');
@@ -106,15 +106,15 @@ class TicketController extends BaseController {
             $ticketComment = new TicketComments;
             $ticketComment->user_id = Auth::id(); // logged in user id
             
-            $ticketComment->ticket_id = $ticket->id;
+            $ticketComment->ticket_id = $id;
             $ticketComment->comments = Input::get('comments');
 			$success = $ticketComment->save();
 			
 			 
             if ($success) {
-                return Redirect::intended('ticket')->with('success', Lang::get('ticket/ticket.ticket_updated'));
+                return Redirect::intended('ticket')->with('success', Lang::get('ticket/ticket.ticket_comments_updated'));
             } else {
-                return Redirect::to('ticket')->with('error', Lang::get('ticket/ticket.ticket_auth_failed'));
+                return Redirect::to('ticket')->with('error', Lang::get('ticket/ticket.ticket_comment_update_failed'));
             }
         }
         catch(Exception $e) {
