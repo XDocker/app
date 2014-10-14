@@ -25,7 +25,8 @@ Inverse	<span class="label label-inverse">Inverse</span>
 			case 'Completed' 	: return '<span class="label label-success">'.$status.'</span>'; break;
 			case 'In Progress'  : return '<span class="label">'.$status.'</span>'; break;
 			case 'Started' 		: 
-			case 'start' 		: return '<span class="label label-info">'.$status.'</span>'; break;
+			case 'start' 		: 
+			case 'started' 		: return '<span class="label label-info">'.$status.'</span>'; break;
 			case 'Stop' 		: return '<span class="label label-inverse">'.$status.'</span>'; break;
 			case 'failed' 		: return '<span class="label label-important">'.$status.'</span>'; break;
 		}
