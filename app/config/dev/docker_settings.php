@@ -25,7 +25,7 @@ return array(
    								  					 'env' => array('host' => '{host}', 
    								  					 				'AWS_ACCESS_KEY_ID' => '{AWS_ACCESS_KEY_ID}',
 																	'AWS_SECRET_ACCESS_KEY' => '{AWS_SECRET_ACCESS_KEY}',
-																	'BILLING_BUCKET' =>'{BILLING_BUCKET}'), 
+																	'BILLING_BUCKET' =>'{billingBucket}'), 
    									 				  				 'tag' => 'v2',
 																	 'cmd' => ''),),
    								  'logo' => 'placeholder.jpg', 'protocol' => 'http://',  'enabled' => TRUE),
