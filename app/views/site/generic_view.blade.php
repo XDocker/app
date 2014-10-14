@@ -1,7 +1,7 @@
 <div class="page-header">
 	<div class="row">
 		<div class="col-md-9">
-			<h4>Your Deployments:</h4>
+			<h5>Your Deployments:</h5>
 		</div>
 	</div>
 </div>
@@ -81,7 +81,7 @@
 <div class="page-header">
 	<div class="row">
 		<div class="col-md-9">
-			<h4>Public Docker Images:</h4>
+			<h5>Public Docker Images:</h5>
 		</div>
 		<div class="col-md-3">
 			<form class="navbar-right" action="#" role="search" method="get">

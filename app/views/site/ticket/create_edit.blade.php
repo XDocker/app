@@ -6,7 +6,7 @@
 	<div class="page-header">
 		<div class="row">
 			<div class="col-md-9">
-				<h4>{{isset($ticket->id)?'Edit':'Create'}} Ticket:</h4>
+				<h5>{{isset($ticket->id)?'Edit':'Create'}} Ticket:</h5>
 			</div>
 		</div>
 	</div>

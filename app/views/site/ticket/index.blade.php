@@ -6,7 +6,7 @@
 <div class="page-header">
 	<div class="row">
 		<div class="col-md-9">
-			<h4>{{{ Lang::get('ticket/ticket.your_tickets') }}}</h4>
+			<h5>{{{ Lang::get('ticket/ticket.your_tickets') }}}</h5>
 		</div>
 	</div>
 </div>
