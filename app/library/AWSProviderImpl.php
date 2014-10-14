@@ -148,7 +148,7 @@ class AWSPRoviderImpl implements IProvider
 			catch(Exception $ex)
 			{
 				Log::error($ex);
-				return array('status' => 'error', 'message' => 'Error occured during terminateInstances - '.$params['InstanceIds']);
+				return array('status' => 'error', 'message' => 'Error occured during terminateInstances - '.json_encode($params['InstanceIds']));
 			}
 		} 
 		else
