@@ -10,7 +10,7 @@
 	<ul class="list-group">
 		@if(!empty($deployments)) 
 			@foreach ($deployments as $deployment)
-				@if(xDockerEngine::enabled($deployment->docker_name))
+				
 					<?php $result = json_decode($deployment->wsResults); 
 						if(empty($result)) 
 						{
@@ -66,8 +66,7 @@
 								</p>
 							</div>
 						</div>
-					</li>
-				@endif	
+					</li>	
 			@endforeach
 		@endif
 	</ul>
@@ -103,35 +102,37 @@
 <div class="media-block">
 	<ul class="list-group list-group-custom">
 		@foreach($dockerInstances as $instance)
-  		<li class="list-group-item">
-  			<!--[is_automated] => 1
-            [name] => vubui/ubuntu
-            [is_trusted] => 1
-            [is_official] => 
-            [star_count] => 0
-            [description] => -->
-			<div class="media">
-				<span class="pull-left" href="#">
-					<img style="width:25px;height:25px" class="media-object img-responsive" src="{{ asset('/assets/img/providers/'.xDockerEngine::getLogo($instance -> name)) }}" alt="{{ $instance -> name }}" />
-				</span>
-				<a href="{{ URL::to('deployment/create/') }}?name={{urlencode($instance -> name)}}" class="btn btn-primary pull-right" role="button"><span class="glyphicon glyphicon-play"></span></a>
-				<div class="media-body">
-					<h4 class="media-heading">{{{!empty($instance -> name)?$instance -> name:''}}}</h4>
-				    <p>
-				    	{{{!empty($instance -> description)?$instance -> description:''}}}
-					</p>
-					<p>
-				    	{{{!empty($instance -> is_automated)?$instance -> is_automated:'Not Automated'}}}
-				    	|
-				    	{{{!empty($instance -> is_trusted)?$instance -> is_trusted:'Not Trusted'}}}
-				    	|
-				    	{{{!empty($instance -> is_official)?$instance -> is_official:'Not Official'}}}
-				    	|
-				    	{{{!empty($instance -> star_count)?$instance -> star_count:'0'}}}
-					</p>
+			@if(xDockerEngine::enabled($instance->name))
+	  			<li class="list-group-item">
+	  			<!--[is_automated] => 1
+	            [name] => vubui/ubuntu
+	            [is_trusted] => 1
+	            [is_official] => 
+	            [star_count] => 0
+	            [description] => -->
+				<div class="media">
+					<span class="pull-left" href="#">
+						<img style="width:25px;height:25px" class="media-object img-responsive" src="{{ asset('/assets/img/providers/'.xDockerEngine::getLogo($instance -> name)) }}" alt="{{ $instance -> name }}" />
+					</span>
+					<a href="{{ URL::to('deployment/create/') }}?name={{urlencode($instance -> name)}}" class="btn btn-primary pull-right" role="button"><span class="glyphicon glyphicon-play"></span></a>
+					<div class="media-body">
+						<h4 class="media-heading">{{{!empty($instance -> name)?$instance -> name:''}}}</h4>
+					    <p>
+					    	{{{!empty($instance -> description)?$instance -> description:''}}}
+						</p>
+						<p>
+					    	{{{!empty($instance -> is_automated)?$instance -> is_automated:'Not Automated'}}}
+					    	|
+					    	{{{!empty($instance -> is_trusted)?$instance -> is_trusted:'Not Trusted'}}}
+					    	|
+					    	{{{!empty($instance -> is_official)?$instance -> is_official:'Not Official'}}}
+					    	|
+					    	{{{!empty($instance -> star_count)?$instance -> star_count:'0'}}}
+						</p>
+					</div>
 				</div>
-			</div>
-		</li>
+			</li>
+			@endfor
 		@endforeach
 	</ul>
 	<!-- <div class="text-center">
