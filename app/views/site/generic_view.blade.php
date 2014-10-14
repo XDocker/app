@@ -132,7 +132,7 @@
 					</div>
 				</div>
 			</li>
-			@endfor
+			@endif
 		@endforeach
 	</ul>
 	<!-- <div class="text-center">
