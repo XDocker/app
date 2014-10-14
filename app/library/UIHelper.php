@@ -20,10 +20,10 @@ Important	<span class="label label-important">Important</span>
 Info	<span class="label label-info">Info</span>
 Inverse	<span class="label label-inverse">Inverse</span>
 		 */
-		switch(strtolower($status))
+		switch($status)
 		{
-			case 'completed' 	: return '<span class="label label-success">'.$status.'</span>'; break;
-			case 'in progress'  : return '<span class="label">'.$status.'</span>'; break;
+			case 'Completed' 	: return '<span class="label label-success">'.$status.'</span>'; break;
+			case 'In Progress'  : return '<span class="label">'.$status.'</span>'; break;
 			case 'start' 		: 
 			case 'started' 		: return '<span class="label label-info">'.$status.'</span>'; break;
 			case 'stop' 		: return '<span class="label label-inverse">'.$status.'</span>'; break;
