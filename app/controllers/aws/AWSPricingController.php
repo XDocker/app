@@ -7,7 +7,7 @@
  * Classes list:
  * - AWSController extends BaseController
  */
-class AWSController extends BaseController {
+class AWSPricingController extends BaseController {
    
     /**
      * User Model
