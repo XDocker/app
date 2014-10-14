@@ -12,7 +12,7 @@ body {
 #footer {
     margin-bottom: 0;
     position: absolute;
-    bottom: 0;
+    /*bottom: 0;*/
     width: 100%;
 }
 .social-login-icons {
