@@ -61,14 +61,15 @@
 				<button type="submit" class="btn btn-primary">Comment</button>
 			</div>
 		</div>
-		
+		<!--
 		@foreach($ticketComments as $comment)
 		<div class="form-group {{{ $errors->has('comment') ? 'has-error' : '' }}}">
 			<div class="col-md-6">
-            		<textarea class="form-control full-width wysihtml5" name="pastComment" value="pastComment" rows="3" readonly>{{{$comment->comment}}}</textarea>
+            		<textarea class="form-control full-width wysihtml5" name="pastComment" value="pastComment" rows="3" readonly>{{{$comment}}}</textarea>
 			</div>
 		</div>
 		@endforeach
+		-->
 		<!-- ./ form actions -->
 	</form>
 @stop
