@@ -102,7 +102,7 @@ class xDockerEngine {
 	public static function getTag($dockerName)
 	{
 		$settings = Config::get('docker_settings');
-		return isset($settings[$dockerName]) ? $settings[$dockerName]['dockerParams']['env']['tag'] : '';
+		return isset($settings[$dockerName]) ? $settings[$dockerName]['tags'] : '';
 	}
 	public static function getLogo($dockerName)
 	{
