@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'AWSController' => $baseDir . '/app/controllers/aws/AWSPricingController.php',
     'AWSPRoviderImpl' => $baseDir . '/app/library/AWSProviderImpl.php',
     'AccountController' => $baseDir . '/app/controllers/account/AccountController.php',
     'AddEngineKeyLog' => $baseDir . '/app/database/migrations/2014_09_29_041347_add_engine_key_log.php',
@@ -42,6 +43,7 @@ return array(
     'DatabaseSeeder' => $baseDir . '/app/database/seeds/DatabaseSeeder.php',
     'Deployment' => $baseDir . '/app/models/Deployment.php',
     'DeploymentController' => $baseDir . '/app/controllers/deployment/DeploymentController.php',
+    'EC2InstancePrices' => $baseDir . '/app/library/EC2InstancePrices.php',
     'EngineLog' => $baseDir . '/app/models/EngineLog.php',
     'EnginelogController' => $baseDir . '/app/controllers/enginelog/EnginelogController.php',
     'EntrustPermissions' => $baseDir . '/app/database/migrations/2013_05_21_024934_entrust_permissions.php',
