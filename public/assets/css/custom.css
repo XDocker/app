@@ -4,6 +4,7 @@ body {
     padding: 0;
     height: 100%;
 }
+/*
 .page-header {
 	padding-bottom: 1.0px;
 	margin-top: 10px;
@@ -12,6 +13,7 @@ body {
 	margin-left: 0px;
 	border-bottom: 1px solid #eeeeee;
 }
+*/
 #wrap {
     position: relative;
     min-height: 100%;
