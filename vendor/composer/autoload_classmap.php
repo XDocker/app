@@ -6,8 +6,8 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'AWSController' => $baseDir . '/app/controllers/aws/AWSPricingController.php',
     'AWSPRoviderImpl' => $baseDir . '/app/library/AWSProviderImpl.php',
+    'AWSPricingController' => $baseDir . '/app/controllers/aws/AWSPricingController.php',
     'AccountController' => $baseDir . '/app/controllers/account/AccountController.php',
     'AddEngineKeyLog' => $baseDir . '/app/database/migrations/2014_09_29_041347_add_engine_key_log.php',
     'AddToDeployment' => $baseDir . '/app/database/migrations/2014_09_29_041347_add_to_deployment.php',
