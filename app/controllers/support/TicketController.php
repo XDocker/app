@@ -91,9 +91,11 @@ class TicketController extends BaseController {
 	public function getReply($id = false)
 	{
 		$ticket = $id !== false ? Ticket::where('user_id', Auth::id())->findOrFail($id) : null;
+		
+		$ticketComments = $id !== false ? Ticket::where('user_id', Auth::id())->findOrFail($id) : null;
 		//@TODO get all comments for the tickets.
 		$priorities =array('urgent', 'high', 'medium', 'low');
-        return View::make('site/ticket/reply', compact('mode', 'ticket', 'priorities'));
+        return View::make('site/ticket/reply', compact('mode', 'ticket', 'priorities', 'ticketComments'));
 	}
 	
 	 public function postReply($id = false) {
