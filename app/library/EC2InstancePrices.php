@@ -13,7 +13,7 @@
  */
 class EC2InstancePrices {
 	private $EC2_REGIONS = array("us-east-1", "us-west-1", "us-west-2", "eu-west-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "sa-east-1");
-	private $EC2_INSTANCE_TYPES = array("t1.micro", "m1.medium", "m1.large", "m1.xlarge", "m2.xlarge", "m2.2xlarge", "m3.xlarge", "m3.2xlarge", "m2.4xlarge", "c1.medium", "c1.xlarge", "cc1.4xlarge", "cc2.8xlarge", "cg1.4xlarge");
+	private $EC2_INSTANCE_TYPES = array("t1.micro", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m2.xlarge", "m2.2xlarge", "m3.xlarge", "m3.2xlarge", "m2.4xlarge", "c1.medium", "c1.xlarge", "cc1.4xlarge", "cc2.8xlarge", "cg1.4xlarge");
 
 	private $EC2_OS_TYPES = array("linux", "mswin");
 
@@ -106,7 +106,7 @@ class EC2InstancePrices {
 							$instance_type = $this -> INSTANCE_TYPE_MAPPING[$it["type"]];
 							if (array_key_exists("sizes", $it)) {
 								foreach ($it["sizes"] as $s) {
-									$instance_size = $this -> INSTANCE_SIZE_MAPPING[$s["size"]];
+									$instance_size = isset( $this -> INSTANCE_SIZE_MAPPING[$s["size"]]) ?  $this -> INSTANCE_SIZE_MAPPING[$s["size"]]: 'm1.small';
 
 									$prices = array("1year" => array("hourly" => NULL, "upfront" => NULL), "3year" => array("hourly" => NULL, "upfront" => NULL));
 
