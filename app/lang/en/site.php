@@ -28,6 +28,7 @@ return array(
     'tickets' => 'Tickets',
     'deployments' => 'Deployments',
     'enginelog' => 'Request Logs',
+    'aws_pricing' => 'AWS Prices',
     'admin_panel' => 'Admin Panel',
     'name'=>'xDocker',
     'tagline'=>'Deploy & manage docker images on any IaaS/On-Premise',
