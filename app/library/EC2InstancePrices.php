@@ -355,7 +355,7 @@
             return NULL;
         }
 
-        function get_ec2_data() {
+        function getEc2Data() {
 
             $ret = array(
                 "reserved_instances" => $this -> get_ec2_reserved_instances_prices(),
