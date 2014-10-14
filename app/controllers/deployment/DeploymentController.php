@@ -176,9 +176,8 @@ class DeploymentController extends BaseController {
                                         'instanceAmi' => $parameters->instanceAmi,
                                         'OS' => $parameters->OS,
                                         'packageName' => $deployment -> docker_name,
-                                        'dockerParams' => array('ports' => $parameters->ports, 
-                                                                'env' => array('mail' =>$user->email, 'host'=> '{host}'), 
-                                                                'tag'=> xDockerEngine::getTag($deployment -> docker_name))   )
+                                        'dockerParams' => xDockerEngine::getDockerParams($deployment -> docker_name)  
+										)
                                       );			  				
 	}
 

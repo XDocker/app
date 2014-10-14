@@ -10,63 +10,64 @@
 	<ul class="list-group">
 		@if(!empty($deployments)) 
 			@foreach ($deployments as $deployment)
-			
-			<?php $result = json_decode($deployment->wsResults); 
-				if(empty($result)) 
-				{
-					$result = new stdClass();
-					$result ->instance_id = '';
-				}
-			?>
-	  			<li class="list-group-item">
-					<div class="media">
-						<p>
-							<a href="{{ URL::to('account/'.$deployment->cloud_account_id.'/edit') }}" class="pull-left" href="#">
-							    <img class="media-object img-responsive" src="{{ asset('/assets/img/providers/'.Config::get('provider_meta.'.$deployment->cloudProvider.'.logo')) }}" alt="{{ $deployment->cloudProvider }}" />
-							    <p class="text-center">{{{$deployment->accountName}}}</p>
-							</a> 
-						</p>
-						<form class="pull-right" method="post" action="{{ URL::to('deployment/' . $deployment->id . '/refresh') }}">
-							<!-- CSRF Token -->
-							<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
-							<!-- ./ csrf token -->
-							<button type="submit" class="btn btn-success pull-right" role="button"><span class="glyphicon glyphicon-refresh"></span></button>
-						</form>
-						<form class="pull-right" method="post" action="{{ URL::to('deployment/' . $deployment->id . '/delete') }}">
-							<!-- CSRF Token -->
-							<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
-							<input type="hidden" name="instanceAction" value="terminate" />
-							<input type="hidden" name="instanceID" value="{{{ $result->instance_id }}}" />
-							<!-- ./ csrf token -->
-							<button type="submit" class="btn btn-danger pull-right" role="button"><span class="glyphicon glyphicon-trash"></span></button>
-						</form>
-						<div class="media-body">
-							
-							<h4 class="media-heading">{{ String::title($deployment->name) }}</h4>
+				@if(xDockerEngine::enabled($deployment->docker_name))
+					<?php $result = json_decode($deployment->wsResults); 
+						if(empty($result)) 
+						{
+							$result = new stdClass();
+							$result ->instance_id = '';
+						}
+					?>
+		  			<li class="list-group-item">
+						<div class="media">
 							<p>
-								<?php
-								if(in_array($deployment->status, array('Completed', 'start', 'stop')))
-									{
-										$url = URL::to('deployment/'.$deployment->id.'/instanceAction');
-										$anchor = '<a target="_blank" href="'.xDockerEngine::getProtocol($deployment->docker_name). $result->public_dns .'">'.xDockerEngine::getDisplayName($deployment->docker_name).'</a>';
-										echo $result->instance_id . ' | ' .xDockerEngine::getDockerUrl($deployment->docker_name) . ' | ' .$anchor . '<br/>';
-										echo '<a href="#" onclick="start(\''.$url.'\',\''.$result->instance_id.'\', \''.csrf_token().'\')">Start</a> |'  .
-										'<a href="#" onclick="stop(\''.$url.'\',\''.$result->instance_id.'\', \''.csrf_token().'\')">Stop</a> |'  .
-										'<a href="#" onclick="restart(\''.$url.'\',\''.$result->instance_id.'\', \''.csrf_token().'\')">Restart</a>'  ;
-									}
-								?>
+								<a href="{{ URL::to('account/'.$deployment->cloud_account_id.'/edit') }}" class="pull-left" href="#">
+								    <img class="media-object img-responsive" src="{{ asset('/assets/img/providers/'.Config::get('provider_meta.'.$deployment->cloudProvider.'.logo')) }}" alt="{{ $deployment->cloudProvider }}" />
+								    <p class="text-center">{{{$deployment->accountName}}}</p>
+								</a> 
+							</p>
+							<form class="pull-right" method="post" action="{{ URL::to('deployment/' . $deployment->id . '/refresh') }}">
+								<!-- CSRF Token -->
+								<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
+								<!-- ./ csrf token -->
+								<button type="submit" class="btn btn-success pull-right" role="button"><span class="glyphicon glyphicon-refresh"></span></button>
+							</form>
+							<form class="pull-right" method="post" action="{{ URL::to('deployment/' . $deployment->id . '/delete') }}">
+								<!-- CSRF Token -->
+								<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
+								<input type="hidden" name="instanceAction" value="terminate" />
+								<input type="hidden" name="instanceID" value="{{{ $result->instance_id }}}" />
+								<!-- ./ csrf token -->
+								<button type="submit" class="btn btn-danger pull-right" role="button"><span class="glyphicon glyphicon-trash"></span></button>
+							</form>
+							<div class="media-body">
 								
-							</p>
-							<p>
-								<span title="Created At"><span class="glyphicon glyphicon-calendar"></span> <strong>Build Date</strong>:{{{ $deployment->created_at }}}</span>
-							</p>
-							<p>
-								
-								<span title="Status">{{ UIHelper::getLabel($deployment->status) }}</span>
-							</p>
+								<h4 class="media-heading">{{ String::title($deployment->name) }}</h4>
+								<p>
+									<?php
+									if(in_array($deployment->status, array('Completed', 'start', 'stop')))
+										{
+											$url = URL::to('deployment/'.$deployment->id.'/instanceAction');
+											$anchor = '<a target="_blank" href="'.xDockerEngine::getProtocol($deployment->docker_name). $result->public_dns .'">'.xDockerEngine::getDisplayName($deployment->docker_name).'</a>';
+											echo $result->instance_id . ' | ' .xDockerEngine::getDockerUrl($deployment->docker_name) . ' | ' .$anchor . '<br/>';
+											echo '<a href="#" onclick="start(\''.$url.'\',\''.$result->instance_id.'\', \''.csrf_token().'\')">Start</a> |'  .
+											'<a href="#" onclick="stop(\''.$url.'\',\''.$result->instance_id.'\', \''.csrf_token().'\')">Stop</a> |'  .
+											'<a href="#" onclick="restart(\''.$url.'\',\''.$result->instance_id.'\', \''.csrf_token().'\')">Restart</a>'  ;
+										}
+									?>
+									
+								</p>
+								<p>
+									<span title="Created At"><span class="glyphicon glyphicon-calendar"></span> <strong>Build Date</strong>:{{{ $deployment->created_at }}}</span>
+								</p>
+								<p>
+									
+									<span title="Status">{{ UIHelper::getLabel($deployment->status) }}</span>
+								</p>
+							</div>
 						</div>
-					</div>
-				</li>
+					</li>
+				@endif	
 			@endforeach
 		@endif
 	</ul>

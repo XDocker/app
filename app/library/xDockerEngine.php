@@ -98,10 +98,11 @@ class xDockerEngine {
         return self::request(self::$orchestrationParams['endpoint_ip'] . self::$orchestrationParams['downloadKey'], $data);
     }
 	
+	///Following methods are helper for accessing the config variables
 	public static function getTag($dockerName)
 	{
 		$settings = Config::get('docker_settings');
-		return isset($settings[$dockerName]) ? $settings[$dockerName]['tags'] : '';
+		return isset($settings[$dockerName]) ? $settings[$dockerName]['dockerParams']['env']['tag'] : '';
 	}
 	public static function getLogo($dockerName)
 	{
@@ -127,5 +128,17 @@ class xDockerEngine {
 		$url = isset($settings[$dockerName]) ? $settings[$dockerName]['docker_url'] : '';
 		return '<a target="_blank" href="'.$url.'">' .$img.  $dockerName.'</a>';
 		
+	}
+	
+	public static function getDockerParams($dockerName)
+	{
+		$settings = Config::get('docker_settings');
+		return isset($settings[$dockerName]) ? $settings[$dockerName]['dockerParams'] : '';
+	}
+	
+	public static function enabled($dockerName)
+	{
+		$settings = Config::get('docker_settings');
+		return isset($settings[$dockerName]) ? $settings[$dockerName]['enabled'] : FALSE;
 	}
 }
