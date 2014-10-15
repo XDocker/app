@@ -34,17 +34,7 @@ class DeploymentController extends BaseController {
     
     public function getIndex() {
         // Get all the user's deployment
-        $deployments = $this->deployments
-            ->select('deployments.id', 'cloud_accounts.name as accountName', 
-            		 'cloud_accounts.cloudProvider', 'deployments.name', 
-            		 'deployments.docker_name', 'deployments.parameters',
-            		 'deployments.cloud_account_id', 'deployments.status', 
-            		 'deployments.wsResults',
-            		 'deployments.created_at')
-            ->leftJoin('cloud_accounts', 'deployments.cloud_account_id', '=', 'cloud_accounts.id')
-            ->where('deployments.user_id', Auth::id())
-            ->orderBy('deployments.created_at', 'DESC')
-            ->paginate(10);
+        $deployments = DeploymentQueryHelper::getQuery( $this->deployments, 10 );
 			
 			$search_term = Input::get('q');
             if (empty($search_term)) {
