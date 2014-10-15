@@ -23,12 +23,12 @@ Inverse	<span class="label label-inverse">Inverse</span>
 		switch($status)
 		{
 			case 'Completed' 	: return '<span class="label label-success">'.$status.'</span>'; break;
-			case 'In Progress'  : return '<span class="label">'.$status.'</span>'; break;
+			case 'In Progress'  : 
 			case 'start' 		: 
 			case 'started' 		: return '<span class="label label-info">'.$status.'</span>'; break;
 			case 'stop' 		: return '<span class="label label-warning">'.$status.'</span>'; break;
 			case 'failed' 		: return '<span class="label label-danger">'.$status.'</span>'; break;
-			default:			  return '<span class="label label-info">'.$status.'</span>'; break;
+			default:			  return '<span class="label label-danger">'.$status.'</span>'; break;
 								
 		}
 	}
