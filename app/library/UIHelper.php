@@ -39,7 +39,7 @@ Inverse	<span class="label label-inverse">Inverse</span>
 			//Array ( [config] => Array ( [currency] => USD [unit] => perhr ) [regions] => 
 			//Array ( [0] => Array ( [region] => us-east-1 [instanceTypes] 
 			//=> Array ( [0] => Array ( [type] => m1.small [os] => linux [price] => 0.06 ) ) ) ) )
-			
+			$instanceType = $data['regions'][0]['instanceTypes'];
 			return ' <table class="table table-bordered"> '.
               		' <thead> ' .
                 	'	<tr>'.
@@ -53,8 +53,8 @@ Inverse	<span class="label label-inverse">Inverse</span>
               		'<tr>'.
               		'<td>YES</td>'.
               		'<td>'.$data['regions'][0]['region'].'<td>'.
-              		'<td>'.$data['regions'][0]['instanceTypes'][0]['type'].'<td>'.
-              		'<td>'.$data['regions'][0]['instanceTypes'][0]['os'].'<td>'.
+              		'<td>'.$instanceType[0]['type'].'<td>'.
+              		'<td>'.$instanceType[0]['os'].'<td>'.
               		'<td>'.self::getPrice($data).'<td>'.
 					'</tr>'.
 					'</table>';
