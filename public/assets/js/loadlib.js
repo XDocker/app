@@ -1,9 +1,9 @@
-;loadImages = function(val)
+;loadImages = function(val, url)
 {
 	var cloudProvider = $('#cloud_account_id').find('option:selected').data('cloud-provider');
 	var region = val.value;
 	var request = $.ajax({
-				  url: "{{ URL::to('deployment/images') }}",
+				  url: url,
 				  type: "GET",
 				  data: { "cloudProvider" : cloudProvider, "region" : val.value },
 				  dataType: "json"
