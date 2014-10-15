@@ -40,6 +40,8 @@ Inverse	<span class="label label-inverse">Inverse</span>
 			//Array ( [0] => Array ( [region] => us-east-1 [instanceTypes] 
 			//=> Array ( [0] => Array ( [type] => m1.small [os] => linux [price] => 0.06 ) ) ) ) )
 			$instanceType = $data['regions'][0]['instanceTypes'];
+			$obj = json_decode(json_encode($data));
+			
 			return ' <table class="table table-bordered"> '.
               		' <thead> ' .
                 	'	<tr>'.
@@ -52,10 +54,10 @@ Inverse	<span class="label label-inverse">Inverse</span>
               		'</thead>'.
               		'<tr>'.
               		'<td>YES</td>'.
-              		'<td>'.$data['regions'][0]['region'].'<td>'.
-              		'<td>'.$instanceType[0]['type'].'<td>'.
-              		'<td>'.$instanceType[0]['os'].'<td>'.
-              		'<td>'.self::getPrice($data).'<td>'.
+              		'<td>'.$obj->regions[0]->region.'<td>'.
+              		'<td>'.'<td>'.
+              		'<td>'.'<td>'.
+              		'<td>'.'<td>'.
 					'</tr>'.
 					'</table>';
 			
