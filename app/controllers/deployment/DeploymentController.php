@@ -103,7 +103,7 @@ class DeploymentController extends BaseController {
 				EngineLog::logIt(array('user_id' => Auth::id(), 'method' => 'authenticate', 'return' => $responseJson));
 				$obj = json_decode($responseJson);
 				
-				if($obj->status == 'OK')
+				if(!empty($obj) && $obj->status == 'OK')
 				{
 					$deployment -> token = $obj->token;
 					$this->prepare($user, $deployment);
