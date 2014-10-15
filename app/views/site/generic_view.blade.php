@@ -58,7 +58,7 @@
 										}
 									else 
 									{
-										$anchor = '<a target="_blank" href="'.xDockerEngine::getProtocol($deployment->docker_name). $result->public_dns .'">'.xDockerEngine::getDisplayName($deployment->docker_name).'</a>';
+										$anchor = '<a target="_blank" href="#">'.xDockerEngine::getDisplayName($deployment->docker_name).'</a>';
 										echo  xDockerEngine::getDockerUrl($deployment->docker_name) . ' | ' .$anchor . '<br/>';
 									}
 									?>
