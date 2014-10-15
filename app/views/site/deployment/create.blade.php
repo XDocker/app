@@ -72,13 +72,16 @@
 			</div>
 		</div>
 		<!-- ./ form actions -->
+		
+		<input type="hidden" id="js-imagelookup" name="imageLookup" value="{{ URL::to('deployment/images') }}" />
+	
 	</form>
 @stop
 
 @section('scripts')
 <script async="async" src="{{asset('bower_components/jsonform/deps/underscore.js')}}"></script>
 <script async="async" src="{{asset('bower_components/jsonform/lib/jsonform.js')}}"></script>
-<script async="async" src="{{asset('assets/js/loadlib.js')}}"></script>
+<script src="{{asset('assets/js/loadlib.js')}}"></script>
 <script type="text/javascript">
 	
 	(function($){

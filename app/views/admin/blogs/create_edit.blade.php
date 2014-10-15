@@ -85,8 +85,6 @@
 				<button type="submit" class="btn btn-success">Update</button>
 			</div>
 		</div>
-		
-		<input type="hidden" id="js-imagelookup" name="imageLookup" value="{{ URL::to('deployment/images') }}" />
-		<!-- ./ form actions -->
+			<!-- ./ form actions -->
 	</form>
 @stop
