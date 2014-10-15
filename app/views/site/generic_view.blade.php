@@ -17,7 +17,7 @@
 							$result = new stdClass();
 							$result ->instance_id = '';
 						}
-							?>
+					?>
 		  			<li class="list-group-item">
 						<div class="media">
 							<p>
