@@ -32,8 +32,6 @@
 
 ;loadPrices = function(val)
 {
-	var instanceRegion = $('#jsonform-0-elt-parameters[instanceRegion]').find('option:selected').val();
-	var instanceType = val.value;
-	alert(instanceRegion);
+	
 	
 };
