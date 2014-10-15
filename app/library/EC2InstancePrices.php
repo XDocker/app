@@ -30,6 +30,7 @@
             "m1.xlarge",
             "m2.xlarge",
             "m2.2xlarge",
+            "m3.medium",
             "m3.xlarge",
             "m3.2xlarge",
             "m2.4xlarge",
