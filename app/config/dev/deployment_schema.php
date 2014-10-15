@@ -46,7 +46,7 @@ return array(
 	            "cc2.8xlarge",
 	            "cg1.4xlarge"
             ),
-            'event' => 'onchange="loadPrice(this)"'
+            'event' => 'onchange="loadPrices(this)"'
         ),
 		 'parameters[ports]' => array(
             'type' => 'string',
