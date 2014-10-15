@@ -45,20 +45,18 @@ Inverse	<span class="label label-inverse">Inverse</span>
 			
 			return '<div class="table-responsive">  <table class="table table-bordered"> '.
               		' <thead> ' .
-                	'	<tr>'.
-                			'<th>Ondemand</th>'.
+                		'<th>Ondemand</th>'.
 	                    	'<th>Region</th> '.
 	                    	'<th>Instance Type</th>'.
 	                    	'<th>OS Flavor</th>'.
 	                    	'<th>Price</th>'.
-                	    '</tr>'.
-              		'</thead>'.
+                	'</thead>'.
               		'<tr>'.
-              		'<td>YES</td>'.
-              		'<td>'.$obj->regions[0]->region.'<td>'.
-              		'<td>'.$input->instanceType.'<td>'.
-              		'<td>'.$input->instanceAmi.'<td>'.
-              		'<td>'.'<td>'.
+	              		'<td>YES</td>'.
+	              		'<td>'.$obj->regions[0]->region.'<td>'.
+	              		'<td>'.$input->instanceType.'<td>'.
+	              		'<td>'.$input->instanceAmi.'<td>'.
+	              		'<td>'.'<td>'.
 					'</tr>'.
 					'</table></div>';
 			
