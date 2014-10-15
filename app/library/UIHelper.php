@@ -53,10 +53,10 @@ Inverse	<span class="label label-inverse">Inverse</span>
                 	'</thead>'.
               		'<tr>'.
 	              		'<td>YES</td>'.
-	              		'<td>'.$obj->regions[0]->region.'<td>'.
-	              		'<td>'.$input->instanceType.'<td>'.
-	              		'<td>'.$input->instanceAmi.'<td>'.
-	              		'<td>'.'<td>'.
+	              		'<td>'.$obj->regions[0]->region.'</td>'.
+	              		'<td>'.$input->instanceType.'</td>'.
+	              		'<td>'.$input->instanceAmi.'</td>'.
+	              		'<td>'.'</td>'.
 					'</tr>'.
 					'</table></div>';
 			
