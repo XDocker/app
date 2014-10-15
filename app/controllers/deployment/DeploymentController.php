@@ -129,7 +129,7 @@ class DeploymentController extends BaseController {
 						return Redirect::to('deployment')->with('error', 'Failed during deployment!'. $obj1->message);
 					}
 	            }
-				else if($obj->status == 'error')
+				else if(!empty($obj) && $obj->status == 'error')
 				{
 					Log::error('Failed to authenticate before deployment!'. $obj->message);
 					return Redirect::to('deployment')->with('error', 'Failed to authenticate before deployment!'. $obj->message);
