@@ -31,6 +31,44 @@ Inverse	<span class="label label-inverse">Inverse</span>
 			default:			  return '<span class="label label-danger">'.$status.'</span>'; break;
 								
 		}
+		
 	}
+
+	public static function getEstimatedPrice($data)
+	{
+			//Array ( [config] => Array ( [currency] => USD [unit] => perhr ) [regions] => 
+			//Array ( [0] => Array ( [region] => us-east-1 [instanceTypes] 
+			//=> Array ( [0] => Array ( [type] => m1.small [os] => linux [price] => 0.06 ) ) ) ) )
+			
+			return ' <table class="table table-bordered"> '.
+              		' <thead> ' .
+                	'	<tr>'.
+                			'<th>Ondemand</th>'.
+	                    	'<th>Region</th> '.
+	                    	'<th>Instance Type</th>'.
+	                    	'<th>OS Flavor</th>'.
+	                    	'<th>Price</th>'.
+                	    '</tr>'.
+              		'</thead>'.
+              		'<tr>'.
+              		'<td>YES</td>'.
+              		'<td>'.$data['config']['regions'][0]['region'].'<td>'.
+              		'<td>'.$data['config']['instanceTypes'][0]['type'].'<td>'.
+              		'<td>'.$data['config']['instanceTypes'][0]['os'].'<td>'.
+              		'<td>'.self::getPrice($data).'<td>'.
+					'</tr>'.
+					'</table>';
+			
+	}	
 	
+	private static function getPrice($data)
+	{
+		$sym = '';
+		switch ($data['config']['currency'])
+		{
+			case 'USD' : $sym = '$'; break;
+		}
+		
+		return $sym.$data['config']['instanceTypes'][0]['price'] .' '. $data['config']['unit'];
+	}
 }

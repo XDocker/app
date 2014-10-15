@@ -17,6 +17,8 @@
 							$result = new stdClass();
 							$result ->instance_id = '';
 						}
+						
+						
 					?>
 		  			<li class="list-group-item">
 						<div class="media">
@@ -57,6 +59,10 @@
 									?>
 									
 								</p>
+								<p>
+									{{UIHelper::getEstimatedPrice(EC2InstancePrices::OnDemand($deployment->parameters))}}
+								</p>
+			
 								<p>
 									<span title="Created At"><span class="glyphicon glyphicon-calendar"></span> <strong>Build Date</strong>:{{{ $deployment->created_at }}}</span>
 								</p>
