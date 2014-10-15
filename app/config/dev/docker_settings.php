@@ -12,9 +12,11 @@ return array(
    									 'logo' => 'securitymonkeyHead.png', 
    									 'dockerParams' => array('ports' => array(443, 5000, 8080), 
    									 						'tag' => 'v1',
+   									 						'env_keys' => false,
 															'env' => array('host' => '{host}', 
    									 				  				'cmd' => '/home/ubuntu/securitymonkey.sh',),),
    									 'protocol' => 'https://',
+   									
 									 'enabled' => TRUE),
    									 
 									 //"dockerParams": {"ports": [443, 5000], "env": {}, "tag": "v1",
@@ -22,14 +24,15 @@ return array(
    								  'docker_url' => 'https://registry.hub.docker.com/u/xdocker/netflix_ice/', 
    								  'dockerParams' => array('ports' => array(443, 5000, 8080), 
    								  					    'tag' => 'v2',
-   								  					 	'env' => array('host' => '{host}', 
+   								  					    'env_keys' => true,
+   								  					 	'env' => array('host' => '{host}',
    								  					 				'cmd' => ''),),
-   								  'logo' => 'placeholder.jpg', 'protocol' => 'http://',  'enabled' => TRUE),
+   								  'logo' => 'placeholder.jpg', 'protocol' => 'http://',  'env_keys' => true, 'enabled' => TRUE),
    								  
    'stefobark/sphinxdocker' => array('displayName' => 'Sphinx', 
    									 'docker_url' => 'https://registry.hub.docker.com/u/xdocker/securitymonkey/',
    									 'dockerParams' => array('ports' => array(443, 5000, 8080), 
-   									 				  'env' => array('host' => '{host}', 
+   									 				  'env' => array('host' => '{host}',  'env_keys' => false,
    									 				  				 'tag' => ''),), 
-   									  'logo' => 'placeholder.jpg', 'protocol' => '',  'enabled' => FALSE),
+   									  'logo' => 'placeholder.jpg', 'protocol' => '', 'enabled' => FALSE),
 );

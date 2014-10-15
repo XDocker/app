@@ -154,10 +154,14 @@ class DeploymentController extends BaseController {
 		$credentials = json_decode($account->credentials);
 		$parameters = json_decode($deployment->parameters);
 		$dockerParams = xDockerEngine::getDockerParams($deployment -> docker_name);
-		$keys = array('AWS_ACCESS_KEY_ID' => $credentials ->apiKey,
+		if($dockerParams['env_keys'])
+		{
+			$keys = array('AWS_ACCESS_KEY_ID' => $credentials ->apiKey,
 					  'AWS_SECRET_ACCESS_KEY' => $credentials ->secretKey,
 					  'BILLING_BUCKET' => $credentials ->billingBucket);
-		$dockerParams['env'] = array_merge($dockerParams['env'], $keys);
+		
+			$dockerParams['env'] = array_merge($dockerParams['env'], $keys);
+		}
 		$deployment->wsParams = json_encode(
                                     array (
                                         'token' => $deployment->token,
