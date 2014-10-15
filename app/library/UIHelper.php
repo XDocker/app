@@ -52,9 +52,9 @@ Inverse	<span class="label label-inverse">Inverse</span>
               		'</thead>'.
               		'<tr>'.
               		'<td>YES</td>'.
-              		'<td>'.$data['config']['regions'][0]['region'].'<td>'.
-              		'<td>'.$data['config']['instanceTypes'][0]['type'].'<td>'.
-              		'<td>'.$data['config']['instanceTypes'][0]['os'].'<td>'.
+              		'<td>'.$data['regions'][0]['region'].'<td>'.
+              		'<td>'.$data['regions'][0]['instanceTypes'][0]['type'].'<td>'.
+              		'<td>'.$data['regions'][0]['instanceTypes'][0]['os'].'<td>'.
               		'<td>'.self::getPrice($data).'<td>'.
 					'</tr>'.
 					'</table>';
@@ -69,6 +69,6 @@ Inverse	<span class="label label-inverse">Inverse</span>
 			case 'USD' : $sym = '$'; break;
 		}
 		
-		return $sym.$data['config']['instanceTypes'][0]['price'] .' '. $data['config']['unit'];
+		return $sym.$data['regions'][0]['instanceTypes'][0]['price'] .' '. $data['config']['unit'];
 	}
 }
