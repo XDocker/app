@@ -30,7 +30,7 @@ class AWSPricingController extends BaseController {
      */
     public function getIndex() {
         $ec2 = new EC2InstancePrices();
-		
+		//$ec2->get_ec2_ondemand_instances_prices('us-east-1', 'm1.small', 'linux')
         return View::make('site/aws/index', array(
             'ec2Data' => $ec2->getEc2Data()
         ));

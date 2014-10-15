@@ -17,6 +17,10 @@
 							$result = new stdClass();
 							$result ->instance_id = '';
 						}
+						$ondemand = EC2InstancePrices::OnDemand($deployment->parameters);
+						$reserved = EC2InstancePrices::OnDemand($deployment->Reserved);
+						
+						print_r($ondemand);
 					?>
 		  			<li class="list-group-item">
 						<div class="media">
