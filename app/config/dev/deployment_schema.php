@@ -24,7 +24,7 @@ return array(
                 'cn-north-1'
                 
             ),
-            'event' => 'onchange="loadImages(this, \"{{ URL::to(\'deployment/images\') }}\")"'
+            'event' => 'onchange="loadImages(this, "'. URL::to('deployment/images') . '")'
         ) ,
         'parameters[instanceType]' => array(
             'type' => 'string',
