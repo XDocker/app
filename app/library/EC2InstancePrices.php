@@ -370,15 +370,14 @@
 		{
 			$param = json_decode($parameters);
 			$ec2 = new EC2InstancePrices();
-			return json_decode(
-				$ec2 -> get_ec2_ondemand_instances_prices($param->instanceRegion, $param->instanceType, 'linux'));
+			return $ec2 -> get_ec2_ondemand_instances_prices($param->instanceRegion, $param->instanceType, 'linux');
 		}
 		
 		public static function Reserved($parameters)
 		{
 			$param = json_decode($parameters);
 			$ec2 = new EC2InstancePrices();
-			return json_decode($ec2 -> get_ec2_reserved_instances_prices($param->instanceRegion, $param->instanceType, 'linux'));
+			return $ec2 -> get_ec2_reserved_instances_prices($param->instanceRegion, $param->instanceType, 'linux');
 		}
 
     }
