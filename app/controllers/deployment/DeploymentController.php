@@ -157,7 +157,6 @@ class DeploymentController extends BaseController {
 		$keys = array('AWS_ACCESS_KEY_ID' => $credentials ->apiKey,
 					  'AWS_SECRET_ACCESS_KEY' => $credentials ->secretKey,
 					  'BILLING_BUCKET' => $credentials ->billingBucket);
-		$env = $dockerParams['env'];
 		$dockerParams['env'] = array_merge($dockerParams['env'], $keys);
 		$deployment->wsParams = json_encode(
                                     array (
