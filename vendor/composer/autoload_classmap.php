@@ -43,6 +43,7 @@ return array(
     'DatabaseSeeder' => $baseDir . '/app/database/seeds/DatabaseSeeder.php',
     'Deployment' => $baseDir . '/app/models/Deployment.php',
     'DeploymentController' => $baseDir . '/app/controllers/deployment/DeploymentController.php',
+    'DeploymentQueryHelper' => $baseDir . '/app/library/DeploymentQueryHelper.php',
     'EC2InstancePrices' => $baseDir . '/app/library/EC2InstancePrices.php',
     'EngineLog' => $baseDir . '/app/models/EngineLog.php',
     'EnginelogController' => $baseDir . '/app/controllers/enginelog/EnginelogController.php',
