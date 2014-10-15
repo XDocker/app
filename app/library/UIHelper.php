@@ -52,7 +52,7 @@ Inverse	<span class="label label-inverse">Inverse</span>
 	                    	'<th>Price</th>'.
                 	'</thead>'.
               		'<tr>'.
-	              		'<td><span class=".glyphicon-ok-sign"></span></td>'.
+	              		'<td><span class="glyphicon-ok-sign"></span></td>'.
 	              		'<td>'.$obj->regions[0]->region.'</td>'.
 	              		'<td>'.$input->instanceType.'</td>'.
 	              		'<td>'.$input->instanceAmi.'</td>'.
