@@ -42,7 +42,7 @@ Inverse	<span class="label label-inverse">Inverse</span>
 			$instanceType = $data['regions'][0]['instanceTypes'];
 			$obj = json_decode(json_encode($data));
 			
-			return ' <table class="table table-bordered"> '.
+			return '<div class="table-responsive">  <table class="table table-bordered"> '.
               		' <thead> ' .
                 	'	<tr>'.
                 			'<th>Ondemand</th>'.
@@ -59,7 +59,7 @@ Inverse	<span class="label label-inverse">Inverse</span>
               		'<td>'.'<td>'.
               		'<td>'.'<td>'.
 					'</tr>'.
-					'</table>';
+					'</table></div>';
 			
 	}	
 	
