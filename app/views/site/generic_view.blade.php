@@ -56,6 +56,11 @@
 											'<a href="#" onclick="stop(\''.$url.'\',\''.$result->instance_id.'\', \''.csrf_token().'\')">Stop</a> |'  .
 											'<a href="#" onclick="restart(\''.$url.'\',\''.$result->instance_id.'\', \''.csrf_token().'\')">Restart</a>'  ;
 										}
+									else 
+									{
+										$anchor = '<a target="_blank" href="'.xDockerEngine::getProtocol($deployment->docker_name). $result->public_dns .'">'.xDockerEngine::getDisplayName($deployment->docker_name).'</a>';
+										echo  xDockerEngine::getDockerUrl($deployment->docker_name) . ' | ' .$anchor . '<br/>';
+									}
 									?>
 									
 								</p>
