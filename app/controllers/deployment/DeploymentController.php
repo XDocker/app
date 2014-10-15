@@ -53,7 +53,8 @@ class DeploymentController extends BaseController {
            
             $response = xDockerEngine::dockerHubGet($search_term);
             
-            $dockerInstances = $response->results;
+			
+            $dockerInstances = !empty($response) ? $response->results : '';
         // var_dump($accounts, $this->accounts, $this->accounts->owner);
         // Show the page
         return View::make('site/deployment/index', array(
