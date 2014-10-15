@@ -37,6 +37,7 @@ class DeploymentController extends BaseController {
         $deployments = $this->deployments
             ->select('deployments.id', 'cloud_accounts.name as accountName', 
             		 'cloud_accounts.cloudProvider', 'deployments.name', 
+            		 'deployments.docker_name', 'deployments.parameters',
             		 'deployments.cloud_account_id', 'deployments.status', 
             		 'deployments.wsResults',
             		 'deployments.created_at')
@@ -175,9 +176,8 @@ class DeploymentController extends BaseController {
                                         'instanceAmi' => $parameters->instanceAmi,
                                         'OS' => $parameters->OS,
                                         'packageName' => $deployment -> docker_name,
-                                        'dockerParams' => array('ports' => $parameters->ports, 
-                                                                'env' => array('mail' =>$user->email, 'host'=> '{host}'), 
-                                                                'tag'=> xDockerEngine::getTag($deployment -> docker_name))   )
+                                        'dockerParams' => xDockerEngine::getDockerParams($deployment -> docker_name)  
+										)
                                       );			  				
 	}
 

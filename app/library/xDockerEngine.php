@@ -98,14 +98,47 @@ class xDockerEngine {
         return self::request(self::$orchestrationParams['endpoint_ip'] . self::$orchestrationParams['downloadKey'], $data);
     }
 	
+	///Following methods are helper for accessing the config variables
 	public static function getTag($dockerName)
 	{
-		$setting = Config::get('docker_settings');
-		return isset($setting[$dockerName]) ? $setting[$dockerName]['tags'] : '';
+		$settings = Config::get('docker_settings');
+		return isset($settings[$dockerName]) ? $settings[$dockerName]['tags'] : '';
 	}
 	public static function getLogo($dockerName)
 	{
-		$setting = Config::get('docker_settings');
-		return isset($setting[$dockerName]) ? $setting[$dockerName]['logo'] : '';
+		$settings = Config::get('docker_settings');
+		return isset($settings[$dockerName]) ? $settings[$dockerName]['logo'] : '';
+	}
+	
+	public static function getProtocol($dockerName)
+	{
+		$settings = Config::get('docker_settings');
+		return isset($settings[$dockerName]) ? $settings[$dockerName]['protocol'] : '';
+	}
+	public static function getDisplayName($dockerName)
+	{
+		$settings = Config::get('docker_settings');
+		$img = '<img width="25px" height="25px" src="' . asset('/assets/img/providers/'.$settings[$dockerName]['logo']).'" />';
+		return isset($settings[$dockerName]) ? $img.$settings[$dockerName]['displayName'] : '';
+	}
+	public static function getDockerUrl($dockerName)
+	{
+		$settings = Config::get('docker_settings');
+		$img = '<img width="25px" height="25px" src="' . asset('/assets/img/providers/docker.jpg').'" />';
+		$url = isset($settings[$dockerName]) ? $settings[$dockerName]['docker_url'] : '';
+		return '<a target="_blank" href="'.$url.'">' .$img.  $dockerName.'</a>';
+		
+	}
+	
+	public static function getDockerParams($dockerName)
+	{
+		$settings = Config::get('docker_settings');
+		return isset($settings[$dockerName]) ? $settings[$dockerName]['dockerParams'] : '';
+	}
+	
+	public static function enabled($dockerName)
+	{
+		$settings = Config::get('docker_settings');
+		return isset($settings[$dockerName]) ? $settings[$dockerName]['enabled'] : FALSE;
 	}
 }

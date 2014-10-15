@@ -108,4 +108,5 @@ class AccountController extends BaseController {
             return Redirect::to('account/' . $account->id . '/edit')->with('error', 'Error while deleting');
         }
     }
+	
 }

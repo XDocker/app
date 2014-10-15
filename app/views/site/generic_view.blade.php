@@ -1,7 +1,7 @@
 <div class="page-header">
 	<div class="row">
 		<div class="col-md-9">
-			<h4>Your Deployments:</h4>
+			<h5>Your Deployments:</h5>
 		</div>
 	</div>
 </div>
@@ -10,61 +10,65 @@
 	<ul class="list-group">
 		@if(!empty($deployments)) 
 			@foreach ($deployments as $deployment)
-			
-			<?php $result = json_decode($deployment->wsResults); 
-				if(empty($result)) 
-				{
-					$result = new stdClass();
-					$result ->instance_id = '';
-				}
-			?>
-	  			<li class="list-group-item">
-					<div class="media">
-						<p>
-							<a href="{{ URL::to('account/'.$deployment->cloud_account_id.'/edit') }}" class="pull-left" href="#">
-							    <img class="media-object img-responsive" src="{{ asset('/assets/img/providers/'.Config::get('provider_meta.'.$deployment->cloudProvider.'.logo')) }}" alt="{{ $deployment->cloudProvider }}" />
-							    <p class="text-center">{{{$deployment->accountName}}}</p>
-							</a> 
-						</p>
-						<form class="pull-right" method="post" action="{{ URL::to('deployment/' . $deployment->id . '/refresh') }}">
-							<!-- CSRF Token -->
-							<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
-							<!-- ./ csrf token -->
-							<button type="submit" class="btn btn-success pull-right" role="button"><span class="glyphicon glyphicon-refresh"></span></button>
-						</form>
-						<form class="pull-right" method="post" action="{{ URL::to('deployment/' . $deployment->id . '/delete') }}">
-							<!-- CSRF Token -->
-							<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
-							<input type="hidden" name="instanceAction" value="terminate" />
-							<input type="hidden" name="instanceID" value="{{{ $result->instance_id }}}" />
-							<!-- ./ csrf token -->
-							<button type="submit" class="btn btn-danger pull-right" role="button"><span class="glyphicon glyphicon-trash"></span></button>
-						</form>
-						<div class="media-body">
-							
-							<h4 class="media-heading">{{ String::title($deployment->name) }}</h4>
+				
+					<?php $result = json_decode($deployment->wsResults); 
+						if(empty($result)) 
+						{
+							$result = new stdClass();
+							$result ->instance_id = '';
+						}
+						$prices = EC2InstancePrices::OnDemand($deployment->parameters);
+						print_r($prices); die();
+					?>
+		  			<li class="list-group-item">
+						<div class="media">
 							<p>
-								<?php
-								if(in_array($deployment->status, array('Completed', 'start', 'stop')))
-									{
-										$url = URL::to('deployment/'.$deployment->id.'/instanceAction');
-										echo $result->instance_id . ' | ' . $result->public_dns . '<br/>';
-										echo '<a href="#" onclick="start(\''.$url.'\',\''.$result->instance_id.'\', \''.csrf_token().'\')">Start</a> |'  .
-										'<a href="#" onclick="stop(\''.$url.'\',\''.$result->instance_id.'\', \''.csrf_token().'\')">Stop</a> |'  .
-										'<a href="#" onclick="restart(\''.$url.'\',\''.$result->instance_id.'\', \''.csrf_token().'\')">Restart</a>'  ;
-									}
-								?>
+								<a href="{{ URL::to('account/'.$deployment->cloud_account_id.'/edit') }}" class="pull-left" href="#">
+								    <img class="media-object img-responsive" src="{{ asset('/assets/img/providers/'.Config::get('provider_meta.'.$deployment->cloudProvider.'.logo')) }}" alt="{{ $deployment->cloudProvider }}" />
+								    <p class="text-center">{{{$deployment->accountName}}}</p>
+								</a> 
+							</p>
+							<form class="pull-right" method="post" action="{{ URL::to('deployment/' . $deployment->id . '/refresh') }}">
+								<!-- CSRF Token -->
+								<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
+								<!-- ./ csrf token -->
+								<button type="submit" class="btn btn-success pull-right" role="button"><span class="glyphicon glyphicon-refresh"></span></button>
+							</form>
+							<form class="pull-right" method="post" action="{{ URL::to('deployment/' . $deployment->id . '/delete') }}">
+								<!-- CSRF Token -->
+								<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
+								<input type="hidden" name="instanceAction" value="terminate" />
+								<input type="hidden" name="instanceID" value="{{{ $result->instance_id }}}" />
+								<!-- ./ csrf token -->
+								<button type="submit" class="btn btn-danger pull-right" role="button"><span class="glyphicon glyphicon-trash"></span></button>
+							</form>
+							<div class="media-body">
 								
-							</p>
-							<p>
-								<span title="Created At"><span class="glyphicon glyphicon-calendar"></span> <!--Sept 16th, 2012-->{{{ $deployment->created_at }}}</span>
-							</p>
-							<p>
-								<span title="Status"><span class="glyphicon glyphicon-asterisk"></span> <!--Sept 16th, 2012-->{{{ $deployment->status }}}</span>
-							</p>
+								<h4 class="media-heading">{{ String::title($deployment->name) }}</h4>
+								<p>
+									<?php
+									if(in_array($deployment->status, array('Completed', 'start', 'stop')))
+										{
+											$url = URL::to('deployment/'.$deployment->id.'/instanceAction');
+											$anchor = '<a target="_blank" href="'.xDockerEngine::getProtocol($deployment->docker_name). $result->public_dns .'">'.xDockerEngine::getDisplayName($deployment->docker_name).'</a>';
+											echo $result->instance_id . ' | ' .xDockerEngine::getDockerUrl($deployment->docker_name) . ' | ' .$anchor . '<br/>';
+											echo '<a href="#" onclick="start(\''.$url.'\',\''.$result->instance_id.'\', \''.csrf_token().'\')">Start</a> |'  .
+											'<a href="#" onclick="stop(\''.$url.'\',\''.$result->instance_id.'\', \''.csrf_token().'\')">Stop</a> |'  .
+											'<a href="#" onclick="restart(\''.$url.'\',\''.$result->instance_id.'\', \''.csrf_token().'\')">Restart</a>'  ;
+										}
+									?>
+									
+								</p>
+								<p>
+									<span title="Created At"><span class="glyphicon glyphicon-calendar"></span> <strong>Build Date</strong>:{{{ $deployment->created_at }}}</span>
+								</p>
+								<p>
+									
+									<span title="Status">{{ UIHelper::getLabel($deployment->status) }}</span>
+								</p>
+							</div>
 						</div>
-					</div>
-				</li>
+					</li>	
 			@endforeach
 		@endif
 	</ul>
@@ -79,7 +83,7 @@
 <div class="page-header">
 	<div class="row">
 		<div class="col-md-9">
-			<h4>Public Docker Images:</h4>
+			<h5>Public Docker Images:</h5>
 		</div>
 		<div class="col-md-3">
 			<form class="navbar-right" action="#" role="search" method="get">
@@ -100,35 +104,37 @@
 <div class="media-block">
 	<ul class="list-group list-group-custom">
 		@foreach($dockerInstances as $instance)
-  		<li class="list-group-item">
-  			<!--[is_automated] => 1
-            [name] => vubui/ubuntu
-            [is_trusted] => 1
-            [is_official] => 
-            [star_count] => 0
-            [description] => -->
-			<div class="media">
-				<span class="pull-left" href="#">
-					<img style="width:25px;height:25px" class="media-object img-responsive" src="{{ asset('/assets/img/providers/'.xDockerEngine::getLogo($instance -> name)) }}" alt="{{ $instance -> name }}" />
-				</span>
-				<a href="{{ URL::to('deployment/create/') }}?name={{urlencode($instance -> name)}}" class="btn btn-primary pull-right" role="button"><span class="glyphicon glyphicon-play"></span></a>
-				<div class="media-body">
-					<h4 class="media-heading">{{{!empty($instance -> name)?$instance -> name:''}}}</h4>
-				    <p>
-				    	{{{!empty($instance -> description)?$instance -> description:''}}}
-					</p>
-					<p>
-				    	{{{!empty($instance -> is_automated)?$instance -> is_automated:'Not Automated'}}}
-				    	|
-				    	{{{!empty($instance -> is_trusted)?$instance -> is_trusted:'Not Trusted'}}}
-				    	|
-				    	{{{!empty($instance -> is_official)?$instance -> is_official:'Not Official'}}}
-				    	|
-				    	{{{!empty($instance -> star_count)?$instance -> star_count:'0'}}}
-					</p>
+			@if(xDockerEngine::enabled($instance->name))
+	  			<li class="list-group-item">
+	  			<!--[is_automated] => 1
+	            [name] => vubui/ubuntu
+	            [is_trusted] => 1
+	            [is_official] => 
+	            [star_count] => 0
+	            [description] => -->
+				<div class="media">
+					<span class="pull-left" href="#">
+						<img style="width:25px;height:25px" class="media-object img-responsive" src="{{ asset('/assets/img/providers/'.xDockerEngine::getLogo($instance -> name)) }}" alt="{{ $instance -> name }}" />
+					</span>
+					<a href="{{ URL::to('deployment/create/') }}?name={{urlencode($instance -> name)}}" class="btn btn-primary pull-right" role="button"><span class="glyphicon glyphicon-play"></span></a>
+					<div class="media-body">
+						<h4 class="media-heading">{{{!empty($instance -> name)?$instance -> name:''}}}</h4>
+					    <p>
+					    	{{{!empty($instance -> description)?$instance -> description:''}}}
+						</p>
+						<p>
+					    	{{{!empty($instance -> is_automated)?$instance -> is_automated:'Not Automated'}}}
+					    	|
+					    	{{{!empty($instance -> is_trusted)?$instance -> is_trusted:'Not Trusted'}}}
+					    	|
+					    	{{{!empty($instance -> is_official)?$instance -> is_official:'Not Official'}}}
+					    	|
+					    	{{{!empty($instance -> star_count)?$instance -> star_count:'0'}}}
+						</p>
+					</div>
 				</div>
-			</div>
-		</li>
+			</li>
+			@endif
 		@endforeach
 	</ul>
 	<!-- <div class="text-center">

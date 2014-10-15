@@ -65,6 +65,7 @@
 		                        @if (Auth::user()->hasRole('admin'))
 		                        	<li><a href="{{{ URL::to('admin') }}}">{{{ Lang::get('site.admin_panel') }}}</a></li>
 		                        @endif
+		                        
 		                        <li class="dropdown">
 		                        	<a class="dropdown-toggle" data-toggle="dropdown" href="#">
 	    								<span class="glyphicon glyphicon-cog"></span> {{{ Lang::get('site.services') }}}	<span class="caret"></span>
@@ -74,12 +75,22 @@
 	    								<li class="divider"></li>
 	    								<li><a href="{{{ URL::to('deployment') }}}"><span class="glyphicon glyphicon-play-circle"></span> {{{ Lang::get('site.deployments') }}}</a></li>
 	    								<li class="divider"></li>
+	    								<li><a href="{{{ URL::to('awsPricing') }}}"><span class="glyphicon glyphicon-inbox"></span> {{{ Lang::get('site.aws_pricing') }}}</a></li>
+	    								<li class="divider"></li>
 	    								<li><a href="{{{ URL::to('enginelog') }}}"><span class="glyphicon glyphicon-inbox"></span> {{{ Lang::get('site.enginelog') }}}</a></li>
 	    								<li class="divider"></li>
 	    								<li><a href="{{{ URL::to('ServiceStatus') }}}"><span class="glyphicon glyphicon-signal"></span> {{{ Lang::get('site.webserivce_status') }}}</a></li>
 	    								
 	    							</ul>
 		                        </li>
+		                        <li class="dropdown">
+		                        	<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+	    								<span class="glyphicon glyphicon-hand-up"></span> {{{ Lang::get('site.support') }}}	<span class="caret"></span>
+	    							</a>
+	    							<ul class="dropdown-menu">
+	    								<li><a href="{{{ URL::to('ticket') }}}"><span class="glyphicon glyphicon-exclamation-sign"></span> {{{ Lang::get('site.tickets') }}}</a></li>
+	    							</ul>
+	    						</li>
 		                        <li class="dropdown">
 		    							<a class="dropdown-toggle" data-toggle="dropdown" href="#">
 	    									<span class="glyphicon glyphicon-user"></span> {{{ Auth::user()->username }}}	<span class="caret"></span>
