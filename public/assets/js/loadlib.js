@@ -1,6 +1,7 @@
-;loadImages = function(val, url)
+;loadImages = function(val)
 {
 	var cloudProvider = $('#cloud_account_id').find('option:selected').data('cloud-provider');
+	var url = $('.js-imagelookup').val();
 	var region = val.value;
 	var request = $.ajax({
 				  url: url,
