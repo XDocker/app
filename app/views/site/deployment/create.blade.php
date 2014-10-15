@@ -79,8 +79,8 @@
 @stop
 
 @section('scripts')
-<script async="async" src="{{asset('bower_components/jsonform/deps/underscore.js')}}"></script>
-<script async="async" src="{{asset('bower_components/jsonform/lib/jsonform.js')}}"></script>
+<script  src="{{asset('bower_components/jsonform/deps/underscore.js')}}"></script>
+<script  src="{{asset('bower_components/jsonform/lib/jsonform.js')}}"></script>
 <script src="{{asset('assets/js/loadlib.js')}}"></script>
 <script type="text/javascript">
 	
