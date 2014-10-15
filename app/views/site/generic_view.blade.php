@@ -58,8 +58,7 @@
 										}
 									else 
 									{
-										$anchor = '<a target="_blank" href="#">'.xDockerEngine::getDisplayName($deployment->docker_name).'</a>';
-										echo  xDockerEngine::getDockerUrl($deployment->docker_name) . ' | ' .$anchor . '<br/>';
+										//echo  xDockerEngine::getDockerUrl($deployment->docker_name) . ' | ' .xDockerEngine::getDisplayName($deployment->docker_name) . '<br/>';
 									}
 									?>
 									
