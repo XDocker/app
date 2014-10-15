@@ -58,7 +58,7 @@
 										}
 									else 
 									{
-										//echo  xDockerEngine::getDockerUrl($deployment->docker_name) . ' | ' .xDockerEngine::getDisplayName($deployment->docker_name) . '<br/>';
+										echo  xDockerEngine::getDockerUrl($deployment->docker_name) . ' | ' .xDockerEngine::getDisplayName($deployment->docker_name) . '<br/>';
 									}
 									?>
 									
