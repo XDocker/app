@@ -30,7 +30,7 @@ return array(
             'type' => 'string',
             'title' => 'Instance Type',
             'required' => false,
-            'enum' => array(
+            'enum' => array('',
                 "m1.small",
 	            "m1.medium",
 	            "m1.large",

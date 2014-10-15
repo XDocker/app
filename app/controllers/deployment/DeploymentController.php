@@ -353,5 +353,19 @@ class DeploymentController extends BaseController {
 		}
 	}
 
+	public function getPrices()
+	{
+		$cloudProvider = Input::get('cloudProvider');
+		$param = new stdClass();
+		$param->region 		 = Input::get('region');
+		$param->instanceType = Input::get('instanceType');
+		
+		$ondemand = EC2InstancePrices::OnDemand2($param);
+		
+		echo json_encode($ondemand);
+		
+		//echo json_encode(EC2InstancePrices::On)
+	}
+
 	
 }
