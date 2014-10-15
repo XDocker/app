@@ -23,10 +23,7 @@ return array(
    								  'dockerParams' => array('ports' => array(443, 5000, 8080), 
    								  					    'tag' => 'v2',
    								  					 	'env' => array('host' => '{host}', 
-   								  					 				'AWS_ACCESS_KEY_ID' => '{AWS_ACCESS_KEY_ID}',
-																	'AWS_SECRET_ACCESS_KEY' => '{AWS_SECRET_ACCESS_KEY}',
-																	'BILLING_BUCKET' =>'{billingBucket}', 
-   									 				  				 'cmd' => ''),),
+   								  					 				'cmd' => ''),),
    								  'logo' => 'placeholder.jpg', 'protocol' => 'http://',  'enabled' => TRUE),
    								  
    'stefobark/sphinxdocker' => array('displayName' => 'Sphinx', 

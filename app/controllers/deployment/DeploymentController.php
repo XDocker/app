@@ -153,6 +153,12 @@ class DeploymentController extends BaseController {
 		$account = CloudAccount::where('user_id', Auth::id())->findOrFail($deployment->cloud_account_id) ;
 		$credentials = json_decode($account->credentials);
 		$parameters = json_decode($deployment->parameters);
+		$dockerParams = xDockerEngine::getDockerParams($deployment -> docker_name);
+		$keys = array('AWS_ACCESS_KEY_ID' => $credentials ->apiKey,
+					  'AWS_SECRET_ACCESS_KEY' => $credentials ->secretKey,
+					  'BILLING_BUCKET' => $credentials ->billingBucket);
+		$env = $dockerParams['env'];
+		$dockerParams['env'] = array_merge($dockerParams['env'], $keys);
 		$deployment->wsParams = json_encode(
                                     array (
                                         'token' => $deployment->token,
@@ -167,9 +173,11 @@ class DeploymentController extends BaseController {
                                         'instanceAmi' => $parameters->instanceAmi,
                                         'OS' => $parameters->OS,
                                         'packageName' => $deployment -> docker_name,
-                                        'dockerParams' => xDockerEngine::getDockerParams($deployment -> docker_name)  
+                                        'dockerParams' => $dockerParams  
 										)
-                                      );			  				
+                                      );	
+									  
+									  print_r($dockerParams); die();		  				
 	}
 
 	/**

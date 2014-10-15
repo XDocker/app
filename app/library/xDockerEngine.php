@@ -136,6 +136,20 @@ class xDockerEngine {
 		return isset($settings[$dockerName]) ? $settings[$dockerName]['dockerParams'] : '';
 	}
 	
+	public static function cleanMacros($dockerName, $params)
+	{
+		$params = self::getDockerParams($dockerName);
+		$envOld = $params['env'];
+		$env = '';
+		foreach($envOld as $param)
+		{
+			switch($param)
+			{
+				case 'AWS_ACCESS_KEY_ID' : 
+			}
+		}
+	}
+	
 	public static function enabled($dockerName)
 	{
 		$settings = Config::get('docker_settings');
