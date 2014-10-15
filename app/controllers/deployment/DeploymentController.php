@@ -176,8 +176,7 @@ class DeploymentController extends BaseController {
                                         'dockerParams' => $dockerParams  
 										)
                                       );	
-									  
-									  print_r($dockerParams); die();		  				
+		  				
 	}
 
 	/**
