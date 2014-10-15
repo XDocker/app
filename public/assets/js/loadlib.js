@@ -13,7 +13,7 @@
   		for(var i = 0; i < msg.length; i++) {
     		option += '<option data-instance-region="' + msg[i] +'" value="' + msg[i] + '">' + msg[i] + '</option>';
 		}
-  		var str = '<div class="form-group {{{ $errors->has('username') ? 'error' : '' }}}"> ' +
+  		var str = '<div class="form-group"> ' +
 				  ' <label class="col-md-2 control-label" for="name">Instance Image</label> '+
 				  '<div class="col-md-6"> '+
 				  '<select class="form-control" name="instanceAmi" id="jsonform-0-elt-instanceAmi" >' +
@@ -29,10 +29,10 @@
 		});
 };
 
-loadPrices = function(val)
+;loadPrices = function(val)
 {
 	var instanceRegion = $('.jsonform-0-elt-parameters[instanceRegion]').find('option:selected').data('instance-region');
 	alert(val);
 	alert(instanceRegion);
 	
-}
+};
