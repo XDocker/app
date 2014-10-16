@@ -13,10 +13,10 @@ class AdminSubscribersController extends AdminController {
      * Inject the models.
      * @param Post $post
      */
-    public function __construct(Subscriber $signup)
+    public function __construct(Subscriber $subscriber)
     {
         parent::__construct();
-        $this->subscriber = $signup;
+        $this->subscriber = $subscriber;
     }
 
     /**
@@ -103,7 +103,7 @@ class AdminSubscribersController extends AdminController {
      */
     public function getData()
     {
-        $subscribers = Subscriber::select(array('fbf_newsletter_signups.email', 'fbf_newsletter_signups.created_at'));
+        $subscribers = Subscriber::select(array('fbf_newsletter_signups.id', 'fbf_newsletter_signups.email', 'fbf_newsletter_signups.created_at'));
 
         return Datatables::of($subscribers)
 
