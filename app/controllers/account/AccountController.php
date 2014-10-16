@@ -50,10 +50,9 @@ class AccountController extends BaseController {
      * Displays the form for cloud account creation
      *
      */
-    public function getCreate($account = false) {
-        $mode = $account !== false ? 'edit' : 'create';
-		if(empty($account->id)) $account = CloudAccount::where('user_id', Auth::id())->find($account);
-        $account = $account !== false ? CloudAccount::where('user_id', Auth::id())->findOrFail($account->id) : null;
+    public function getCreate($id = false) {
+        $mode = $id !== false ? 'edit' : 'create';
+		$account =  $id !== false ? CloudAccount::where('user_id', Auth::id())->findOrFail($id) : null;
         $providers = Config::get('account_schema');
         return View::make('site/account/create_edit', compact('mode', 'account', 'providers'));
     }
