@@ -46,7 +46,7 @@
 								
 								<h4 class="media-heading">{{ String::title($deployment->name) }}</h4>
 								<p>
-									<?php
+									<?php 
 									if(in_array($deployment->status, array('Completed', 'start', 'stop')))
 										{
 											$url = URL::to('deployment/'.$deployment->id.'/instanceAction');
