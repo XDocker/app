@@ -28,7 +28,7 @@ Route::model('post', 'Post');
 Route::model('fbf_newsletter_signups', 'Subscriber');
 Route::model('role', 'Role');
 Route::model('deployments', 'Deployment');
-Route::model('account', 'CloudAccount');
+Route::model('cloudAccounts', 'CloudAccount');
 Route::model('tickets', 'Ticket');
 Route::model('ticket_comments', 'TicketComments');
 Route::model('engine_logs', 'EngineLog');
