@@ -65,6 +65,7 @@
 		                        @if (Auth::user()->hasRole('admin'))
 		                        	<li><a href="{{{ URL::to('admin') }}}">{{{ Lang::get('site.admin_panel') }}}</a></li>
 		                        @endif
+		                        
 		                        <li class="dropdown">
 		                        	<a class="dropdown-toggle" data-toggle="dropdown" href="#">
 	    								<span class="glyphicon glyphicon-cog"></span> {{{ Lang::get('site.services') }}}	<span class="caret"></span>
@@ -74,12 +75,22 @@
 	    								<li class="divider"></li>
 	    								<li><a href="{{{ URL::to('deployment') }}}"><span class="glyphicon glyphicon-play-circle"></span> {{{ Lang::get('site.deployments') }}}</a></li>
 	    								<li class="divider"></li>
+	    								<li><a href="{{{ URL::to('awsPricing') }}}"><span class="glyphicon glyphicon-tags"></span> {{{ Lang::get('site.aws_pricing') }}}</a></li>
+	    								<li class="divider"></li>
 	    								<li><a href="{{{ URL::to('enginelog') }}}"><span class="glyphicon glyphicon-inbox"></span> {{{ Lang::get('site.enginelog') }}}</a></li>
 	    								<li class="divider"></li>
 	    								<li><a href="{{{ URL::to('ServiceStatus') }}}"><span class="glyphicon glyphicon-signal"></span> {{{ Lang::get('site.webserivce_status') }}}</a></li>
 	    								
 	    							</ul>
 		                        </li>
+		                        <li class="dropdown">
+		                        	<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+	    								<span class="glyphicon glyphicon-hand-up"></span> {{{ Lang::get('site.support') }}}	<span class="caret"></span>
+	    							</a>
+	    							<ul class="dropdown-menu">
+	    								<li><a href="{{{ URL::to('ticket') }}}"><span class="glyphicon glyphicon-exclamation-sign"></span> {{{ Lang::get('site.tickets') }}}</a></li>
+	    							</ul>
+	    						</li>
 		                        <li class="dropdown">
 		    							<a class="dropdown-toggle" data-toggle="dropdown" href="#">
 	    									<span class="glyphicon glyphicon-user"></span> {{{ Auth::user()->username }}}	<span class="caret"></span>
@@ -101,11 +112,11 @@
 				</div>
 			</nav>
 			<!-- ./ navbar -->
-
+			<!--
 			<a class="banner-github {{ (Request::is('/') ? '' : 'hide') }}" href="https://github.com/XDocker/app" target="_blank">
 		        <img src="{{{ asset('assets/img/forkme_right_red_aa0000.png') }}}" alt="{{{ Lang::get('site.forkme') }}}">
 		    </a>
-
+			-->
 			<!-- Container -->
 			<div class="container clear-both">
 				
@@ -121,22 +132,8 @@
 
 			<!-- the following div is needed to make a sticky footer -->
 			<div id="push"></div>
-
-		    <footer id="footer" class="navbar navbar-default navbar-static-bottom">
-			  <hr>
-		      <div class="container">
-		      	<p class="muted credit text-center">
-		      		<img src="{{{ asset('assets/ico/favicon.ico') }}}" alt="{{{ Lang::get('site.footertitle') }}}"/>
-		      		<a href="https://www.xervmon.com">{{{ Lang::get('site.footertitle') }}}</a>
-		      	</p>
-		      	<p class="pull-right">
-		      			<a href="https://www.facebook.com/pages/XDocker/687711791303636"><img width="25px" height="25px" src="{{{ asset('assets/img/facebook.png') }}}" alt="{{{ Lang::get('site.footertitle') }}}"/></a>
-		      	</p>
-		        <p class="text-center">
-		        	<iframe src="http://ghbtns.com/github-btn.html?user=xdocker&repo=app&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="170" height="30"></iframe>
-		        </p>
-		      </div>
-		    </footer>
+			@include('site.footer')
+		   
 	    </div>
 		<!-- ./wrap -->
 

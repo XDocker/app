@@ -40,7 +40,7 @@ class WebserviceController extends BaseController {
         if(!empty($responseJson))
 		{
 			$obj = json_decode($responseJson);
-			if($obj->status == 'OK')
+			if(!empty($obj) && $obj->status == 'OK')
 			{
 				$status = 'OK';
 			}

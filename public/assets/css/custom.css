@@ -4,6 +4,16 @@ body {
     padding: 0;
     height: 100%;
 }
+/*
+.page-header {
+	padding-bottom: 1.0px;
+	margin-top: 10px;
+	margin-right: 0px;
+	margin-bottom: 10px;
+	margin-left: 0px;
+	border-bottom: 1px solid #eeeeee;
+}
+*/
 #wrap {
     position: relative;
     min-height: 100%;
@@ -12,7 +22,7 @@ body {
 #footer {
     margin-bottom: 0;
     position: absolute;
-    bottom: 0;
+    /*bottom: 0;*/
     width: 100%;
 }
 .social-login-icons {

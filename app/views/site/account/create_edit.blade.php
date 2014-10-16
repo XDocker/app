@@ -11,7 +11,7 @@
 	<div class="page-header">
 		<div class="row">
 			<div class="col-md-9">
-				<h4>{{isset($account->id)?'Edit':'Create'}} Account:</h4>
+				<h5>{{isset($account->id)?'Edit':'Create'}} Account:</h5>
 			</div>
 		</div>
 	</div>

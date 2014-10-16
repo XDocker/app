@@ -85,6 +85,6 @@
 				<button type="submit" class="btn btn-success">Update</button>
 			</div>
 		</div>
-		<!-- ./ form actions -->
+			<!-- ./ form actions -->
 	</form>
 @stop

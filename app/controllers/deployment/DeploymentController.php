@@ -34,16 +34,7 @@ class DeploymentController extends BaseController {
     
     public function getIndex() {
         // Get all the user's deployment
-        $deployments = $this->deployments
-            ->select('deployments.id', 'cloud_accounts.name as accountName', 
-            		 'cloud_accounts.cloudProvider', 'deployments.name', 
-            		 'deployments.cloud_account_id', 'deployments.status', 
-            		 'deployments.wsResults',
-            		 'deployments.created_at')
-            ->leftJoin('cloud_accounts', 'deployments.cloud_account_id', '=', 'cloud_accounts.id')
-            ->where('deployments.user_id', Auth::id())
-            ->orderBy('deployments.created_at', 'DESC')
-            ->paginate(10);
+        $deployments = DeploymentQueryHelper::getQuery( $this->deployments, 10 );
 			
 			$search_term = Input::get('q');
             if (empty($search_term)) {
@@ -52,7 +43,8 @@ class DeploymentController extends BaseController {
            
             $response = xDockerEngine::dockerHubGet($search_term);
             
-            $dockerInstances = $response->results;
+			
+            $dockerInstances = !empty($response) ? $response->results : '';
         // var_dump($accounts, $this->accounts, $this->accounts->owner);
         // Show the page
         return View::make('site/deployment/index', array(
@@ -111,14 +103,14 @@ class DeploymentController extends BaseController {
 				EngineLog::logIt(array('user_id' => Auth::id(), 'method' => 'authenticate', 'return' => $responseJson));
 				$obj = json_decode($responseJson);
 				
-				if($obj->status == 'OK')
+				if(!empty($obj) && $obj->status == 'OK')
 				{
 					$deployment -> token = $obj->token;
 					$this->prepare($user, $deployment);
 					$responseJson = xDockerEngine::run(json_decode($deployment->wsParams));
 					EngineLog::logIt(array('user_id' => Auth::id(), 'method' => 'run', 'return' => $responseJson));
 					$obj1 = json_decode($responseJson);
-					if($obj1->status == 'OK')
+					if(!empty($obj1) && $obj1->status == 'OK')
 					{
 						$deployment -> job_id = $obj1->job_id;
 						$deployment -> status = 'In Progress';
@@ -131,24 +123,31 @@ class DeploymentController extends BaseController {
 		                //throw new Exception($deployment->errors());
 						}
 					}
-					else if($obj1->status == 'error')
+					else if(!empty($obj1) && $obj1->status == 'error')
 					{
 						Log::error('Failed during deployment!'. $obj1->message);
 						return Redirect::to('deployment')->with('error', 'Failed during deployment!'. $obj1->message);
 					}
+					return Redirect::to('deployment')->with('success', Lang::get('deployment/deployment.deployment_updated'));
 	            }
-				else if($obj->status == 'error')
+				else if(!empty($obj) && $obj->status == 'error')
 				{
 					Log::error('Failed to authenticate before deployment!'. $obj->message);
 					return Redirect::to('deployment')->with('error', 'Failed to authenticate before deployment!'. $obj->message);
 				}
+				else
+				{
+					Log::error('error', 'Unexpected error - Backend Engine API should be down!');
+					return Redirect::to('ServiceStatus')->with('error', 'Backend API is down, please try again later!');		
+				}
+ 
             }
             catch(Exception $err) {
                 $status = 'Unexpected Error: ' . $err->getMessage();
 				Log::error('Error while saving deployment : '. $status);
                 throw new Exception($err->getMessage());
             }
-            return Redirect::to('deployment')->with('success', Lang::get('deployment/deployment.deployment_updated'));
+            
         }
         catch(Exception $e) {
         	Log::error('Error while saving deployment : '. $e->getMessage());
@@ -161,6 +160,15 @@ class DeploymentController extends BaseController {
 		$account = CloudAccount::where('user_id', Auth::id())->findOrFail($deployment->cloud_account_id) ;
 		$credentials = json_decode($account->credentials);
 		$parameters = json_decode($deployment->parameters);
+		$dockerParams = xDockerEngine::getDockerParams($deployment -> docker_name);
+		if($dockerParams['env_keys'])
+		{
+			$keys = array('AWS_ACCESS_KEY_ID' => $credentials ->apiKey,
+					  'AWS_SECRET_ACCESS_KEY' => $credentials ->secretKey,
+					  'BILLING_BUCKET' => $credentials ->billingBucket);
+		
+			$dockerParams['env'] = array_merge($dockerParams['env'], $keys);
+		}
 		$deployment->wsParams = json_encode(
                                     array (
                                         'token' => $deployment->token,
@@ -175,25 +183,23 @@ class DeploymentController extends BaseController {
                                         'instanceAmi' => $parameters->instanceAmi,
                                         'OS' => $parameters->OS,
                                         'packageName' => $deployment -> docker_name,
-                                        'dockerParams' => array('ports' => $parameters->ports, 
-                                                                'env' => array('mail' =>$user->email, 'host'=> '{host}'), 
-                                                                'tag'=> $this->getTagIfApplicable($deployment -> docker_name))   )
-                                      );			  				
+                                        'dockerParams' => $dockerParams  
+										)
+                                      );	
+		  				
 	}
 
-	private function getTagIfApplicable($dockerName)
-	{
-		$setting = Config::get('docker_settings');
-		return $setting[$dockerName]['tags'];
-	}
-    /**
+	/**
      * Remove the specified Account .
      *
      * @param $deployment
      *
      */
-    public function postDelete($id) {
+    public function postDelete($id) 
+    {
+    	$this->terminateInstance($id);
     	Deployment::where('id', $id)->where('user_id', Auth::id())->delete();
+		
         // Was the comment post deleted?
         $deployment = Deployment::where('user_id', Auth::id())->find($id);
         if (empty($deployment)) {
@@ -204,6 +210,18 @@ class DeploymentController extends BaseController {
             return Redirect::to('/')->with('error', 'Error while deleting');
         }
     }
+
+	private function terminateInstance($id)
+	{
+		$deployment = Deployment::where('user_id', Auth::id())->find($id);
+		$account = CloudAccount::where('user_id', Auth::id())->findOrFail($deployment->cloud_account_id) ;
+		$instanceId =  Input::get('instanceID');
+		Log::error('Terminating Instance :'. $instanceId);
+		$response = $this->executeAction(Input::get('instanceAction'), $account, $deployment, $instanceId);
+		if($response['status'] == 'OK') return TRUE;
+		else return FALSE;
+			
+	}
 	
 	public function checkStatus($id)
 	{
@@ -291,11 +309,11 @@ class DeploymentController extends BaseController {
 		$credentials 	= json_decode($account->credentials);
 		
 		$result			= json_decode($deployment->wsResults);
-		$arr = $this->executeAction($instanceAction, $account, $deployment, $instanceId);
+		$arr = $this->executeAction($instanceAction, $account, $deployment, $instanceID);
 										
 		if($arr['status'] == 'OK')
 		{
-			$deployment->status = $instanceAction .':' .$arr['result'];
+			$deployment->status = $instanceAction;
 			$success = $deployment->save();
 		    if (!$success) 
 		    {
@@ -314,11 +332,11 @@ class DeploymentController extends BaseController {
 		
 	}
 
-	private function executeAction($instanceAction, $account, $deployment , $instanceId)
+	private function executeAction($instanceAction, $account, $deployment , $instanceID)
 	{
 		$param 			= json_decode($deployment->parameters);
-		$account -> instanceRegion = & $param->instanceRegion;
-		return CloudProvider::executeAction($instanceAction, $account, $instanceId);
+		$account -> instanceRegion =  $param->instanceRegion;
+		return CloudProvider::executeAction($instanceAction, $account, $instanceID);
 	}
 	
 	public function getImages()
@@ -341,6 +359,20 @@ class DeploymentController extends BaseController {
 
 			}
 		}
+	}
+
+	public function getPrices()
+	{
+		$cloudProvider = Input::get('cloudProvider');
+		$param = new stdClass();
+		$param->region 		 = Input::get('region');
+		$param->instanceType = Input::get('instanceType');
+		
+		$ondemand = EC2InstancePrices::OnDemand2($param);
+		
+		echo json_encode($ondemand);
+		
+		//echo json_encode(EC2InstancePrices::On)
 	}
 
 	
