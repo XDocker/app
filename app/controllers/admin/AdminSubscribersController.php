@@ -13,7 +13,7 @@ class AdminSubscribersController extends AdminController {
      * Inject the models.
      * @param Post $post
      */
-    public function __construct(Subscriber $subscriber)
+    public function __construct(Signup $subscriber)
     {
         parent::__construct();
         $this->subscriber = $subscriber;
@@ -85,7 +85,7 @@ class AdminSubscribersController extends AdminController {
             $subscriber->delete();
 
             // Was the blog post deleted?
-            $subscriber = Subscriber::find($id);
+            $subscriber = Signup::find($id);
             if(empty($subscriber))
             {
                 // Redirect to the blog posts management page
@@ -103,7 +103,7 @@ class AdminSubscribersController extends AdminController {
      */
     public function getData()
     {
-        $subscribers = Subscriber::select(array('fbf_newsletter_signups.id', 'fbf_newsletter_signups.email', 'fbf_newsletter_signups.created_at'));
+        $subscribers = Signup::select(array('fbf_newsletter_signups.id', 'fbf_newsletter_signups.email', 'fbf_newsletter_signups.created_at'));
 
         return Datatables::of($subscribers)
 
