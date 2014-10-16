@@ -21,7 +21,7 @@
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">{{{ Lang::get('site.name') }}}</h2>
                     <h5 class="section-subheading text-muted">{{{ Lang::get('site.tagline') }}}</h5>
-                    <h7 class="section-subheading text-muted btn btn-success">{{{ Lang::get('site.launch') }}}</h7>
+                    <strong class="section-subheading text-muted btn btn-success">{{{ Lang::get('site.launch') }}}</strong>
                 		
 		</div>
             </div>
