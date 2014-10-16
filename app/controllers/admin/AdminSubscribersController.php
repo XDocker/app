@@ -103,12 +103,11 @@ class AdminSubscribersController extends AdminController {
      */
     public function getData()
     {
-        $subscribers = Subscriber::select(array('fbf_newsletter_signups.id', 'fbf_newsletter_signups.email', 'fbf_newsletter_signups.created_at'));
+        $subscribers = Subscriber::select(array('fbf_newsletter_signups.email', 'fbf_newsletter_signups.created_at'));
 
         return Datatables::of($subscribers)
 
-        ->add_column('actions', '<a href="{{{ URL::to(\'admin/subscribers/\' . $id . \'/edit\' ) }}}" class="btn btn-default btn-xs iframe" >{{{ Lang::get(\'button.edit\') }}}</a>
-                <a href="{{{ URL::to(\'admin/subscribers/\' . $id . \'/delete\' ) }}}" class="btn btn-xs btn-danger iframe">{{{ Lang::get(\'button.delete\') }}}</a>
+        ->add_column('actions', '<a href="{{{ URL::to(\'admin/subscribers/\' . $id . \'/delete\' ) }}}" class="btn btn-xs btn-danger iframe">{{{ Lang::get(\'button.delete\') }}}</a>
             ')
 
         ->remove_column('id')
