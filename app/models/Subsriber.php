@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\URL;
 
 class Subscriber extends Eloquent {
 
+	protected $table = 'fbf_newsletter_signups';
 	/**
 	 * Deletes a blog post and all
 	 * the associated comments.
