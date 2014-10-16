@@ -52,6 +52,7 @@ class AccountController extends BaseController {
      */
     public function getCreate($account = false) {
         $mode = $account !== false ? 'edit' : 'create';
+		if(empty($account->id)) $account = CloudAccount::where('user_id', Auth::id())->find($account);
         $account = $account !== false ? CloudAccount::where('user_id', Auth::id())->findOrFail($account->id) : null;
         $providers = Config::get('account_schema');
         return View::make('site/account/create_edit', compact('mode', 'account', 'providers'));
@@ -94,7 +95,9 @@ class AccountController extends BaseController {
      *
      */
     public function postDelete($account) {
-    	
+    		
+    	if(empty($account->id)) $account = CloudAccount::where('user_id', Auth::id())->find($account);
+		
 		$deployment = Deployment::where('user_id', Auth::id())->where('cloudAccountId', $account->id)->get();
 		if(!$deployment->isEmpty())
 		{
