@@ -13,6 +13,7 @@ class CloudAccount extends \Eloquent
 	use SoftDeletingTrait;
     protected $fillable = [];
 	protected $softDelete = true;
+	protected $table='accounts'
     /**
      * Get the account's owner.
      *
