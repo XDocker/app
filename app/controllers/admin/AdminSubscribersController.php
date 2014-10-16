@@ -30,7 +30,7 @@ class AdminSubscribersController extends AdminController {
         $title = Lang::get('admin/subscribers/title.subscriber_management');
 
         // Grab all the blog posts
-        $subscibers = $this->subsciber;
+        $subscibers = $this->subscriber;
 
         // Show the page
         return View::make('admin/subscribers/index', compact('subscibers', 'title'));
