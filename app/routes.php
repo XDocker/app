@@ -71,8 +71,8 @@ Route::group(array(
     Route::post('blogs/{post}/delete', 'AdminBlogsController@postDelete');
     Route::controller('blogs', 'AdminBlogsController');
 	
-	Route::get('subscribers/{post}/delete', 'AdminSubscribersController@getDelete');
-    Route::post('subscribers/{post}/delete', 'AdminSubscribersController@postDelete');
+	Route::get('subscribers/{subscriber}/delete', 'AdminSubscribersController@getDelete');
+    Route::post('subscribers/{subscriber}/delete', 'AdminSubscribersController@postDelete');
     Route::controller('subscribers', 'AdminSubscribersController');
     # User Management
     Route::get('users/{user}/show', 'AdminUsersController@getShow');
