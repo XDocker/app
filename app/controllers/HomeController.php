@@ -48,9 +48,7 @@ class HomeController extends BaseController {
             }
             
             $response = xDockerEngine::dockerHubGet($search_term);
-            
-            $dockerInstances = $response->results;
-            // var_dump($dockerHubCredentials, $dockerInstances, json_decode($dockerInstances));
+            $dockerInstances = !empty($response) ? $response->results : '';
         }
         catch(Exception $e) {
             Log::error('Exception while loading docker images!');
