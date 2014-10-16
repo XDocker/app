@@ -60,7 +60,9 @@
         	<h4>{{{ Lang::get('home.xervmon_intro') }}}</h4>
         	<a target="_blank" href="https://www.xervmon.com/product" class="btn btn-primary">{{{ Lang::get('home.xervmon_call_to_action') }}}</a>
         </div>
-       
+       <div>
+       	@include('laravel-newsletter-signup::signup')
+       </div>
     </section>
 @else
 	@include('site.generic_view')
