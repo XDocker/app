@@ -1,7 +1,8 @@
 <?php
-
+use Fbf\LaravelNewsletterSignup\Signup;
 class AdminSubscribersController extends AdminController {
 
+	use Signup;
 
     /**
      * Post Model
