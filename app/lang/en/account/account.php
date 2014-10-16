@@ -11,7 +11,7 @@ return array(
 	*/
 
 	'cp_amazon_aws'            => 'Amazon AWS',
-	'account_updated'          => 'Account updated.',
+	'account_updated'          => 'Account updated. Now you can  <a href="'.URL::to('deployment').'">dDeploy</a> your favorite docker image.',
 	'account_created'          => 'Account created.',
 	'add_account'			   => 'Add Account',
 	'your_accounts'			   => 'Your Accounts:',
