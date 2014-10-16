@@ -12,8 +12,8 @@ class DeploymentQueryHelper
 	public static function getQuery($deployments, $paginate)
 	{
 		return $deployments
-            ->select('deployments.id', 'cloud_accounts.name as accountName', 
-            		 'cloud_accounts.cloudProvider', 'deployments.name', 
+            ->select('deployments.id', 'cloudAccounts.name as accountName', 
+            		 'cloudAccounts.cloudProvider', 'deployments.name', 
             		 'deployments.docker_name', 'deployments.parameters',
             		 'deployments.cloudAccountId', 'deployments.status', 
             		 'deployments.wsResults',
