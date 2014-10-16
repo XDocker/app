@@ -85,7 +85,7 @@ class AdminSubscribersController extends AdminController {
             $subscriber->delete();
 
             // Was the blog post deleted?
-            $subscriber = Signup::find($id);
+            $subscriber = Subscriber::find($id);
             if(empty($subscriber))
             {
                 // Redirect to the blog posts management page
@@ -103,7 +103,7 @@ class AdminSubscribersController extends AdminController {
      */
     public function getData()
     {
-        $subscribers = Signup::select(array('fbf_newsletter_signups.id', 'fbf_newsletter_signups.email', 'fbf_newsletter_signups.created_at'));
+        $subscribers = Subscriber::select(array('fbf_newsletter_signups.id', 'fbf_newsletter_signups.email', 'fbf_newsletter_signups.created_at'));
 
         return Datatables::of($subscribers)
 
