@@ -33,8 +33,16 @@ class SignupsController extends \BaseController {
 		{
 			$signup = new Signup();
 			$signup->email = \Input::get('newsletter_signup_email');
-			$signup->save();
-			$message = \Lang::get('laravel-newsletter-signup::copy.signup.success');
+			try
+			{
+				$signup->save();
+				$message = \Lang::get('laravel-newsletter-signup::copy.signup.success');
+			}
+			catch(Exception $ex)
+			{
+				Log::error('Failed in saving the email:'. $signup->email);
+				$message = \Lang::get('laravel-newsletter-signup::copy.signup.failure');
+			}
 		}
 
 		if (\Request::ajax())
