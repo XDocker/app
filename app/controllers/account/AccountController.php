@@ -95,7 +95,7 @@ class AccountController extends BaseController {
      */
     public function postDelete($account) {
     	
-		$deployment = Deployment::where('user_id', Auth::id())->where('cloud_account_id', $account->id)->get();
+		$deployment = Deployment::where('user_id', Auth::id())->where('cloudAccountId', $account->id)->get();
 		if(!$deployment->isEmpty())
 		{
 			  return Redirect::to('account')->with('error', 'Deployment is linked with this account and hence cannot be deleted');

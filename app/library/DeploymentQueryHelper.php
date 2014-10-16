@@ -15,10 +15,10 @@ class DeploymentQueryHelper
             ->select('deployments.id', 'cloud_accounts.name as accountName', 
             		 'cloud_accounts.cloudProvider', 'deployments.name', 
             		 'deployments.docker_name', 'deployments.parameters',
-            		 'deployments.cloud_account_id', 'deployments.status', 
+            		 'deployments.cloudAccountId', 'deployments.status', 
             		 'deployments.wsResults',
             		 'deployments.created_at')
-            ->leftJoin('cloud_accounts', 'deployments.cloud_account_id', '=', 'cloud_accounts.id')
+            ->leftJoin('cloudAccounts', 'deployments.cloudAccountId', '=', 'cloudAccounts.id')
             ->where('deployments.user_id', Auth::id())
             ->orderBy('deployments.created_at', 'DESC')
             ->paginate($paginate);

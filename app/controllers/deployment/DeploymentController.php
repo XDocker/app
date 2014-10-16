@@ -85,7 +85,7 @@ class DeploymentController extends BaseController {
                 throw new Exception('general.access_denied');
             }
             $deployment->name = Input::get('name');
-            $deployment->cloud_account_id = Input::get('cloud_account_id');
+            $deployment->cloudAccountId = Input::get('cloudAccountId');
 			$params = Input::get('parameters');
 			//$params['instanceImage'] = Input::get('instanceImage');
 			$arr = explode(':', Input::get('instanceAmi'));
@@ -157,7 +157,7 @@ class DeploymentController extends BaseController {
 
 	private function prepare($user, & $deployment)
 	{
-		$account = CloudAccount::where('user_id', Auth::id())->findOrFail($deployment->cloud_account_id) ;
+		$account = CloudAccount::where('user_id', Auth::id())->findOrFail($deployment->cloudAccountId) ;
 		$credentials = json_decode($account->credentials);
 		$parameters = json_decode($deployment->parameters);
 		$dockerParams = xDockerEngine::getDockerParams($deployment -> docker_name);
@@ -214,7 +214,7 @@ class DeploymentController extends BaseController {
 	private function terminateInstance($id)
 	{
 		$deployment = Deployment::where('user_id', Auth::id())->find($id);
-		$account = CloudAccount::where('user_id', Auth::id())->findOrFail($deployment->cloud_account_id) ;
+		$account = CloudAccount::where('user_id', Auth::id())->findOrFail($deployment->cloudAccountId) ;
 		$instanceId =  Input::get('instanceID');
 		Log::error('Terminating Instance :'. $instanceId);
 		$response = $this->executeAction(Input::get('instanceAction'), $account, $deployment, $instanceId);
@@ -317,7 +317,7 @@ class DeploymentController extends BaseController {
 		$instanceAction = Input::get('instanceAction');
 		$instanceID 	= Input::get('instanceID');
 		$deployment 	= Deployment::where('user_id', Auth::id())->find($id);
-		$account 		= CloudAccount::where('user_id', Auth::id())->findOrFail($deployment->cloud_account_id) ;
+		$account 		= CloudAccount::where('user_id', Auth::id())->findOrFail($deployment->cloudAccountId) ;
 		$credentials 	= json_decode($account->credentials);
 		
 		$result			= json_decode($deployment->wsResults);
