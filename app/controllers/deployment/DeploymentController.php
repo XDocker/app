@@ -110,7 +110,7 @@ class DeploymentController extends BaseController {
 					$responseJson = xDockerEngine::run(json_decode($deployment->wsParams));
 					EngineLog::logIt(array('user_id' => Auth::id(), 'method' => 'run', 'return' => $responseJson));
 					$obj1 = json_decode($responseJson);
-					if($obj1->status == 'OK')
+					if(!empty($obj1) && $obj1->status == 'OK')
 					{
 						$deployment -> job_id = $obj1->job_id;
 						$deployment -> status = 'In Progress';
@@ -123,24 +123,31 @@ class DeploymentController extends BaseController {
 		                //throw new Exception($deployment->errors());
 						}
 					}
-					else if($obj1->status == 'error')
+					else if(!empty($obj1) && $obj1->status == 'error')
 					{
 						Log::error('Failed during deployment!'. $obj1->message);
 						return Redirect::to('deployment')->with('error', 'Failed during deployment!'. $obj1->message);
 					}
+					return Redirect::to('deployment')->with('success', Lang::get('deployment/deployment.deployment_updated'));
 	            }
 				else if(!empty($obj) && $obj->status == 'error')
 				{
 					Log::error('Failed to authenticate before deployment!'. $obj->message);
 					return Redirect::to('deployment')->with('error', 'Failed to authenticate before deployment!'. $obj->message);
 				}
+				else
+				{
+					Log::error('error', 'Unexpected error - Backend Engine API should be down!');
+					return Redirect::to('ServiceStatus')->with('error', 'Backend API is down, please try again later!');		
+				}
+ 
             }
             catch(Exception $err) {
                 $status = 'Unexpected Error: ' . $err->getMessage();
 				Log::error('Error while saving deployment : '. $status);
                 throw new Exception($err->getMessage());
             }
-            return Redirect::to('deployment')->with('success', Lang::get('deployment/deployment.deployment_updated'));
+            
         }
         catch(Exception $e) {
         	Log::error('Error while saving deployment : '. $e->getMessage());
