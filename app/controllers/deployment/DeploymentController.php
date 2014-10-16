@@ -235,13 +235,13 @@ class DeploymentController extends BaseController {
 		 EngineLog::logIt(array('user_id' => Auth::id(), 'method' => 'authenticate', 'return' => $responseJson));
 		 $obj = json_decode($responseJson);
 		
-		 if($obj->status == 'OK')
+		 if(!empty($obj) && $obj->status == 'OK')
 		 {
 			$responseJson = xDockerEngine::getDeploymentStatus(array('token' => $obj->token, 'job_id' => $deployment->job_id));
 			EngineLog::logIt(array('user_id' => Auth::id(), 'method' => 'getDeploymentStatus', 'return' => $responseJson));
 		
 			$obj2 = json_decode($responseJson);
-			if($obj2->status == 'OK')
+			if(!empty($obj2) && $obj2->status == 'OK')
 			{
 				if(!isset($obj2 -> result))
 				{
@@ -257,18 +257,26 @@ class DeploymentController extends BaseController {
 		        }
 				return Redirect::to('deployment')->with('success', $deployment->name .' is refreshed' );
 			}
-			else  if($obj2->status == 'error')
+			else  if(!empty($obj2) && $obj2->status == 'error')
 			 {
 				 // There was a problem deleting the user
 	            return Redirect::to('deployment')->with('error', $obj2->message );
 			 }	
+			else
+			{
+				  return Redirect::to('ServiceStatus')->with('error', 'Backend API is down, please try again later!');			
+			}
 			
 		 }	
-		 if($obj->status == 'error')
+		 else if(!empty($obj) && $obj->status == 'error')
 		 {
 			 // There was a problem deleting the user
             return Redirect::to('deployment')->with('error', $obj->message );
-		 }		
+		 }	
+		 else
+		 {
+			return Redirect::to('ServiceStatus')->with('error', 'Backend API is down, please try again later!');			
+		 }	
 	}
 
 	public function getLogs($id)
@@ -281,7 +289,7 @@ class DeploymentController extends BaseController {
 		 	EngineLog::logIt(array('user_id' => Auth::id(), 'method' => 'authenticate', 'return' => $responseJson));
 		 	$obj = json_decode($responseJson);
 			
-			if($obj->status == 'OK')
+			if(!empty($obj) && $obj->status == 'OK')
 		 	{
 				$response = xDockerEngine::getLog(array('token' => $obj->token, 'job_id' => $deployment->job_id, "line_num"> 10));
 				return View::make('site/deployment/logs', array(
@@ -289,10 +297,14 @@ class DeploymentController extends BaseController {
             	'deployment' => $deployment));
 				
 			}
-			else if($obj->status == 'error')
+			else if(!empty($obj) && $obj->status == 'error')
 			{
 				 return Redirect::to('deployment')->with('error', $obj->message );
 			}
+			else
+				{
+					return Redirect::to('ServiceStatus')->with('error', 'Backend API is down, please try again later!');
+				}
 		}
 		else {
 			 return Redirect::to('deployment')->with('info', 'No Log found '. isset($deployment->name) ? $deployment->name : '' );
