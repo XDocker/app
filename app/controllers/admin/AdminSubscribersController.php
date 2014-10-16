@@ -1,8 +1,7 @@
 <?php
-use Fbf\LaravelNewsletterSignup\Signup;
+
 class AdminSubscribersController extends AdminController {
 
-	use Signup;
 
     /**
      * Post Model
@@ -14,10 +13,10 @@ class AdminSubscribersController extends AdminController {
      * Inject the models.
      * @param Post $post
      */
-    public function __construct(Signup $subscriber)
+    public function __construct(Subscriber $signup)
     {
         parent::__construct();
-        $this->subscriber = $subscriber;
+        $this->subscriber = $signup;
     }
 
     /**
