@@ -155,4 +155,10 @@ class xDockerEngine {
 		$settings = Config::get('docker_settings');
 		return isset($settings[$dockerName]) ? $settings[$dockerName]['enabled'] : FALSE;
 	}
+	
+	public static function urlAppend($dockerName)
+	{
+		$settings = Config::get('docker_settings');
+		return isset($settings[$dockerName]) ? $settings[$dockerName]['urlAppend'] : '';
+	}
 }
