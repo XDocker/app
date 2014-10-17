@@ -94,7 +94,7 @@ class CloudProvider {
 		$data = self::executeAction('describeInstances', $account, $instanceID);
 		if($data['status'] == 'OK')
 		{
-			return $data['message']['Reservations'][0]['Instances'][0]['State']['Name'];
+			return '<span class="label label-success">'.$data['message']['Reservations'][0]['Instances'][0]['State']['Name'];
 		}
 		else if($data['status'] == 'error')
 		{
