@@ -47,6 +47,19 @@ function terminate(url, instanceID, token)
 	});
 };
 
+function download(url, deploymentId, token)
+{
+	$.ajax({
+	 type: "POST",
+	 url: url,
+	 data: { "instanceAction": "download", "deploymentId": deploymentId, "_token" : token}
+	 }).done(function(response) 
+	 {
+	 	console.log(response);
+		    //showMessage(response);
+	});
+};
+
 showMessage = function (response)
 {
 	if(response.status == 'OK')

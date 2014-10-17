@@ -71,6 +71,15 @@ class CloudProvider {
 			case 'terminate' :
 				$response = self::getDriver($account)->terminateInstances(array('DryRun' => false, 'InstanceIds' =>array($instanceID)));
 				break;	
+			case 'download' :
+				$responseJson = xDockerEngine::authenticate(array('username' => Auth::user()->username, 'password' => md5(Auth::user()->engine_key)));
+		 		EngineLog::logIt(array('user_id' => Auth::id(), 'method' => 'authenticate-executeAction', 'return' => $responseJson));
+		 		$obj = json_decode($responseJson);
+				if(!empty($obj) && $obj->status == 'OK')
+		 		{
+					$resonse = xDockerEngine::downloadKey(array('token' =>$obj->token));
+				}
+				break;
 		}
 		return $response;
 	}
