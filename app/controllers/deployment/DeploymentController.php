@@ -330,7 +330,7 @@ class DeploymentController extends BaseController {
 										
 		if($arr['status'] == 'OK')
 		{
-			$deployment->status = $instanceAction;
+			$deployment->status = $instanceAction !=='describeInstances' ? $instanceAction : $deployment->status;
 			$success = $deployment->save();
 		    if (!$success) 
 		    {
