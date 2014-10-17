@@ -129,7 +129,7 @@ class xDockerEngine {
 		$settings = Config::get('docker_settings');
 		$img = '<img width="25px" height="25px" src="' . asset('/assets/img/providers/docker.jpg').'" />';
 		$url = isset($settings[$dockerName]) ? $settings[$dockerName]['docker_url'] : '';
-		return '<a target="_blank" href="'.$url.'">' .$img.  $dockerName.'</a>';
+		return '<a target="_blank" href="'.$url.'">' .$img.'</a>';
 		
 	}
 	
