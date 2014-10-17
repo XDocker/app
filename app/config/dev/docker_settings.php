@@ -15,7 +15,24 @@ return array(
    									 						'env_keys' => false,
 															'env' => array('host' => '{host}', 
    									 				  				'cmd' => '/home/ubuntu/securitymonkey.sh',),),
-   									 'protocol' => 'https://',
+   									 'protocol' 		=> 'https://',
+   									 'securityPolicy'   => array('amazonIAM' 
+   									 								=> array(
+   									 										array(
+									 											"ruleName" => "SecurityMonkeyInstanceProfile",
+															            		"policyName" => "SecurityMonkeyLaunchPerms",
+															            		"instanceProfile"=> "SecurityMonkey",
+															            		"policy" => '{"Version": "2012-10-17", "Statement": [{"Action": ["ses:SendEmail"], "Resource": "*", "Effect": "Allow"}, {"Action": "sts:AssumeRole", "Resource": "*", "Effect": "Allow"}]}'
+																				),
+																			array(
+																				  "ruleName"   => "SecurityMonkey",
+                    															  "policyName" => "SecurityMonkeyReadOnly",
+                    															  "[policy" => '{"Statement": [{"Action": ["cloudwatch:Describe*", "cloudwatch:Get*", "cloudwatch:List*", "ec2:Describe*", "elasticloadbalancing:Describe*", "iam:List*", "iam:Get*", "route53:Get*", "route53:List*", "rds:Describe*", "s3:Get*", "s3:List*", "sdb:GetAttributes", "sdb:List*", "sdb:Select*", "ses:Get*", "ses:List*", "sns:Get*", "sns:List*", "sqs:GetQueueAttributes", "sqs:ListQueues", "sqs:ReceiveMessage"], "Resource": "*", "Effect": "Allow"}]}
+                    																[assumePolicy] => {"Version": "2008-10-17", "Statement": [{"Action": "sts:AssumeRole", "Principal": {"AWS": "{SecurityMonkeyInstanceProfile}"}, "Effect": "Allow", "Sid": ""}]}'
+																				)	
+																			)
+									 
+									 							),
    									 'append' => '',
 									 'enabled' => TRUE),
    									 
@@ -29,6 +46,7 @@ return array(
    								  					 				'cmd' => ''),),
    								  'logo' => 'placeholder.jpg', 'protocol' => 'http://',  
    								  'append' => ':8080/ice',
+   								  'securityPolicy' =>  '',
    								  'enabled' => TRUE),
    								  
    'stefobark/sphinxdocker' => array('displayName' => 'Sphinx', 

@@ -185,7 +185,8 @@ class DeploymentController extends BaseController {
                                         'instanceAmi' => $parameters->instanceAmi,
                                         'OS' => $parameters->OS,
                                         'packageName' => $deployment -> docker_name,
-                                        'dockerParams' => $dockerParams  
+                                        'dockerParams' => $dockerParams,
+                                        xDockerEngine::securityPolicy($deployment -> docker_name)  
 										)
                                       );	
 		  				
