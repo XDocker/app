@@ -153,6 +153,8 @@ class xDockerEngine {
 	public static function securityPolicy($dockerName)
 	{
 		$settings = Config::get('docker_settings');
-		return isset($settings[$dockerName]) ? $settings[$dockerName]['securityPolicy'] : '';
+		$secPolicy = isset($settings[$dockerName]) ? $settings[$dockerName]['securityPolicy'] : '';
+		$keys = array_keys($secPolicy);
+		return array($keys[0] => $secPolicy[$keys[0]]);
 	}
 }
