@@ -95,7 +95,7 @@ Inverse	<span class="label label-inverse">Inverse</span>
 		}
 		//$data['regions'][0]['instanceTypes'][0]['price']
 		$perHr = $sym.$data['regions'][0]['instanceTypes'][0]['price'] .' '. $data['config']['unit'];
-		$s30hr = intval($data['regions'][0]['instanceTypes'][0]['price']) * 730 . ' per 730 hours ';
+		$s30hr = floatval($data['regions'][0]['instanceTypes'][0]['price']) * 730 . ' per 730 hours ';
 		return $sym.$data['regions'][0]['instanceTypes'][0]['price'] .' '. $data['config']['unit'].
 		'<br/>'.$sym. $s30hr;
 	}
