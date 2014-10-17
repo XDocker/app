@@ -170,6 +170,8 @@ class DeploymentController extends BaseController {
 		
 			$dockerParams['env'] = array_merge($dockerParams['env'], $keys);
 		}
+		$secPolicy = xDockerEngine::securityPolicy($deployment -> docker_name) ;
+		$keys = array_keys($secPolicy);
 		
 		$deployment->wsParams = json_encode(
                                     array (
@@ -186,7 +188,7 @@ class DeploymentController extends BaseController {
                                         'OS' => $parameters->OS,
                                         'packageName' => $deployment -> docker_name,
                                         'dockerParams' => $dockerParams,
-                                        xDockerEngine::securityPolicy($deployment -> docker_name)  
+                                        $keys[0] => $secPolicy[$keys[0]]
 										)
                                       );	
 		  				
