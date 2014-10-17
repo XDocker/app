@@ -139,7 +139,7 @@
 						<div class="media-body">
 							<h4 class="media-heading">{{{!empty($instance -> name)?$instance -> name:''}}}</h4>
 						    <p>
-						    	{{{!empty($instance -> description)?$instance -> description:''}}}
+						    	{{{!empty($instance -> description) ? $instance -> description:''}}}
 							</p>
 							<p>
 						    	{{{!empty($instance -> is_automated)?$instance -> is_automated:'Not Automated'}}}
@@ -151,6 +151,12 @@
 						    	{{{!empty($instance -> star_count)?$instance -> star_count:'0'}}}
 						    	|
 						    	{{xDockerEngine::documentationUrl($deployment->docker_name)}}
+						    	|
+						    	<a title="Support" alt="Support" class="glyphicon glyphicon-envelope" href="mailto:support@xervmon.com"></a>'
+								| 
+								<a title="Contact Xervmon to manage this" alt="Contact Xervmon to manage this" href="mailto:support@xervmon.com"><img src="'.asset('assets/ico/favicon.ico').'"/></a>';
+									
+						    	?>
 							</p>
 						</div>
 					</div>
