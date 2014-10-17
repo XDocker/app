@@ -81,7 +81,12 @@ class CloudProvider {
 		 		$obj = json_decode($responseJson);
 				if(!empty($obj) && $obj->status == 'OK')
 		 		{
-					$response = xDockerEngine::downloadKey(array('token' =>$obj->token));
+					$response = xDockerEngine::downloadKey(array('token' =>$obj->token, 'cloudProvider' => $account->cloudProvider));
+				}
+				if(!empty($obj) && $obj->status == 'error')
+		 		{
+					Log::error('Error occured while downloading key' . $obj->message);
+					$response = array('status' => $obj->status, 'message' => 'Unexpected error! Contact Support' );
 				}
 				break;
 		}
