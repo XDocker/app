@@ -49,7 +49,6 @@ function terminate(url, instanceID, token)
 
 function downloadKey(url,deploymentId, token)
 {
-	alert(id);
 	$.ajax({
 	 type: "POST",
 	 url: url,
