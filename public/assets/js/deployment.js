@@ -72,6 +72,7 @@ function refresh(url, instanceId, token)
 	 }).done(function(response) 
 	 {
 	 	console.log(response);
+	 	$('#'+instanceId).html(response.Instances);
 		    //showMessage(response);
 	});
 	
