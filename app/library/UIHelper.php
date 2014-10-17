@@ -44,7 +44,7 @@ Inverse	<span class="label label-inverse">Inverse</span>
 			$instanceType = $data['regions'][0]['instanceTypes'];
 			$obj = json_decode(json_encode($data));
 			
-			$image = self::getImage($obj->regions[0]->region, $input->instanceAmi);
+			$image = self::getImage($input->instanceAmi);
 			
 			return '<div class="table-responsive">  <table class="table table-bordered"> '.
               		' <thead> ' .
@@ -58,22 +58,30 @@ Inverse	<span class="label label-inverse">Inverse</span>
 	              		'<td><span class="glyphicon glyphicon-ok"></span></td>'.
 	              		'<td>'.$obj->regions[0]->region.'</td>'.
 	              		'<td>'.$input->instanceType.'</td>'.
-	              		'<td>'.$input->instanceAmi.'</td>'.
+	              		'<td>'.$image.'</td>'.
 	              		'<td>'.'</td>'.
 					'</tr>'.
 					'</table></div>';
 			
 	}	
 
-	private static function getImage($region, $instanceAMI)
+	private static function getImage($instanceAMI)
 	{
 		$images = Config::get('images');
 		foreach($images as $providers)
 		{
-			foreach($providers as $image)
+			foreach($providers as $confImages)
 			{
-				print_r($image);
-				die();
+				foreach($confImages as $cImage)
+				{
+					$arr = explode (':', $cImage);
+					if(!empty($arr[1]) && $arr[1] == $instanceAMI)
+						return $cImage;
+					else
+					{
+						return $instanceAMI;
+					}
+				}
 			}
 		}
 	}
