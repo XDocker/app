@@ -64,17 +64,17 @@ function downloadKey(id)
 
 function refresh(url, instanceId, token)
 {
-	alert(id);
-	/*$.ajax({
+	alert(instanceId);
+	$.ajax({
 	 type: "POST",
 	 url: url,
-	 data: { "instanceAction": "download", "deploymentId": deploymentId, "_token" : token}
+	 data: { "instanceAction": "describeInstances", "instanceID": instanceId, "_token" : token}
 	 }).done(function(response) 
 	 {
 	 	console.log(response);
 		    //showMessage(response);
 	});
-	*/
+	
 };
 
 showMessage = function (response)

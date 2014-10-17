@@ -60,7 +60,7 @@ class CloudProvider {
 		switch ($instanceAction)
 		{
 			case 'start' :
-				$response = self::getDriver($account)->startInstances(array('InstanceIds' =>array($instanceID), 'DryRun' => false, ));
+				$response = self::getDriver($account)->startInstances(array('DryRun' => false, 'InstanceIds' =>array($instanceID),  ));
 				break;
 			case 'stop' :
 				$response = self::getDriver($account)->stopInstances(array('DryRun' => false, 'InstanceIds' =>array($instanceID)));
@@ -70,6 +70,10 @@ class CloudProvider {
 				break;
 			case 'terminate' :
 				$response = self::getDriver($account)->terminateInstances(array('DryRun' => false, 'InstanceIds' =>array($instanceID)));
+				break;	
+				
+			case 'describeInstances':
+				$response = self::getDriver($account)->describeInstances(array('DryRun' => false, 'InstanceIds' =>array($instanceID)));
 				break;	
 			case 'download' :
 				$responseJson = xDockerEngine::authenticate(array('username' => Auth::user()->username, 'password' => md5(Auth::user()->engine_key)));

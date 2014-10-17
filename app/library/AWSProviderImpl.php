@@ -159,4 +159,37 @@ class AWSPRoviderImpl implements IProvider
 			return array('status' => 'error', 'message' => 'Authentication failure! API key and secret key for account is not correct');
 		}
 	}
+	
+	public function describeInstances($params)
+	{
+		if($this->init())
+		{
+			try
+			{	
+				$nstanceResult = $this->ec2Client->DescribeInstances(array(
+		        'Filters' => array(
+		                		array('Name' => 'instance-id', 'Values' => $params['InstanceIds']),
+		        			)
+						));
+				if (!empty($nstanceResult))
+				{
+					return array('status' => 'OK', 'message'  => $nstanceResult-> toArray());
+				} 
+			}
+			catch(Exception $ex)
+			{
+				Log::error($ex);
+				return array('status' => 'error', 'message' => 'Error occured during describeInstances - '.json_encode($params['InstanceIds']));
+			}
+		} 
+		else
+		{
+			Log::error(Auth::check() ? Auth::user()->username : '__Guest__');
+			Log::error('describeInstances '. $instanceAction .' request');
+			Log::error('describeInstances '. $instanceAction .' Authentication failure! API key and secret key for account is not correct');
+			return array('status' => 'error', 'message' => 'Authentication failure! API key and secret key for account is not correct');
+		}
+		
+		
+	}
 }
