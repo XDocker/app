@@ -47,9 +47,10 @@ function terminate(url, instanceID, token)
 	});
 };
 
-function downloadKey(url, deploymentId, token)
+function downloadKey($id)
 {
-	$.ajax({
+	alert(id);
+	/*$.ajax({
 	 type: "POST",
 	 url: url,
 	 data: { "instanceAction": "download", "deploymentId": deploymentId, "_token" : token}
@@ -58,6 +59,7 @@ function downloadKey(url, deploymentId, token)
 	 	console.log(response);
 		    //showMessage(response);
 	});
+	*/
 };
 
 showMessage = function (response)
