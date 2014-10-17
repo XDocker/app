@@ -72,6 +72,14 @@ function refresh(url, instanceId, token)
 	 }).done(function(response) 
 	 {
 	 	console.log(response);
+	 	if (!$.isArray(response))
+	 	{
+        	response = JSON.parse(response);
+        }
+		if(response.status == 'OK')
+		{
+			
+		}
 	 	//$('#'+instanceId).html(response.Instances);
 		    //showMessage(response);
 	});

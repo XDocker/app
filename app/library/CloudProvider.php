@@ -87,6 +87,13 @@ class CloudProvider {
 		}
 		return $response;
 	}
+
+	public static function getState($cloudAccountId, $instanceID)
+	{
+		$account = CloudAccount::where('user_id', Auth::id())->findOrFail($deployment->cloudAccountId) ;
+		$data = self::executeAction('describeInstances', $account, $instanceID);
+		print_r($data);	
+	}
 	
 	
 }
