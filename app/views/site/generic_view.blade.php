@@ -67,7 +67,7 @@
 								</p>
 								<p>
 									
-									{{UIHelper::getDataOrganized(EC2InstancePrices::OnDemand($deployment->parameters), $deployment->parameters)}}
+									{{UIHelper::getDataOrganized($deployment->parameters)}}
 									
 								</p>
 			

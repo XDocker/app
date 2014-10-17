@@ -34,14 +34,17 @@ Inverse	<span class="label label-inverse">Inverse</span>
 		
 	}
 
-	public static function getDataOrganized($data, $params)
+	public static function getDataOrganized($params)
 	{
 			//Array ( [config] => Array ( [currency] => USD [unit] => perhr ) [regions] => 
 			//Array ( [0] => Array ( [region] => us-east-1 [instanceTypes] 
 			//=> Array ( [0] => Array ( [type] => m1.small [os] => linux [price] => 0.06 ) ) ) ) )
+			$data = EC2InstancePrices::OnDemand($params);
 			$input = json_decode($params);
 			$instanceType = $data['regions'][0]['instanceTypes'];
 			$obj = json_decode(json_encode($data));
+			
+			$image = self::getImage($obj->regions[0]->region, $input->instanceAmi);
 			
 			return '<div class="table-responsive">  <table class="table table-bordered"> '.
               		' <thead> ' .
@@ -61,6 +64,19 @@ Inverse	<span class="label label-inverse">Inverse</span>
 					'</table></div>';
 			
 	}	
+
+	private static function getImage($region, $instanceAMI)
+	{
+		$images = Config::get('images');
+		foreach($images as $providers)
+		{
+			foreach($providers as $image)
+			{
+				print_r($image);
+				die();
+			}
+		}
+	}
 	
 	private static function getPrice($data)
 	{
