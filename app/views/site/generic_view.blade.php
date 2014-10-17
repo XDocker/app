@@ -23,9 +23,8 @@
 		  			<li class="list-group-item">
 						<div class="media">
 							<p>
-								<a href="{{ URL::to('account/'.$deployment->cloudAccountId.'/edit') }}" class="pull-left" href="#">
-								    <img class="media-object img-responsive" src="{{ asset('/assets/img/providers/'.Config::get('provider_meta.'.$deployment->cloudProvider.'.logo')) }}" alt="{{ $deployment->cloudProvider }}" />
-								    <p class="text-center">{{{$deployment->accountName}}}</p>
+								<a alt="{{ $deployment->accountName }}" title="{{ $deployment->accountName }}" href="{{ URL::to('account/'.$deployment->cloudAccountId.'/edit') }}" class="pull-left" href="#">
+								    <img title="{{ $deployment->accountName }}" class="media-object img-responsive" src="{{ asset('/assets/img/providers/'.Config::get('provider_meta.'.$deployment->cloudProvider.'.logo')) }}" alt="{{ $deployment->accountName }}" />
 								</a> 
 							</p>
 							<form class="pull-right" method="post" action="{{ URL::to('deployment/' . $deployment->id . '/refresh') }}">
