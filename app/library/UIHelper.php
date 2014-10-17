@@ -33,6 +33,37 @@ Inverse	<span class="label label-inverse">Inverse</span>
 		}
 		
 	}
+	
+	public static function getBadge($status)
+	{
+		
+		/*
+		 * Default	<span class="label">Default</span>
+Success	<span class="label label-success">Success</span>
+Warning	<span class="label label-warning">Warning</span>
+Important	<span class="label label-important">Important</span>
+Info	<span class="label label-info">Info</span>
+Inverse	<span class="label label-inverse">Inverse</span>
+		 */
+		switch($status)
+		{
+			case 'running' 	: return '<span class="badge alert-success">'.$status.'</span>'; break;
+			
+			case 'start' 		: 
+			case 'started' 		: return '<span class="badge alert-info">'.$status.'</span>'; break;
+			
+			case 'stop' 		: 
+			case 'stopped' 		: return '<span class="badge alert-warning">'.$status.'</span>'; break;
+			
+			case 'terminated' 		: 
+			case 'error' 		: 
+			case 'failed' 		: return '<span class="badge alert-danger">'.$status.'</span>'; break;
+			
+			default:			  return '<span class="badge alert-danger">'.$status.'</span>'; break;
+								
+		}
+		
+	}
 
 	public static function getDataOrganized($params)
 	{

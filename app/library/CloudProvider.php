@@ -94,13 +94,20 @@ class CloudProvider {
 		$data = self::executeAction('describeInstances', $account, $instanceID);
 		if($data['status'] == 'OK')
 		{
-			return '<span class="badge badge-success">'.$data['message']['Reservations'][0]['Instances'][0]['State']['Name'].'</label>';
+			if(!empty($data['message']['Reservations'][0]['Instances'][0]['State']['Name']))
+			
+				return UIHelper::getBadge($data['message']['Reservations'][0]['Instances'][0]['State']['Name']);
+			else
+				return UIHelper::getBadge('NA');
 		}
 		else if($data['status'] == 'error')
 		{
-			return 'ERROR';
+			return UIHelper::getBadge($data['status']);
 		}
-		print_r($data);	
+		else
+		{
+			return UIHelper::getBadge('NA');
+		}
 	}
 	
 	
