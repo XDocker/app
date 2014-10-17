@@ -43,7 +43,7 @@
 							</form>
 							<div class="media-body">
 								
-								<h4 class="media-heading">{{ String::title($deployment->name) }} {{CloudProvider::getState($deployment->cloudAccountId, $result->instance_id)}}</h4>
+								<h4 class="media-heading">{{ String::title($deployment->name) }} {{{CloudProvider::getState($deployment->cloudAccountId, $result->instance_id)}}}</h4>
 								<p>
 									<?php 
 									
