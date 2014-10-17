@@ -22,6 +22,7 @@ Inverse	<span class="label label-inverse">Inverse</span>
 		 */
 		switch($status)
 		{
+			case 'running' :
 			case 'Completed' 	: return '<span class="label label-success">'.$status.'</span>'; break;
 			case 'In Progress'  : 
 			case 'start' 		: 
