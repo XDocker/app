@@ -17,6 +17,6 @@ return array(
 	'deployment_updated'   => 'Deployment Updated successfully.',
 	'account_required'  => 'To deploy, please create the Account first',
 	'status' => 'In Progress',
-	'monthly' => ' 730 hours / Month ',
+	'monthly' => '(730 hours / Month)',
 
 );
