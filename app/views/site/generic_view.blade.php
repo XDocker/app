@@ -137,7 +137,7 @@
 						</span>
 						<a href="{{ URL::to('deployment/create/') }}?name={{urlencode($instance -> name)}}" class="btn btn-primary pull-right" role="button"><span class="glyphicon glyphicon-play"></span></a>
 						<div class="media-body">
-							<h4 class="media-heading">{{{!empty($instance -> name)?$instance -> name:''}}}</h4>
+							<h4 class="media-heading">{{{!empty($instance -> name)?xDockerEngine::getDockerUrl($instance->name):''}}}</h4>
 						    <p>
 						    	{{{!empty($instance -> description) ? $instance -> description:''}}}
 							</p>
@@ -156,7 +156,7 @@
 								| 
 								<a title="Contact Xervmon to manage this" alt="Contact Xervmon to manage this" href="mailto:support@xervmon.com"><img src="{{{ asset('assets/ico/favicon.ico') }}}"/></a>;
 									
-						    	?>
+						    	
 							</p>
 						</div>
 					</div>
