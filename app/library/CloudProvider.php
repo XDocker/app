@@ -101,17 +101,17 @@ class CloudProvider {
 		{
 			if(!empty($data['message']['Reservations'][0]['Instances'][0]['State']['Name']))
 			
-				return UIHelper::getBadge($data['message']['Reservations'][0]['Instances'][0]['State']['Name']);
+				return UIHelper::getLabel($data['message']['Reservations'][0]['Instances'][0]['State']['Name']);
 			else
-				return UIHelper::getBadge('NA');
+				return UIHelper::getLabel('NA');
 		}
 		else if($data['status'] == 'error')
 		{
-			return UIHelper::getBadge($data['status']);
+			return UIHelper::getLabel($data['status']);
 		}
 		else
 		{
-			return UIHelper::getBadge('NA');
+			return UIHelper::getLabel('NA');
 		}
 	}
 	
