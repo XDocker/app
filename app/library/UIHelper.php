@@ -59,7 +59,7 @@ Inverse	<span class="label label-inverse">Inverse</span>
 	              		'<td>'.$obj->regions[0]->region.'</td>'.
 	              		'<td>'.$input->instanceType.'</td>'.
 	              		'<td>'.$image.'</td>'.
-	              		'<td>'.'</td>'.
+	              		'<td>'.self::getPrice($data).'</td>'.
 					'</tr>'.
 					'</table></div>';
 			
@@ -93,7 +93,7 @@ Inverse	<span class="label label-inverse">Inverse</span>
 		{
 			case 'USD' : $sym = '$'; break;
 		}
-		
+		//$data['regions'][0]['instanceTypes'][0]['price']
 		return $sym.$data['regions'][0]['instanceTypes'][0]['price'] .' '. $data['config']['unit'];
 	}
 }
