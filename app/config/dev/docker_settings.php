@@ -16,7 +16,7 @@ return array(
 															'env' => array('host' => '{host}', 
    									 				  				'cmd' => '/home/ubuntu/securitymonkey.sh',),),
    									 'protocol' => 'https://',
-   									 'urlAppend' => '',
+   									 'append' => '',
 									 'enabled' => TRUE),
    									 
 									 //"dockerParams": {"ports": [443, 5000], "env": {}, "tag": "v1",
@@ -29,7 +29,7 @@ return array(
    								  					 				'cmd' => ''),),
    								  'logo' => 'placeholder.jpg', 'protocol' => 'http://',  
    								  'env_keys' => true, 
-   								  'urlAppend' => ':8080/ice',
+   								  'append' => ':8080/ice',
    								  'enabled' => TRUE),
    								  
    'stefobark/sphinxdocker' => array('displayName' => 'Sphinx', 
