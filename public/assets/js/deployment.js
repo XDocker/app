@@ -47,10 +47,10 @@ function terminate(url, instanceID, token)
 	});
 };
 
-function downloadKey(id)
+function downloadKey(url,deploymentId, token)
 {
 	alert(id);
-	/*$.ajax({
+	$.ajax({
 	 type: "POST",
 	 url: url,
 	 data: { "instanceAction": "download", "deploymentId": deploymentId, "_token" : token}
@@ -59,12 +59,11 @@ function downloadKey(id)
 	 	console.log(response);
 		    //showMessage(response);
 	});
-	*/
+	
 };
 
 function refresh(url, instanceId, token)
 {
-	alert(instanceId);
 	$.ajax({
 	 type: "POST",
 	 url: url,
