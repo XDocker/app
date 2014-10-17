@@ -28,7 +28,6 @@ return array(
    								  					 	'env' => array('host' => '{host}',
    								  					 				'cmd' => ''),),
    								  'logo' => 'placeholder.jpg', 'protocol' => 'http://',  
-   								  'env_keys' => true, 
    								  'append' => ':8080/ice',
    								  'enabled' => TRUE),
    								  

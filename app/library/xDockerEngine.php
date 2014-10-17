@@ -20,7 +20,9 @@ class xDockerEngine {
     private static $connection;
     private static $orchestrationParams;
     private static $dockerHubCredentials;
-    private static function init() {
+	
+    private static function init() 
+    {
         self::$orchestrationParams = Config::get('orchestration');
         self::$dockerHubCredentials = Config::get('thirdparty_integration.Docker_Hub');
     }
