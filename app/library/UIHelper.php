@@ -55,8 +55,8 @@ Inverse	<span class="label label-inverse">Inverse</span>
 	                    	'<th>Price</th>'.
                 	'</thead>'.
               		'<tr>'.
-	              		'<td><span class="glyphicon glyphicon-ok"></span></td>'.
-	              		'<td>'.$obj->regions[0]->region.'</td>'.
+	              		'<td align="center"><span class="glyphicon glyphicon-ok"></span></td>'.
+	              		'<td><span class="glyphicon glyphicon-flag"></span>'.$obj->regions[0]->region.'</td>'.
 	              		'<td>'.$input->instanceType.'</td>'.
 	              		'<td>'.$image.'</td>'.
 	              		'<td>'.self::getPrice($data).'</td>'.
