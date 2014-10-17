@@ -43,7 +43,7 @@
 							</form>
 							<div class="media-body">
 								
-								<h4 class="media-heading">{{ String::title($deployment->name) }} {{CloudProvider::getState($deployment->cloudAccountId, $result->instance_id)}}</h4>
+								<h4 class="media-heading">{{ String::title($deployment->name) }} </h4>
 								<p>
 									<?php 
 									
@@ -51,7 +51,7 @@
 										{
 											$url = URL::to('deployment/'.$deployment->id.'/instanceAction');
 											$anchor = '<a target="_blank" href="'.xDockerEngine::getProtocol($deployment->docker_name). $result->public_dns .xDockerEngine::urlAppend($deployment->docker_name).'">'.xDockerEngine::getDisplayName($deployment->docker_name).'</a>';
-											echo $result->instance_id .xDockerEngine::getDockerUrl($deployment->docker_name) . ' | ' .$anchor . ' | '  .xDockerEngine::documentationUrl($deployment->docker_name) 
+											echo $result->instance_id .CloudProvider::getState($deployment->cloudAccountId, $result->instance_id) .' | '.xDockerEngine::getDockerUrl($deployment->docker_name) . ' | ' .$anchor . ' | '  .xDockerEngine::documentationUrl($deployment->docker_name) 
 											.' | <a title="Support" alt="Support" class="glyphicon glyphicon-envelope" href="mailto:support@xervmon.com"></a>'
 											.' | <a title="Contact Xervmon to manage this" alt="Contact Xervmon to manage this" href="mailto:support@xervmon.com"><img src="'.asset('assets/ico/favicon.ico').'"/></a>';
 									
