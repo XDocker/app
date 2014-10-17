@@ -47,7 +47,7 @@ function terminate(url, instanceID, token)
 	});
 };
 
-function download(url, deploymentId, token)
+function downloadKey(url, deploymentId, token)
 {
 	$.ajax({
 	 type: "POST",

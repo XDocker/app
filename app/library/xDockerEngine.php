@@ -156,4 +156,11 @@ class xDockerEngine {
 		$secPolicy = isset($settings[$dockerName]) ? $settings[$dockerName]['securityPolicy'] : '';
 		return $secPolicy;
 	}
+
+	public static function documentationUrl($dockerName)
+	{
+		$settings = Config::get('docker_settings');
+		$url = isset($settings[$dockerName]) ? $settings[$dockerName]['documentationUrl'] : '';
+		return '<a title="Documentation" alt="Documentation" target="_blank" href="'.$url.'"><span class="glyphicon glyphicon-list-alt"> </span></a>';
+	}
 }

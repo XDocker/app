@@ -14,7 +14,7 @@ return array(
    									 						'tag' => 'v1',
    									 						'env_keys' => false,
 															'env' => array('host' => '{host}', 
-   									 				  				'cmd' => '/home/ubuntu/securitymonkey.sh',),),
+   									 				  		'cmd' => '/home/ubuntu/securitymonkey.sh',),),
    									 'protocol' 		=> 'https://',
    									 'securityPolicy'   => array('amazonIAM' 
    									 								=> array(
@@ -34,6 +34,7 @@ return array(
 									 
 									 							),
    									 'append' => '',
+   									 'documentationUrl' => 'http://securitymonkey.readthedocs.org/en/latest/quickstart1.html#adding-an-account-in-the-web-ui',
 									 'enabled' => TRUE),
    									 
 									 //"dockerParams": {"ports": [443, 5000], "env": {}, "tag": "v1",
@@ -47,6 +48,7 @@ return array(
    								  'logo' => 'placeholder.jpg', 'protocol' => 'http://',  
    								  'append' => ':8080/ice',
    								  'securityPolicy' =>  '',
+   								  'documentationUrl' => 'https://github.com/Netflix/ice',
    								  'enabled' => TRUE),
    								  
    'stefobark/sphinxdocker' => array('displayName' => 'Sphinx', 
