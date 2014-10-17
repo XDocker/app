@@ -93,10 +93,14 @@ Inverse	<span class="label label-inverse">Inverse</span>
 		{
 			case 'USD' : $sym = '$ '; break;
 		}
-		//$data['regions'][0]['instanceTypes'][0]['price']
-		$perHr = $sym.$data['regions'][0]['instanceTypes'][0]['price'] .' '. $data['config']['unit'];
-		$s30hr = floatval($data['regions'][0]['instanceTypes'][0]['price']) * 730 . ' per 730 hours ';
-		return $sym.$data['regions'][0]['instanceTypes'][0]['price'] .' '. $data['config']['unit'].
-		'<br/>'.$sym. $s30hr;
+		
+		if(!empty($data['regions'][0]['instanceTypes'][0]['price']))
+		{
+			$price = $data['regions'][0]['instanceTypes'][0]['price'];
+			$perHr = $sym . $price.' '. $data['config']['unit'];
+			$s30hr = floatval($price) * 730 . Lang::get('deployment/deployment.monthly');;
+			return $perHr .'<br/>'. $s30hr;
+		}
+		else return 'NA';
 	}
 }

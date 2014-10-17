@@ -15,6 +15,8 @@ return array(
 	'empty_deployments'  		   => 'You do not have any deployments. Create one by clicking on "Add New Cloud Deployment" below',
 	'deployment.account_required'  => 'To deploy, please create the Account first',
 	'deployment_updated'   => 'Deployment Updated successfully.',
-	'account_required'  => 'To deploy, please create the Account first'
+	'account_required'  => 'To deploy, please create the Account first',
+	'status' => 'In Progress',
+	'monthly' => ' per 730 hours / Month ',
 
 );

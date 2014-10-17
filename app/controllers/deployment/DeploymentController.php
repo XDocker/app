@@ -113,7 +113,7 @@ class DeploymentController extends BaseController {
 					if(!empty($obj1) && $obj1->status == 'OK')
 					{
 						$deployment -> job_id = $obj1->job_id;
-						$deployment -> status = 'In Progress';
+						$deployment -> status = Lang::get('deployment/deployment.status');
 						unset($deployment -> token );
 						 //$deployment->status = $status;
 		            	$success = $deployment->save();
