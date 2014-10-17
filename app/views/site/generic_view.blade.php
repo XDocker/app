@@ -63,7 +63,10 @@
 										}
 									else 
 									{
-										echo  xDockerEngine::getDockerUrl($deployment->docker_name) . ' | ' .xDockerEngine::getDisplayName($deployment->docker_name) . '<br/>';
+										echo  xDockerEngine::getDockerUrl($deployment->docker_name) . ' | ' .xDockerEngine::getDisplayName($deployment->docker_name) . ' | ' .xDockerEngine::documentationUrl($deployment->docker_name).
+										' | <a title="Support" alt="Support" class="glyphicon glyphicon-envelope" href="mailto:support@xervmon.com"></a>'
+										.' | <a title="Contact Xervmon to manage this" alt="Contact Xervmon to manage this" href="mailto:support@xervmon.com"><img src="'.asset('assets/ico/favicon.ico').'"/></a>';
+									
 									}
 									?>
 									
@@ -146,6 +149,8 @@
 						    	{{{!empty($instance -> is_official)?$instance -> is_official:'Not Official'}}}
 						    	|
 						    	{{{!empty($instance -> star_count)?$instance -> star_count:'0'}}}
+						    	|
+						    	{{{xDockerEngine::documentationUrl($deployment->docker_name)}}}
 							</p>
 						</div>
 					</div>
