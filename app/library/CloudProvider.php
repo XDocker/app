@@ -81,7 +81,7 @@ class CloudProvider {
 		 		$obj = json_decode($responseJson);
 				if(!empty($obj) && $obj->status == 'OK')
 		 		{
-					$resonse = xDockerEngine::downloadKey(array('token' =>$obj->token));
+					$response = xDockerEngine::downloadKey(array('token' =>$obj->token));
 				}
 				break;
 		}
