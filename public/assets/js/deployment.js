@@ -47,7 +47,22 @@ function terminate(url, instanceID, token)
 	});
 };
 
-function downloadKey($id)
+function downloadKey(id)
+{
+	alert(id);
+	/*$.ajax({
+	 type: "POST",
+	 url: url,
+	 data: { "instanceAction": "download", "deploymentId": deploymentId, "_token" : token}
+	 }).done(function(response) 
+	 {
+	 	console.log(response);
+		    //showMessage(response);
+	});
+	*/
+};
+
+function refresh(url, instanceId, token)
 {
 	alert(id);
 	/*$.ajax({
