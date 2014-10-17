@@ -98,7 +98,7 @@ Inverse	<span class="label label-inverse">Inverse</span>
 		{
 			$price = $data['regions'][0]['instanceTypes'][0]['price'];
 			$perHr = $sym . $price.' '. $data['config']['unit'];
-			$s30hr = floatval($price) * 730 . Lang::get('deployment/deployment.monthly');;
+			$s30hr = $sym .floatval($price) * 730 . Lang::get('deployment/deployment.monthly');;
 			return $perHr .'<br/>'. $s30hr;
 		}
 		else return 'NA';
