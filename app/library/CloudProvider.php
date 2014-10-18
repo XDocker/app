@@ -79,6 +79,10 @@ class CloudProvider {
 				$responseJson = xDockerEngine::authenticate(array('username' => Auth::user()->username, 'password' => md5(Auth::user()->engine_key)));
 		 		EngineLog::logIt(array('user_id' => Auth::id(), 'method' => 'authenticate-executeAction', 'return' => $responseJson));
 		 		$obj = json_decode($responseJson);
+				if(empty($deployment))
+				{
+					return array('status' => 'error', 'message'=> 'Not a valid executeAction without deplayment parameters!');
+				}
 				if(!empty($obj) && $obj->status == 'OK')
 		 		{
 					$response = xDockerEngine::downloadKey(array('token' =>$obj->token, 'cloudProvider' => $account->cloudProvider, 'region' => $deployment->instanceRegion));
@@ -96,7 +100,7 @@ class CloudProvider {
 	public static function getState($cloudAccountId, $instanceID)
 	{
 		$account = CloudAccount::where('user_id', Auth::id())->findOrFail($cloudAccountId) ;
-		$data = self::executeAction('describeInstances', $account, $instanceID);
+		$data = self::executeAction('describeInstances', $account, '', $instanceID);
 		if($data['status'] == 'OK')
 		{
 			if(!empty($data['message']['Reservations'][0]['Instances'][0]['State']['Name']))
