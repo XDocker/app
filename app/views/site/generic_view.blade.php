@@ -150,7 +150,7 @@
 						    	|
 						    	{{{!empty($instance -> star_count)?$instance -> star_count:'0'}}}
 						    	|
-						    	{{xDockerEngine::documentationUrl($deployment->docker_name)}}
+						    	{{xDockerEngine::documentationUrl($instance->name)}}
 						    	|
 						    	<a title="Support" alt="Support" class="glyphicon glyphicon-envelope" href="mailto:support@xervmon.com"></a>'
 								| 
