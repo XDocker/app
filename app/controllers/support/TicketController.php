@@ -26,9 +26,8 @@ class TicketController extends BaseController {
      * @param Account $account
      * @param User $user
      */
-    public function __construct(Ticket $ticket, User $user) {
+    public function __construct(User $user) {
         parent::__construct();
-        $this->ticket = $ticket;
         $this->user = $user;
     }
     /**
@@ -40,6 +39,12 @@ class TicketController extends BaseController {
         // Get all the user's accounts
         //Auth::id() : gives the logged in userid
         $tickets = $this->ticket->where('user_id', Auth::id())->orderBy('created_at', 'DESC')->paginate(10);
+		
+		if(!Auth::check())
+		{
+			Log::error("Not authorized access");
+			return Redirect::to('ticket')->with('error', Lang::get('ticket/ticket.ticket_auth_failed'));
+		}
         // var_dump($accounts, $this->accounts, $this->accounts->owner);
         // Show the page
         return View::make('site/ticket/index', array(
