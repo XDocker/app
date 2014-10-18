@@ -54,7 +54,7 @@ class CloudProvider {
         }
 	}
 	 
-	public static function executeAction($instanceAction, $account, $instanceID)
+	public static function executeAction($instanceAction, $account, $deployment, $instanceID)
 	{
 		$response = '';
 		switch ($instanceAction)
@@ -81,7 +81,7 @@ class CloudProvider {
 		 		$obj = json_decode($responseJson);
 				if(!empty($obj) && $obj->status == 'OK')
 		 		{
-					$response = xDockerEngine::downloadKey(array('token' =>$obj->token, 'cloudProvider' => $account->cloudProvider));
+					$response = xDockerEngine::downloadKey(array('token' =>$obj->token, 'cloudProvider' => $account->cloudProvider, 'region' => $deployment->instanceRegion));
 				}
 				if(!empty($obj) && $obj->status == 'error')
 		 		{

@@ -361,7 +361,7 @@ class DeploymentController extends BaseController {
 	{
 		$param 			= json_decode($deployment->parameters);
 		$account -> instanceRegion =  $param->instanceRegion;
-		return CloudProvider::executeAction($instanceAction, $account, $instanceID);
+		return CloudProvider::executeAction($instanceAction, $account, $deployment, $instanceID);
 	}
 	
 	public function getImages()

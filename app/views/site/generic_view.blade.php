@@ -58,7 +58,7 @@
 											
 											//'<a title="Start" href="#" onclick="start(\''.$url.'\',\''.$result->instance_id.'\', \''.csrf_token().'\')"><span class="glyphicon glyphicon-collapse-up"> </span></a> | '  .
 											//'<a title="Stop" href="#" onclick="stop(\''.$url.'\',\''.$result->instance_id.'\', \''.csrf_token().'\')"><span class="glyphicon glyphicon-collapse-down"> </span></a> | '.
-											echo '<a title="Download" href="#" onclick="downloadKey(\''.$url.'\',\''.$result->instance_id.'\', \''.csrf_token().'\')"><span class="glyphicon glyphicon-download"> </span>Download Pem</a>';
+											echo ' | <a title="Download" href="#" onclick="downloadKey(\''.$url.'\',\''.$result->instance_id.'\', \''.csrf_token().'\')"><span class="glyphicon glyphicon-download"> </span>Download Pem</a>';
 											
 										}
 									else 
