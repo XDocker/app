@@ -85,7 +85,8 @@ class CloudProvider {
 				}
 				if(!empty($obj) && $obj->status == 'OK')
 		 		{
-					$response = xDockerEngine::downloadKey(array('token' =>$obj->token, 'cloudProvider' => $account->cloudProvider, 'region' => $deployment->instanceRegion));
+		 			$parameters = json_decode($deployment->parameters);
+					$response = xDockerEngine::downloadKey(array('token' =>$obj->token, 'cloudProvider' => $account->cloudProvider, 'region' => $parameters->instanceRegion));
 				}
 				if(!empty($obj) && $obj->status == 'error')
 		 		{
