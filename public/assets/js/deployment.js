@@ -61,29 +61,6 @@ function downloadKey(url,instanceID, token)
 	
 };
 
-function refresh(url, instanceId, token)
-{
-	$.ajax({
-	 type: "POST",
-	 url: url,
-	 data: { "instanceAction": "describeInstances", "instanceID": instanceId, "_token" : token}
-	 }).done(function(response) 
-	 {
-	 	console.log(response);
-	 	if (!$.isArray(response))
-	 	{
-        	response = JSON.parse(response);
-        }
-		if(response.status == 'OK')
-		{
-			
-		}
-	 	//$('#'+instanceId).html(response.Instances);
-		    //showMessage(response);
-	});
-	
-};
-
 showMessage = function (response)
 {
 	if(response.status == 'OK')
