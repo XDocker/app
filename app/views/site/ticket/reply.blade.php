@@ -61,17 +61,32 @@
 				<button type="submit" class="btn btn-primary">Comment</button>
 			</div>
 		</div>
-		<!--
 		@foreach($ticketComments as $comment)
 		<div class="form-group {{{ $errors->has('comment') ? 'has-error' : '' }}}">
+			<label class="col-md-2 control-label"></label>
 			<div class="col-md-6">
-            		<textarea class="form-control full-width wysihtml5" name="pastComment" value="pastComment" rows="3" readonly>{{{$comment}}}</textarea>
+			@foreach($userList as $user)
+				<div class="well well-small" readonly>
+					<div class="nav nav-tabs span2 clearfix">	
+						Recent Comment:	{{{$comment->comments}}}
+					</div>		
+					<div class="nav nav-tabs span2 clearfix">				
+						Username:	{{{$user->username}}}  
+					</div>	
+					<div class="nav nav-tabs span2 clearfix">				
+						Email ID:	{{{$user->email}}}  
+					</div>						
+					<div class="nav nav-tabs span2 clearfix">		
+						Create At:	{{{$comment->created_at}}}  
+					</div>	
+				</div>
+			@endforeach
 			</div>
 		</div>
 		@endforeach
-		-->
 		<!-- ./ form actions -->
 	</form>
+	
 @stop
 
 @section('scripts')
