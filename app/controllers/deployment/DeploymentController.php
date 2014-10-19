@@ -357,19 +357,6 @@ class DeploymentController extends BaseController {
 		
 	}
 
-	public function postDownloadKey($id)
-	{
-		$instanceID 	= Input::get('instanceID');
-		$deployment 	= Deployment::where('user_id', Auth::id())->find($id);
-		$account 		= CloudAccount::where('user_id', Auth::id())->findOrFail($deployment->cloudAccountId) ;
-		$credentials 	= json_decode($account->credentials);
-		
-		$result			= json_decode($deployment->wsResults);
-		$arr = $this->executeAction('downloadKey', $account, $deployment, $instanceID);
-		
-		print_r($arr);
-	}
-
 	private function executeAction($instanceAction, $account, $deployment , $instanceID)
 	{
 		$param 			= json_decode($deployment->parameters);
