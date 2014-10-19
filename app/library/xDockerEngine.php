@@ -20,7 +20,9 @@ class xDockerEngine {
     private static $connection;
     private static $orchestrationParams;
     private static $dockerHubCredentials;
-    private static function init() {
+	
+    private static function init() 
+    {
         self::$orchestrationParams = Config::get('orchestration');
         self::$dockerHubCredentials = Config::get('thirdparty_integration.Docker_Hub');
     }
@@ -95,6 +97,7 @@ class xDockerEngine {
     
     public static function downloadKey($data) {
         self::init();
+		Log::info('Debug :' . json_encode($data));
         return self::request(self::$orchestrationParams['endpoint_ip'] . self::$orchestrationParams['downloadKey'], $data);
     }
 	
@@ -121,12 +124,13 @@ class xDockerEngine {
 		$img = '<img width="25px" height="25px" src="' . asset('/assets/img/providers/'.$settings[$dockerName]['logo']).'" />';
 		return isset($settings[$dockerName]) ? $img.$settings[$dockerName]['displayName'] : '';
 	}
+	
 	public static function getDockerUrl($dockerName)
 	{
 		$settings = Config::get('docker_settings');
 		$img = '<img width="25px" height="25px" src="' . asset('/assets/img/providers/docker.jpg').'" />';
 		$url = isset($settings[$dockerName]) ? $settings[$dockerName]['docker_url'] : '';
-		return '<a target="_blank" href="'.$url.'">' .$img.  $dockerName.'</a>';
+		return '<a target="_blank" href="'.$url.'">' .$img.'</a>';
 		
 	}
 	
@@ -136,23 +140,28 @@ class xDockerEngine {
 		return isset($settings[$dockerName]) ? $settings[$dockerName]['dockerParams'] : '';
 	}
 	
-	public static function cleanMacros($dockerName, $params)
-	{
-		$params = self::getDockerParams($dockerName);
-		$envOld = $params['env'];
-		$env = '';
-		foreach($envOld as $param)
-		{
-			switch($param)
-			{
-				case 'AWS_ACCESS_KEY_ID' : 
-			}
-		}
-	}
-	
 	public static function enabled($dockerName)
 	{
 		$settings = Config::get('docker_settings');
 		return isset($settings[$dockerName]) ? $settings[$dockerName]['enabled'] : FALSE;
+	}
+	
+	public static function urlAppend($dockerName)
+	{
+		$settings = Config::get('docker_settings');
+		return isset($settings[$dockerName]) ? $settings[$dockerName]['append'] : '';
+	}
+	public static function securityPolicy($dockerName)
+	{
+		$settings = Config::get('docker_settings');
+		$secPolicy = isset($settings[$dockerName]) ? $settings[$dockerName]['securityPolicy'] : '';
+		return $secPolicy;
+	}
+
+	public static function documentationUrl($dockerName)
+	{
+		$settings = Config::get('docker_settings');
+		$url = isset($settings[$dockerName]) ? $settings[$dockerName]['documentationUrl'] : '';
+		return '<a title="Documentation" alt="Documentation" target="_blank" href="'.$url.'"><span class="glyphicon glyphicon-list-alt"> </span></a>';
 	}
 }

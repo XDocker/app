@@ -1,4 +1,6 @@
 <?php
+
+use Illuminate\Database\Eloquent\SoftDeletingTrait;
 /**
 * Class and Function List:
 * Function list:
@@ -8,7 +10,10 @@
 */
 class CloudAccount extends \Eloquent 
 {
+	use SoftDeletingTrait;
     protected $fillable = [];
+	protected $softDelete = true;
+	protected $table = 'cloudAccounts';
     /**
      * Get the account's owner.
      *

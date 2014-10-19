@@ -23,9 +23,8 @@
 		  			<li class="list-group-item">
 						<div class="media">
 							<p>
-								<a href="{{ URL::to('account/'.$deployment->cloud_account_id.'/edit') }}" class="pull-left" href="#">
-								    <img class="media-object img-responsive" src="{{ asset('/assets/img/providers/'.Config::get('provider_meta.'.$deployment->cloudProvider.'.logo')) }}" alt="{{ $deployment->cloudProvider }}" />
-								    <p class="text-center">{{{$deployment->accountName}}}</p>
+								<a alt="{{ $deployment->accountName }}" title="{{ $deployment->accountName }}" href="{{ URL::to('account/'.$deployment->cloudAccountId.'/edit') }}" class="pull-left" href="#">
+								    <img title="{{ $deployment->accountName }}" class="media-object img-responsive" src="{{ asset('/assets/img/providers/'.Config::get('provider_meta.'.$deployment->cloudProvider.'.logo')) }}" alt="{{ $deployment->accountName }}" />
 								</a> 
 							</p>
 							<form class="pull-right" method="post" action="{{ URL::to('deployment/' . $deployment->id . '/refresh') }}">
@@ -44,27 +43,37 @@
 							</form>
 							<div class="media-body">
 								
-								<h4 class="media-heading">{{ String::title($deployment->name) }}</h4>
+								<h4 class="media-heading">{{ String::title($deployment->name) }} </h4>
 								<p>
-									<?php
+									<?php 
+									
 									if(in_array($deployment->status, array('Completed', 'start', 'stop')))
 										{
 											$url = URL::to('deployment/'.$deployment->id.'/instanceAction');
-											$anchor = '<a target="_blank" href="'.xDockerEngine::getProtocol($deployment->docker_name). $result->public_dns .'">'.xDockerEngine::getDisplayName($deployment->docker_name).'</a>';
-											echo $result->instance_id . ' | ' .xDockerEngine::getDockerUrl($deployment->docker_name) . ' | ' .$anchor . '<br/>';
-											echo '<a title="start" href="#" onclick="start(\''.$url.'\',\''.$result->instance_id.'\', \''.csrf_token().'\')"><span class="glyphicon glyphicon-collapse-up"> </span></a> | '  .
-											'<a title="stop" href="#" onclick="stop(\''.$url.'\',\''.$result->instance_id.'\', \''.csrf_token().'\')"><span class="glyphicon glyphicon-collapse-down"> </span></a>';
+											$anchor = '<a target="_blank" href="'.xDockerEngine::getProtocol($deployment->docker_name). $result->public_dns .xDockerEngine::urlAppend($deployment->docker_name).'">'.xDockerEngine::getDisplayName($deployment->docker_name).'</a>';
+											echo $result->instance_id .CloudProvider::getState($deployment->cloudAccountId, $result->instance_id) .' | '.xDockerEngine::getDockerUrl($deployment->docker_name) . ' | ' .$anchor . ' | '  .xDockerEngine::documentationUrl($deployment->docker_name) 
+											.' | <a title="Support" alt="Support" class="glyphicon glyphicon-envelope" href="mailto:support@xervmon.com"></a>'
+											.' | <a title="Contact Xervmon to manage this" alt="Contact Xervmon to manage this" href="mailto:support@xervmon.com"><img src="'.asset('assets/ico/favicon.ico').'"/></a>';
+									
+											
+											//'<a title="Start" href="#" onclick="start(\''.$url.'\',\''.$result->instance_id.'\', \''.csrf_token().'\')"><span class="glyphicon glyphicon-collapse-up"> </span></a> | '  .
+											//'<a title="Stop" href="#" onclick="stop(\''.$url.'\',\''.$result->instance_id.'\', \''.csrf_token().'\')"><span class="glyphicon glyphicon-collapse-down"> </span></a> | '.
+											//echo ' | <a title="Download" href="#" onclick="downloadKey(\''.$url.'\',\''.$result->instance_id.'\', \''.csrf_token().'\')"><span class="glyphicon glyphicon-download"> </span>Download Pem</a>';
+											
 										}
 									else 
 									{
-										echo  xDockerEngine::getDockerUrl($deployment->docker_name) . ' | ' .xDockerEngine::getDisplayName($deployment->docker_name) . '<br/>';
+										echo  xDockerEngine::getDockerUrl($deployment->docker_name) . ' | ' .xDockerEngine::getDisplayName($deployment->docker_name) . ' | ' .xDockerEngine::documentationUrl($deployment->docker_name).
+										' | <a title="Support" alt="Support" class="glyphicon glyphicon-envelope" href="mailto:support@xervmon.com"></a>'
+										.' | <a title="Contact Xervmon to manage this" alt="Contact Xervmon to manage this" href="mailto:support@xervmon.com"><img src="'.asset('assets/ico/favicon.ico').'"/></a>';
+									
 									}
 									?>
 									
 								</p>
 								<p>
 									
-									{{UIHelper::getDataOrganized(EC2InstancePrices::OnDemand($deployment->parameters), $deployment->parameters)}}
+									{{UIHelper::getDataOrganized($deployment->parameters)}}
 									
 								</p>
 			
@@ -128,9 +137,9 @@
 						</span>
 						<a href="{{ URL::to('deployment/create/') }}?name={{urlencode($instance -> name)}}" class="btn btn-primary pull-right" role="button"><span class="glyphicon glyphicon-play"></span></a>
 						<div class="media-body">
-							<h4 class="media-heading">{{{!empty($instance -> name)?$instance -> name:''}}}</h4>
+							<h4 class="media-heading">{{!empty($instance -> name)?xDockerEngine::getDockerUrl($instance->name).' ' .$instance->name:''}}</h4>
 						    <p>
-						    	{{{!empty($instance -> description)?$instance -> description:''}}}
+						    	{{{!empty($instance -> description) ? $instance -> description:''}}}
 							</p>
 							<p>
 						    	{{{!empty($instance -> is_automated)?$instance -> is_automated:'Not Automated'}}}
@@ -140,6 +149,14 @@
 						    	{{{!empty($instance -> is_official)?$instance -> is_official:'Not Official'}}}
 						    	|
 						    	{{{!empty($instance -> star_count)?$instance -> star_count:'0'}}}
+						    	|
+						    	{{xDockerEngine::documentationUrl($instance->name)}}
+						    	|
+						    	<a title="Support" alt="Support" class="glyphicon glyphicon-envelope" href="mailto:support@xervmon.com"></a>'
+								| 
+								<a title="Contact Xervmon to manage this" alt="Contact Xervmon to manage this" href="mailto:support@xervmon.com"><img src="{{{ asset('assets/ico/favicon.ico') }}}"/></a>
+									
+						    	
 							</p>
 						</div>
 					</div>

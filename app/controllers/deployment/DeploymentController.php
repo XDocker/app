@@ -85,7 +85,7 @@ class DeploymentController extends BaseController {
                 throw new Exception('general.access_denied');
             }
             $deployment->name = Input::get('name');
-            $deployment->cloud_account_id = Input::get('cloud_account_id');
+            $deployment->cloudAccountId = Input::get('cloudAccountId');
 			$params = Input::get('parameters');
 			//$params['instanceImage'] = Input::get('instanceImage');
 			$arr = explode(':', Input::get('instanceAmi'));
@@ -113,7 +113,7 @@ class DeploymentController extends BaseController {
 					if(!empty($obj1) && $obj1->status == 'OK')
 					{
 						$deployment -> job_id = $obj1->job_id;
-						$deployment -> status = 'In Progress';
+						$deployment -> status = Lang::get('deployment/deployment.status');
 						unset($deployment -> token );
 						 //$deployment->status = $status;
 		            	$success = $deployment->save();
@@ -157,18 +157,30 @@ class DeploymentController extends BaseController {
 
 	private function prepare($user, & $deployment)
 	{
-		$account = CloudAccount::where('user_id', Auth::id())->findOrFail($deployment->cloud_account_id) ;
+		$account = CloudAccount::where('user_id', Auth::id())->findOrFail($deployment->cloudAccountId) ;
 		$credentials = json_decode($account->credentials);
 		$parameters = json_decode($deployment->parameters);
 		$dockerParams = xDockerEngine::getDockerParams($deployment -> docker_name);
 		if($dockerParams['env_keys'])
 		{
-			$keys = array('AWS_ACCESS_KEY_ID' => $credentials ->apiKey,
-					  'AWS_SECRET_ACCESS_KEY' => $credentials ->secretKey,
-					  'BILLING_BUCKET' => $credentials ->billingBucket);
+			$keys = array('AWS_ACCESS_KEY_ID'     => $credentials ->apiKey,
+					      'AWS_SECRET_ACCESS_KEY' => $credentials ->secretKey,
+					      'BILLING_BUCKET'        => 
+					      				!empty($credentials ->billingBucket) ? $credentials ->billingBucket : '');
 		
 			$dockerParams['env'] = array_merge($dockerParams['env'], $keys);
 		}
+		$secPolicy = xDockerEngine::securityPolicy($deployment -> docker_name) ;
+		if(!empty($secPolicy))
+		{
+			$keys = array_keys($secPolicy);
+		}
+		else {
+			$keys[0] = 0;	
+			$secPolicy[0] ='';
+		}
+		$keys = !empty($secPolicy) ? array_keys($secPolicy) : '';
+		
 		$deployment->wsParams = json_encode(
                                     array (
                                         'token' => $deployment->token,
@@ -183,7 +195,8 @@ class DeploymentController extends BaseController {
                                         'instanceAmi' => $parameters->instanceAmi,
                                         'OS' => $parameters->OS,
                                         'packageName' => $deployment -> docker_name,
-                                        'dockerParams' => $dockerParams  
+                                        'dockerParams' => $dockerParams,
+                                        $keys[0] => $secPolicy[$keys[0]]
 										)
                                       );	
 		  				
@@ -214,7 +227,7 @@ class DeploymentController extends BaseController {
 	private function terminateInstance($id)
 	{
 		$deployment = Deployment::where('user_id', Auth::id())->find($id);
-		$account = CloudAccount::where('user_id', Auth::id())->findOrFail($deployment->cloud_account_id) ;
+		$account = CloudAccount::where('user_id', Auth::id())->findOrFail($deployment->cloudAccountId) ;
 		$instanceId =  Input::get('instanceID');
 		Log::error('Terminating Instance :'. $instanceId);
 		$response = $this->executeAction(Input::get('instanceAction'), $account, $deployment, $instanceId);
@@ -235,13 +248,13 @@ class DeploymentController extends BaseController {
 		 EngineLog::logIt(array('user_id' => Auth::id(), 'method' => 'authenticate', 'return' => $responseJson));
 		 $obj = json_decode($responseJson);
 		
-		 if($obj->status == 'OK')
+		 if(!empty($obj) && $obj->status == 'OK')
 		 {
 			$responseJson = xDockerEngine::getDeploymentStatus(array('token' => $obj->token, 'job_id' => $deployment->job_id));
 			EngineLog::logIt(array('user_id' => Auth::id(), 'method' => 'getDeploymentStatus', 'return' => $responseJson));
 		
 			$obj2 = json_decode($responseJson);
-			if($obj2->status == 'OK')
+			if(!empty($obj2) && $obj2->status == 'OK')
 			{
 				if(!isset($obj2 -> result))
 				{
@@ -257,18 +270,26 @@ class DeploymentController extends BaseController {
 		        }
 				return Redirect::to('deployment')->with('success', $deployment->name .' is refreshed' );
 			}
-			else  if($obj2->status == 'error')
+			else  if(!empty($obj2) && $obj2->status == 'error')
 			 {
 				 // There was a problem deleting the user
 	            return Redirect::to('deployment')->with('error', $obj2->message );
 			 }	
+			else
+			{
+				  return Redirect::to('ServiceStatus')->with('error', 'Backend API is down, please try again later!');			
+			}
 			
 		 }	
-		 if($obj->status == 'error')
+		 else if(!empty($obj) && $obj->status == 'error')
 		 {
 			 // There was a problem deleting the user
             return Redirect::to('deployment')->with('error', $obj->message );
-		 }		
+		 }	
+		 else
+		 {
+			return Redirect::to('ServiceStatus')->with('error', 'Backend API is down, please try again later!');			
+		 }	
 	}
 
 	public function getLogs($id)
@@ -281,7 +302,7 @@ class DeploymentController extends BaseController {
 		 	EngineLog::logIt(array('user_id' => Auth::id(), 'method' => 'authenticate', 'return' => $responseJson));
 		 	$obj = json_decode($responseJson);
 			
-			if($obj->status == 'OK')
+			if(!empty($obj) && $obj->status == 'OK')
 		 	{
 				$response = xDockerEngine::getLog(array('token' => $obj->token, 'job_id' => $deployment->job_id, "line_num"> 10));
 				return View::make('site/deployment/logs', array(
@@ -289,10 +310,14 @@ class DeploymentController extends BaseController {
             	'deployment' => $deployment));
 				
 			}
-			else if($obj->status == 'error')
+			else if(!empty($obj) && $obj->status == 'error')
 			{
 				 return Redirect::to('deployment')->with('error', $obj->message );
 			}
+			else
+				{
+					return Redirect::to('ServiceStatus')->with('error', 'Backend API is down, please try again later!');
+				}
 		}
 		else {
 			 return Redirect::to('deployment')->with('info', 'No Log found '. isset($deployment->name) ? $deployment->name : '' );
@@ -305,7 +330,7 @@ class DeploymentController extends BaseController {
 		$instanceAction = Input::get('instanceAction');
 		$instanceID 	= Input::get('instanceID');
 		$deployment 	= Deployment::where('user_id', Auth::id())->find($id);
-		$account 		= CloudAccount::where('user_id', Auth::id())->findOrFail($deployment->cloud_account_id) ;
+		$account 		= CloudAccount::where('user_id', Auth::id())->findOrFail($deployment->cloudAccountId) ;
 		$credentials 	= json_decode($account->credentials);
 		
 		$result			= json_decode($deployment->wsResults);
@@ -313,7 +338,7 @@ class DeploymentController extends BaseController {
 										
 		if($arr['status'] == 'OK')
 		{
-			$deployment->status = $instanceAction;
+			$deployment->status = (!in_array($instanceAction, array('describeInstances'))) ? $instanceAction : $deployment->status;
 			$success = $deployment->save();
 		    if (!$success) 
 		    {
@@ -336,7 +361,7 @@ class DeploymentController extends BaseController {
 	{
 		$param 			= json_decode($deployment->parameters);
 		$account -> instanceRegion =  $param->instanceRegion;
-		return CloudProvider::executeAction($instanceAction, $account, $instanceID);
+		return CloudProvider::executeAction($instanceAction, $account, $deployment, $instanceID);
 	}
 	
 	public function getImages()

@@ -12,4 +12,9 @@ return array(
         'password' => 'Java0man',
         'search_url' => 'https://index.docker.io/v1/search?q='
     ) ,
+    
+	 'Freshdesk' => array(
+        'apiKey' => 'PFMvwwCsPMbmx5943Qdo',
+        'endpointUrl' => 'http://xervmon.freshdesk.com/hpdesk/'
+    ) ,
 );

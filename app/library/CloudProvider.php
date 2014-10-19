@@ -54,13 +54,13 @@ class CloudProvider {
         }
 	}
 	 
-	public static function executeAction($instanceAction, $account, $instanceID)
+	public static function executeAction($instanceAction, $account, $deployment, $instanceID)
 	{
 		$response = '';
 		switch ($instanceAction)
 		{
 			case 'start' :
-				$response = self::getDriver($account)->startInstances(array('InstanceIds' =>array($instanceID), 'DryRun' => false, ));
+				$response = self::getDriver($account)->startInstances(array('DryRun' => false, 'InstanceIds' =>array($instanceID),  ));
 				break;
 			case 'stop' :
 				$response = self::getDriver($account)->stopInstances(array('DryRun' => false, 'InstanceIds' =>array($instanceID)));
@@ -71,8 +71,53 @@ class CloudProvider {
 			case 'terminate' :
 				$response = self::getDriver($account)->terminateInstances(array('DryRun' => false, 'InstanceIds' =>array($instanceID)));
 				break;	
+				
+			case 'describeInstances':
+				$response = self::getDriver($account)->describeInstances(array('DryRun' => false, 'InstanceIds' =>array($instanceID)));
+				break;	
+			case 'downloadKey' :
+				$responseJson = xDockerEngine::authenticate(array('username' => Auth::user()->username, 'password' => md5(Auth::user()->engine_key)));
+		 		EngineLog::logIt(array('user_id' => Auth::id(), 'method' => 'authenticate-executeAction', 'return' => $responseJson));
+		 		$obj = json_decode($responseJson);
+				if(empty($deployment))
+				{
+					return array('status' => 'error', 'message'=> 'Not a valid executeAction without deplayment parameters!');
+				}
+				if(!empty($obj) && $obj->status == 'OK')
+		 		{
+		 			$parameters = json_decode($deployment->parameters);
+					$response = xDockerEngine::downloadKey(array('token' =>$obj->token, 'cloudProvider' => $account->cloudProvider, 'region' => $parameters->instanceRegion));
+				}
+				if(!empty($obj) && $obj->status == 'error')
+		 		{
+					Log::error('Error occured while downloading key' . $obj->message);
+					$response = array('status' => $obj->status, 'message' => 'Unexpected error! Contact Support' );
+				}
+				break;
 		}
 		return $response;
+	}
+
+	public static function getState($cloudAccountId, $instanceID)
+	{
+		$account = CloudAccount::where('user_id', Auth::id())->findOrFail($cloudAccountId) ;
+		$data = self::executeAction('describeInstances', $account, '', $instanceID);
+		if($data['status'] == 'OK')
+		{
+			if(!empty($data['message']['Reservations'][0]['Instances'][0]['State']['Name']))
+			
+				return UIHelper::getLabel($data['message']['Reservations'][0]['Instances'][0]['State']['Name']);
+			else
+				return UIHelper::getLabel('NA');
+		}
+		else if($data['status'] == 'error')
+		{
+			return UIHelper::getLabel($data['status']);
+		}
+		else
+		{
+			return UIHelper::getLabel('NA');
+		}
 	}
 	
 	

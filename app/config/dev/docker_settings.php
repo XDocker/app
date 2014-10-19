@@ -14,9 +14,27 @@ return array(
    									 						'tag' => 'v1',
    									 						'env_keys' => false,
 															'env' => array('host' => '{host}', 
-   									 				  				'cmd' => '/home/ubuntu/securitymonkey.sh',),),
-   									 'protocol' => 'https://',
-   									
+   									 				  		'cmd' => '/home/ubuntu/securitymonkey.sh',),),
+   									 'protocol' 		=> 'https://',
+   									 'securityPolicy'   => array('amazonIAM' 
+   									 								=> array(
+   									 										array(
+									 											"ruleName" => "SecurityMonkeyInstanceProfile",
+															            		"policyName" => "SecurityMonkeyLaunchPerms",
+															            		"instanceProfile"=> "SecurityMonkey",
+															            		"policy" => '{"Version": "2012-10-17", "Statement": [{"Action": ["ses:SendEmail"], "Resource": "*", "Effect": "Allow"}, {"Action": "sts:AssumeRole", "Resource": "*", "Effect": "Allow"}]}'
+																				),
+																			array(
+																				  "ruleName"   => "SecurityMonkey",
+                    															  "policyName" => "SecurityMonkeyReadOnly",
+                    															  "[policy" => '{"Statement": [{"Action": ["cloudwatch:Describe*", "cloudwatch:Get*", "cloudwatch:List*", "ec2:Describe*", "elasticloadbalancing:Describe*", "iam:List*", "iam:Get*", "route53:Get*", "route53:List*", "rds:Describe*", "s3:Get*", "s3:List*", "sdb:GetAttributes", "sdb:List*", "sdb:Select*", "ses:Get*", "ses:List*", "sns:Get*", "sns:List*", "sqs:GetQueueAttributes", "sqs:ListQueues", "sqs:ReceiveMessage"], "Resource": "*", "Effect": "Allow"}]}
+                    																[assumePolicy] => {"Version": "2008-10-17", "Statement": [{"Action": "sts:AssumeRole", "Principal": {"AWS": "{SecurityMonkeyInstanceProfile}"}, "Effect": "Allow", "Sid": ""}]}'
+																				)	
+																			)
+									 
+									 							),
+   									 'append' => '',
+   									 'documentationUrl' => 'http://securitymonkey.readthedocs.org/en/latest/quickstart1.html#adding-an-account-in-the-web-ui',
 									 'enabled' => TRUE),
    									 
 									 //"dockerParams": {"ports": [443, 5000], "env": {}, "tag": "v1",
@@ -27,7 +45,11 @@ return array(
    								  					    'env_keys' => true,
    								  					 	'env' => array('host' => '{host}',
    								  					 				'cmd' => ''),),
-   								  'logo' => 'placeholder.jpg', 'protocol' => 'http://',  'env_keys' => true, 'enabled' => TRUE),
+   								  'logo' => 'placeholder.jpg', 'protocol' => 'http://',  
+   								  'append' => ':8080/ice',
+   								  'securityPolicy' =>  '',
+   								  'documentationUrl' => 'https://github.com/Netflix/ice',
+   								  'enabled' => TRUE),
    								  
    'stefobark/sphinxdocker' => array('displayName' => 'Sphinx', 
    									 'docker_url' => 'https://registry.hub.docker.com/u/xdocker/securitymonkey/',

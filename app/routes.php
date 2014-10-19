@@ -25,9 +25,10 @@
 Route::model('user', 'User');
 Route::model('comment', 'Comment');
 Route::model('post', 'Post');
+Route::model('fbf_newsletter_signups', 'Subscriber');
 Route::model('role', 'Role');
 Route::model('deployments', 'Deployment');
-Route::model('account', 'CloudAccount');
+Route::model('cloudAccounts', 'CloudAccount');
 Route::model('tickets', 'Ticket');
 Route::model('ticket_comments', 'TicketComments');
 Route::model('engine_logs', 'EngineLog');
@@ -38,6 +39,7 @@ Route::model('engine_logs', 'EngineLog');
  */
 Route::pattern('comment', '[0-9]+');
 Route::pattern('post', '[0-9]+');
+Route::pattern('subscriber', '[0-9]+');
 Route::pattern('user', '[0-9]+');
 Route::pattern('role', '[0-9]+');
 Route::pattern('token', '[0-9a-z]+');
@@ -68,6 +70,10 @@ Route::group(array(
     Route::get('blogs/{post}/delete', 'AdminBlogsController@getDelete');
     Route::post('blogs/{post}/delete', 'AdminBlogsController@postDelete');
     Route::controller('blogs', 'AdminBlogsController');
+	
+	Route::get('subscribers/{subscriber}/delete', 'AdminSubscribersController@getDelete');
+    Route::post('subscribers/{subscriber}/delete', 'AdminSubscribersController@postDelete');
+    Route::controller('subscribers', 'AdminSubscribersController');
     # User Management
     Route::get('users/{user}/show', 'AdminUsersController@getShow');
     Route::get('users/{user}/edit', 'AdminUsersController@getEdit');
@@ -156,9 +162,9 @@ Route::group(array(
         Route::post('deployment/create', 'DeploymentController@postEdit');
         Route::post('deployment/{deployment}/delete', 'DeploymentController@postDelete');
 		Route::post('deployment/{deployment}/instanceAction', 'DeploymentController@postInstanceAction');
-		 Route::post('ticket/create', 'TicketController@postEdit');
+		Route::post('ticket/create', 'TicketController@postEdit');
         Route::post('ticket/{ticket}/edit', 'TicketController@postEdit');
-		 Route::post('ticket/{ticket}/reply', 'TicketController@postReply');
+		Route::post('ticket/{ticket}/reply', 'TicketController@postReply');
         Route::post('ticket/{ticket}/delete', 'TicketController@postDelete');
     });
     

@@ -19,17 +19,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">{{{ Lang::get('site.name') }}}</h2>
+                    <h3 class="section-heading">{{{ Lang::get('site.name') }}}</h3>
                     <h5 class="section-subheading text-muted">{{{ Lang::get('site.tagline') }}}</h5>
-                    <h7 class="section-subheading text-muted btn btn-success">{{{ Lang::get('site.launch') }}}</h7>
-                    
-                    <br/><br/>
-        	 			@include('laravel-newsletter-signup::signup')
+                    <strong class="section-subheading text-muted btn btn-success">{{{ Lang::get('site.launch') }}}</strong>
                 		
-				</div>
+		</div>
             </div>
-            <br/>
-            <br/>
             <div class="row text-center">
                 <div class="col-md-4">
                     <span class="fa-stack fa-4x">
@@ -61,13 +56,13 @@
                 </div>
             </div>
         </div>
-        <br/>
         <div class="alert alert-info text-center">
         	<h4>{{{ Lang::get('home.xervmon_intro') }}}</h4>
         	<a target="_blank" href="https://www.xervmon.com/product" class="btn btn-primary">{{{ Lang::get('home.xervmon_call_to_action') }}}</a>
-        	
         </div>
-       
+       <div class="text-center">
+       	@include('laravel-newsletter-signup::signup')
+       </div>
     </section>
 @else
 	@include('site.generic_view')

@@ -37,9 +37,9 @@
 		<div class="form-group {{{ $errors->has('username') ? 'error' : '' }}}">
 			<label class="col-md-2 control-label" for="cloud_account_id">Cloud Account <font color="red"> * </font></label>
 			<div class="col-md-6">
-				<select class="form-control" name="cloud_account_id" id="cloud_account_id" required>
+				<select class="form-control" name="cloudAccountId" id="cloudAccountId" required>
 					@foreach ($cloud_account_ids as $key => $value)
-						<option value="{{$value->id}}" data-cloud-provider="{{{$value->cloudProvider}}}" {{{ Input::old('cloud_account_id', isset($deployment->cloud_account_id) && ($deployment->cloud_account_id == $key) ? 'selected="selected"' : '') }}}>{{{$value->name}}}</option>
+						<option value="{{$value->id}}" data-cloud-provider="{{{$value->cloudProvider}}}" {{{ Input::old('cloudAccountId', isset($deployment->cloudAccountId) && ($deployment->cloudAccountId == $key) ? 'selected="selected"' : '') }}}>{{{$value->name}}}</option>
 					@endforeach
 				</select>
 			</div>
@@ -90,7 +90,7 @@
 		var SAVED_PARAMETERS = {{ !empty($deployment -> parameters) ? $deployment -> parameters : 'null' }};
 		$(function(){
 			var $additionalCloudProviderFields = $('#additionalCloudProviderFields');
-			var $cloud_account_id = $('#cloud_account_id');
+			var $cloud_account_id = $('#cloudAccountId');
 			$cloud_account_id.on('change', function(){
 				var cloudProvider = $(this).find('option:selected').data('cloud-provider');
 				console.log('cloudProvider', cloudProvider);

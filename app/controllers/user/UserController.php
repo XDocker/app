@@ -250,7 +250,7 @@ class UserController extends BaseController {
                 // Register the user on the engine
                 $return = xDockerEngine::register(array(
                     'username' => $user->username,
-                    'password' => $user->engine_password
+                    'password' => $user->engine_key
                 ));
 				Log::info("Return Status : " . $return);
 				EngineLog::logIt(array('user_id' => $this->user->id, 'method' => 'register', 'return' => $return));

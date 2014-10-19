@@ -22,13 +22,17 @@ class CreateDeploymentsTable extends Migration {
             $table->increments('id');
             $table->string('name');
             $table->string('docker_name');
-            $table->integer('cloud_account_id')->unsigned()->index();
-            $table->foreign('cloud_account_id')->references('id')->on('cloud_accounts');
+            $table->integer('cloudAccountId')->unsigned()->index();
+            $table->foreign('cloudAccountId')->references('id')->on('cloudAccounts');
             $table->integer('user_id')->unsigned()->index();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->text('parameters');
+			$table->text('job_id');
+			$table->text('wsParams');
+			$table->text('wsResults')->nullable();
             $table->string('status');
             $table->timestamps();
+			$table->softDeletes();
         });
     }
     /**
