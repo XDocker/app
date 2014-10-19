@@ -97,6 +97,7 @@ class xDockerEngine {
     
     public static function downloadKey($data) {
         self::init();
+		Log::info('Debug :' . json_encode($data));
         return self::request(self::$orchestrationParams['endpoint_ip'] . self::$orchestrationParams['downloadKey'], $data);
     }
 	
