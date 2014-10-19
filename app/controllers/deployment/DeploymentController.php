@@ -338,7 +338,7 @@ class DeploymentController extends BaseController {
 										
 		if($arr['status'] == 'OK')
 		{
-			$deployment->status = (!in_array($instanceAction, array('describeInstances', 'downloadKey'))) ? $instanceAction : $deployment->status;
+			$deployment->status = (!in_array($instanceAction, array('describeInstances'))) ? $instanceAction : $deployment->status;
 			$success = $deployment->save();
 		    if (!$success) 
 		    {
@@ -355,6 +355,19 @@ class DeploymentController extends BaseController {
 			print json_encode(array('status' => 'error', 'message' => 'Error while submitting '.$instanceAction .' request ' ));
 		}
 		
+	}
+
+	public function postDownloadKey($id)
+	{
+		$instanceID 	= Input::get('instanceID');
+		$deployment 	= Deployment::where('user_id', Auth::id())->find($id);
+		$account 		= CloudAccount::where('user_id', Auth::id())->findOrFail($deployment->cloudAccountId) ;
+		$credentials 	= json_decode($account->credentials);
+		
+		$result			= json_decode($deployment->wsResults);
+		$arr = $this->executeAction('downloadKey', $account, $deployment, $instanceID);
+		
+		print_r($arr);
 	}
 
 	private function executeAction($instanceAction, $account, $deployment , $instanceID)

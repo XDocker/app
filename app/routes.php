@@ -162,9 +162,10 @@ Route::group(array(
         Route::post('deployment/create', 'DeploymentController@postEdit');
         Route::post('deployment/{deployment}/delete', 'DeploymentController@postDelete');
 		Route::post('deployment/{deployment}/instanceAction', 'DeploymentController@postInstanceAction');
-		 Route::post('ticket/create', 'TicketController@postEdit');
+		Route::post('deployment/{deployment}/downloadKey', 'DeploymentController@postDownloadKey');
+		Route::post('ticket/create', 'TicketController@postEdit');
         Route::post('ticket/{ticket}/edit', 'TicketController@postEdit');
-		 Route::post('ticket/{ticket}/reply', 'TicketController@postReply');
+		Route::post('ticket/{ticket}/reply', 'TicketController@postReply');
         Route::post('ticket/{ticket}/delete', 'TicketController@postDelete');
     });
     
