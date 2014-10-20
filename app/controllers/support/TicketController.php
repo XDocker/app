@@ -39,8 +39,7 @@ class TicketController extends BaseController {
     public function getIndex() {
         // Get all the user's accounts
         //Auth::id() : gives the logged in userid
-        $tickets = $this->ticket->where('user_id', Auth::id())->orderBy('created_at', 'DESC')->paginate(10);
-		$open_tickets = $this->ticket->where('user_id', Auth::id())->where('active', TRUE)->orderBy('created_at', 'DESC')->paginate(10);
+        $open_tickets = $this->ticket->where('user_id', Auth::id())->where('active', TRUE)->orderBy('created_at', 'DESC')->paginate(10);
 		$closed_tickets = $this->ticket->where('user_id', Auth::id())->where('active', FALSE)->orderBy('created_at', 'DESC')->paginate(10);
 		if(!Auth::check())
 		{
