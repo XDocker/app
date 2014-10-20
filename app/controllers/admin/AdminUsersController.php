@@ -273,7 +273,7 @@ class AdminUsersController extends AdminController {
         $id = $user->id;
 		$username = $user->username;
 		
-		$responseJson = xDockerEngine::authenticate(array('username' => $user->username, 'password' => md5($user->username->engine_key)));
+		$responseJson = xDockerEngine::authenticate(array('username' => $user->username, 'password' => md5($user->engine_key)));
 		 EngineLog::logIt(array('user_id' => Auth::id(), 'method' => 'authenticate', 'return' => $responseJson));
 		 $obj = json_decode($responseJson);
 			
