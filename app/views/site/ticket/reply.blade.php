@@ -58,7 +58,7 @@
 		<div class="form-group">
 			<div class="col-md-offset-2 col-md-10">
 				<a href="{{ URL::to('ticket') }}" class="btn btn-default">Back</a>
-				<button type="submit" class="btn btn-primary">Comment</button>
+				<button type="button" class="btn btn-primary" onclick="saveComment({{{$ticket->id}}}, '{{{URL::to('ticket/' . $ticket->id . '/reply')}}}');">Comment</button>
 			</div>
 		</div>
 		@foreach($ticketComments as $comment)
@@ -91,3 +91,5 @@
 
 @section('scripts')
 @stop
+
+<script src="{{asset('assets/js/comment.js')}}"></script>

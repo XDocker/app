@@ -49,7 +49,7 @@ class TicketController extends BaseController {
         // var_dump($accounts, $this->accounts, $this->accounts->owner);
         // Show the page
         return View::make('site/ticket/index', array(
-            'tickets' => $tickets,
+           
 			'open_tickets' => $open_tickets,
 			'closed_tickets' => $closed_tickets
         ));
@@ -123,9 +123,11 @@ class TicketController extends BaseController {
 			
 			 
             if ($success) {
-                return Redirect::intended('ticket')->with('success', Lang::get('ticket/ticket.ticket_comments_updated'));
+				print json_encode(array('status' => 'OK', 'message' => Lang::get('ticket/ticket.ticket_comments_updated')));
+               // return Redirect::intended('ticket')->with('success', Lang::get('ticket/ticket.ticket_comments_updated'));
             } else {
-                return Redirect::to('ticket')->with('error', Lang::get('ticket/ticket.ticket_comment_update_failed'));
+				print json_encode(array('status' => 'error', 'message' =>Lang::get('ticket/ticket.ticket_comment_update_failed')));
+               // return Redirect::to('ticket')->with('error', Lang::get('ticket/ticket.ticket_comment_update_failed'));
             }
         }
         catch(Exception $e) {
