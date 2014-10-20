@@ -106,7 +106,7 @@ class AdminTicketsController extends AdminController {
      */
     public function getData()
     {
-    	$tickets = Ticket::select(array('tickets.id', 'tickets.title',  'tickets.active', 'tickets.created_at'));
+    	$tickets = Ticket::select(array('tickets.id', 'tickets.title', 'tickets.priority',  'tickets.active', 'tickets.created_at'));
 
         return Datatables::of($tickets)
 
