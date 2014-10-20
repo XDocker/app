@@ -456,6 +456,7 @@ return array(
     'SebastianBergmann\\Exporter\\Exporter' => $vendorDir . '/sebastian/exporter/src/Exporter.php',
     'SebastianBergmann\\Version' => $vendorDir . '/sebastian/version/src/Version.php',
     'SessionHandlerInterface' => $vendorDir . '/symfony/http-foundation/Symfony/Component/HttpFoundation/Resources/stubs/SessionHandlerInterface.php',
+    'StringHelper' => $baseDir . '/app/library/helpers/StringHelper.php',
     'Subscriber' => $baseDir . '/app/models/Subsriber.php',
     'TestCase' => $baseDir . '/app/tests/library/TestCase.php',
     'Text_Template' => $vendorDir . '/phpunit/php-text-template/Text/Template.php',
