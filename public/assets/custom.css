@@ -73,4 +73,11 @@
 	margin-bottom: 15px;
 }
 
+div#footer {
+border-top: 1px solid #E2E2E2;
+background: #FFF;
+}
 
+div#footer p {
+	margin-bottom:0px;
+}

@@ -27,7 +27,7 @@ But when you are vetting a service, as to how it looks and works, you may need t
         <link rel="stylesheet" href="{{asset('assets/custom.css')}}">
 		<style>
         body {
-            padding: 60px 0;
+            padding: 60px 0 90px 0;
         }
 		@section('styles')
 		@show
@@ -102,9 +102,7 @@ But when you are vetting a service, as to how it looks and works, you may need t
 		<div id="push"></div>
 		</div>
 		<!-- ./wrap -->
-
-		<hr>
-	    <div id="footer">
+	    <div id="footer" class="navbar-fixed-bottom">
 	      <div class="container">
 	        <p class="muted credit text-center">xDocker : Test drive Docker images on any infrastructure. </p>
 	        <p class="text-center">
