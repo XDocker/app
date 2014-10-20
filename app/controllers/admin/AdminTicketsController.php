@@ -131,6 +131,7 @@ class AdminTicketsController extends AdminController {
 
 		 ->add_column('actions', '<a href="{{{ URL::to(\'admin/tickets/\' . $id . \'/edit\' ) }}}" class="btn btn-default btn-xs iframe" >{{{ Lang::get(\'button.edit\') }}}</a>
                 <a href="{{{ URL::to(\'admin/tickets/\' . $id . \'/delete\' ) }}}" class="btn btn-xs btn-danger iframe">{{{ Lang::get(\'button.delete\') }}}</a>
+                 <a href="{{{ URL::to(\'admin/tickets/\' . $id . \'/comment\' ) }}}" class="btn btn-xs btn-info iframe">{{{ Lang::get(\'button.comment\') }}}</a>
             ')
        
         ->remove_column('id')
