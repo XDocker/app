@@ -101,6 +101,12 @@ class xDockerEngine {
         return self::request(self::$orchestrationParams['endpoint_ip'] . self::$orchestrationParams['downloadKey'], $data);
     }
 	
+	public static function removeUsername($data) {
+        self::init();
+		Log::info('Debug :' . json_encode($data));
+        return self::request(self::$orchestrationParams['endpoint_ip'] . self::$orchestrationParams['removeUsername'], $data);
+    }
+	
 	///Following methods are helper for accessing the config variables
 	public static function getTag($dockerName)
 	{

@@ -257,12 +257,31 @@ class AdminUsersController extends AdminController {
         AssignedRoles::where('user_id', $user->id)->delete();
 
         $id = $user->id;
-        $user->delete();
+		$username = $user->username;
+		$user->delete();
 
         // Was the comment post deleted?
         $user = User::find($id);
         if ( empty($user) )
         {
+        	$responseJson = xDockerEngine::authenticate(array('username' => Auth::user()->username, 'password' => md5(Auth::user()->engine_key)));
+		 	EngineLog::logIt(array('user_id' => Auth::id(), 'method' => 'authenticate', 'return' => $responseJson));
+		 	$obj = json_decode($responseJson);
+			
+			if(!empty($obj) && $obj->status == 'OK')
+		 	{
+				$response = xDockerEngine::removeUsername(array('token' => $obj->token, 'username' => $username));
+				Log::info('xDocker Engine user is deleted!');
+			}
+			if(!empty($obj) && $obj->status == 'error')
+		 	{
+				Log::error('xDocker Engine user deletion : Failed in authentication');
+			}
+			else
+			{
+				Log::error('xDocker Engine user deletion - Unexpected error');
+			}
+		
             // TODO needs to delete all of that user's content
             return Redirect::to('admin/users')->with('success', Lang::get('admin/users/messages.delete.success'));
         }
