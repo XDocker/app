@@ -39,7 +39,8 @@ class TicketController extends BaseController {
         // Get all the user's accounts
         //Auth::id() : gives the logged in userid
         $tickets = $this->ticket->where('user_id', Auth::id())->orderBy('created_at', 'DESC')->paginate(10);
-		
+		$open_tickets = $this->ticket->where('user_id', Auth::id())->where('active', TRUE)->orderBy('created_at', 'DESC')->paginate(10);
+		$closed_tickets = $this->ticket->where('user_id', Auth::id())->where('active', FALSE)->orderBy('created_at', 'DESC')->paginate(10);
 		if(!Auth::check())
 		{
 			Log::error("Not authorized access");
@@ -48,7 +49,9 @@ class TicketController extends BaseController {
         // var_dump($accounts, $this->accounts, $this->accounts->owner);
         // Show the page
         return View::make('site/ticket/index', array(
-            'tickets' => $tickets
+            'tickets' => $tickets,
+			'open_tickets' => $open_tickets,
+			'closed_tickets' => $closed_tickets
         ));
     }
     /**
@@ -97,10 +100,11 @@ class TicketController extends BaseController {
 	{
 		$ticket = $id !== false ? Ticket::where('user_id', Auth::id())->findOrFail($id) : null;
 		
-		$ticketComments = $id !== false ? Ticket::where('user_id', Auth::id())->findOrFail($id) : null;
-		//@TODO get all comments for the tickets.
+		$userList = $id !== false ? DB::table('users')->select('username', 'email')->where('id', Auth::id())->get() : null;
+		
+		$ticketComments = $id !== false ? Ticket::leftJoin('ticket_comments', 'tickets.id', '=', 'ticket_comments.ticket_id')->where('tickets.user_id', Auth::id())->orderBy('ticket_comments.created_at', 'DESC')->get() : null;
 		$priorities =array('urgent', 'high', 'medium', 'low');
-        return View::make('site/ticket/reply', compact('mode', 'ticket', 'priorities', 'ticketComments'));
+        return View::make('site/ticket/reply', compact('mode', 'ticket', 'priorities', 'ticketComments', 'userList'));
 	}
 	
 	 public function postReply($id = false) {
