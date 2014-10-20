@@ -304,7 +304,7 @@ class DeploymentController extends BaseController {
 			
 			if(!empty($obj) && $obj->status == 'OK')
 		 	{
-				$response = xDockerEngine::getLog(array('token' => $obj->token, 'job_id' => $deployment->job_id, "line_num"> 10));
+				$response = xDockerEngine::getLog(array('token' => $obj->token, 'job_id' => $deployment->job_id, "line_num" => 10));
 				return View::make('site/deployment/logs', array(
             	'response' => $response,
             	'deployment' => $deployment));
