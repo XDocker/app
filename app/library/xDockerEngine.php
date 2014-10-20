@@ -87,6 +87,7 @@ class xDockerEngine {
     
     public static function getLog($data) {
         self::init();
+		Log::info('Debug' . json_encode($data));
         return self::request(self::$orchestrationParams['endpoint_ip'] . self::$orchestrationParams['getLog'] . '/' . $data['job_id'], $data);
     }
     
