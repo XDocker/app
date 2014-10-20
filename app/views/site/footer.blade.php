@@ -1,4 +1,4 @@
-<footer id="footer">
+<footer id="footer" class="navbar navbar-default navbar-static-bottom">
 
 	<div class="container">
 	
