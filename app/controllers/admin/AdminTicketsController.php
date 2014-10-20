@@ -63,7 +63,7 @@ class AdminTicketsController extends AdminController {
 		$priorities =array('urgent', 'high', 'medium', 'low');
 
         // Show the page
-        return View::make('admin/tickets/create_edit', compact('$ticket', 'priorities', 'title'));
+        return View::make('admin/tickets/create_edit', compact('ticket', 'priorities', 'title'));
 	}
 
     /**
