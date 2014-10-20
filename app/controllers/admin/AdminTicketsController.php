@@ -64,6 +64,7 @@ class AdminTicketsController extends AdminController {
 		
 		$ticket = $id !== false ? Ticket::findOrFail($id) : null;
 		
+		print_r($ticket);die();
 
         // Show the page
         return View::make('admin/tickets/create_edit', compact('ticket', 'priorities', 'title'));
