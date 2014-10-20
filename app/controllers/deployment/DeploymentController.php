@@ -375,7 +375,7 @@ class DeploymentController extends BaseController {
 		{
 			header('Content-Description: File Transfer');
 			header('Content-Type: ' . 'application/x-pem-file');
-			header('Content-Disposition: attachment; filename=' . StringHelper::removeSpaces($deployment->name) . '.pem');
+			header('Content-Disposition: attachment; filename=' . $arr['keyName'] . '.pem');
 			header('Content-Transfer-Encoding: binary');
 			header('Expires: 0');
 			header('Cache-Control: must-revalidate');
