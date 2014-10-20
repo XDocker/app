@@ -45,9 +45,24 @@ class AdminTicketsController extends AdminController {
      * @param $post
      * @return Response
      */
-	public function getShow($post)
+	public function getShow($ticket)
 	{
         // redirect to the frontend
+	}
+	
+	/**
+     * Show the form for editing the specified resource.
+     *
+     * @param $post
+     * @return Response
+     */
+	public function getEdit($ticket)
+	{
+        // Title
+        $title = Lang::get('admin/tickets/title.ticket_update');
+
+        // Show the page
+        return View::make('admin/tickets/create_edit', compact('$ticket', 'title'));
 	}
 
     /**
