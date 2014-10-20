@@ -50,27 +50,25 @@
 									$downloadUrl = URL::to('deployment/'.$deployment->id.'/downloadKey');
 											
 									if(in_array($deployment->status, array('Completed', 'start', 'stop')))
-										{
-											$anchor = '<a target="_blank" href="'.xDockerEngine::getProtocol($deployment->docker_name). $result->public_dns .xDockerEngine::urlAppend($deployment->docker_name).'">'.xDockerEngine::getDisplayName($deployment->docker_name).'</a>';
-											echo $result->instance_id .CloudProvider::getState($deployment->cloudAccountId, $result->instance_id) .' | '.xDockerEngine::getDockerUrl($deployment->docker_name) . ' | ' .$anchor . ' | '  .xDockerEngine::documentationUrl($deployment->docker_name) 
-											.' | <a title="Support" alt="Support" class="glyphicon glyphicon-envelope" href="mailto:support@xervmon.com"></a>'
-											.' | <a title="Contact Xervmon to manage this" alt="Contact Xervmon to manage this" href="mailto:support@xervmon.com"><img src="'.asset('assets/ico/favicon.ico').'"/></a>';
-									
-											
-											//'<a title="Start" href="#" onclick="start(\''.$url.'\',\''.$result->instance_id.'\', \''.csrf_token().'\')"><span class="glyphicon glyphicon-collapse-up"> </span></a> | '  .
-											//'<a title="Stop" href="#" onclick="stop(\''.$url.'\',\''.$result->instance_id.'\', \''.csrf_token().'\')"><span class="glyphicon glyphicon-collapse-down"> </span></a> | '.
-											echo ' | <a title="Download" href="#" onclick="downloadKey(\''.$downloadUrl.'\',\''.$result->instance_id.'\', \''.csrf_token().'\')"><span class="glyphicon glyphicon-download"> </span>Download Pem</a>';
-											
-										}
+									{
+										$anchor = '<a target="_blank" href="'.xDockerEngine::getProtocol($deployment->docker_name). $result->public_dns .xDockerEngine::urlAppend($deployment->docker_name).'">'.xDockerEngine::getDisplayName($deployment->docker_name).'</a>';
+										echo $result->instance_id .CloudProvider::getState($deployment->cloudAccountId, $result->instance_id) .' | '.xDockerEngine::getDockerUrl($deployment->docker_name) . ' | ' .$anchor . ' | '  .xDockerEngine::documentationUrl($deployment->docker_name) 
+										.' | <a title="Support" alt="Support" class="glyphicon glyphicon-envelope" href="mailto:support@xervmon.com"></a>'
+										.' | <a title="Contact Xervmon to manage this" alt="Contact Xervmon to manage this" href="mailto:support@xervmon.com"><img src="'.asset('assets/ico/favicon.ico').'"/></a>';
+									}
 									else 
 									{
 										echo  xDockerEngine::getDockerUrl($deployment->docker_name) . ' | ' .xDockerEngine::getDisplayName($deployment->docker_name) . ' | ' .xDockerEngine::documentationUrl($deployment->docker_name).
 										' | <a title="Support" alt="Support" class="glyphicon glyphicon-envelope" href="mailto:support@xervmon.com"></a>'
-										.' | <a title="Contact Xervmon to manage this" alt="Contact Xervmon to manage this" href="mailto:support@xervmon.com"><img src="'.asset('assets/ico/favicon.ico').'"/></a>'
-										. ' | <a title="Download" href="#" onclick="downloadKey(\''.$downloadUrl.'\',\''.$result->instance_id.'\', \''.csrf_token().'\')"><span class="glyphicon glyphicon-download"> </span>Download Pem</a>';
-											
+										.' | <a title="Contact Xervmon to manage this" alt="Contact Xervmon to manage this" href="mailto:support@xervmon.com"><img src="'.asset('assets/ico/favicon.ico').'"/></a>';
 									}
 									?>
+									
+								| <form class="pull-right" method="get" action="{{ URL::to('deployment/'.$deployment->id.'/downloadKey') }}">
+									<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
+									<input type="hidden" name="instanceId" value="{{$result->instance_id}}" />
+									<button type="submit" class="btn btn-success pull-right" role="button"><span class="glyphicon glyphicon-refresh"></span></button>
+								  </form>
 									
 								</p>
 								<p>
