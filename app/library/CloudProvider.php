@@ -87,6 +87,7 @@ class CloudProvider {
 		 		{
 		 			$parameters = json_decode($deployment->parameters);
 					$response = xDockerEngine::downloadKey(array('token' =>$obj->token, 'cloudProvider' => $account->cloudProvider, 'instanceRegion' => $parameters->instanceRegion));
+					$response = StringHelper::isJson($response) ? json_decode($response) : array('status' => 'errpr', 'message' => 'Error occured while downloading keys');
 				}
 				if(!empty($obj) && $obj->status == 'error')
 		 		{
