@@ -364,7 +364,7 @@ class DeploymentController extends BaseController {
 		return CloudProvider::executeAction($instanceAction, $account, $instanceID);
 	}
 	
-	private function getDownloadKey($id)
+	public function getDownloadKey($id)
 	{
 		$instanceID 	= Input::get('instanceID');
 		$deployment 	= Deployment::where('user_id', Auth::id())->find($id);
