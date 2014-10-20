@@ -155,7 +155,7 @@ Route::group(array(
 	Route::get('deployment/{deployment}/log', 'DeploymentController@getLogs');
 	Route::get('ServiceStatus/', 'WebserviceController@getIndex');
 	Route::get('deployment/images', 'DeploymentController@getImages');
-	Route::get('deployment/{deployment}/downloadKey', 'DeploymentController@getDownloadKey');
+	Route::any('deployment/{deployment}/downloadKey', 'DeploymentController@getDownloadKey');
 	Route::any('deployment/{deployment}/refresh', 'DeploymentController@checkStatus');
 	
 	 Route::any('awsPricing/', 'AWSPricingController@getIndex'); 
