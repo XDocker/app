@@ -60,8 +60,7 @@ function downloadKey(url,instanceID, token)
 		    //showMessage(response);
 	});
 	*/
-	$.fileDownload(url', { httpMethod : "POST", 
-							data: { 
+	$.fileDownload(url, { httpMethod : "POST", data: { 
 									"instanceID" : instanceID,
 									"_token" : token,
 								}
