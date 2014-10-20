@@ -184,5 +184,5 @@
 		</div>
 	</div> -->
 </div>
-<script src="{{asset('assets/js/deployment.js')}}"></script>
 <script src="{{asset('assets/js/jquery.fileDownload.js')}}"></script>
+<script src="{{asset('assets/js/deployment.js')}}"></script>
