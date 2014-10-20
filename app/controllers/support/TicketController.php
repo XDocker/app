@@ -26,9 +26,10 @@ class TicketController extends BaseController {
      * @param Account $account
      * @param User $user
      */
-    public function __construct(User $user) {
+    public function __construct(Ticket $ticket, User $user) {
         parent::__construct();
         $this->user = $user;
+		$this->ticket = $ticket;
     }
     /**
      * Returns all the Accounts for logged in user.
