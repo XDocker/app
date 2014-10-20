@@ -60,9 +60,10 @@ class AdminTicketsController extends AdminController {
 	{
         // Title
         $title = Lang::get('admin/tickets/title.ticket_update');
+		$priorities =array('urgent', 'high', 'medium', 'low');
 
         // Show the page
-        return View::make('admin/tickets/create_edit', compact('$ticket', 'title'));
+        return View::make('admin/tickets/create_edit', compact('$ticket', 'priorities', 'title'));
 	}
 
     /**
