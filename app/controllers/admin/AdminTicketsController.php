@@ -56,11 +56,14 @@ class AdminTicketsController extends AdminController {
      * @param $post
      * @return Response
      */
-	public function getEdit($ticket)
+	public function getEdit($id)
 	{
         // Title
         $title = Lang::get('admin/tickets/title.ticket_update');
 		$priorities =array('urgent', 'high', 'medium', 'low');
+		
+		$ticket = $id !== false ? Ticket::findOrFail($id) : null;
+		
 
         // Show the page
         return View::make('admin/tickets/create_edit', compact('ticket', 'priorities', 'title'));
