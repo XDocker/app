@@ -102,7 +102,21 @@ class AdminUsersController extends AdminController {
         //$user->permissions = $user->roles()->preparePermissionsForSave(Input::get( 'permissions' ));
 
         // Save if valid. Password field will be hashed before save
+        $this->user->engine_key = Hash::make(uniqid(mt_rand() , true));
         $this->user->save();
+		
+		  try {
+                // Register the user on the engine
+                $return = xDockerEngine::register(array(
+                    'username' => $this->user->username,
+                    'password' => $this->user->engine_key
+                ));
+				Log::info("Return Status : " . $return);
+				EngineLog::logIt(array('user_id' => $this->user->id, 'method' => 'admin:register', 'return' => $return));
+            }
+            catch(Exception $e) {
+            	Log::error('Error while registering the user!' . $e->getMessage());
+            }
 
         if ( $this->user->id )
         {
