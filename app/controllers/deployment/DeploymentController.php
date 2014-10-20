@@ -361,7 +361,28 @@ class DeploymentController extends BaseController {
 	{
 		$param 			= json_decode($deployment->parameters);
 		$account -> instanceRegion =  $param->instanceRegion;
-		return CloudProvider::executeAction($instanceAction, $account, $deployment, $instanceID);
+		return CloudProvider::executeAction($instanceAction, $account, $instanceID);
+	}
+	
+	private function getDownloadKey($id)
+	{
+		$instanceID 	= Input::get('instanceID');
+		$deployment 	= Deployment::where('user_id', Auth::id())->find($id);
+		$account 		= CloudAccount::where('user_id', Auth::id())->findOrFail($deployment->cloudAccountId) ;
+		
+		$arr = $this->executeAction('downloadKey', $account, $deployment, $instanceID);
+		if($arr['status'] == 'OK')
+		{
+			header('Content-Description: File Transfer');
+			header('Content-Type: ' . 'application/x-pem-file');
+			header('Content-Disposition: attachment; filename=' . StringHelper::removeSpaces($deployment->name) . '.pem');
+			header('Content-Transfer-Encoding: binary');
+			header('Expires: 0');
+			header('Cache-Control: must-revalidate');
+			header('Pragma: public');
+			header('Content-Length: ' . strlen($arr['key']));
+			print $arr['key'];
+		}
 	}
 	
 	public function getImages()

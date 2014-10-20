@@ -54,7 +54,7 @@ class CloudProvider {
         }
 	}
 	 
-	public static function executeAction($instanceAction, $account, $deployment, $instanceID)
+	public static function executeAction($instanceAction, $account, $instanceID)
 	{
 		$response = '';
 		switch ($instanceAction)
@@ -85,9 +85,14 @@ class CloudProvider {
 				}
 				if(!empty($obj) && $obj->status == 'OK')
 		 		{
-		 			$parameters = json_decode($deployment->parameters);
-					$response = xDockerEngine::downloadKey(array('token' =>$obj->token, 'cloudProvider' => $account->cloudProvider, 'instanceRegion' => $parameters->instanceRegion));
-					$response = StringHelper::isJson($response) ? json_decode($response, true) : array('status' => 'errpr', 'message' => 'Error occured while downloading keys');
+		 			
+					$response = xDockerEngine::downloadKey(array('token' =>$obj->token, 'cloudProvider' => $account->cloudProvider, 'instanceRegion' => $account ->instanceRegion));
+					if(StringHelper::isJson($response)) 
+					{
+						$response = json_decode($response, true) ;
+						$response['message'] = 'Key is returned in field key';
+					}
+					else $response = array('status' => 'error', 'message' => 'Error occured while downloading keys');
 				}
 				if(!empty($obj) && $obj->status == 'error')
 		 		{
