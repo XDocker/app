@@ -74,6 +74,13 @@ Route::group(array(
 	Route::get('subscribers/{subscriber}/delete', 'AdminSubscribersController@getDelete');
     Route::post('subscribers/{subscriber}/delete', 'AdminSubscribersController@postDelete');
     Route::controller('subscribers', 'AdminSubscribersController');
+	
+	Route::get('tickets/{ticket}/show', 'AdminTicketsController@getShow');
+    Route::get('tickets/{ticket}/edit', 'AdminTicketsController@getEdit');
+    Route::post('tickets/{ticket}/edit', 'AdminTicketsController@postEdit');
+    Route::get('tickets/{ticket}/delete', 'AdminTicketsController@getDelete');
+    Route::post('tickets/{ticket}/delete', 'AdminTicketsController@postDelete');
+    Route::controller('tickets', 'AdminTicketsController');
     # User Management
     Route::get('users/{user}/show', 'AdminUsersController@getShow');
     Route::get('users/{user}/edit', 'AdminUsersController@getEdit');
