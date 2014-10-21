@@ -1,4 +1,4 @@
-<footer id="footer" class="navbar navbar-default navbar-static-bottom">
+<div id="footer" class="navbar navbar-default navbar-static-bottom">
 
 	<div class="container">
 	
@@ -34,6 +34,4 @@
 	 </div>
 	 </div>
 	</div>
-</footer>
-
-	
+</div>
