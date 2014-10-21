@@ -88,7 +88,13 @@ class DeploymentController extends BaseController {
             $deployment->cloudAccountId = Input::get('cloudAccountId');
 			//Check if account credentials are valid
 			
-			//$account = CloudAccount::where('user_id', Auth::id())->get();
+			$account = CloudAccount::where('id', $deployment->cloudAccountId)->get();
+			
+			if(!CloudProvider::authenticate($account))
+			{
+				Log::error('Failed to authenticate before deployment! '. json_encode($account) );
+				return Redirect::to('deployment/')->with('error', 'Failed to authenticate before deployment! '. $deployment->name);
+			}
 		
 			$params = Input::get('parameters');
 			//$params['instanceImage'] = Input::get('instanceImage');
