@@ -75,8 +75,6 @@
 	    								<li class="divider"></li>
 	    								<li><a href="{{{ URL::to('deployment') }}}"><span class="glyphicon glyphicon-play-circle"></span> {{{ Lang::get('site.deployments') }}}</a></li>
 	    								<li class="divider"></li>
-	    								<li><a href="{{{ URL::to('awsPricing') }}}"><span class="glyphicon glyphicon-tags"></span> {{{ Lang::get('site.aws_pricing') }}}</a></li>
-	    								<li class="divider"></li>
 	    								<li><a href="{{{ URL::to('enginelog') }}}"><span class="glyphicon glyphicon-inbox"></span> {{{ Lang::get('site.enginelog') }}}</a></li>
 	    								<li class="divider"></li>
 	    								<li><a href="{{{ URL::to('ServiceStatus') }}}"><span class="glyphicon glyphicon-signal"></span> {{{ Lang::get('site.webserivce_status') }}}</a></li>
