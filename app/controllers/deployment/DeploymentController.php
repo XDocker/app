@@ -319,8 +319,11 @@ class DeploymentController extends BaseController {
 					return Redirect::to('ServiceStatus')->with('error', 'Backend API is down, please try again later!');
 				}
 		}
+		else if(empty($deployment))
+			 return Redirect::to('deployment')->with('info', 'No deployments found! ' );
+		}
 		else {
-			 return Redirect::to('deployment')->with('info', 'No Log found '. isset($deployment->name) ? $deployment->name : '' );
+			 return Redirect::to('deployment')->with('info', 'No logs found! ' );
 		}
 		
 	}
