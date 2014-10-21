@@ -86,6 +86,8 @@ class DeploymentController extends BaseController {
             }
             $deployment->name = Input::get('name');
             $deployment->cloudAccountId = Input::get('cloudAccountId');
+			//Check if account credentials are valid
+		
 			$params = Input::get('parameters');
 			//$params['instanceImage'] = Input::get('instanceImage');
 			$arr = explode(':', Input::get('instanceAmi'));
@@ -196,6 +198,7 @@ class DeploymentController extends BaseController {
                                         'OS' => $parameters->OS,
                                         'packageName' => $deployment -> docker_name,
                                         'dockerParams' => $dockerParams,
+                                        'ipUI' => xDockerEngine::getIPAddress($deployment -> docker_name),
                                         $keys[0] => $secPolicy[$keys[0]]
 										)
                                       );	

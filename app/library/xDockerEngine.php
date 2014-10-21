@@ -171,4 +171,11 @@ class xDockerEngine {
 		$url = isset($settings[$dockerName]) ? $settings[$dockerName]['documentationUrl'] : '';
 		return '<a title="Documentation" alt="Documentation" target="_blank" href="'.$url.'"><span class="glyphicon glyphicon-list-alt"> </span></a>';
 	}
+	
+	public static function getIPAddress($dockerName)
+	{
+		$settings = Config::get('docker_settings');
+		$url = isset($settings[$dockerName]) ? $settings[$dockerName]['ipUI'] : ''; 
+	}
+	
 }
