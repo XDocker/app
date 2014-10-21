@@ -87,6 +87,8 @@ class DeploymentController extends BaseController {
             $deployment->name = Input::get('name');
             $deployment->cloudAccountId = Input::get('cloudAccountId');
 			//Check if account credentials are valid
+			
+			//$account = CloudAccount::where('user_id', Auth::id())->get();
 		
 			$params = Input::get('parameters');
 			//$params['instanceImage'] = Input::get('instanceImage');

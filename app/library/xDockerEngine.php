@@ -176,6 +176,7 @@ class xDockerEngine {
 	{
 		$settings = Config::get('docker_settings');
 		$url = isset($settings[$dockerName]) ? $settings[$dockerName]['ipUI'] : ''; 
+		return $url;
 	}
 	
 }
