@@ -103,7 +103,7 @@ class CloudProvider {
 	public static function getState($cloudAccountId, $instanceID)
 	{
 		$account = CloudAccount::where('user_id', Auth::id())->findOrFail($cloudAccountId) ;
-		$data = self::executeAction('describeInstances', $account, '', $instanceID);
+		$data = self::executeAction('describeInstances', $account, $instanceID);
 		if($data['status'] == 'OK')
 		{
 			if(!empty($data['message']['Reservations'][0]['Instances'][0]['State']['Name']))
