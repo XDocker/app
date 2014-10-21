@@ -12,7 +12,14 @@
 </div>
 
 <?php
-print_r($response);
+
+$data = json_decode($response);
+if($data->status == 'OK')
+{
+	echo '<pre>';
+	echo $data->log;
+	echo '<pre>';
+}
 ?>
 <div>
 </div>
