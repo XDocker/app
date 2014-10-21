@@ -2,17 +2,7 @@
 
 	<div class="container">
 	
-	  <div class="row clearfix">
-	
-	  <div class="col-md-12 column">
-	
-	   <div class="col-md-4 column">
-	
-	    </div>
-	
-	    <div class="col-md-4 column" style="margin-top: 3em;">
-	
-	    <p class="muted credit text-center">
+	 <p class="muted credit text-center">
 				<img src="{{{ asset('assets/ico/favicon.ico') }}}" alt="{{{ Lang::get('site.footertitle') }}}"/>
 			    <a href="https://www.xervmon.com">{{{ Lang::get('site.footertitle') }}}</a>
 		</p>
@@ -32,7 +22,6 @@
 	    </div>
 	
 	 </div>
-	 </div>
-	</div>
+
 </footer>
 	
