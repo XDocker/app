@@ -11,11 +11,11 @@ return array(
    									 'docker_url' => 'https://registry.hub.docker.com/u/xdocker/securitymonkey/',
    									 'logo' => 'securitymonkeyHead.png', 
    									 'dockerParams' => array('ports' => array(443, 5000, 8080), 
-   									 						 'ipUI' => '104.131.14.172',
-   									 						'tag' => 'v1',
+   									 						 'tag' => 'v1',
    									 						'env_keys' => false,
 															'env' => array('host' => '{host}', 
    									 				  		'cmd' => '/home/ubuntu/securitymonkey.sh',),),
+   									 				  		'ipUI' => '104.131.14.172',
    									 'protocol' 		=> 'https://',
    									 'securityPolicy'   => array('amazonIAM' 
    									 								=> array(
@@ -41,11 +41,12 @@ return array(
 									 //"dockerParams": {"ports": [443, 5000], "env": {}, "tag": "v1",
    'xdocker/netflix_ice' => array('displayName' => 'Netflix ICE',
    								  'docker_url' => 'https://registry.hub.docker.com/u/xdocker/netflix_ice/', 
-   								  'dockerParams' => array('ports' => array(443, 5000, 8080), 'ipUI' => '104.131.14.172',
+   								  'dockerParams' => array('ports' => array(443, 5000, 8080),
    								  					    'tag' => 'v2',
    								  					    'env_keys' => true,
    								  					 	'env' => array('host' => '{host}',
    								  					 				'cmd' => ''),),
+   								  					 'ipUI' => '104.131.14.172',
    								  'logo' => 'placeholder.jpg', 'protocol' => 'http://',  
    								  'append' => ':8080/ice',
    								  'securityPolicy' =>  '',
@@ -54,8 +55,8 @@ return array(
    								  
    'stefobark/sphinxdocker' => array('displayName' => 'Sphinx', 
    									 'docker_url' => 'https://registry.hub.docker.com/u/xdocker/securitymonkey/',
-   									 'dockerParams' => array('ports' => array(443, 5000, 8080), 'ipUI' => '104.131.14.172',
+   									 'dockerParams' => array('ports' => array(443, 5000, 8080),
    									 				  'env' => array('host' => '{host}',  'env_keys' => false,
-   									 				  				 'tag' => ''),), 
+   									 				  				 'tag' => ''),), 'ipUI' => '104.131.14.172',
    									  'logo' => 'placeholder.jpg', 'protocol' => '', 'enabled' => FALSE),
 );
