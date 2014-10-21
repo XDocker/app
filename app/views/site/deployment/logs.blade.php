@@ -6,7 +6,7 @@
 <div class="page-header">
 	<div class="row">
 		<div class="col-md-9">
-			<h4>{{{ Lang::get('enginelog/enginelog.your_logs') }}} . {{$deployment->name}}</h4>
+			<h4>{{{ Lang::get('enginelog/enginelog.deployment_logs') }}} . {{$deployment->name}}</h4>
 		</div>
 	</div>
 </div>
