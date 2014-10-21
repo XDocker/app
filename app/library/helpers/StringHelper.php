@@ -71,7 +71,8 @@ class StringHelper
 	public static function decrypt($base64encoded_ciphertext, $customerIdentifier) 
 	{
 		$key = $customerIdentifier;
-		$iv = ci() -> config -> item('iv');
+		$appSettings = Config::get('app');
+		$iv = ci() -> config -> item($appSettings['key']);
 
 		$plaintext = mcrypt_decrypt(MCRYPT_RIJNDAEL_128, $key, base64_decode($base64encoded_ciphertext), MCRYPT_MODE_CBC, $iv);
 		$plaintext = trim($plaintext);
@@ -87,7 +88,8 @@ class StringHelper
 		if (!empty($dvalue))
 		{
 			$iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_CBC);
-			$iv = ci() -> config -> item('iv');
+			$appSettings = Config::get('app');
+			$iv = $appSettings['key'];
 			$key = $customerIdentifier;
 			$crypttext = mcrypt_encrypt(MCRYPT_RIJNDAEL_128, $key, $dvalue, MCRYPT_MODE_CBC, $iv);
 			return base64_encode($crypttext);
