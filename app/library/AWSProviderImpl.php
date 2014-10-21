@@ -74,8 +74,7 @@ class AWSPRoviderImpl implements IProvider
 		else
 		{
 			Log::error(Auth::check() ? Auth::user()->username : '__Guest__');
-			Log::error('startInstances '. $instanceAction .' request');
-			Log::error('startInstances '. $instanceAction .' Authentication failure! API key and secret key for account is not correct');
+			Log::error('startInstances Authentication failure! API key and secret key for account is not correct');
 			return array('status' => 'error', 'message' => 'Authentication failure! API key and secret key for account is not correct');
 		}
 	}
@@ -101,8 +100,7 @@ class AWSPRoviderImpl implements IProvider
 		else
 		{
 			Log::error(Auth::check() ? Auth::user()->username : '__Guest__');
-			Log::error('stopInstances '. $instanceAction .' request');
-			Log::error('stopInstances '. $instanceAction .' Authentication failure! API key and secret key for account is not correct');
+			Log::error('stopInstances  Authentication failure! API key and secret key for account is not correct');
 			return array('status' => 'error', 'message' => 'Authentication failure! API key and secret key for account is not correct');
 		}
 	}
@@ -128,8 +126,7 @@ class AWSPRoviderImpl implements IProvider
 		else
 		{
 			Log::error(Auth::check() ? Auth::user()->username : '__Guest__');
-			Log::error('restartInstances '. $instanceAction .' request');
-			Log::error('restartInstances '. $instanceAction .' Authentication failure! API key and secret key for account is not correct');
+			Log::error('restartInstances Authentication failure! API key and secret key for account is not correct');
 			return array('status' => 'error', 'message' => 'Authentication failure! API key and secret key for account is not correct');
 		}
 	}
@@ -154,8 +151,7 @@ class AWSPRoviderImpl implements IProvider
 		else
 		{
 			Log::error(Auth::check() ? Auth::user()->username : '__Guest__');
-			Log::error('terminateInstances '. $instanceAction .' request');
-			Log::error('terminateInstances '. $instanceAction .' Authentication failure! API key and secret key for account is not correct');
+			Log::error('terminateInstances Authentication failure! API key and secret key for account is not correct');
 			return array('status' => 'error', 'message' => 'Authentication failure! API key and secret key for account is not correct');
 		}
 	}
@@ -185,8 +181,7 @@ class AWSPRoviderImpl implements IProvider
 		else
 		{
 			Log::error(Auth::check() ? Auth::user()->username : '__Guest__');
-			Log::error('describeInstances '. $instanceAction .' request');
-			Log::error('describeInstances '. $instanceAction .' Authentication failure! API key and secret key for account is not correct');
+			Log::error('describeInstances Authentication failure! API key and secret key for account is not correct');
 			return array('status' => 'error', 'message' => 'Authentication failure! API key and secret key for account is not correct');
 		}
 		
