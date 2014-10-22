@@ -165,7 +165,7 @@ Inverse	<span class="label label-inverse">Inverse</span>
 				//$str .= '<td>' . $row -> Id .'</td>';
 				$str .= '<td>' . $row -> Image .'</td>';
 				$str .= '<td>' . self::getPorts($row->Ports) .'</td>';
-				$str .= '<td>' . $row -> Created .'</td>';
+				$str .= '<td>' . StringHelper::timeAgo($row -> Created) .'</td>';
 				
 				$str .= '</tr>';
 				
