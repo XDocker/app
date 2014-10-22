@@ -30,8 +30,8 @@ class RemoteAPI
 	{
 		$ret  = shell_exec('curl -X GET http://'.$url.':4243/containers/json');
 		$ret = StringHelper::isJson($ret) ? json_decode($ret) :  '';
-		
-		print_r($ret);
+		return $ret;
+		//print_r($ret);
 	}
 		
 }
