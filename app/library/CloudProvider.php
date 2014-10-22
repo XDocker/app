@@ -40,8 +40,7 @@ class CloudProvider {
     
    public static function authenticate($account) 
 	{
-		print_r($account);
-	 	return self::getDriver($account)->authenticate();
+		return self::getDriver($account)->authenticate();
     }
 	 
 	public static function getDriver($account)

@@ -117,7 +117,7 @@ class DeploymentController extends BaseController {
 				if(!empty($obj) && $obj->status == 'OK')
 				{
 					$deployment -> token = $obj->token;
-					$this->prepare($user, $deployment);
+					$this->prepare($user, $account, $deployment);
 					$responseJson = xDockerEngine::run(json_decode($deployment->wsParams));
 					EngineLog::logIt(array('user_id' => Auth::id(), 'method' => 'run', 'return' => $responseJson));
 					$obj1 = json_decode($responseJson);
@@ -166,9 +166,8 @@ class DeploymentController extends BaseController {
         }
     }
 
-	private function prepare($user, & $deployment)
+	private function prepare($user, $account, & $deployment)
 	{
-		$account = CloudAccount::where('user_id', Auth::id())->findOrFail($deployment->cloudAccountId) ;
 		$credentials = json_decode($account->credentials);
 		$parameters = json_decode($deployment->parameters);
 		$dockerParams = xDockerEngine::getDockerParams($deployment -> docker_name);
