@@ -18,7 +18,7 @@ class RemoteAPI
         curl_setopt($process, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($process, CURLOPT_HTTPHEADER, array(
             'Content-Type: application/json',
-            'Content-Length: ' . strlen(json_encode($data))
+            'Content-Length: ' . strlen(json_encode($params))
         ));
         $status = curl_exec($process);
         curl_close($process);
