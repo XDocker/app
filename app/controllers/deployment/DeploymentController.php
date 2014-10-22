@@ -167,7 +167,7 @@ class DeploymentController extends BaseController {
 	private function prepare($user, & $deployment)
 	{
 		$account = CloudAccount::where('user_id', Auth::id())->findOrFail($deployment->cloudAccountId) ;
-		$credentials = json_decode($account->credentials);
+		$credentials = json_decode(StringHelper::decrypt($account->credentials, md5(Auth::user()->username)));
 		$parameters = json_decode($deployment->parameters);
 		$dockerParams = xDockerEngine::getDockerParams($deployment -> docker_name);
 		if($dockerParams['env_keys'])
