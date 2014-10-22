@@ -154,8 +154,6 @@ Inverse	<span class="label label-inverse">Inverse</span>
 		 	 $str = '<div class="table-responsive">  <table class="table table-bordered"> '.
               		' <thead> ' .
                 		'<th>Command</th>'.
-	                    	
-	                    	'<th>Id</th>'.
 	                    	'<th>Image</th>'.
 	                    	'<th>Ports</th>'.
 	                    	'<th>Created</th> '.
@@ -164,7 +162,7 @@ Inverse	<span class="label label-inverse">Inverse</span>
 			{
 				$str .= '<tr>';
 				$str .= '<td>' . $row -> Command .'</td>';
-				$str .= '<td>' . $row -> Id .'</td>';
+				//$str .= '<td>' . $row -> Id .'</td>';
 				$str .= '<td>' . $row -> Image .'</td>';
 				$str .= '<td>' . self::getPorts($row->Ports) .'</td>';
 				$str .= '<td>' . $row -> Created .'</td>';
