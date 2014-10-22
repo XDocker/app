@@ -129,7 +129,7 @@
 </p>
 <div class="media-block">
 	<ul class="list-group list-group-custom">
-		@if($dockerInstances->num_results > 0 && !empty($dockerInstances->results))
+		@if(!empty($dockerInstances))
 			@foreach($dockerInstances as $instance)
 				@if(xDockerEngine::enabled($instance->name))
 		  			<li class="list-group-item">
@@ -172,11 +172,8 @@
 				@endif
 			@endforeach
 		@endif
-		
 	</ul>
-	@if($dockerInstances->num_results == 0 && empty($dockerInstances->results))
-		<div class="alert alert-info"> {{{ Lang::get('deployment/deployment.empty_deployments') }}}</div>
-	@endif<!-- <div class="text-center">
+	<!-- <div class="text-center">
 		<div class="pagination">
 			<ul>
 	        	<li class="previous"><a href="#fakelink" class="fui-arrow-left"></a></li>
