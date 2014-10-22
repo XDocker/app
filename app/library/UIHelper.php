@@ -184,6 +184,7 @@ Inverse	<span class="label label-inverse">Inverse</span>
 
 	private static function getPorts($row)
 	{
+		return '';
 		if(empty($row)) return '';
 		else {
 			$str = '';
