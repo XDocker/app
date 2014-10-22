@@ -72,7 +72,7 @@ class StringHelper
 	{
 		$key = $customerIdentifier;
 		$appSettings = Config::get('app');
-		$iv = ci() -> config -> item($appSettings['key']);
+		$iv = $appSettings['key'];
 
 		$plaintext = mcrypt_decrypt(MCRYPT_RIJNDAEL_128, $key, base64_decode($base64encoded_ciphertext), MCRYPT_MODE_CBC, $iv);
 		$plaintext = trim($plaintext);
