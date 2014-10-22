@@ -28,9 +28,8 @@ class RemoteAPI
 	
 	public static function Containers($url)
 	{
-		$process = curl_init($url.':4243/containers/json');
-		$ret = self::request($url.':4243/containers/json', 'get', '');
-        print_r($ret);
+		$ret  = shell_exec('curl -X GET http://'.$url.':4243/containers/json');
+		return StringHelper::isJson($ret) ? json_decode($ret) :  '';
 	}
 		
 }
