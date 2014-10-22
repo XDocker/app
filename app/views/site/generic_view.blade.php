@@ -81,8 +81,8 @@
 								</p>
 								<p>
 									@if($deployment->status == 'Completed' && isset($result->public_dns))
-									{{RemoteAPI::Containers($result->public_dns)}}
-									
+										{{RemoteAPI::Containers($result->public_dns)}}
+									@endif
 								</p>
 			
 								<p>
