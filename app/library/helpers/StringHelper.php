@@ -72,6 +72,7 @@ class StringHelper
 	{
 		$key = $customerIdentifier;
 		$appSettings = Config::get('app');
+		print_r($appSettings);
 		$iv = $appSettings['key'];
 
 		$plaintext = mcrypt_decrypt(MCRYPT_RIJNDAEL_128, $key, base64_decode($base64encoded_ciphertext), MCRYPT_MODE_CBC, $iv);
@@ -89,6 +90,7 @@ class StringHelper
 		{
 			$iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_CBC);
 			$appSettings = Config::get('app');
+			print_r($appSettings);
 			$iv = $appSettings['key'];
 			$key = $customerIdentifier;
 			$crypttext = mcrypt_encrypt(MCRYPT_RIJNDAEL_128, $key, $dvalue, MCRYPT_MODE_CBC, $iv);
