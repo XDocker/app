@@ -78,7 +78,7 @@ Inverse	<span class="label label-inverse">Inverse</span>
 			
 			$image = self::getImage($input->instanceAmi);
 			
-			return '<div class="table-responsive">  <table class="table table-bordered"> '.
+			return '<h5> Cost Details</h5><div class="table-responsive">  <table class="table table-bordered"> '.
               		' <thead> ' .
                 		'<th>Ondemand</th>'.
 	                    	'<th>Region</th> '.
@@ -151,7 +151,7 @@ Inverse	<span class="label label-inverse">Inverse</span>
 		
 		 if(!empty($data))
 		 {
-		 	 $str = '<div class="table-responsive">  <table class="table table-bordered"> '.
+		 	 $str = '<h5> Container Details</h5><div class="table-responsive">  <table class="table table-bordered"> '.
               		' <thead> ' .
                 		'<th>Command</th>'.
 	                    	'<th>Image</th>'.
@@ -182,13 +182,13 @@ Inverse	<span class="label label-inverse">Inverse</span>
 
 	private static function getPorts($row)
 	{
-		return '';
 		if(empty($row)) return '';
 		else {
 			$str = '';
 			foreach($row as $set)
 			{
-				$str .= $set ->IP .':' . $set ->PrivatePort .':'.$set ->PublicPort.':'.$set ->Type; 
+				$a = (array) $set;                                
+				$str .= http_build_query($a, '', ' '). '<br/>';
 			}
 			return $str;
 		}
