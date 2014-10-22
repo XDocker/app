@@ -53,6 +53,11 @@ class AccountController extends BaseController {
     public function getCreate($id = false) {
         $mode = $id !== false ? 'edit' : 'create';
 		$account =  $id !== false ? CloudAccount::where('user_id', Auth::id())->findOrFail($id) : null;
+		if($mode == 'edit')
+		{
+			Log::info('Credentials are decrypted before loading in edit mode.');
+            $account->credentials = StringHelper::decrypt($account->credentials, md5(Auth::user()->username));
+		}
         $providers = Config::get('account_schema');
         return View::make('site/account/create_edit', compact('mode', 'account', 'providers'));
     }
@@ -78,6 +83,8 @@ class AccountController extends BaseController {
             
             
             if ($conStatus == 1) {
+            	Log::info('Credentials are encrypted before saving to DB.');
+            	$account->credentials = StringHelper::encrypt($account->credentials, md5(Auth::user()->username));
                 $success = $account->save();
                 return Redirect::intended('account')->with('success', Lang::get('account/account.account_updated'));
             } else {
