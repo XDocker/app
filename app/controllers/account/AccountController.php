@@ -68,17 +68,14 @@ class AccountController extends BaseController {
             } else if ($account->user_id !== Auth::id()) {
                 throw new Exception('general.access_denied');
             }
-		    $enc = StringHelper::encrypt($account->name, md5(Auth::user()->username));
-			echo 'Enc :' . $enc.'<br/>';
-			$dec = StringHelper::decrypt($enc, md5(Auth::user()->username));
-			echo 'DEC :' . $dec.'<br/>';
-			die();
+		    
             $account->name = Input::get('name');
             $account->cloudProvider = Input::get('cloudProvider');
             $account->credentials = json_encode(Input::get('credentials'));
             $account->user_id = Auth::id(); // logged in user id
             
             $conStatus = CloudProvider::authenticate($account);
+            
             
             if ($conStatus == 1) {
                 $success = $account->save();
