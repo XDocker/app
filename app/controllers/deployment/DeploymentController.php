@@ -162,7 +162,7 @@ class DeploymentController extends BaseController {
         }
         catch(Exception $e) {
         	Log::error('Error while saving deployment : '. $e->getMessage());
-            return Redirect::back()->with('error', $e->getMessage());
+			return Redirect::back()->with('error', $e->getMessage());
         }
     }
 
