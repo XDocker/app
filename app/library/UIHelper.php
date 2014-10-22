@@ -135,4 +135,5 @@ Inverse	<span class="label label-inverse">Inverse</span>
 		}
 		else return 'NA';
 	}
+
 }
