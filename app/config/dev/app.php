@@ -65,7 +65,7 @@ return array(
 	|
 	*/
 
-	'key' => '9873ABgce0erede011',
+	'key' => 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=',
 
 	'cipher' => MCRYPT_RIJNDAEL_128,	
 
