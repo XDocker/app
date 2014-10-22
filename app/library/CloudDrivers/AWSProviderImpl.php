@@ -18,7 +18,7 @@ class AWSPRoviderImpl implements IProvider
 	private $account;
 	
 	private function init() {
-	 	$credentials = json_decode(StringHelper::decrypt($this->account->credentials, md5(Auth::user()->username)));
+	 	$credentials = json_decode($this->account->credentials);
         $config['key'] = $credentials->apiKey;
         $config['secret'] = $credentials->secretKey;
         $config['region'] = empty($credentials -> instanceRegion) ? 'us-east-1' : $credentials->instanceRegion;
