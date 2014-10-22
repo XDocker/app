@@ -135,5 +135,64 @@ Inverse	<span class="label label-inverse">Inverse</span>
 		}
 		else return 'NA';
 	}
+	
+	public static function getContainer($data)
+	{
+		/*
+		 * Array ( [0] => stdClass Object ( [Command] => /bin/sh -c /home/ice/netflix-ice.sh 
+		 * [Created] => 1413937646 [Id] => 4f262ebac076ee717539e082918d97393111d1b4de24415b6a30cbfbf74aa502 
+		 * [Image] => xdocker/netflix_ice:v2 [Names] => Array ( [0] => /desperate_turing ) 
+		 * [Ports] => Array ( [0] => stdClass Object ( [IP] => 0.0.0.0 [PrivatePort] => 443 [PublicPort] => 443 [Type] => tcp ) 
+		 * [1] => stdClass Object ( [IP] => 0.0.0.0 [PrivatePort] => 5000 [PublicPort] => 5000 [Type] => tcp ) 
+		 * [2] => stdClass Object ( [IP] => 0.0.0.0 [PrivatePort] => 8080 [PublicPort] => 8080 [Type] => tcp ) ) 
+		 * [Status] => Up 3 hours ) )
+		 * 
+		 */
+		
+		 if(!empty($data))
+		 {
+		 	 $str = '<div class="table-responsive">  <table class="table table-bordered"> '.
+              		' <thead> ' .
+                		'<th>Command</th>'.
+	                    	
+	                    	'<th>Id</th>'.
+	                    	'<th>Image</th>'.
+	                    	'<th>Ports</th>'.
+	                    	'<th>Created</th> '.
+                	'</thead>';
+		 	foreach($data as $row)
+			{
+				$str .= '<tr>';
+				$str .= '<td>' . $row -> Command .'</td>';
+				$str .= '<td>' . $row -> Id .'</td>';
+				$str .= '<td>' . $row -> Image .'</td>';
+				$str .= '<td>' . self::getPorts($row->Ports) .'</td>';
+				$str .= '<td>' . $row -> Created .'</td>';
+				
+				$str .= '</tr>';
+				
+			}
+			
+			$str .= '</table> </div>';
+		 }
+		 else {
+			 return 'No data found';
+		 }
+		 return $str;
+		 
+	}
+
+	private static function getPorts($row)
+	{
+		if(empty($row)) return '';
+		else {
+			$str = '';
+			foreach($row as $set)
+			{
+				$str .= $set ->IP .':' . $set ->PrivatePort .':'.$set ->PublicPort.':'.$set ->Type; 
+			}
+			return $str;
+		}
+	}
 
 }
