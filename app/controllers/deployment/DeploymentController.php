@@ -173,8 +173,8 @@ class DeploymentController extends BaseController {
 		$dockerParams = xDockerEngine::getDockerParams($deployment -> docker_name);
 		if($dockerParams['env_keys'])
 		{
-			$keys = array('AWS_ACCESS_KEY_ID'     => $credentials ->apiKey,
-					      'AWS_SECRET_ACCESS_KEY' => $credentials ->secretKey,
+			$keys = array('AWS_ACCESS_KEY_ID'     => StringHelper::encrypt($credentials ->apiKey, md5(Auth::user()->username)),
+					      'AWS_SECRET_ACCESS_KEY' => StringHelper::encrypt($credentials ->secretKey,md5(Auth::user()->username)),
 					      'BILLING_BUCKET'        => 
 					      				!empty($credentials ->billingBucket) ? $credentials ->billingBucket : '');
 		
