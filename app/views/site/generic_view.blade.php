@@ -61,6 +61,7 @@
 											//'<a title="Stop" href="#" onclick="stop(\''.$url.'\',\''.$result->instance_id.'\', \''.csrf_token().'\')"><span class="glyphicon glyphicon-collapse-down"> </span></a> | '.
 											. ' | <a title="Download" href="#" onclick="downloadKey(\''.$downloadUrl.'\',\''.$result->instance_id.'\', \''.csrf_token().'\')"><span class="glyphicon glyphicon-cloud-download"> </span> Pem </a>'
 											. ' | <a title="ViewLog" href="'.$logUrl.'" ><span class="glyphicon glyphicon-th-list"> </span>  </a>';
+																					
 										}
 									else 
 									{
@@ -76,6 +77,11 @@
 								<p>
 									
 									{{UIHelper::getDataOrganized($deployment->parameters)}}
+									
+								</p>
+								<p>
+									@if($deployment->status == 'Completed' && isset($result->public_dns))
+									{{RemoteAPI::Containers($result->public_dns)}}
 									
 								</p>
 			
