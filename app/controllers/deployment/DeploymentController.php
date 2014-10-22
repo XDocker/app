@@ -89,6 +89,8 @@ class DeploymentController extends BaseController {
 			//Check if account credentials are valid
 			
 			$account =CloudAccount::where('user_id', Auth::id())->findOrFail($deployment->cloudAccountId) ;
+			$account->credentials = StringHelper::decrypt($account->credentials, md5(Auth::user()->username));
+			
 			if(!CloudProvider::authenticate($account))
 			{
 				Log::error('Failed to authenticate before deployment! '. json_encode($account) );
@@ -167,7 +169,7 @@ class DeploymentController extends BaseController {
 	private function prepare($user, & $deployment)
 	{
 		$account = CloudAccount::where('user_id', Auth::id())->findOrFail($deployment->cloudAccountId) ;
-		$credentials = json_decode(StringHelper::decrypt($account->credentials, md5(Auth::user()->username)));
+		$credentials = json_decode($account->credentials);
 		$parameters = json_decode($deployment->parameters);
 		$dockerParams = xDockerEngine::getDockerParams($deployment -> docker_name);
 		if($dockerParams['env_keys'])
