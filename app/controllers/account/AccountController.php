@@ -60,7 +60,8 @@ class AccountController extends BaseController {
      * Saves/Edits an account
      *
      */
-    public function postEdit($account = false) {
+    public function postEdit($id = false) {
+    	$account = CloudAccount::where('user_id', Auth::id())->findOrFail($id);
         try {
             if (empty($account)) {
                 $account = new CloudAccount;
