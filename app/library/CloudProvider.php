@@ -103,6 +103,8 @@ class CloudProvider {
 	public static function getState($cloudAccountId, $instanceID)
 	{
 		$account = CloudAccount::where('user_id', Auth::id())->findOrFail($cloudAccountId) ;
+		$account->credentials = StringHelper::decrypt($account->credentials, md5(Auth::user()->username));
+			
 		$data = self::executeAction('describeInstances', $account, $instanceID);
 		if($data['status'] == 'OK')
 		{
