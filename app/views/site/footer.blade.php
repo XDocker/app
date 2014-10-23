@@ -1,4 +1,4 @@
-<footer id="footer" class="navbar navbar-default navbar-static-bottom">
+<div class="navbar navbar-default navbar-static-bottom">
 	<hr> 
 	<div class="container">
 
@@ -29,4 +29,4 @@
 			<iframe src="http://ghbtns.com/github-btn.html?user=xdocker&repo=app&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="170" height="30"></iframe>
 		</p> -->
 	</div>
-</footer>
+</div>
