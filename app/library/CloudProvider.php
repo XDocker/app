@@ -75,7 +75,6 @@ class CloudProvider {
 				break;	
 				
 			case 'describeInstances':
-				$account->credentials = StringHelper::decrypt($account->credentials, md5(Auth::user()->username));
 				$response = self::getDriver($account)->describeInstances(array('DryRun' => false, 'InstanceIds' =>array($instanceID)));
 				break;	
 			case 'downloadKey' :
