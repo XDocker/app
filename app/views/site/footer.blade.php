@@ -1,4 +1,4 @@
-<div class="navbar navbar-default navbar-static-bottom">
+<div id="footer">
 	<hr> 
 	<div class="container">
 

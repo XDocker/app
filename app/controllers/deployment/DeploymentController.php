@@ -88,8 +88,7 @@ class DeploymentController extends BaseController {
             $deployment->cloudAccountId = Input::get('cloudAccountId');
 			//Check if account credentials are valid
 			
-			$account =CloudAccount::where('user_id', Auth::id())->findOrFail($deployment->cloudAccountId) ;
-			$account->credentials = StringHelper::decrypt($account->credentials, md5(Auth::user()->username));
+			$account = CloudAccountHelper::findAccount($cloudAccountId);
 			
 			if(!CloudProvider::authenticate($account))
 			{
@@ -172,10 +171,19 @@ class DeploymentController extends BaseController {
 		$credentials = json_decode($account->credentials);
 		$parameters = json_decode($deployment->parameters);
 		$dockerParams = xDockerEngine::getDockerParams($deployment -> docker_name);
+		$rawApiKey = StringHelper::encrypt($credentials ->apiKey, md5(Auth::user()->username));
+		$rawSecretKey = StringHelper::encrypt($credentials ->apiKey, md5(Auth::user()->username));
+		
+		if(xDockerEngine::billingBucket($deployment -> docker_name) && empty($credentials ->billingBucket))
+		{
+			Log::error('error', 'Billing bucket is mandatory for '. $deployment -> docker_name);
+			return Redirect::to('account/'.$account->id.'/edit')->with('error', 'Billing bucket is mandatory for '. $deployment -> docker_name);			
+		}
+		
 		if($dockerParams['env_keys'])
 		{
-			$keys = array('AWS_ACCESS_KEY_ID'     => StringHelper::encrypt($credentials ->apiKey, md5(Auth::user()->username)),
-					      'AWS_SECRET_ACCESS_KEY' => StringHelper::encrypt($credentials ->secretKey,md5(Auth::user()->username)),
+			$keys = array('AWS_ACCESS_KEY_ID'     => $rawApiKey,
+					      'AWS_SECRET_ACCESS_KEY' => $rawSecretKey,
 					      'BILLING_BUCKET'        => 
 					      				!empty($credentials ->billingBucket) ? $credentials ->billingBucket : '');
 		
@@ -197,8 +205,8 @@ class DeploymentController extends BaseController {
                                         'token' => $deployment->token,
                                         'username' => $user->username,
                                         'cloudProvider' => $account ->cloudProvider,
-                                        'apiKey' => StringHelper::encrypt($credentials ->apiKey, md5(Auth::user()->username)),
-                                        'secretKey' => StringHelper::encrypt($credentials ->secretKey,md5(Auth::user()->username)),
+                                        'apiKey' => $rawApiKey,
+                                        'secretKey' => $rawSecretKey,
                                         'billingBucket' => !empty($credentials ->billingBucket) ? $credentials ->billingBucket : '' ,
                                         'instanceName' => $deployment->name,
                                         'instanceType' => $parameters->instanceType,
@@ -239,7 +247,8 @@ class DeploymentController extends BaseController {
 	private function terminateInstance($id)
 	{
 		$deployment = Deployment::where('user_id', Auth::id())->find($id);
-		$account = CloudAccount::where('user_id', Auth::id())->findOrFail($deployment->cloudAccountId) ;
+		$account = CloudAccountHelper::findAccount($cloudAccountId);
+				
 		$instanceId =  Input::get('instanceID');
 		Log::error('Terminating Instance :'. $instanceId);
 		$response = $this->executeAction(Input::get('instanceAction'), $account, $deployment, $instanceId);

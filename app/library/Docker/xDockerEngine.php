@@ -179,4 +179,10 @@ class xDockerEngine {
 		return $url;
 	}
 	
+	public static function billingBucket($dockerName)
+	{
+		$settings = Config::get('docker_settings');
+		return isset($settings[$dockerName]) ? $settings[$dockerName]['billingBucket'] : FALSE;
+	}
+	
 }

@@ -70,7 +70,6 @@ class CloudProvider {
 				$response =  self::getDriver($account)->restartInstances(array('DryRun' => false, 'InstanceIds' =>array($instanceID)));
 				break;
 			case 'terminate' :
-				$account->credentials = StringHelper::decrypt($account->credentials, md5(Auth::user()->username));
 				$response = self::getDriver($account)->terminateInstances(array('DryRun' => false, 'InstanceIds' =>array($instanceID)));
 				break;	
 				
@@ -104,9 +103,8 @@ class CloudProvider {
 
 	public static function getState($cloudAccountId, $instanceID)
 	{
-		$account = CloudAccount::where('user_id', Auth::id())->findOrFail($cloudAccountId) ;
-		$account->credentials = StringHelper::decrypt($account->credentials, md5(Auth::user()->username));
-			
+		$account = CloudAccountHelper::findAccount($cloudAccountId);
+		
 		$data = self::executeAction('describeInstances', $account, $instanceID);
 		if($data['status'] == 'OK')
 		{
