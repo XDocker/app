@@ -35,6 +35,7 @@ return array(
 									 
 									 							),
    									 'append' => '',
+   									 'billingBucket' => FALSE,
    									 'documentationUrl' => 'http://securitymonkey.readthedocs.org/en/latest/quickstart1.html#adding-an-account-in-the-web-ui',
 									 'enabled' => TRUE),
    									 
@@ -51,7 +52,7 @@ return array(
    								  'append' => ':8080/ice',
    								  'securityPolicy' =>  '',
    								  'documentationUrl' => 'https://github.com/Netflix/ice',
-   								  'enabled' => TRUE),
+   								  'enabled' => TRUE,'billingBucket' => TRUE,),
    								  
    'stefobark/sphinxdocker' => array('displayName' => 'Sphinx', 
    									 'docker_url' => 'https://registry.hub.docker.com/u/xdocker/securitymonkey/',

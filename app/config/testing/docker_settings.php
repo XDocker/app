@@ -52,8 +52,7 @@ return array(
    								  'append' => ':8080/ice',
    								  'securityPolicy' =>  '',
    								  'documentationUrl' => 'https://github.com/Netflix/ice',
-   								  'billingBucket' => TRUE,
-   								  'enabled' => TRUE),
+   								  'enabled' => TRUE,'billingBucket' => TRUE,),
    								  
    'stefobark/sphinxdocker' => array('displayName' => 'Sphinx', 
    									 'docker_url' => 'https://registry.hub.docker.com/u/xdocker/securitymonkey/',
