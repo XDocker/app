@@ -1,4 +1,4 @@
-<div class="navbar navbar-default navbar-static-bottom" style=" margin-bottom: -2em;">
+<div class="navbar navbar-default navbar-static-bottom" >
 	<hr> 
 	<div class="container">
 
