@@ -88,7 +88,7 @@ class DeploymentController extends BaseController {
             $deployment->cloudAccountId = Input::get('cloudAccountId');
 			//Check if account credentials are valid
 			
-			$account = CloudAccountHelper::findAndDecrypt($cloudAccountId);
+			$account = CloudAccountHelper::findAndDecrypt($deployment->cloudAccountId);
 			
 			if(!CloudProvider::authenticate($account))
 			{
