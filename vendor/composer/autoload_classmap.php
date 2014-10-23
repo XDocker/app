@@ -25,6 +25,7 @@ return array(
     'BaseControllerTestCase' => $baseDir . '/app/tests/library/BaseControllerTestCase.php',
     'BlogController' => $baseDir . '/app/controllers/BlogController.php',
     'CloudAccount' => $baseDir . '/app/models/CloudAccount.php',
+    'CloudAccountHelper' => $baseDir . '/app/library/helpers/CloudAccountHelper.php',
     'CloudProvider' => $baseDir . '/app/library/CloudProvider.php',
     'Comment' => $baseDir . '/app/models/Comment.php',
     'CommentsTableSeeder' => $baseDir . '/app/database/seeds/CommentsTableSeeder.php',
