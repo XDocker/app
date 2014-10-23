@@ -88,7 +88,7 @@ class DeploymentController extends BaseController {
             $deployment->cloudAccountId = Input::get('cloudAccountId');
 			//Check if account credentials are valid
 			
-			$account = CloudAccountHelper::findAccount($cloudAccountId);
+			$account = CloudAccountHelper::findAndDecrypt($cloudAccountId);
 			
 			if(!CloudProvider::authenticate($account))
 			{
@@ -247,7 +247,7 @@ class DeploymentController extends BaseController {
 	private function terminateInstance($id)
 	{
 		$deployment = Deployment::where('user_id', Auth::id())->find($id);
-		$account = CloudAccountHelper::findAccount($cloudAccountId);
+		$account = CloudAccountHelper::findAndDecrypt($cloudAccountId);
 				
 		$instanceId =  Input::get('instanceID');
 		Log::error('Terminating Instance :'. $instanceId);
