@@ -22,6 +22,7 @@ return array(
 	'getDeploymentStatus' => '/getDeploymentStatus',
 	'getLog' 	   		  => '/getLog',
 	'uploadKey'    		  => '/uploadKey',
-	'downloadKey'  		  => '/downloadKey'
+	'downloadKey'  		  => '/downloadKey',
+	'removeUsername'  		  => '/removeUsername'
 	);
 
