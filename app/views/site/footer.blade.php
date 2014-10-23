@@ -1,5 +1,5 @@
 <footer id="footer" class="navbar navbar-default navbar-static-bottom">
-	<!-- <hr> -->
+	<hr> 
 	<div class="container">
 
 		<div class="row clearfix">
