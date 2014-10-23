@@ -60,6 +60,7 @@ class CloudProvider {
 		switch ($instanceAction)
 		{
 			case 'start' :
+				
 				$response = self::getDriver($account)->startInstances(array('DryRun' => false, 'InstanceIds' =>array($instanceID),  ));
 				break;
 			case 'stop' :
@@ -69,10 +70,12 @@ class CloudProvider {
 				$response =  self::getDriver($account)->restartInstances(array('DryRun' => false, 'InstanceIds' =>array($instanceID)));
 				break;
 			case 'terminate' :
+				$account->credentials = StringHelper::decrypt($account->credentials, md5(Auth::user()->username));
 				$response = self::getDriver($account)->terminateInstances(array('DryRun' => false, 'InstanceIds' =>array($instanceID)));
 				break;	
 				
 			case 'describeInstances':
+				$account->credentials = StringHelper::decrypt($account->credentials, md5(Auth::user()->username));
 				$response = self::getDriver($account)->describeInstances(array('DryRun' => false, 'InstanceIds' =>array($instanceID)));
 				break;	
 			case 'downloadKey' :
