@@ -417,7 +417,6 @@ class DeploymentController extends BaseController {
 
 	private function executeAction($instanceAction, $account, $deployment , $instanceID)
 	{
-		$this->check();
 		$param 			= json_decode($deployment->parameters);
 		$account -> instanceRegion =  $param->instanceRegion;
 		return CloudProvider::executeAction($instanceAction, $account, $instanceID);
@@ -425,7 +424,7 @@ class DeploymentController extends BaseController {
 	
 	public function getDownloadKey($id)
 	{
-		$this->check();
+		$this->check(true);
 		$instanceID 	= Input::get('instanceID');
 		$deployment 	= Deployment::where('user_id', Auth::id())->find($id);
 		$account 		= CloudAccount::where('user_id', Auth::id())->findOrFail($deployment->cloudAccountId) ;
