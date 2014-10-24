@@ -201,10 +201,10 @@ Inverse	<span class="label label-inverse">Inverse</span>
 		if(StringHelper::isJson($json))
 		{
 			$obj = json_decode($json);
-			self::getLabel($obj->status);
+			return self::getLabel($obj->status);
 		}
 		else {
-			self::getLabel('error');
+			return self::getLabel('error');
 		}
 	}
 
