@@ -17,7 +17,7 @@
 	  			<li class="list-group-item">
 					<div class="media">
 						 <?php foreach($vars as $name => $val) { ?>
-                            <p class="pull right">{{ UIHelper::getStatus($val) }}</p>
+                            <p class="pull right">{{ UIHelper::getLabel($val) }}</p>
 							<div class="media-body">
 								<h5 class="media-heading"><?=$name?></h5>
 							
