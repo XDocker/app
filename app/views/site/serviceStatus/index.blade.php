@@ -17,8 +17,9 @@
 	  			<li class="list-group-item">
 					<div class="media">
 						<div class="media-body">
-							<h4 class="media-heading">{{{$name}}}</h4>
+							
 						 <?php foreach($vars as $name => $val) { ?>
+						 	<h4 class="media-heading">{{{$name}}}</h4>
                             <p><span class="glyphicon glyphicon-asterisk"></span> {{ UIHelper::getLabel($val) }}</p>
 							
 						<?php } ?>
