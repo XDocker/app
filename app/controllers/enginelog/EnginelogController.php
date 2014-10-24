@@ -39,6 +39,7 @@ class EnginelogController extends BaseController {
     public function getIndex() {
         // Get all the user's accounts
         $enginelog = $this->enginelog->where('user_id', Auth::id())->orderBy('created_at', 'DESC')->paginate(10);
+		$enginelog->statusObj =json_decode($enginelog->status_message);
         return View::make('site/enginelog/index', array(
             'enginelog' => $enginelog
         ));

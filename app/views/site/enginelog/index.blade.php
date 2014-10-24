@@ -20,7 +20,7 @@
 						<div class="media-body">
 							<h4 class="media-heading">{{{ Lang::get('enginelog/enginelog.method') }}} : {{ String::title($log->method) }}</h4>
 							<p>
-								<span class="glyphicon glyphicon-asterisk"></span> <!--Sept 16th, 2012-->{{{ $log->status_message }}}
+								<span class="glyphicon glyphicon-asterisk"></span> <!--Sept 16th, 2012-->{{{ $enginelog->statusObj ->status }}}
 							</p>
 							<p>
 								<span class="glyphicon glyphicon-calendar"></span> <!--Sept 16th, 2012-->{{{ $log->created_at }}}
