@@ -180,15 +180,6 @@ class DeploymentController extends BaseController {
 			return Redirect::to('account/'.$account->id.'/edit')->with('error', 'Billing bucket is mandatory for '. $deployment -> docker_name);			
 		}
 		
-		if($dockerParams['env_keys'])
-		{
-			$keys = array('AWS_ACCESS_KEY_ID'     => $rawApiKey,
-					      'AWS_SECRET_ACCESS_KEY' => $rawSecretKey,
-					      'BILLING_BUCKET'        => 
-					      				!empty($credentials ->billingBucket) ? $credentials ->billingBucket : '');
-		
-			$dockerParams['env'] = array_merge($dockerParams['env'], $keys);
-		}
 		$secPolicy = xDockerEngine::securityPolicy($deployment -> docker_name) ;
 		if(!empty($secPolicy))
 		{
