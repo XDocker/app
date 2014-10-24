@@ -196,4 +196,16 @@ Inverse	<span class="label label-inverse">Inverse</span>
 		}
 	}
 
+	public static function getStatus($json)
+	{
+		if(StringHelper::isJson($json))
+		{
+			$obj = json_decode($json);
+			self::getLabel($obj->status);
+		}
+		else {
+			self::getLabel('error');
+		}
+	}
+
 }
