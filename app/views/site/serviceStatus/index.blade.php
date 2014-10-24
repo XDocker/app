@@ -20,7 +20,7 @@
 						 	
 						?>
 						
-						<span class="glyphicon glyphicon-asterisk"></span> <!--Sept 16th, 2012-->{{ UIHelper::getLabel($log->$val) }}
+						<span class="glyphicon glyphicon-asterisk"></span> <!--Sept 16th, 2012-->{{ UIHelper::getLabel($val) }}
 						
                             <div class="media-body">
 								<h5 class="media-heading"><?=$name?></h5>
