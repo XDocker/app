@@ -17,7 +17,7 @@
 	  			<li class="list-group-item">
 					<div class="media">
 						@forach($vars as $name)
-							@if($vars[$name] ==> 'OK)
+							@if($vars[$name] == 'OK)
 								<span type="submit" class="btn btn-success pull-right" role="button">{{{ $status }}}</span>
 							@else
 								<span type="submit" class="btn btn-danger pull-right" role="button">{{{ $status }}}</span>
