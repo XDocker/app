@@ -23,7 +23,8 @@
 								<span type="submit" class="btn btn-danger pull-right" role="button"><?=$val?></span>
 							<?php } ?>
 							<div class="media-body">
-								<h4 class="media-heading"><?=$name?></h4>
+								<h5 class="media-heading"><?=$name?></h5>
+							
 							</div>
 						<?php } ?>
 					</div>
