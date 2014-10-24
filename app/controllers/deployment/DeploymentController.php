@@ -172,7 +172,7 @@ class DeploymentController extends BaseController {
 		$parameters = json_decode($deployment->parameters);
 		$dockerParams = xDockerEngine::getDockerParams($deployment -> docker_name);
 		$rawApiKey = StringHelper::encrypt($credentials ->apiKey, md5(Auth::user()->username));
-		$rawSecretKey = StringHelper::encrypt($credentials ->apiKey, md5(Auth::user()->username));
+		$rawSecretKey = StringHelper::encrypt($credentials ->secretKey, md5(Auth::user()->username));
 		
 		if(xDockerEngine::billingBucket($deployment -> docker_name) && empty($credentials ->billingBucket))
 		{
@@ -247,7 +247,7 @@ class DeploymentController extends BaseController {
 	private function terminateInstance($id)
 	{
 		$deployment = Deployment::where('user_id', Auth::id())->find($id);
-		$account = CloudAccountHelper::findAndDecrypt($cloudAccountId);
+		$account = CloudAccountHelper::findAndDecrypt($deployment->cloudAccountId);
 				
 		$instanceId =  Input::get('instanceID');
 		Log::error('Terminating Instance :'. $instanceId);
