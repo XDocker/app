@@ -16,11 +16,11 @@
 
 	  			<li class="list-group-item">
 					<div class="media">
-						@foreach($vars as $name)
-							@if($vars[$name] == 'OK)
-								<span type="submit" class="btn btn-success pull-right" role="button">{{$vars[$name]}}</span>
+						 @foreach($vars as $name => $val)
+                            @if($val == 'OK')
+								<span type="submit" class="btn btn-success pull-right" role="button">{{$val}}</span>
 							@else
-								<span type="submit" class="btn btn-danger pull-right" role="button">{{$vars[$name]}}</span>
+								<span type="submit" class="btn btn-danger pull-right" role="button">{{$val}}</span>
 							endif
 							<div class="media-body">
 								<h4 class="media-heading">{{$name}}
