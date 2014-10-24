@@ -187,16 +187,12 @@ class xDockerEngine {
 	
 	public static function getDockerServiceStatus($query = 'xdocker')
 	{
-		$responseJson = self::dockerHubGet($query);
+		$response = self::dockerHubGet($query);
 		$dockerServiceStatus = 'error';
-		 if(StringHelper::isJson($responseJson))
-		 {
-		 	$obj1 - json_decode($responseJson);
-			if($obj1->num_results > 0 && !empty($obj1->results) )
-			{
-				$dockerServiceStatus = 'OK';
-			}
-		 }
+		if($response->num_results > 0 && !empty($response->results) )
+		{
+			$dockerServiceStatus = 'OK';
+		}
 		 return $dockerServiceStatus;
 	}
 	
