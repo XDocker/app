@@ -16,13 +16,9 @@
 
 	  			<li class="list-group-item">
 					<div class="media">
-						 <?php foreach($vars as $name => $val) {
-						 	
-						?>
-						
-						<span class="glyphicon glyphicon-asterisk"></span> <!--Sept 16th, 2012-->{{ UIHelper::getLabel($val) }}
-						
-                            <div class="media-body">
+						 <?php foreach($vars as $name => $val) { ?>
+                            <p class="pull right">{{ UIHelper::getStatus($val) }}</p>
+							<div class="media-body">
 								<h5 class="media-heading"><?=$name?></h5>
 							
 							</div>
