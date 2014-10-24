@@ -28,16 +28,20 @@ class WebserviceController extends BaseController {
      * @return View
      */
     public function getIndex() {
+    	$response ='';
         if (Auth::check()) {
           	$responseJson = xDockerEngine::authenticate(array('username' => Auth::user()->username, 'password' => md5(Auth::user()->engine_key)));
 			EngineLog::logIt(array('user_id' => Auth::id(), 'method' => 'Status Page : authenticate', 'return' => $responseJson));
+			
+			
+            
        } else {
             $responseJson = '';
         }
        
 	   	$status = 'error';
         // Show the page
-        if(!empty($responseJson))
+        if(StringHelper::isJson($responseJson))
 		{
 			$obj = json_decode($responseJson);
 			if(!empty($obj) && $obj->status == 'OK')
@@ -45,8 +49,10 @@ class WebserviceController extends BaseController {
 				$status = 'OK';
 			}
 		}
+		
         return View::make('site/serviceStatus/index', array(
-            'status' => $status
+            'vars' => array( Lang::get('site.docker_serivce') => xDockerEngine::getDockerServiceStatus(), 
+            				Lang::get('site.webserivce') => $status, )
         ));
     }
 }
