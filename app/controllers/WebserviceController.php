@@ -51,8 +51,8 @@ class WebserviceController extends BaseController {
 		}
 		
         return View::make('site/serviceStatus/index', array(
-            'vars' => array( Lang::get('site.docker_serivce') => xDockerEngine::getDockerServiceStatus(), 
-            				Lang::get('site.webserivce') => $status, )
+            'vars' => array( Lang::get('site.docker_service') => xDockerEngine::getDockerServiceStatus(), 
+            				Lang::get('site.webservice') => $status, )
         ));
     }
 }
