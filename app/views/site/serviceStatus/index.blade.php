@@ -16,17 +16,16 @@
 
 	  			<li class="list-group-item">
 					<div class="media">
-						 @foreach($vars as $name => $val)
-                            @if($val == 'OK')
-								<span type="submit" class="btn btn-success pull-right" role="button">{{$val}}</span>
-							@else
-								<span type="submit" class="btn btn-danger pull-right" role="button">{{$val}}</span>
-							endif
+						 <?php foreach($vars as $name => $val) {
+                            if($val == 'OK')  { ?>
+								<span type="submit" class="btn btn-success pull-right" role="button"><?=$val?></span>
+							<?php } else { ?>
+								<span type="submit" class="btn btn-danger pull-right" role="button"><?=$val?></span>
+							<?php } ?>
 							<div class="media-body">
-								<h4 class="media-heading">{{$name}}
-							</h4>
-						</div>
-						@endforeach
+								<h4 class="media-heading"><?=$name?></h4>
+							</div>
+						<?php } ?>
 					</div>
 				</li>
 	</ul>
