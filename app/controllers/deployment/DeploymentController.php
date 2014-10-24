@@ -198,8 +198,7 @@ class DeploymentController extends BaseController {
             
         }
         catch(Exception $e) {
-		print_r($e); die();
-        	Log::error('Error while saving deployment : '. $e->getMessage());
+			Log::error('Error while saving deployment : '. $e->getMessage());
 			return Redirect::back()->with('error', $e->getMessage());
         }
     }
@@ -430,6 +429,7 @@ class DeploymentController extends BaseController {
 		$account 		= CloudAccount::where('user_id', Auth::id())->findOrFail($deployment->cloudAccountId) ;
 		
 		$arr = $this->executeAction('downloadKey', $account, $deployment, $instanceID);
+		
 		if($arr['status'] == 'OK')
 		{
 			header('Content-Description: File Transfer');
