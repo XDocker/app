@@ -46,7 +46,7 @@ return array(
    								  					    'env' => array('host' => '{host}',
    								  					    			   'AWS_ACCESS_KEY_ID'     => '{AWS_ACCESS_KEY_ID}',
 												     				   'AWS_SECRET_ACCESS_KEY' => '{AWS_SECRET_ACCESS_KEY}',
-												      				   'BILLING_BUCKET'        => '{billingBucket}',
+												      				   'BILLING_BUCKET'        => '{BILLING_BUCKET}',
    								  					 				'cmd' => ''),),
    								  					 'ipUI' => '104.131.14.172',
    								  'logo' => 'placeholder.jpg', 'protocol' => 'http://',  
