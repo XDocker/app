@@ -196,4 +196,20 @@ class xDockerEngine {
 		 return $dockerServiceStatus;
 	}
 	
+	public static function getxDockerServiceStatus()
+	{
+		$responseJson = xDockerEngine::authenticate(array('username' => Auth::user()->username, 'password' => md5(Auth::user()->engine_key)));
+		EngineLog::logIt(array('user_id' => Auth::id(), 'method' => 'getxDockerServiceStatus : authenticate', 'return' => $responseJson));
+		$status = 'error';
+		if(StringHelper::isJson($responseJson))
+		{
+			$obj = json_decode($responseJson);
+			if(!empty($obj) && $obj->status == 'OK')
+			{
+				$status = 'OK';
+			}
+		}	
+		return $status;
+	}
+	
 }

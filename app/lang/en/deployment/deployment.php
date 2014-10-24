@@ -18,5 +18,7 @@ return array(
 	'account_required'  => 'To deploy, please create the Account first',
 	'status' => 'In Progress',
 	'monthly' => '(730 hours / Month)',
+	'docker_service_down' => 'Docker service down!',
+	'xdocker_service_down' => 'xDocker service down!',
 
 );

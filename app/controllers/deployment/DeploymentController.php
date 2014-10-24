@@ -31,6 +31,40 @@ class DeploymentController extends BaseController {
         $this->deployments = $deployments->where('deployments.user_id', Auth::id());
         $this->user = $user;
     }
+	
+	private function check($json = false)
+	{
+		if($json)
+		{
+			if(xDockerEngine::getDockerServiceStatus() == 'error')
+			{
+				Log::error(Lang::get('deployment/deployment.docker_service_down'));
+				print json_encode(array('status' => 'error', 'message' => Lang::get('deployment/deployment.docker_service_down')));
+				return;
+			}
+			if(xDockerEngine::getxDockerServiceStatus() == 'error')
+			{
+				Log::error(Lang::get('deployment/deployment.xdocker_service_down'));
+				print json_encode(array('status' => 'error', 'message' => Lang::get('deployment/deployment.xdocker_service_down')));
+				return;
+			}
+		}
+		else 
+		{
+			
+			if(xDockerEngine::getDockerServiceStatus() == 'error')
+			{
+				Log::error(Lang::get('deployment/deployment.docker_service_down'));
+				return Redirect::to('ServiceStatus')->with('error', Lang::get('deployment/deployment.docker_service_down'));
+			}
+				
+			if(xDockerEngine::getxDockerServiceStatus() == 'error')
+			{
+				Log::error(Lang::get('deployment/deployment.xdocker_service_down'));
+				return Redirect::to('ServiceStatus')->with('error', Lang::get('deployment/deployment.xdocker_service_down'));
+			}
+		}
+	}
     
     public function getIndex() {
         // Get all the user's deployment
@@ -40,6 +74,8 @@ class DeploymentController extends BaseController {
             if (empty($search_term)) {
                 $search_term = 'xdocker';
             }
+			
+			$this->check();
            
             $response = xDockerEngine::dockerHubGet($search_term);
             
@@ -58,6 +94,7 @@ class DeploymentController extends BaseController {
      *
      */
     public function getCreate($id = false) {
+    	$this->check();
         $mode = $id !== false ? 'edit' : 'create';
         $deployment = $id !== false ? Deployment::where('user_id', Auth::id())->findOrFail($id) : null;
         $cloud_account_ids = CloudAccount::where('user_id', Auth::id())->get();
@@ -78,6 +115,7 @@ class DeploymentController extends BaseController {
      *
      */
     public function postEdit($deployment = false) {
+    	$this->check();
         try {
             if (empty($deployment)) {
                 $deployment = new Deployment;
@@ -221,6 +259,7 @@ class DeploymentController extends BaseController {
      */
     public function postDelete($id) 
     {
+    	$this->check();
     	$this->terminateInstance($id);
     	Deployment::where('id', $id)->where('user_id', Auth::id())->delete();
 		
@@ -237,6 +276,7 @@ class DeploymentController extends BaseController {
 
 	private function terminateInstance($id)
 	{
+		$this->check();
 		$deployment = Deployment::where('user_id', Auth::id())->find($id);
 		$account = CloudAccountHelper::findAndDecrypt($deployment->cloudAccountId);
 				
@@ -250,6 +290,7 @@ class DeploymentController extends BaseController {
 	
 	public function checkStatus($id)
 	{
+		$this->check();
 		$deployment = Deployment::where('user_id', Auth::id())-> whereNotIn('status', array('Completed'))->find($id);
 		if(empty($deployment))
 		{
@@ -306,6 +347,7 @@ class DeploymentController extends BaseController {
 
 	public function getLogs($id)
 	{
+		$this->check();
 		$deployment = Deployment::where('user_id', Auth::id())->find($id);
 		
 		if(!empty($deployment) && isset($deployment->job_id))
@@ -342,6 +384,7 @@ class DeploymentController extends BaseController {
 	
 	public function postInstanceAction($id)
 	{
+		$this->check(true);
 		$instanceAction = Input::get('instanceAction');
 		$instanceID 	= Input::get('instanceID');
 		$deployment 	= Deployment::where('user_id', Auth::id())->find($id);
@@ -374,6 +417,7 @@ class DeploymentController extends BaseController {
 
 	private function executeAction($instanceAction, $account, $deployment , $instanceID)
 	{
+		$this->check();
 		$param 			= json_decode($deployment->parameters);
 		$account -> instanceRegion =  $param->instanceRegion;
 		return CloudProvider::executeAction($instanceAction, $account, $instanceID);
@@ -381,6 +425,7 @@ class DeploymentController extends BaseController {
 	
 	public function getDownloadKey($id)
 	{
+		$this->check();
 		$instanceID 	= Input::get('instanceID');
 		$deployment 	= Deployment::where('user_id', Auth::id())->find($id);
 		$account 		= CloudAccount::where('user_id', Auth::id())->findOrFail($deployment->cloudAccountId) ;
