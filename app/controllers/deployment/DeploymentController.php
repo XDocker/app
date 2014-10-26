@@ -241,6 +241,7 @@ class DeploymentController extends BaseController {
                                         'instanceRegion' => $parameters->instanceRegion,
                                         'instanceAmi' => $parameters->instanceAmi,
                                         'OS' => $parameters->OS,
+                                        'sgPorts' => xDockerEngine::getSGPorts(),
                                         'packageName' => $deployment -> docker_name,
                                         'dockerParams' => $dockerParams,
                                         'ipUI' => xDockerEngine::getIPAddress($deployment -> docker_name),
