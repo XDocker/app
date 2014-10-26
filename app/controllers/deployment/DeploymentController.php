@@ -242,6 +242,7 @@ class DeploymentController extends BaseController {
                                         'instanceAmi' => $parameters->instanceAmi,
                                         'OS' => $parameters->OS,
                                         'packageName' => $deployment -> docker_name,
+                                        'sgPorts' => $parameters->sgPorts,
                                         'dockerParams' => $dockerParams,
                                         'ipUI' => xDockerEngine::getIPAddress($deployment -> docker_name),
                                         $keys[0] => $secPolicy[$keys[0]]
