@@ -10,7 +10,6 @@ return array(
    'xdocker/securitymonkey' => array('displayName' => 'SecurityMonkey', 
    									 'docker_url' => 'https://registry.hub.docker.com/u/xdocker/securitymonkey/',
    									 'logo' => 'securitymonkeyHead.png', 
-   									 'sgPorts' => array(80, 443, 5000, 8080),
    									 'dockerParams' => array('ports' => array(80, 443, 5000, 8080), 
    									 						 'tag' => 'v1',
    									 						'env' => array('host' => '{host}', 

@@ -212,10 +212,4 @@ class xDockerEngine {
 		return $status;
 	}
 	
-	public static function getSGPorts()
-	{
-		$settings = Config::get('docker_settings');
-		return isset($settings[$dockerName]) ? $settings[$dockerName]['sgPorts'] : '';
-	}
-	
 }
