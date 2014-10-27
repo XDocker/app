@@ -45,7 +45,7 @@ Inverse	<span class="label label-inverse">Inverse</span>
 		switch($state)
 		{
 			case 1: return '<span class="label label-success">Active</span>'; break;
-			case 0: return '<span class="label label-success">Closed</span>'; break;
+			case 0: return '<span class="label label-info">Closed</span>'; break;
 		}
 		
 	}
