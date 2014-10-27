@@ -23,9 +23,6 @@
         <link rel="stylesheet" href="{{asset('bower_components/font-awesome/css/font-awesome.min.css')}}">
         <link rel="stylesheet" href="{{asset('assets/css/custom.css')}}">
 		<style>
-		body {
-           padding-bottom: 60px;
-         }
 		@section('styles')
 		@show
 		</style>
