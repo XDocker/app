@@ -77,6 +77,9 @@
 		<div class="form-group {{{ $errors->has('comment') ? 'has-error' : '' }}}">
 			<label class="col-md-2 control-label"></label>
 			<div class="col-md-6">
+			@if($comment->comments == '')
+			<div class="well well-small"><font color="blue">No responses yet - Be first to respond<font></div>						
+			@else
 			@foreach($userList as $user)
 				<div class="well well-small" readonly>
 					<div class="nav nav-tabs span2 clearfix">	
@@ -93,6 +96,7 @@
 					</div>	
 				</div>
 			@endforeach
+			@endif
 			</div>
 		</div>
 		@endforeach
