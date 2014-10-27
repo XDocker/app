@@ -253,7 +253,7 @@ class UserController extends BaseController {
                     'password' => $user->engine_key
                 ));
 				Log::info("Return Status : " . $return);
-				EngineLog::logIt(array('user_id' => $this->user->id, 'method' => 'register', 'return' => $return));
+				EngineLog::logIt(array('user_id' => $user->id, 'method' => 'register', 'return' => $return));
             }
             Auth::loginUsingId($user->id);
             // Confide::logAttempt((array) $user);
