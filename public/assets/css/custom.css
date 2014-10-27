@@ -2,7 +2,8 @@ html,
 body {
     margin: 0;
     padding: 0;
-    height: 100%;
+    height: auto;
+	padding: 45px 0px 60px;;
 }
 /*
 .page-header {
@@ -24,19 +25,52 @@ body {
 }
 
       /* Set the fixed height of the footer here */
-#push,
-#footer {
+#push{
 	height: 60px;
 }
 
-      /* Lastly, apply responsive CSS fixes as necessary */
-@media (max-width: 767px) {
+div#footer {
+	border-top: 1px solid #E2E2E2;
+	background: #FFF;
+}
+ 
+div#footer p {
+	margin-bottom:0px;
+}
+
+div#footer  .container > .row > div.column:first-child{
+	margin-top: 2em;
+}
+
+.footer-social > p:first-child {
+	text-align:right;
+}
+
+.footer-social-icons {
+	float:right;
+}
+      
+/* Lastly, apply responsive CSS fixes as necessary */
+@media (max-width: 769px) {
         #footer {
           margin-left: -20px;
           margin-right: -20px;
           padding-left: 20px;
           padding-right: 20px;
         }
+		div#footer  .container > .row > div.column:first-child{
+			margin-top: 5px;
+		}
+		
+		.footer-social > p:first-child {
+			text-align:center;
+		}
+
+		.footer-social-icons {
+			float:none;
+			text-align:center;
+			margin-bottom:5px !important;
+		}
  }
 .social-login-icons {
     margin-right: 20px;
