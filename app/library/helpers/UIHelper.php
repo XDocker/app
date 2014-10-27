@@ -22,7 +22,6 @@ Inverse	<span class="label label-inverse">Inverse</span>
 		 */
 		switch($status)
 		{
-			case 1:
 			case 'running' :
 			case 'OK' :	
 			case 'Completed' 	: return '<span class="label label-success">'.$status.'</span>'; break;
@@ -32,7 +31,6 @@ Inverse	<span class="label label-inverse">Inverse</span>
 			case 'started' 		: return '<span class="label label-info">'.$status.'</span>'; break;
 			case 'stop' 		: return '<span class="label label-warning">'.$status.'</span>'; break;
 			case 'error' 		:
-			case 0				: return '<span class="label label-default">'.$status.'</span>'; break;	
 			case 'failed' 		: return '<span class="label label-danger">'.$status.'</span>'; break;
 			default:			  return '<span class="label label-danger">'.$status.'</span>'; break;
 								
