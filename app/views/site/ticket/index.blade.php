@@ -72,7 +72,7 @@
 									<p>
 										{{{ $ticket->description }}}
 									</p>
-									<p>{{{ $ticket->priority }}} | {{{ $ticket->active }}} </p>
+									<p>{{{ $ticket->priority }}} |  {{ UIHelper::getTicketToggle($ticket->active) }} </p>
 									<p>
 										<span class="glyphicon glyphicon-calendar"></span> <!--Sept 16th, 2012-->{{{ $ticket->created_at }}}
 									</p>
