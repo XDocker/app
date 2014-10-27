@@ -1,5 +1,4 @@
-<div id="footer">
-	<hr> 
+<div id="footer" class="navbar-fixed-bottom">
 	<div class="container">
 
 		<div class="row clearfix">

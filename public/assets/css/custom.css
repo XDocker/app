@@ -29,6 +29,15 @@ body {
 	height: 60px;
 }
 
+div#footer {
+	border-top: 1px solid #E2E2E2;
+	background: #FFF;
+}
+ 
+div#footer p {
+	margin-bottom:0px;
+}
+
       /* Lastly, apply responsive CSS fixes as necessary */
 @media (max-width: 767px) {
         #footer {
