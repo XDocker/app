@@ -9,6 +9,7 @@ return array(
     'AWSPRoviderImpl' => $baseDir . '/app/library/CloudDrivers/AWSProviderImpl.php',
     'AWSPricingController' => $baseDir . '/app/controllers/aws/AWSPricingController.php',
     'AccountController' => $baseDir . '/app/controllers/account/AccountController.php',
+    'AddDeploymentIdToTicketsTable' => $baseDir . '/app/database/migrations/2014_10_26_043505_add_deploymentId_to_tickets_table.php',
     'AddEngineKeyLog' => $baseDir . '/app/database/migrations/2014_09_29_041347_add_engine_key_log.php',
     'AdminBlogsController' => $baseDir . '/app/controllers/admin/AdminBlogsController.php',
     'AdminCommentsController' => $baseDir . '/app/controllers/admin/AdminCommentsController.php',
