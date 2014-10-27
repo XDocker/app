@@ -16,7 +16,7 @@ class AddDeploymentIdToTicketsTable extends Migration {
 		
 		Schema::table('tickets', function(Blueprint $table)
 		{
-			$table->integer('deploymentId');
+			$table->integer('deploymentId')->nullable();
 
 		});
 	}
