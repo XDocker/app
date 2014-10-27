@@ -106,6 +106,7 @@ class TicketController extends BaseController {
 		
 		$ticketComments = $id !== false ? Ticket::leftJoin('ticket_comments', 'tickets.id', '=', 'ticket_comments.ticket_id')->where('tickets.user_id', Auth::id())->orderBy('ticket_comments.created_at', 'DESC')->get() : null;
 		$priorities =array('urgent', 'high', 'medium', 'low');
+		$deployments = Deployment::where('user_id', Auth::id())->get();
         return View::make('site/ticket/reply', compact('mode', 'ticket', 'priorities', 'ticketComments', 'userList'));
 	}
 	
