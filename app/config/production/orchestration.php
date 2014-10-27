@@ -14,7 +14,7 @@
  
  
 return array(
-	'endpoint_ip'  		  => 'http://104.131.38.159:5000',
+	'endpoint_ip'  		  => 'https://engine.xdocker.io',
 	'register'	   		  => '/register',
 	'authenticate' 		  => '/authenticate',
 	'run' 		   		  => '/run',
@@ -22,6 +22,7 @@ return array(
 	'getDeploymentStatus' => '/getDeploymentStatus',
 	'getLog' 	   		  => '/getLog',
 	'uploadKey'    		  => '/uploadKey',
-	'downloadKey'  		  => '/downloadKey'
+	'downloadKey'  		  => '/downloadKey',
+	'removeUsername'  		  => '/removeUsername'
 	);
 

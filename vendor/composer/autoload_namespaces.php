@@ -54,4 +54,5 @@ return array(
     'Bllim\\Datatables' => array($vendorDir . '/bllim/datatables/src'),
     'Aws\\Laravel' => array($baseDir . '/src'),
     'Aws' => array($vendorDir . '/aws/aws-sdk-php/src'),
+    '' => array($vendorDir . '/stage1/docker-php/src'),
 );

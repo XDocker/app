@@ -75,11 +75,9 @@
 	    								<li class="divider"></li>
 	    								<li><a href="{{{ URL::to('deployment') }}}"><span class="glyphicon glyphicon-play-circle"></span> {{{ Lang::get('site.deployments') }}}</a></li>
 	    								<li class="divider"></li>
-	    								<li><a href="{{{ URL::to('awsPricing') }}}"><span class="glyphicon glyphicon-tags"></span> {{{ Lang::get('site.aws_pricing') }}}</a></li>
-	    								<li class="divider"></li>
 	    								<li><a href="{{{ URL::to('enginelog') }}}"><span class="glyphicon glyphicon-inbox"></span> {{{ Lang::get('site.enginelog') }}}</a></li>
 	    								<li class="divider"></li>
-	    								<li><a href="{{{ URL::to('ServiceStatus') }}}"><span class="glyphicon glyphicon-signal"></span> {{{ Lang::get('site.webserivce_status') }}}</a></li>
+	    								<li><a href="{{{ URL::to('ServiceStatus') }}}"><span class="glyphicon glyphicon-signal"></span> {{{ Lang::get('site.webservice_status') }}}</a></li>
 	    								
 	    							</ul>
 		                        </li>
@@ -118,7 +116,7 @@
 		    </a>
 			-->
 			<!-- Container -->
-			<div class="container clear-both">
+			<div class="container clear-both" style="margin-top: 3em;">
 				
 				<!-- Notifications -->
 				@include('notifications')
@@ -141,6 +139,7 @@
 		================================================== -->
         <script src="{{asset('bower_components/jquery/dist/jquery.min.js')}}"></script>
         <script src="{{asset('bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
+        <script src="{{asset('assets/js/jquery.fileDownload.js')}}"></script>
 
         @yield('scripts')
 

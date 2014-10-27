@@ -102,7 +102,21 @@ class AdminUsersController extends AdminController {
         //$user->permissions = $user->roles()->preparePermissionsForSave(Input::get( 'permissions' ));
 
         // Save if valid. Password field will be hashed before save
+        $this->user->engine_key = Hash::make(uniqid(mt_rand() , true));
         $this->user->save();
+		
+		  try {
+                // Register the user on the engine
+                $return = xDockerEngine::register(array(
+                    'username' => $this->user->username,
+                    'password' => $this->user->engine_key
+                ));
+				Log::info("Return Status : " . $return);
+				EngineLog::logIt(array('user_id' => $this->user->id, 'method' => 'admin:register', 'return' => $return));
+            }
+            catch(Exception $e) {
+            	Log::error('Error while registering the user!' . $e->getMessage());
+            }
 
         if ( $this->user->id )
         {
@@ -257,13 +271,33 @@ class AdminUsersController extends AdminController {
         AssignedRoles::where('user_id', $user->id)->delete();
 
         $id = $user->id;
-        $user->delete();
+		$username = $user->username;
+		
+		$responseJson = xDockerEngine::authenticate(array('username' => $user->username, 'password' => md5($user->engine_key)));
+		 EngineLog::logIt(array('user_id' => Auth::id(), 'method' => 'authenticate', 'return' => $responseJson));
+		 $obj = json_decode($responseJson);
+			
+		if(!empty($obj) && $obj->status == 'OK')
+		{
+			$response = xDockerEngine::removeUsername(array('token' => $obj->token));
+			Log::info('xDocker Engine user is deleted!');
+		}
+		if(!empty($obj) && $obj->status == 'error')
+	 	{
+			Log::error('xDocker Engine user deletion : Failed in authentication');
+		}
+		else
+		{
+			Log::error('xDocker Engine user deletion - Unexpected error');
+		}
+			
+		$user->delete();
 
         // Was the comment post deleted?
         $user = User::find($id);
         if ( empty($user) )
         {
-            // TODO needs to delete all of that user's content
+        	    // TODO needs to delete all of that user's content
             return Redirect::to('admin/users')->with('success', Lang::get('admin/users/messages.delete.success'));
         }
         else

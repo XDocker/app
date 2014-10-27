@@ -49,15 +49,22 @@ function terminate(url, instanceID, token)
 
 function downloadKey(url,instanceID, token)
 {
-	$.ajax({
+	/*$.ajax({
 	 type: "POST",
 	 url: url,
 	 data: { "instanceAction": "downloadKey", "instanceID": instanceID, "_token" : token}
 	 }).done(function(response) 
 	 {
 	 	console.log(response);
+	 	return response;
 		    //showMessage(response);
 	});
+	*/
+	$.fileDownload(url, { httpMethod : "POST", data: { 
+									"instanceID" : instanceID,
+									"_token" : token,
+								}
+						});
 	
 };
 

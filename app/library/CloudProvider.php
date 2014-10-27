@@ -40,7 +40,7 @@ class CloudProvider {
     
    public static function authenticate($account) 
 	{
-	 	return self::getDriver($account)->authenticate();
+		return self::getDriver($account)->authenticate();
     }
 	 
 	public static function getDriver($account)
@@ -54,12 +54,13 @@ class CloudProvider {
         }
 	}
 	 
-	public static function executeAction($instanceAction, $account, $deployment, $instanceID)
+	public static function executeAction($instanceAction, $account, $instanceID)
 	{
 		$response = '';
 		switch ($instanceAction)
 		{
 			case 'start' :
+				
 				$response = self::getDriver($account)->startInstances(array('DryRun' => false, 'InstanceIds' =>array($instanceID),  ));
 				break;
 			case 'stop' :
@@ -79,14 +80,16 @@ class CloudProvider {
 				$responseJson = xDockerEngine::authenticate(array('username' => Auth::user()->username, 'password' => md5(Auth::user()->engine_key)));
 		 		EngineLog::logIt(array('user_id' => Auth::id(), 'method' => 'authenticate-executeAction', 'return' => $responseJson));
 		 		$obj = json_decode($responseJson);
-				if(empty($deployment))
-				{
-					return array('status' => 'error', 'message'=> 'Not a valid executeAction without deplayment parameters!');
-				}
 				if(!empty($obj) && $obj->status == 'OK')
 		 		{
-		 			$parameters = json_decode($deployment->parameters);
-					$response = xDockerEngine::downloadKey(array('token' =>$obj->token, 'cloudProvider' => $account->cloudProvider, 'region' => $parameters->instanceRegion));
+		 			
+					$response = xDockerEngine::downloadKey(array('token' =>$obj->token, 'cloudProvider' => $account->cloudProvider, 'instanceRegion' => $account ->instanceRegion));
+					if(StringHelper::isJson($response)) 
+					{
+						$response = json_decode($response, true) ;
+						$response['message'] = 'Key is returned in field key';
+					}
+					else $response = array('status' => 'error', 'message' => 'Error occured while downloading keys');
 				}
 				if(!empty($obj) && $obj->status == 'error')
 		 		{
@@ -100,8 +103,9 @@ class CloudProvider {
 
 	public static function getState($cloudAccountId, $instanceID)
 	{
-		$account = CloudAccount::where('user_id', Auth::id())->findOrFail($cloudAccountId) ;
-		$data = self::executeAction('describeInstances', $account, '', $instanceID);
+		$account = CloudAccountHelper::findAndDecrypt($cloudAccountId);
+		
+		$data = self::executeAction('describeInstances', $account, $instanceID);
 		if($data['status'] == 'OK')
 		{
 			if(!empty($data['message']['Reservations'][0]['Instances'][0]['State']['Name']))

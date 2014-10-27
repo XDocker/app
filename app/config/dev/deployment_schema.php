@@ -48,14 +48,15 @@ return array(
             ),
             'event' => 'onchange="loadPrices(this)"'
         ),
-		 'parameters[ports]' => array(
+		 'parameters[sgPorts]' => array(
             'type' => 'string',
-            'title' => 'Ports',
+            'title' => 'Security Group Ports',
             'required' => false,
             'multiple' => true,
-            'default' => array('443','5000'),
+            'default' => array('80', '443','5000', '8080'),
             'enum' => array(
                 '443',
+                '80',
                 '5000',
                 '8080'
             )

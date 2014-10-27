@@ -31,6 +31,40 @@ class DeploymentController extends BaseController {
         $this->deployments = $deployments->where('deployments.user_id', Auth::id());
         $this->user = $user;
     }
+	
+	private function check($json = false)
+	{
+		if($json)
+		{
+			if(xDockerEngine::getDockerServiceStatus() == 'error')
+			{
+				Log::error(Lang::get('deployment/deployment.docker_service_down'));
+				print json_encode(array('status' => 'error', 'message' => Lang::get('deployment/deployment.docker_service_down')));
+				return;
+			}
+			if(xDockerEngine::getxDockerServiceStatus() == 'error')
+			{
+				Log::error(Lang::get('deployment/deployment.xdocker_service_down'));
+				print json_encode(array('status' => 'error', 'message' => Lang::get('deployment/deployment.xdocker_service_down')));
+				return;
+			}
+		}
+		else 
+		{
+			
+			if(xDockerEngine::getDockerServiceStatus() == 'error')
+			{
+				Log::error(Lang::get('deployment/deployment.docker_service_down'));
+				return Redirect::to('ServiceStatus')->with('error', Lang::get('deployment/deployment.docker_service_down'));
+			}
+				
+			if(xDockerEngine::getxDockerServiceStatus() == 'error')
+			{
+				Log::error(Lang::get('deployment/deployment.xdocker_service_down'));
+				return Redirect::to('ServiceStatus')->with('error', Lang::get('deployment/deployment.xdocker_service_down'));
+			}
+		}
+	}
     
     public function getIndex() {
         // Get all the user's deployment
@@ -40,6 +74,8 @@ class DeploymentController extends BaseController {
             if (empty($search_term)) {
                 $search_term = 'xdocker';
             }
+			
+			$this->check();
            
             $response = xDockerEngine::dockerHubGet($search_term);
             
@@ -58,6 +94,7 @@ class DeploymentController extends BaseController {
      *
      */
     public function getCreate($id = false) {
+    	$this->check();
         $mode = $id !== false ? 'edit' : 'create';
         $deployment = $id !== false ? Deployment::where('user_id', Auth::id())->findOrFail($id) : null;
         $cloud_account_ids = CloudAccount::where('user_id', Auth::id())->get();
@@ -78,6 +115,7 @@ class DeploymentController extends BaseController {
      *
      */
     public function postEdit($deployment = false) {
+    	$this->check();
         try {
             if (empty($deployment)) {
                 $deployment = new Deployment;
@@ -86,6 +124,16 @@ class DeploymentController extends BaseController {
             }
             $deployment->name = Input::get('name');
             $deployment->cloudAccountId = Input::get('cloudAccountId');
+			//Check if account credentials are valid
+			
+			$account = CloudAccountHelper::findAndDecrypt($deployment->cloudAccountId);
+			
+			if(!CloudProvider::authenticate($account))
+			{
+				Log::error('Failed to authenticate before deployment! '. json_encode($account) );
+				return Redirect::to('deployment/')->with('error', 'Failed to authenticate before deployment! '. $deployment->name);
+			}
+		
 			$params = Input::get('parameters');
 			//$params['instanceImage'] = Input::get('instanceImage');
 			$arr = explode(':', Input::get('instanceAmi'));
@@ -106,7 +154,7 @@ class DeploymentController extends BaseController {
 				if(!empty($obj) && $obj->status == 'OK')
 				{
 					$deployment -> token = $obj->token;
-					$this->prepare($user, $deployment);
+					$this->prepare($user, $account, $deployment);
 					$responseJson = xDockerEngine::run(json_decode($deployment->wsParams));
 					EngineLog::logIt(array('user_id' => Auth::id(), 'method' => 'run', 'return' => $responseJson));
 					$obj1 = json_decode($responseJson);
@@ -150,26 +198,25 @@ class DeploymentController extends BaseController {
             
         }
         catch(Exception $e) {
-        	Log::error('Error while saving deployment : '. $e->getMessage());
-            return Redirect::back()->with('error', $e->getMessage());
+			Log::error('Error while saving deployment : '. $e->getMessage());
+			return Redirect::back()->with('error', $e->getMessage());
         }
     }
 
-	private function prepare($user, & $deployment)
+	private function prepare($user, $account, & $deployment)
 	{
-		$account = CloudAccount::where('user_id', Auth::id())->findOrFail($deployment->cloudAccountId) ;
 		$credentials = json_decode($account->credentials);
 		$parameters = json_decode($deployment->parameters);
 		$dockerParams = xDockerEngine::getDockerParams($deployment -> docker_name);
-		if($dockerParams['env_keys'])
-		{
-			$keys = array('AWS_ACCESS_KEY_ID'     => $credentials ->apiKey,
-					      'AWS_SECRET_ACCESS_KEY' => $credentials ->secretKey,
-					      'BILLING_BUCKET'        => 
-					      				!empty($credentials ->billingBucket) ? $credentials ->billingBucket : '');
+		$rawApiKey = StringHelper::encrypt($credentials ->apiKey, md5(Auth::user()->username));
+		$rawSecretKey = StringHelper::encrypt($credentials ->secretKey, md5(Auth::user()->username));
 		
-			$dockerParams['env'] = array_merge($dockerParams['env'], $keys);
+		if(xDockerEngine::billingBucket($deployment -> docker_name) && empty($credentials ->billingBucket))
+		{
+			Log::error('error', 'Billing bucket is mandatory for '. $deployment -> docker_name);
+			return Redirect::to('account/'.$account->id.'/edit')->with('error', 'Billing bucket is mandatory for '. $deployment -> docker_name);			
 		}
+		
 		$secPolicy = xDockerEngine::securityPolicy($deployment -> docker_name) ;
 		if(!empty($secPolicy))
 		{
@@ -186,8 +233,8 @@ class DeploymentController extends BaseController {
                                         'token' => $deployment->token,
                                         'username' => $user->username,
                                         'cloudProvider' => $account ->cloudProvider,
-                                        'apiKey' => $credentials ->apiKey,
-                                        'secretKey' => $credentials ->secretKey,
+                                        'apiKey' => $rawApiKey,
+                                        'secretKey' => $rawSecretKey,
                                         'billingBucket' => !empty($credentials ->billingBucket) ? $credentials ->billingBucket : '' ,
                                         'instanceName' => $deployment->name,
                                         'instanceType' => $parameters->instanceType,
@@ -195,7 +242,9 @@ class DeploymentController extends BaseController {
                                         'instanceAmi' => $parameters->instanceAmi,
                                         'OS' => $parameters->OS,
                                         'packageName' => $deployment -> docker_name,
+                                        'sgPorts' => $parameters->sgPorts,
                                         'dockerParams' => $dockerParams,
+                                        'ipUI' => xDockerEngine::getIPAddress($deployment -> docker_name),
                                         $keys[0] => $secPolicy[$keys[0]]
 										)
                                       );	
@@ -210,6 +259,7 @@ class DeploymentController extends BaseController {
      */
     public function postDelete($id) 
     {
+    	$this->check();
     	$this->terminateInstance($id);
     	Deployment::where('id', $id)->where('user_id', Auth::id())->delete();
 		
@@ -226,8 +276,10 @@ class DeploymentController extends BaseController {
 
 	private function terminateInstance($id)
 	{
+		$this->check();
 		$deployment = Deployment::where('user_id', Auth::id())->find($id);
-		$account = CloudAccount::where('user_id', Auth::id())->findOrFail($deployment->cloudAccountId) ;
+		$account = CloudAccountHelper::findAndDecrypt($deployment->cloudAccountId);
+				
 		$instanceId =  Input::get('instanceID');
 		Log::error('Terminating Instance :'. $instanceId);
 		$response = $this->executeAction(Input::get('instanceAction'), $account, $deployment, $instanceId);
@@ -238,6 +290,7 @@ class DeploymentController extends BaseController {
 	
 	public function checkStatus($id)
 	{
+		$this->check();
 		$deployment = Deployment::where('user_id', Auth::id())-> whereNotIn('status', array('Completed'))->find($id);
 		if(empty($deployment))
 		{
@@ -294,6 +347,7 @@ class DeploymentController extends BaseController {
 
 	public function getLogs($id)
 	{
+		$this->check();
 		$deployment = Deployment::where('user_id', Auth::id())->find($id);
 		
 		if(!empty($deployment) && isset($deployment->job_id))
@@ -304,7 +358,7 @@ class DeploymentController extends BaseController {
 			
 			if(!empty($obj) && $obj->status == 'OK')
 		 	{
-				$response = xDockerEngine::getLog(array('token' => $obj->token, 'job_id' => $deployment->job_id, "line_num"> 10));
+				$response = xDockerEngine::getLog(array('token' => $obj->token, 'job_id' => $deployment->job_id, "line_num" => 10));
 				return View::make('site/deployment/logs', array(
             	'response' => $response,
             	'deployment' => $deployment));
@@ -319,14 +373,18 @@ class DeploymentController extends BaseController {
 					return Redirect::to('ServiceStatus')->with('error', 'Backend API is down, please try again later!');
 				}
 		}
+		else if(empty($deployment)) {
+			 return Redirect::to('deployment')->with('info', 'No deployments found! ' );
+		}
 		else {
-			 return Redirect::to('deployment')->with('info', 'No Log found '. isset($deployment->name) ? $deployment->name : '' );
+			 return Redirect::to('deployment')->with('info', 'No logs found! ' );
 		}
 		
 	}
 	
 	public function postInstanceAction($id)
 	{
+		$this->check(true);
 		$instanceAction = Input::get('instanceAction');
 		$instanceID 	= Input::get('instanceID');
 		$deployment 	= Deployment::where('user_id', Auth::id())->find($id);
@@ -361,7 +419,30 @@ class DeploymentController extends BaseController {
 	{
 		$param 			= json_decode($deployment->parameters);
 		$account -> instanceRegion =  $param->instanceRegion;
-		return CloudProvider::executeAction($instanceAction, $account, $deployment, $instanceID);
+		return CloudProvider::executeAction($instanceAction, $account, $instanceID);
+	}
+	
+	public function getDownloadKey($id)
+	{
+		$this->check(true);
+		$instanceID 	= Input::get('instanceID');
+		$deployment 	= Deployment::where('user_id', Auth::id())->find($id);
+		$account 		= CloudAccount::where('user_id', Auth::id())->findOrFail($deployment->cloudAccountId) ;
+		
+		$arr = $this->executeAction('downloadKey', $account, $deployment, $instanceID);
+		
+		if($arr['status'] == 'OK')
+		{
+			header('Content-Description: File Transfer');
+			header('Content-Type: ' . 'application/x-pem-file');
+			header('Content-Disposition: attachment; filename=' . $arr['keyName'] . '.pem');
+			header('Content-Transfer-Encoding: binary');
+			header('Expires: 0');
+			header('Cache-Control: must-revalidate');
+			header('Pragma: public');
+			header('Content-Length: ' . strlen($arr['key']));
+			print $arr['key'];
+		}
 	}
 	
 	public function getImages()

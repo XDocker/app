@@ -1,6 +1,9 @@
 <?php namespace Fbf\LaravelNewsletterSignup;
 
+
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
+
+
 class Signup extends \Eloquent {
 
 	use SoftDeletingTrait;

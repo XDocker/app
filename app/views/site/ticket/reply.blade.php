@@ -36,6 +36,16 @@
 		</div>
 		
 		<div class="form-group {{{ $errors->has('email') ? 'error' : '' }}}">
+			<label class="col-md-2 control-label" for="email">Deployment </label>
+			<div class="col-md-6">
+				<select class="form-control" name="deploymentId" id="deploymentId" readonly>
+					@foreach ($deployments as $key )
+						<option value="{{$key->id}}" {{{ Input::old('deploymentId', isset($ticket->deploymentId) && ($ticket->deploymentId == $key->id) ? 'selected="selected"' : '') }}}>{{{ $key ->name}}}</option>
+					@endforeach
+				</select>
+			</div>
+		</div>
+		<div class="form-group {{{ $errors->has('email') ? 'error' : '' }}}">
 			<label class="col-md-2 control-label" for="email">Priority </label>
 			<div class="col-md-6">
 				<select class="form-control" name="priority" id="priority" readonly>
@@ -45,6 +55,8 @@
 				</select>
 			</div>
 		</div>
+		
+		
 		
 		<div class="form-group {{{ $errors->has('description') ? 'has-error' : '' }}}">
 			<label class="col-md-2 control-label" for="email">Comment <font color="red">*</font></label>

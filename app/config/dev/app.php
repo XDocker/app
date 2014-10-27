@@ -65,7 +65,7 @@ return array(
 	|
 	*/
 
-	'key' => 'YourSecretKey!!!',
+	'key' => '741952hheeyy66#c',
 
 	'cipher' => MCRYPT_RIJNDAEL_128,	
 
