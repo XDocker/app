@@ -14,7 +14,7 @@
  
  
 return array(
-	'endpoint_ip'  		  => 'http://engine.xdocker.io:5000',
+	'endpoint_ip'  		  => 'https://engine.xdocker.io',
 	'register'	   		  => '/register',
 	'authenticate' 		  => '/authenticate',
 	'run' 		   		  => '/run',
