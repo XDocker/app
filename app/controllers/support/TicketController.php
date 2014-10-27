@@ -81,7 +81,8 @@ class TicketController extends BaseController {
             $ticket->description = Input::get('description');
             $ticket->active = 1;
 			$ticket->priority = Input::get('priority');
-			$ticket->deploymentId = Input::get('deploymentId');
+			$deploymentId = Input::get('deploymentId');
+			$ticket->deploymentId = empty($deploymentId) ? 0 : $deploymentId;
             $ticket->user_id = Auth::id(); // logged in user id
             
              $success = $ticket->save();
