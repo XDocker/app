@@ -62,7 +62,8 @@ class TicketController extends BaseController {
         $mode = $ticket !== false ? 'edit' : 'create';
         $ticket = $ticket !== false ? Ticket::where('user_id', Auth::id())->findOrFail($ticket->id) : null;
 		$priorities =array('urgent', 'high', 'medium', 'low');
-        return View::make('site/ticket/create_edit', compact('mode', 'ticket', 'priorities'));
+		$deployments = Deployment::where('user_id', Auth::id())->get();
+        return View::make('site/ticket/create_edit', compact('mode', 'ticket', 'priorities', 'deployments'));
     }
     /**
      * Saves/Edits an account
@@ -80,6 +81,7 @@ class TicketController extends BaseController {
             $ticket->description = Input::get('description');
             $ticket->active = 1;
 			$ticket->priority = Input::get('priority');
+			$ticket->deploymentId = Input::get('deploymentId');
             $ticket->user_id = Auth::id(); // logged in user id
             
              $success = $ticket->save();
