@@ -30,7 +30,7 @@ return array(
     'enginelog' => 'Request Logs',
     'aws_pricing' => 'AWS Prices',
     'admin_panel' => 'Admin Panel',
-    'name'=>'xDocker',
+    'name'=>'xDocker (β)',
     'tagline'=>'Deploy & manage docker images on any IaaS/On-Premise',
     'title'=>'Deploy & manage docker images on any IaaS/On-Premise',
     'footertitle' => 'Powered By Xervmon',

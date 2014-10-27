@@ -122,3 +122,15 @@ Route::filter('detectLang',  function($route, $request, $lang = 'auto')
         App::setLocale($userLang);
     }
 });
+
+/** Uncomment on production
+App::before(function($request)
+{
+    if( ! Request::secure())
+    {
+        return Redirect::secure(Request::path());
+    }
+});
+ **/
+ */
+
