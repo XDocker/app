@@ -3,6 +3,7 @@
 return array(
 	'signup' => array(
 		'success' => 'You have been subscribed',
+		'already_subscribed_success' => 'You have already been subscribed',
 		'success_restored' => 'You have been resubscribed',
 		'submit' => 'Subscribe',
 		'validation' => array(
