@@ -14,7 +14,7 @@ return array(
    									 						 'tag' => 'v1',
    									 						'env' => array('host' => '{host}', 
    									 				  		'cmd' => '/home/ubuntu/securitymonkey.sh',),),
-   									 				  		'ipUI' => '104.131.14.172',
+   									 				  		'ipUI' => '104.131.68.5',
    									 'protocol' 		=> 'https://',
    									 'securityPolicy'   => array('amazonIAM' 
    									 								=> array(
@@ -49,7 +49,7 @@ return array(
 												     				   'AWS_SECRET_ACCESS_KEY' => '{AWS_SECRET_ACCESS_KEY}',
 												      				   'BILLING_BUCKET'        => '{BILLING_BUCKET}',
    								  					 				'cmd' => ''),),
-   								  					 'ipUI' => '104.131.14.172',
+   								  					 'ipUI' => '104.131.68.5',
    								  'logo' => 'placeholder.jpg', 'protocol' => 'http://',  
    								  'append' => ':8080/ice',
    								  'securityPolicy' =>  '',
