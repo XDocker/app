@@ -196,5 +196,7 @@ return array(
     ),
 
     'available_language' => array('en', 'pt', 'es'),
+    
+	'app_environment' => 'dev'
 
 );
