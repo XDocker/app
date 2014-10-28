@@ -37,7 +37,7 @@ class AdminDeploymentsController extends AdminController {
     public function getIndex()
     {
         // Title
-        $title = Lang::get('admin/deployments/title.account_management');
+        $title = Lang::get('admin/deployments/title.deployment_management');
 
         // Grab all the blog posts
         $deployments = $this->deployment;
@@ -54,7 +54,7 @@ class AdminDeploymentsController extends AdminController {
     public function getData()
     {
     	$deployments = Deployment::select(array('deployments.id', 'deployments.name', 'cloudAccounts.name as AcctName', 'cloudAccounts.cloudProvider', 'users.username', 'users.email', 'cloudAccounts.created_at'))
-					->join('users', 'users.id', '=', 'cloudAccounts.user_id')
+					->join('users', 'users.id', '=', 'deployments.user_id')
 					->join('cloudAccounts', 'cloudAccounts.id', '=', 'deployments.cloudAccountId');
 
         return Datatables::of($deployments)
