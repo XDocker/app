@@ -58,7 +58,7 @@ class AdminAccountsController extends AdminController {
 
         return Datatables::of($accounts)
 
-		// ->remove_column('id')
+		->remove_column('id')
 
         ->make();
     }
