@@ -53,7 +53,8 @@ class AdminAccountsController extends AdminController {
      */
     public function getData()
     {
-    	$accounts = CloudAccount::select(array('cloudAccounts.id', 'cloudAccounts.name', 'cloudAccounts.cloudProvider', 'cloudAccounts.created_at'));
+    	$accounts = CloudAccount::select(array('cloudAccounts.id', 'cloudAccounts.name', 'cloudAccounts.cloudProvider', 'users.username', 'users.email', 'cloudAccounts.created_at'))
+					->join('users', 'users.id', '=', 'cloudAccounts.user_id');
 
         return Datatables::of($accounts)
 

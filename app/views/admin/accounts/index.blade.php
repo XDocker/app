@@ -24,6 +24,8 @@
 				<th class="col-md-4">{{{ Lang::get('admin/accounts/table.id') }}}</th>
 				<th class="col-md-4">{{{ Lang::get('admin/accounts/table.name') }}}</th>
 				<th class="col-md-4">{{{ Lang::get('admin/accounts/table.cloudProvider') }}}</th>
+				<th class="col-md-4">{{{ Lang::get('admin/accounts/table.username') }}}</th>
+				<th class="col-md-4">{{{ Lang::get('admin/accounts/table.email') }}}</th>
 				<th class="col-md-2">{{{ Lang::get('admin/accounts/table.created_at') }}}</th>
 			</tr>
 		</thead>
