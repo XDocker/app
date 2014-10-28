@@ -7,7 +7,7 @@
  * Classes list:
  * - AdminAccountController extends BaseController
  */
-class AdminAccountController extends AdminController {
+class AdminAccountsController extends AdminController {
     /**
      * CloudAccount Model
      * @var accounts
