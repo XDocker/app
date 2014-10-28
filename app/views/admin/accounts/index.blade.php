@@ -21,6 +21,7 @@
 	<table id="accounts" class="table table-striped table-hover">
 		<thead>
 			<tr>
+				<th class="col-md-4">{{{ Lang::get('admin/accounts/table.id') }}}</th>
 				<th class="col-md-4">{{{ Lang::get('admin/accounts/table.name') }}}</th>
 				<th class="col-md-4">{{{ Lang::get('admin/accounts/table.cloudProvider') }}}</th>
 				<th class="col-md-2">{{{ Lang::get('admin/accounts/table.created_at') }}}</th>
