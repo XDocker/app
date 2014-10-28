@@ -40,7 +40,7 @@ class AdminDeploymentsController extends AdminController {
         $title = Lang::get('admin/deployments/title.account_management');
 
         // Grab all the blog posts
-        $deployments = $this->deployments;
+        $deployments = $this->deployment;
 
         // Show the page
         return View::make('admin/deployments/index', compact('deployments', 'title'));
