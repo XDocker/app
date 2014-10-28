@@ -6,8 +6,9 @@ return array(
 	'name'      => 'name',
 	'cloudProvider'      => 'CloudProvider',
 	'credentials'      => 'Credentials',
-	'username' => 'Username',
-	'email' => 'Email',
+	'created_by_username' => 'Created By Username',
+	'created_by_email' => 'Created By Email',
+	
 	'created_at' => 'Created at',
 	'post_id' => 'Account Id',
 
