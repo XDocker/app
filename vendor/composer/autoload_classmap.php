@@ -16,6 +16,7 @@ return array(
     'AdminCommentsController' => $baseDir . '/app/controllers/admin/AdminCommentsController.php',
     'AdminController' => $baseDir . '/app/controllers/AdminController.php',
     'AdminDashboardController' => $baseDir . '/app/controllers/admin/AdminDashboardController.php',
+    'AdminDeploymentsController' => $baseDir . '/app/controllers/admin/AdminDeploymentsController.php',
     'AdminRolesController' => $baseDir . '/app/controllers/admin/AdminRolesController.php',
     'AdminSubscribersController' => $baseDir . '/app/controllers/admin/AdminSubscribersController.php',
     'AdminTicketsController' => $baseDir . '/app/controllers/admin/AdminTicketsController.php',
