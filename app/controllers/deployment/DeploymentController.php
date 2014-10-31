@@ -173,15 +173,18 @@ class DeploymentController extends BaseController {
 					}
 					else if(!empty($obj1) && $obj1->status == 'error')
 					{
-						Log::error('Failed during deployment!'. $obj1->message);
-						return Redirect::to('deployment')->with('error', 'Failed during deployment!'. $obj1->message);
+						Log::error('Failed during deployment!'. $obj1->fail_message);
+						Log::error('Log :' . implode(' ', $obj2->job_log));
+            			return Redirect::to('deployment')->with('error', 'Failed during deployment!'. $obj1->fail_message);
 					}
 					return Redirect::to('deployment')->with('success', Lang::get('deployment/deployment.deployment_updated'));
 	            }
 				else if(!empty($obj) && $obj->status == 'error')
 				{
-					Log::error('Failed to authenticate before deployment!'. $obj->message);
-					return Redirect::to('deployment')->with('error', 'Failed to authenticate before deployment!'. $obj->message);
+					Log::error('Failed to authenticate before deployment!'.$obj2->fail_code .':'. $obj->fail_message);
+					Log::error('Log :' . implode(' ', $obj2->job_log));
+            
+					return Redirect::to('deployment')->with('error', 'Failed to authenticate before deployment!'. $obj->fail_message);
 				}
 				else
 				{
@@ -326,7 +329,9 @@ class DeploymentController extends BaseController {
 			else  if(!empty($obj2) && $obj2->status == 'error')
 			 {
 				 // There was a problem deleting the user
-	            return Redirect::to('deployment')->with('error', $obj2->message );
+				 Log::error('Request to deploy failed :' . $obj2->fail_code . ':' . $obj2->fail_message);
+				 Log::error('Log :' . implode(' ', $obj2->job_log));
+	            return Redirect::to('deployment')->with('error', $obj2->fail_message );
 			 }	
 			else
 			{
@@ -337,7 +342,9 @@ class DeploymentController extends BaseController {
 		 else if(!empty($obj) && $obj->status == 'error')
 		 {
 			 // There was a problem deleting the user
-            return Redirect::to('deployment')->with('error', $obj->message );
+			Log::error('Request to deploy failed :' . $obj2->fail_code . ':' . $obj2->fail_message);
+			Log::error('Log :' . implode(' ', $obj2->job_log));
+            return Redirect::to('deployment')->with('error', $obj->fail_message );
 		 }	
 		 else
 		 {
@@ -366,7 +373,9 @@ class DeploymentController extends BaseController {
 			}
 			else if(!empty($obj) && $obj->status == 'error')
 			{
-				 return Redirect::to('deployment')->with('error', $obj->message );
+				Log::error('Request to deploy failed :' . $obj2->fail_code . ':' . $obj2->fail_message);
+				Log::error('Log :' . implode(' ', $obj2->job_log));
+            	return Redirect::to('deployment')->with('error', $obj->fail_message );
 			}
 			else
 				{
@@ -408,8 +417,7 @@ class DeploymentController extends BaseController {
 		}
 		else if($arr['status'] == 'error')
 		{
-			Log::error('Error occured - while submitting '. $instanceAction .' request');
-					//return Redirect::to('deployment')->with('error', 'Error while submitting  '.$instanceAction .'request ' );
+			Log::error('Error occured - while submitting :'.$instanceAction);
 			print json_encode(array('status' => 'error', 'message' => 'Error while submitting '.$instanceAction .' request ' ));
 		}
 		
