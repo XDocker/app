@@ -163,13 +163,11 @@ class DeploymentController extends BaseController {
 						$deployment -> job_id = $obj1->job_id;
 						$deployment -> status = Lang::get('deployment/deployment.status');
 						unset($deployment -> token );
-						 //$deployment->status = $status;
-		            	$success = $deployment->save();
+						$success = $deployment->save();
 		            	if (!$success) {
 		            		Log::error('Error while saving deployment : '.json_encode( $deployment->errors()));
 							return Redirect::to('deployment')->with('error', 'Error saving deployment!' );
-		                //throw new Exception($deployment->errors());
-						}
+		                }
 					}
 					else if(!empty($obj1) && $obj1->status == 'error')
 					{
@@ -263,7 +261,6 @@ class DeploymentController extends BaseController {
     public function postDelete($id) 
     {
     	$this->check();
-    	$this->terminateInstance($id);
     	Deployment::where('id', $id)->where('user_id', Auth::id())->delete();
 		
         // Was the comment post deleted?
@@ -277,7 +274,7 @@ class DeploymentController extends BaseController {
         }
     }
 
-	private function terminateInstance($id)
+	private function postTerminate($id)
 	{
 		$this->check();
 		$deployment = Deployment::where('user_id', Auth::id())->find($id);
@@ -286,8 +283,8 @@ class DeploymentController extends BaseController {
 		$instanceId =  Input::get('instanceID');
 		Log::error('Terminating Instance :'. $instanceId);
 		$response = $this->executeAction(Input::get('instanceAction'), $account, $deployment, $instanceId);
-		if($response['status'] == 'OK') return TRUE;
-		else return FALSE;
+		if($response['status'] == 'OK') return Redirect::to('/')->with('success', 'Instance Terminated Successfully!');
+		else return Redirect::to('/')->with('error', 'Error while terminating the instance!');;
 			
 	}
 	
