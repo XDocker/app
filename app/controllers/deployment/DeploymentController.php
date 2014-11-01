@@ -438,6 +438,7 @@ class DeploymentController extends BaseController {
 		
 		if($arr['status'] == 'OK')
 		{
+			$key = StringHelper::decrypt($arr['key'], md5(Auth::user()->username));
 			header('Content-Description: File Transfer');
 			header('Content-Type: ' . 'application/x-pem-file');
 			header('Content-Disposition: attachment; filename=' . $arr['keyName'] . '.pem');
@@ -445,8 +446,8 @@ class DeploymentController extends BaseController {
 			header('Expires: 0');
 			header('Cache-Control: must-revalidate');
 			header('Pragma: public');
-			header('Content-Length: ' . strlen($arr['key']));
-			print $arr['key'];
+			header('Content-Length: ' . strlen($key));
+			print $key;
 		}
 	}
 	
