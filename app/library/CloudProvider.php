@@ -91,10 +91,15 @@ class CloudProvider {
 					}
 					else $response = array('status' => 'error', 'message' => 'Error occured while downloading keys');
 				}
-				if(!empty($obj) && $obj->status == 'error')
+				else if(!empty($obj) && $obj->status == 'error')
 		 		{
 					Log::error('Error occured while downloading key' . $obj->message);
 					$response = array('status' => $obj->status, 'message' => 'Unexpected error! Contact Support' );
+				}
+				else
+		 		{
+					Log::error('Error occured while downloading key');
+					$response = array('status' => 'error', 'message' => 'Unexpected error! Contact Support' );
 				}
 				break;
 		}
