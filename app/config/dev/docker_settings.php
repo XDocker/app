@@ -65,7 +65,7 @@ return array(
    								  					    			   
    								  					 				'cmd' => ''),),
    								  					 'ipUI' => '104.131.14.172',
-   								  'logo' => 'sketchy.jpg', 'protocol' => 'https://',  
+   								  'logo' => 'sketchy.jpeg', 'protocol' => 'https://',  
    								  'append' => '/eager?url=https://www.xdocker.io&type=sketch',
    								  'securityPolicy' =>  '',
    								  'documentationUrl' => 'https://github.com/Netflix/sketchy',
