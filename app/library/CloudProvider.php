@@ -82,8 +82,8 @@ class CloudProvider {
 		 		$obj = json_decode($responseJson);
 				if(!empty($obj) && $obj->status == 'OK')
 		 		{
-		 			
-					$response = xDockerEngine::downloadKey(array('token' =>$obj->token, 'cloudProvider' => $account->cloudProvider, 'instanceRegion' => $account ->instanceRegion));
+		 			$response = xDockerEngine::downloadKey(array('token' =>$obj->token, 'cloudProvider' => $account->cloudProvider, 'instanceRegion' => $account ->instanceRegion));
+					Log::info('downloadKey Json:'.$response);
 					if(StringHelper::isJson($response)) 
 					{
 						$response = json_decode($response, true) ;
