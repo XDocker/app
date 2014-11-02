@@ -12,9 +12,9 @@
   	<div class="col-md-12">
   		<h4>What to expect?</h4>
   		<p>
-		While our roadmap items are defined by our xdocker users, the following are a gist of items that we would cover in next few releses.
+		While our roadmap items will be defined by our xdocker users, the following are a gist of items that we would cover in next few releses.
 		<ul>
-			<li>MultiCloud Deployment & Management</li>
+			<li>Multi Cloud Deployment & Management</li>
 			<li>Multi Container Deployment & Management</li>
 			<li>Application Container (logs, process etc.,) monitoring</li>
 			<li>Custom application dockerization, workflows & Automation</li>
