@@ -123,23 +123,14 @@ Route::filter('detectLang',  function($route, $request, $lang = 'auto')
     }
 });
 
-
+/** Uncomment on production
 App::before(function($request)
 {
-	$settings = Config::get('app');
-	if($settings['app_environment'] == 'production')
-	{
-    	if( ! Request::secure())
-    	{
-        	return Redirect::secure(Request::path());
-    	}
-	}
-	else {
-		{
-			return Redirect::to(Request::path());
-		}
-	}
+    if( ! Request::secure())
+    {
+        return Redirect::secure(Request::path());
+    }
 });
- 
+ **/
 
 
