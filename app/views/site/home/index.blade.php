@@ -62,7 +62,7 @@
         </div>
        <div class="text-center">
        	 <!-- You can move inline styles to css file or css block. -->
-       	 <p><h4> Ready to be deployed now on Amazon AWS</h4></p>
+       	 <p><h4><font color="3399FF">Ready to be deployed now on Amazon AWS</font></h4></p>
 	    <div id="slider1_container" style="position: relative; top: 0px; center: 0px; width: 980px; height: 100px; overflow: hidden; ">
 	
 	        <!-- Loading Screen -->
