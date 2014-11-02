@@ -1,16 +1,18 @@
 <?php
 
 
-/*
- * @app.route("/authenticate", methods=["POST"])
-@app.route("/register", methods=["POST"])
-@app.route("/run", methods=["POST"])
-@app.route("/instance", methods=["POST"])
-@app.route("/getDeploymentStatus/<job_id>", methods=["POST"])
-@app.route("/getLog/<job_id>", methods=["POST"])
-@app.route("/uploadKey", methods=["POST"])
-@app.route("/downloadKey", methods=["POST"])
- */
+/**
+ * 
+ *	@app.route("/authenticate", methods=["POST"])
+ *  @app.route("/register", methods=["POST"])
+ *	@app.route("/run", methods=["POST"])
+ *	@app.route("/instance", methods=["POST"])
+ *	@app.route("/getDeploymentStatus/<job_id>", methods=["POST"])
+ *	@app.route("/getLog/<job_id>", methods=["POST"])
+ *	@app.route("/uploadKey", methods=["POST"])
+ *	@app.route("/downloadKey", methods=["POST"])
+ 
+ * */
  
  
 return array(
