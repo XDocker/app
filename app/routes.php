@@ -135,10 +135,10 @@ Route::get('data-security', function () {
     return View::make('site/data-security');
 });
 
-Route::when('pledge', 'detectLang');
-Route::get('pledge', function () {
+Route::when('devops', 'detectLang');
+Route::get('devops', function () {
     // Return about us page
-    return View::make('site/pledge');
+    return View::make('site/devops');
 });
 
 /* We don't use the default blog stuff
