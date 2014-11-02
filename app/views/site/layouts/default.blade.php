@@ -61,7 +61,11 @@
 	                </div>
 	                <div class="collapse navbar-collapse navbar-ex1-collapse" id="navbar-collapse-target">
 	                	<ul class="nav navbar-nav">
-	                		
+	                		<li class="dropdown">
+		                        	<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+	    								<span class="glyphicon glyphicon-lock"></span> {{{ Lang::get('site.data_security') }}}	<span class="caret"></span>
+	    							</a>
+	    					</li>
 	                	</ul>	
 	                    <ul class="nav navbar-nav pull-right">
 	                        @if (Auth::check())
