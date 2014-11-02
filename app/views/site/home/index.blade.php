@@ -82,10 +82,7 @@
 						<div><img u="image" alt="{{ $instance -> name }}" src="{{ asset('/assets/img/providers/'.xDockerEngine::getLogo($instance -> name)) }}" /></div>
 	            	@endif
 	            @endforeach
-	            <div><img u="image" alt="Netflix ICE" src="{{{ asset('assets/img/providers/ice.png') }}}" /></div>
-	            <div><img u="image" alt="Netflix Asgard" src="{{{ asset('assets/img/providers/asgard_logo.png') }}}" /></div>
-	            <div><img u="image" alt="Netflix SecurityMonkey" src="{{{ asset('assets/img/providers/securitymonkeyHead.png') }}}" /></div>
-	            <div><img u="image" alt="Netflix SecurityMonkey" src="{{{ asset('assets/img/providers/sketchy.jpeg') }}}" /></div>
+	           
 	        </div>
      	</div>
        </div>
