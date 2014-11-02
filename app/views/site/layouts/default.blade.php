@@ -60,6 +60,9 @@
 	                    <a class="navbar-brand" href="{{{ URL::to('/') }}}"><img class="img-responsive" src="{{{ asset('assets/img/logo.png') }}}"></a>  
 	                </div>
 	                <div class="collapse navbar-collapse navbar-ex1-collapse" id="navbar-collapse-target">
+	                	<ul class="nav navbar-nav">
+	                		
+	                	</ul>	
 	                    <ul class="nav navbar-nav pull-right">
 	                        @if (Auth::check())
 		                        @if (Auth::user()->hasRole('admin'))
