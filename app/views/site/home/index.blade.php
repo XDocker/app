@@ -62,7 +62,6 @@
         </div>
        <div class="text-center">
        	@include('laravel-newsletter-signup::signup')
-       	@include('site.jsPartial')
        	
        	 <!-- You can move inline styles to css file or css block. -->
 	    <div id="slider1_container" style="position: relative; top: 0px; left: 0px; width: 980px; height: 100px; overflow: hidden; ">
