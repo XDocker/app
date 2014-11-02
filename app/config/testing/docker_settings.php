@@ -50,7 +50,7 @@ return array(
 												      				   'BILLING_BUCKET'        => '{BILLING_BUCKET}',
    								  					 				'cmd' => ''),),
    								  					 'ipUI' => '104.131.14.172',
-   								  'logo' => 'placeholder.jpg', 'protocol' => 'http://',  
+   								  'logo' => 'ice.png', 'protocol' => 'http://',  
    								  'append' => ':8080/ice',
    								  'securityPolicy' =>  '',
    								  'documentationUrl' => 'https://github.com/Netflix/ice',
@@ -68,7 +68,7 @@ return array(
    								  'logo' => 'sketchy.jpeg', 'protocol' => 'https://',  
    								  'append' => '/eager?url=https://www.xdocker.io&type=sketch',
    								  'securityPolicy' =>  '',
-   								  'documentationUrl' => 'https://github.com/Netflix/sketchy',
+   								  'documentationUrl' => 'https://github.com/Netflix/sketchy/wiki',
    								  'enabled' => TRUE,'billingBucket' => FALSE,),
    								  
    	 'xdocker/asgard' => array('displayName' => 'Netflix Asgard',
@@ -85,7 +85,7 @@ return array(
    								  'logo' => 'asgard_logo.png', 'protocol' => 'https://',  
    								  'append' => '',
    								  'securityPolicy' =>  '',
-   								  'documentationUrl' => 'https://github.com/Netflix/asgard',
+   								  'documentationUrl' => 'https://github.com/Netflix/asgard/wiki',
    								  'enabled' => TRUE,'billingBucket' => FALSE,),
    								  
    'stefobark/sphinxdocker' => array('displayName' => 'Sphinx', 
