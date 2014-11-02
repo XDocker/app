@@ -14,7 +14,7 @@ return array(
    									 						 'tag' => 'v1',
    									 						'env' => array('host' => '{host}', 
    									 				  		'cmd' => '/home/ubuntu/securitymonkey.sh',),),
-   									 				  		'ipUI' => '104.131.14.172',
+   									 				  		'ipUI' => '104.131.68.5',
    									 'protocol' 		=> 'https://',
    									 'securityPolicy'   => array('amazonIAM' 
    									 								=> array(
@@ -49,7 +49,7 @@ return array(
 												     				   'AWS_SECRET_ACCESS_KEY' => '{AWS_SECRET_ACCESS_KEY}',
 												      				   'BILLING_BUCKET'        => '{BILLING_BUCKET}',
    								  					 				'cmd' => ''),),
-   								  					 'ipUI' => '104.131.14.172',
+   								  					 'ipUI' => '104.131.68.5',
    								  'logo' => 'ice.png', 'protocol' => 'http://',  
    								  'append' => ':8080/ice',
    								  'securityPolicy' =>  '',
@@ -64,7 +64,7 @@ return array(
    								  					    'env' => array('host' => '{host}',
    								  					    			   
    								  					 				'cmd' => ''),),
-   								  					 'ipUI' => '104.131.14.172',
+   								  					 'ipUI' => '104.131.68.5',
    								  'logo' => 'sketchy.jpeg', 'protocol' => 'https://',  
    								  'append' => '/eager?url=https://www.xdocker.io&type=sketch',
    								  'securityPolicy' =>  '',
@@ -81,7 +81,7 @@ return array(
 												     				   'AWS_SECRET_ACCESS_KEY' => '{AWS_SECRET_ACCESS_KEY}',
 												      				   'AWS_ACCOUNT_ID'        => '{AWS_ACCOUNT_ID}',
    								  					 				'cmd' => ''),),
-   								  					 'ipUI' => '104.131.14.172',
+   								  					 'ipUI' => '104.131.68.5',
    								  'logo' => 'asgard_logo.png', 'protocol' => 'https://',  
    								  'append' => '',
    								  'securityPolicy' =>  '',
