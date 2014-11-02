@@ -127,7 +127,7 @@ Route::filter('detectLang',  function($route, $request, $lang = 'auto')
 App::before(function($request)
 {
 	$settings = Config::get('app');
-	if($app['app_environment'] == 'production')
+	if($settings['app_environment'] == 'production')
 	{
     	if( ! Request::secure())
     	{
