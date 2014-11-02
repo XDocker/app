@@ -50,7 +50,7 @@ return array(
 												      				   'BILLING_BUCKET'        => '{BILLING_BUCKET}',
    								  					 				'cmd' => ''),),
    								  					 'ipUI' => '104.131.14.172',
-   								  'logo' => 'placeholder.jpg', 'protocol' => 'http://',  
+   								  'logo' => 'ice.png', 'protocol' => 'http://',  
    								  'append' => ':8080/ice',
    								  'securityPolicy' =>  '',
    								  'documentationUrl' => 'https://github.com/Netflix/ice',
