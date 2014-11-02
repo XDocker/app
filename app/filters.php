@@ -123,14 +123,20 @@ Route::filter('detectLang',  function($route, $request, $lang = 'auto')
     }
 });
 
-/** Uncomment on production
+/** 
+ * Enforce https.
+ */
 App::before(function($request)
 {
-    if( ! Request::secure())
-    {
-        return Redirect::secure(Request::path());
-    }
+	$settings = Config::get('app');
+	if($settings['app_environment'] == 'production')
+	{
+    	if( ! Request::secure())
+    	{
+        	return Redirect::secure(Request::path());
+    	}
+	}
 });
- **/
+
 
 
