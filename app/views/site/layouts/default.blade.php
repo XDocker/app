@@ -61,7 +61,7 @@
 	                </div>
 	                <div class="collapse navbar-collapse navbar-ex1-collapse" id="navbar-collapse-target">
 	                	<ul class="nav navbar-nav">
-	                		<li class="active"><a href="{{{ URL::to('data-security') }}}"><span class="glyphicon glyphicon-lock"></span> {{{ Lang::get('site.data_security') }}}</a></li>
+	                		<li {{ (Request::is('data-security') ? ' class="active"' : '') }}><span class="glyphicon glyphicon-lock"></span> {{{ Lang::get('site.data_security') }}}</a></li>
     				
 	                	</ul>	
 	                    <ul class="nav navbar-nav pull-right">
