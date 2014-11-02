@@ -135,6 +135,12 @@ Route::get('data-security', function () {
     return View::make('site/data-security');
 });
 
+Route::when('pledge', 'detectLang');
+Route::get('pledge', function () {
+    // Return about us page
+    return View::make('site/pledge');
+});
+
 /* We don't use the default blog stuff
 # Posts - Second to last set, match slug
 Route::get('{postSlug}', 'BlogController@getView');
