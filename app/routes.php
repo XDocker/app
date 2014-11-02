@@ -129,8 +129,8 @@ Route::get('contact-us', function () {
     // Return about us page
     return View::make('site/contact-us');
 });
-
-Route::get('Data-Security', function () {
+Route::when('data-security', 'detectLang');
+Route::get('data-security', function () {
     // Return about us page
     return View::make('site/data-security');
 });
