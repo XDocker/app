@@ -9,6 +9,17 @@
 @section('content')
 <h4>{{{ Lang::get('site.devops') }}}</h4>
 <div class="row">
+	<div class="col-md-12">
+  		<h4>Support</h4>
+  		<p>
+		 The popular open source solutions listed and deployed on your favorite cloud provider can be supported by our team.
+		 We offer flexible support packages to support 99.9999 availability of your cloud foundation solutions.
+		 We leverage <a href="https://www.xervmon.com">Xervmon Platform</a> to support and monitor the services, there by delivering
+		 better quality of service at extremely affordable costs.
+		</p>
+		<p>Call us today on (800) 813-1315 or <a href="mailto:xdockersupport@xervmon.com">email us </a> with your questions in relation to our assessment packages and how a review can help your security and cost savings. </p>
+		
+	</div>
   	<div class="col-md-12">
   		<h4>Devops Readiness Package</h4>
   		<p>
