@@ -134,6 +134,11 @@ App::before(function($request)
         	return Redirect::secure(Request::path());
     	}
 	}
+	else {
+		{
+			return Request::path();
+		}
+	}
 });
  
 
