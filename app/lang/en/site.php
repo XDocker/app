@@ -45,5 +45,6 @@ return array(
 But when you are vetting a service, as to how it looks and works, you may need to manually set up the service through multiple steps.',
 	'data_security' => 'Data Security',
 	'roadmap' => 'Roadmap',
+	'pledge' => 'Pledge',
 	'devops' => 'DevOps'
 );
