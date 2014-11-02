@@ -79,7 +79,7 @@
 	        <div u="slides" style="cursor: move; position: absolute; center: 0px; top: 0px; width: 980px; height: 100px; overflow: hidden;">
 	            @foreach($dockerInstances as $instance)
 					@if(xDockerEngine::enabled($instance->name))
-						<div><img u="image" alt="{{ $instance -> name }}" src="{{ asset('/assets/img/providers/'.xDockerEngine::getLogo($instance -> name)) }}" /></div>
+						<div><img u="image" title="{{ $instance -> name }}" alt="{{ $instance -> name }}" src="{{ asset('/assets/img/providers/'.xDockerEngine::getLogo($instance -> name)) }}" /></div>
 	            	@endif
 	            @endforeach
 	           
