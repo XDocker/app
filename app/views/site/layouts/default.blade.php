@@ -142,7 +142,7 @@
         <script src="{{asset('assets/js/jquery-plugins/jquery.fileDownload.js')}}"></script>
         <script src="{{asset('assets/js/jquery-plugins/jssor.js')}}"></script>
         <script src="{{asset('assets/js/jquery-plugins/jssor.slider.mini.js')}}"></script>
-		@include('site.home.jsPartial')
+        <script src="{{asset('assets/js/jquery-plugins/prettify.js')}}"></script>
         @yield('scripts')
 	</body>
 </html>
