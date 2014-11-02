@@ -123,11 +123,18 @@ Route::controller('user', 'UserController');
 
 # Filter for detect language
 Route::when('contact-us', 'detectLang');
+
 # Contact Us Static Page
 Route::get('contact-us', function () {
     // Return about us page
     return View::make('site/contact-us');
 });
+
+Route::get('Data-Security', function () {
+    // Return about us page
+    return View::make('site/data-security');
+});
+
 /* We don't use the default blog stuff
 # Posts - Second to last set, match slug
 Route::get('{postSlug}', 'BlogController@getView');
@@ -160,10 +167,9 @@ Route::group(array(
 	Route::any('deployment/{deployment}/downloadKey', 'DeploymentController@getDownloadKey');
 	Route::any('deployment/{deployment}/refresh', 'DeploymentController@checkStatus');
 	
-	 Route::any('awsPricing/', 'AWSPricingController@getIndex'); 
+	Route::any('awsPricing/', 'AWSPricingController@getIndex'); 
 	
-    // Route::get('deployment/{id}/edit/', 'DeploymentController@getCreate');
-    Route::group(array(
+	Route::group(array(
         'before' => 'csrf'
     ) , function () {
         Route::post('account/create', 'AccountController@postEdit');
