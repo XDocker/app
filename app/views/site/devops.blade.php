@@ -27,14 +27,15 @@
 	</div>
 	
 	<div class="col-md-12">
-  		<h4>Docker Assessment Package</h4>
-  		<strong>Is Docker Right For Your Business Needs?</strong>
+  		<h4>Docker for DevOps, CI & CD</h4>
+  		<strong>Is Docker Right for your deeds?</strong>
 		<p>
 		‘Docker’ is getting a lot of interest from enterprises and small businesses looking to improve their cloud service management. This container-based virtualization approach builds on Linux Container technology to facilitate enhanced application portability across platforms. 
 		</p>
 		<p>
 			Docker containers are also lightweight, which means that unlike virtual machines, they do not have to run on an underlying operating system.
-			Our use of the Docker systems presents opportunities for our clients to operate more efficiently.  However, many businesses are still not fully aware of how or when to use it. We have experience in implementing Docker, in testing and benchmarking.  We understand the best applications for Docker, and it’s limits for offering cloud IT solutions.
+			We specialize in implementing docker based solutions for companies of all shapes and sizes. 
+			Our use of the Docker for building <a href="https://www.xDocker.io">this site</a> presents opportunities for companies to leverage our open source docker solution for docker deployment and management across hybrid Cloud footprint eco system.
 		</p>
 		<p>
 			We can demonstrate the benefits in terms of developer workflows to improve testing in the local dev environment, reduce the time needed to maintain that environment, and ease tasks, such as re-creating and sharing that environment.
