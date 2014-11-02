@@ -71,15 +71,17 @@
 	            <div style="filter: alpha(opacity=70); opacity:0.7; position: absolute; display: block;
 	                background-color: #000; top: 0px; left: 0px;width: 100%;height:100%;">
 	            </div>
-	            <div style="position: absolute; display: block; background: url(../img/loading.gif) no-repeat center center;
+	            <div style="position: absolute; display: block; background: url({{{ asset('assets/img/loading.gif') }}}) no-repeat center center;
 	                top: 0px; left: 0px;width: 100%;height:100%;">
 	            </div>
 	        </div>
 	
 	        <!-- Slides Container -->
 	        <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 980px; height: 100px; overflow: hidden;">
-	            <div><img u="image" alt="amazon" src="../img/logo/amazon.jpg" /></div>
-	            <div><img u="image" alt="android" src="../img/logo/android.jpg" /></div>
+	            <div><img u="image" alt="Netflix ICE" src="{{{ asset('assets/img/providers/ice.png') }}}" /></div>
+	            <div><img u="image" alt="Netflix Asgard" src="{{{ asset('assets/img/providers/asgard_logo.png') }}}" /></div>
+	            <div><img u="image" alt="Netflix SecurityMonkey" src="{{{ asset('assets/img/providers/securitymonkeyHead.png') }}}" /></div>
+	            <div><img u="image" alt="Netflix SecurityMonkey" src="{{{ asset('assets/img/providers/sketchy.jpeg') }}}" /></div>
 	        </div>
      	</div>
        </div>
