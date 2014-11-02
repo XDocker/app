@@ -39,6 +39,8 @@
 		</p>
 		<p>
 			We can not only demonstrate, but also quote customer's use cases and the benefits in terms of developer workflows to improve testing in the local dev environment, reduce the time needed to maintain that environment, and ease tasks, such as re-creating and sharing that environment.
+		</p>
+		<p>	
 			To find out more about how Docker can support your development team, call us today on (800) 813-1315 or <a href="mailto:xdockersupport@xervmon.com">email us </a> with your questions in relation to our assessment packages and how a review can help your security and cost savings. 
 		</p>
 		

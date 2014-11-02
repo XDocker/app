@@ -129,6 +129,13 @@ Route::get('contact-us', function () {
     // Return about us page
     return View::make('site/contact-us');
 });
+
+Route::when('roadmap', 'detectLang');
+Route::get('roadmap', function () {
+    // Return about us page
+    return View::make('site/roadmap');
+});
+
 Route::when('data-security', 'detectLang');
 Route::get('data-security', function () {
     // Return about us page
