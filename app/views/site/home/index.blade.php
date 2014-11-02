@@ -76,6 +76,8 @@
 	
 	        <!-- Slides Container -->
 	        <div u="slides" style="cursor: move; position: absolute; center: 0px; top: 0px; width: 980px; height: 100px; overflow: hidden;">
+	            <div><img u="image" alt="Amazon" src="{{{ asset('assets/img/providers/aws-big.jpg') }}}" /></div>
+	            <div><img u="image" alt="Docker" src="{{{ asset('assets/img/providers/docker.jpg') }}}" /></div>
 	            <div><img u="image" alt="Netflix ICE" src="{{{ asset('assets/img/providers/ice.png') }}}" /></div>
 	            <div><img u="image" alt="Netflix Asgard" src="{{{ asset('assets/img/providers/asgard_logo.png') }}}" /></div>
 	            <div><img u="image" alt="Netflix SecurityMonkey" src="{{{ asset('assets/img/providers/securitymonkeyHead.png') }}}" /></div>
