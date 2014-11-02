@@ -62,10 +62,10 @@
         </div>
        <div class="text-center">
        	 <!-- You can move inline styles to css file or css block. -->
-	    <div id="slider1_container" style="position: relative; top: 0px; left: 0px; width: 980px; height: 100px; overflow: hidden; ">
+	    <div id="slider1_container" style="position: relative; top: 0px; center: 0px; width: 980px; height: 100px; overflow: hidden; ">
 	
 	        <!-- Loading Screen -->
-	        <div u="loading" style="position: absolute; top: 0px; left: 0px;">
+	        <div u="loading" style="position: absolute; top: 0px; center: 0px;">
 	            <div style="filter: alpha(opacity=70); opacity:0.7; position: absolute; display: block;
 	                background-color: #000; top: 0px; left: 0px;width: 100%;height:100%;">
 	            </div>
@@ -75,7 +75,7 @@
 	        </div>
 	
 	        <!-- Slides Container -->
-	        <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 980px; height: 100px; overflow: hidden;">
+	        <div u="slides" style="cursor: move; position: absolute; center: 0px; top: 0px; width: 980px; height: 100px; overflow: hidden;">
 	            <div><img u="image" alt="Netflix ICE" src="{{{ asset('assets/img/providers/ice.png') }}}" /></div>
 	            <div><img u="image" alt="Netflix Asgard" src="{{{ asset('assets/img/providers/asgard_logo.png') }}}" /></div>
 	            <div><img u="image" alt="Netflix SecurityMonkey" src="{{{ asset('assets/img/providers/securitymonkeyHead.png') }}}" /></div>
