@@ -62,7 +62,7 @@
 	                <div class="collapse navbar-collapse navbar-ex1-collapse" id="navbar-collapse-target">
 	                	<ul class="nav navbar-nav">
 	                		<li{{ (Request::is('data-security') ? ' class="active"' : '') }}><a href="{{{ URL::to('data-security') }}}"><span class="glyphicon glyphicon-lock"></span> {{{ Lang::get('site.data_security') }}}</a></li>
-    						<li{{ (Request::is('roadmap') ? ' class="active"' : '') }}><a href="{{{ URL::to('devops') }}}"><span class="glyphicon glyphicon-list-alt"></span> {{{ Lang::get('site.roadmap') }}}</a></li>
+    						<li{{ (Request::is('roadmap') ? ' class="active"' : '') }}><a href="{{{ URL::to('roadmap') }}}"><span class="glyphicon glyphicon-list-alt"></span> {{{ Lang::get('site.roadmap') }}}</a></li>
 	                		<li{{ (Request::is('devops') ? ' class="active"' : '') }}><a href="{{{ URL::to('devops') }}}"><span class="glyphicon glyphicon-plane"></span> {{{ Lang::get('site.devops') }}}</a></li>
 					
 	                	</ul>	
