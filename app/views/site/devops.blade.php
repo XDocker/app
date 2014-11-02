@@ -17,7 +17,10 @@
 		 We leverage <a href="https://www.xervmon.com">Xervmon Platform</a> to support and monitor the services, there by delivering
 		 better quality of service at extremely affordable costs.
 		</p>
-		<p>Call us today on (800) 813-1315 or <a href="mailto:xdockersupport@xervmon.com">email us </a> with your questions in relation to our assessment packages and how a review can help your security and cost savings. </p>
+		<p>
+			Our team can also dockerize custom applications, implement custom CI/CD workflows, manage, audit and monitor them.
+		</p>
+		<p>Call us today on (800) 813-1315 or <a href="mailto:xdockersupport@xervmon.com">email us </a> with your questions in relation to our support packages. </p>
 		
 	</div>
   	<div class="col-md-12">
