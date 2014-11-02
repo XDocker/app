@@ -18,7 +18,7 @@
   		<p>
 		<strong>Secure Data Centers</strong><br/>
 		At xDocker we store our data with some of the most reputable data centers on the market today, such as Amazon AWS. These data centers are both certified with ISO/IEC 27001:2005, SAS70 Type II compliance as well as the PCI DSS Level 1 compliance.
-		If you want to find out more about the security practices at these data centers read, <a href="http://aws.amazon.com/security/">read here</a> for AWS.
+		If you want to find out more about the security practices at these data centers <a href="http://aws.amazon.com/security/">read here</a> for AWS.
 		</p>
 	</div>
 	
