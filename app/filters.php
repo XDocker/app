@@ -136,7 +136,7 @@ App::before(function($request)
 	}
 	else {
 		{
-			return Request::path();
+			return Redirect::to(Request::path());
 		}
 	}
 });
