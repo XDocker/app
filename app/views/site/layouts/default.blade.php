@@ -139,13 +139,10 @@
 		================================================== -->
         <script src="{{asset('bower_components/jquery/dist/jquery.min.js')}}"></script>
         <script src="{{asset('bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
-        <script src="{{asset('assets/js/jquery.fileDownload.js')}}"></script>
+        <script src="{{asset('assets/js/jquery-plugins/jquery.fileDownload.js')}}"></script>
+        <script src="{{asset('assets/js/jquery-plugins/jssor.js')}}"></script>
+        <script src="{{asset('assets/js/jquery-plugins/jssor.slider.mini.js')}}"></script>
 
         @yield('scripts')
-
-        {{-- Load SumoMe for the marketing stuff --}}
-        <!--
-        <script src="//load.sumome.com/" data-sumo-site-id="d9c34610bfb1f1b8f5c8cbfdce3a831f7e81aac9ef616668be06e0ffed04f25b" async></script>
-		-->
 	</body>
 </html>
