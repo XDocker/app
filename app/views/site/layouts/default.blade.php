@@ -93,7 +93,7 @@
 	    								<span class="glyphicon glyphicon-hand-up"></span> {{{ Lang::get('site.support') }}}	<span class="caret"></span>
 	    							</a>
 	    							<ul class="dropdown-menu">
-	    								<li><a href="{{{ URL::to('ticket') }}}"><span class="glyphicon glyphicon-exclamation-sign"></span> {{{ Lang::get('site.tickets') }}}</a></li>
+	    								<li><a href="{{{ URL::to('ticket') }}}"><span class="glyphicon glyphicon-question-sign"></span> {{{ Lang::get('site.tickets') }}}</a></li>
 	    							</ul>
 	    						</li>
 		                        <li class="dropdown">
