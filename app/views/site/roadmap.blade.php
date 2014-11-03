@@ -14,6 +14,7 @@
   		<p>
 		While our roadmap items will be defined by our xdocker service users, the following are a gist of items that we would cover in next few releses.
 		<ul>
+			<li>Collaborate and Integrate with Docker eco system</li>
 			<li>Multi Cloud Deployment & Management</li>
 			<li>Multi Container Deployment & Management</li>
 			<li>Application Container (logs, process etc.,) monitoring</li>
