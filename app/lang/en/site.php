@@ -46,5 +46,6 @@ But when you are vetting a service, as to how it looks and works, you may need t
 	'data_security' => 'Data Security',
 	'roadmap' => 'Roadmap',
 	'pledge' => 'Pledge',
+	'videos' => 'Videos',
 	'devops' => 'DevOps'
 );
