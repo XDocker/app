@@ -10,7 +10,7 @@
 <h4>{{{ Lang::get('site.roadmap') }}}</h4>
 <div class="row">
   	<div class="col-md-12">
-  		<h4>What to expect?</h4>
+  		<h4>Quick walk through</h4>
   		<p>
 		<iframe src="//www.youtube.com/embed/JVRZrhHBHFU" width="700" height="480" frameborder="0"></iframe>
 
