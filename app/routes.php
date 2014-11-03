@@ -127,25 +127,31 @@ Route::when('contact-us', 'detectLang');
 # Contact Us Static Page
 Route::get('contact-us', function () {
     // Return about us page
-    return View::make('site/contact-us');
+    return View::make('site/static/contact-us');
 });
 
 Route::when('roadmap', 'detectLang');
 Route::get('roadmap', function () {
     // Return about us page
-    return View::make('site/roadmap');
+    return View::make('site/static/roadmap');
 });
 
 Route::when('data-security', 'detectLang');
 Route::get('data-security', function () {
     // Return about us page
-    return View::make('site/data-security');
+    return View::make('site/static/data-security');
 });
 
 Route::when('devops', 'detectLang');
 Route::get('devops', function () {
     // Return about us page
-    return View::make('site/devops');
+    return View::make('site/static/devops');
+});
+
+Route::when('videos', 'detectLang');
+Route::get('videos', function () {
+    // Return about us page
+    return View::make('site/static/videos');
 });
 
 /* We don't use the default blog stuff
