@@ -13,7 +13,7 @@
   		<h4>Support</h4>
   		<p>
 		 The popular open source solutions listed and deployed on your favorite cloud provider can be supported by our team.
-		 We offer flexible support packages to support 99.9999 availability of your cloud foundation solutions.
+		 We offer flexible packages to support 99.9999 availability of your cloud foundation solutions.
 		 We leverage <a href="https://www.xervmon.com">Xervmon Platform</a> to support and monitor the services, there by delivering
 		 better quality of service at extremely affordable costs.
 		</p>
