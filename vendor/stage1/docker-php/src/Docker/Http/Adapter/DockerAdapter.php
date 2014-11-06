@@ -2,8 +2,10 @@
 
 namespace Docker\Http\Adapter;
 
+use Docker\Exception\APIException;
 use Docker\Http\Stream\AttachStream;
 use Docker\Http\Stream\ChunkedStream;
+
 use GuzzleHttp\Adapter\AdapterInterface;
 use GuzzleHttp\Adapter\TransactionInterface;
 use GuzzleHttp\Event\RequestEvents;
@@ -11,10 +13,9 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Message\MessageFactoryInterface;
 use GuzzleHttp\Message\RequestInterface;
 use GuzzleHttp\Message\Response;
-use GuzzleHttp\Message\ResponseInterface;
 use GuzzleHttp\Stream\Stream;
 
-class DockerAdapter implements  AdapterInterface
+class DockerAdapter implements AdapterInterface
 {
     const CHUNK_SIZE = 8192;
 
@@ -28,6 +29,8 @@ class DockerAdapter implements  AdapterInterface
     {
         $this->entrypoint     = $entrypoint;
         $this->messageFactory = $messageFactory;
+
+        stream_filter_register('chunk', '\Docker\Http\Stream\Filter\Chunk');
     }
 
     /**
@@ -49,13 +52,21 @@ class DockerAdapter implements  AdapterInterface
             $transaction->getRequest()->setHeader('Connection', 'close');
         }
 
-        RequestEvents::emitBefore($transaction);
-        if (!$transaction->getResponse()) {
-            $this->createResponse($transaction);
-            RequestEvents::emitComplete($transaction);
-        }
+        try {
+            RequestEvents::emitBefore($transaction);
+            if (!$transaction->getResponse()) {
+                $this->createResponse($transaction);
+                RequestEvents::emitComplete($transaction);
+            }
 
-        return $transaction->getResponse();
+            return $transaction->getResponse();
+        } catch (RequestException $e) {
+            if ($e->hasResponse()) {
+                throw new APIException($e->getResponse()->getBody()->__toString(), $e->getRequest(), $e->getResponse(), $e);
+            }
+
+            throw $e;
+        }
     }
 
     private function createResponse(TransactionInterface $transaction)
@@ -81,21 +92,20 @@ class DockerAdapter implements  AdapterInterface
 
         // Write body if set
         if ($request->getBody() !== null) {
-            if ($request->getConfig()['stream']) {
-                $stream = $request->getBody();
+            $stream = $request->getBody();
+            $filter = null;
 
-                while (!$stream->eof()) {
-                    $read = $stream->read(self::CHUNK_SIZE);
-                    $frame = dechex(mb_strlen($read))."\r\n".$read."\r\n";
+            if ($request->getHeader('Transfer-Encoding') == 'chunked') {
+                $filter = stream_filter_prepend($socket, 'chunk', STREAM_FILTER_WRITE);
+            }
 
-                    fwrite($socket, $frame);
-                }
+            while (!$stream->eof()) {
+                fwrite($socket, $stream->read(self::CHUNK_SIZE));
+            }
 
-                $stream->close();
-
+            if ($request->getHeader('Transfer-Encoding') == 'chunked') {
+                stream_filter_remove($filter);
                 fwrite($socket, "0\r\n\r\n");
-            } else {
-                fwrite($socket, $request->getBody()->__toString());
             }
         }
 
