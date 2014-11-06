@@ -1,13 +1,13 @@
 @extends('site.layouts.default')
 {{-- Web site Title --}}
 @section('title')
-{{{ Lang::get('site.roadmap') }}} ::
+{{{ Lang::get('site.videos') }}} ::
 @parent
 @stop
 
 {{-- Content --}}
 @section('content')
-<h4>{{{ Lang::get('site.roadmap') }}}</h4>
+<h4>{{{ Lang::get('site.videos') }}}</h4>
 <div class="row">
   	<div class="col-md-12">
   		<h4>Quick walk through</h4>
