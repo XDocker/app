@@ -246,7 +246,10 @@ class DeploymentController extends BaseController {
                                         'sgPorts' => $parameters->sgPorts,
                                         'dockerParams' => $dockerParams,
                                         'ipUI' => xDockerEngine::getIPAddress($deployment -> docker_name),
-                                        $keys[0] => $secPolicy[$keys[0]]
+                                        $keys[0] => $secPolicy[$keys[0]],
+                                        'app_username' => 'admin',
+                                        'app_psw' => '$apr1$p.Cq/vDM$A7ncQHYxQ5cqC3M2RXomE1'
+                                        
 										)
                                       );	
 		  				
