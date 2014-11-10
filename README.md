@@ -15,3 +15,6 @@ Installation
   php artisan db:seed
   
 ```
+Get In Touch
+===
+We are available to assist with questions, custom installations, directory integrations or deployments, self-hosted installations, and professional consulting. Please open an issue with your question or contact support for assistance.
