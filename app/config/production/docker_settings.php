@@ -75,7 +75,7 @@ return array(
    								  'docker_url' => 'https://registry.hub.docker.com/u/xdocker/asgard/', 
    								  'sgPorts' => array(80, 443, 5000, 8080),
    								  'dockerParams' => array('ports' => array(80, 443, 5000, 8080),
-   								  					    'tag' => 'v1',
+   								  					    'tag' => 'v2',
    								  					    'env' => array('host' => '{host}',
    								  					    			   'AWS_ACCESS_KEY_ID'     => '{AWS_ACCESS_KEY_ID}',
 												     				   'AWS_SECRET_ACCESS_KEY' => '{AWS_SECRET_ACCESS_KEY}',
