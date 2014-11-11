@@ -39,7 +39,7 @@
 								<input type="hidden" name="instanceAction" value="delete" />
 								<input type="hidden" name="instanceID" value="{{{ $result->instance_id }}}" />
 								<!-- ./ csrf token -->
-								<button type="submit" class="btn btn-danger pull-right" role="button"><span class="glyphicon glyphicon-remove"></span></button>
+								<button alt="Deletes the deployment record and not the instance from your AWS account." title="Deletes the deployment record and not the instance from your AWS account." type="submit" class="btn btn-danger pull-right" role="button"><span class="glyphicon glyphicon-remove"></span></button>
 							</form>
 							<form class="pull-right" method="post" action="{{ URL::to('deployment/' . $deployment->id . '/terminate') }}">
 								<!-- CSRF Token -->
@@ -47,7 +47,7 @@
 								<input type="hidden" name="instanceAction" value="terminate" />
 								<input type="hidden" name="instanceID" value="{{{ $result->instance_id }}}" />
 								<!-- ./ csrf token -->
-								<button type="submit" class="btn btn-danger pull-right" role="button"><span class="glyphicon glyphicon-trash"></span></button>
+								<button alt="Terminates the Instance from your AWS account." title="Terminates the Instance from your AWS account." type="submit" class="btn btn-danger pull-right" role="button"><span class="glyphicon glyphicon-trash"></span></button>
 							</form>
 							<div class="media-body">
 								
