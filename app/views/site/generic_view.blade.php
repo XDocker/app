@@ -36,10 +36,18 @@
 							<form class="pull-right" method="post" action="{{ URL::to('deployment/' . $deployment->id . '/delete') }}">
 								<!-- CSRF Token -->
 								<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
-								<input type="hidden" name="instanceAction" value="terminate" />
+								<input type="hidden" name="instanceAction" value="delete" />
 								<input type="hidden" name="instanceID" value="{{{ $result->instance_id }}}" />
 								<!-- ./ csrf token -->
 								<button type="submit" class="btn btn-danger pull-right" role="button"><span class="glyphicon glyphicon-remove"></span></button>
+							</form>
+							<form class="pull-right" method="post" action="{{ URL::to('deployment/' . $deployment->id . '/terminate') }}">
+								<!-- CSRF Token -->
+								<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
+								<input type="hidden" name="instanceAction" value="terminate" />
+								<input type="hidden" name="instanceID" value="{{{ $result->instance_id }}}" />
+								<!-- ./ csrf token -->
+								<button type="submit" class="btn btn-danger pull-right" role="button"><span class="glyphicon glyphicon-trash"></span></button>
 							</form>
 							<div class="media-body">
 								
@@ -91,6 +99,11 @@
 								<p>
 									
 									<span title="Status">{{ UIHelper::getLabel($deployment->status) }}</span>
+									<h4>Legend:</h4>
+									<br/>
+									<span class="glyphicon glyphicon-remove"></span> Deletes the deployment record and not the instance from your AWS account.
+									<span class="glyphicon glyphicon-trash"></span> Terminates the Instance from your AWS account.
+									
 								</p>
 							</div>
 						</div>
