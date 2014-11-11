@@ -39,7 +39,7 @@
 								<input type="hidden" name="instanceAction" value="terminate" />
 								<input type="hidden" name="instanceID" value="{{{ $result->instance_id }}}" />
 								<!-- ./ csrf token -->
-								<button type="submit" class="btn btn-danger pull-right" role="button"><span class="glyphicon glyphicon-trash"></span></button>
+								<button type="submit" class="btn btn-danger pull-right" role="button"><span class="glyphicon glyphicon-remove"></span></button>
 							</form>
 							<div class="media-body">
 								
