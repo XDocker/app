@@ -99,11 +99,6 @@
 								<p>
 									
 									<span title="Status">{{ UIHelper::getLabel($deployment->status) }}</span>
-									<h4>Legend:</h4>
-									
-									<button type="submit" class="btn btn-danger pull-right" role="button"><span class="glyphicon glyphicon-remove"></span> Deletes the deployment record and not the instance from your AWS account.
-									<br/>
-									<button type="submit" class="btn btn-danger pull-right" role="button"><span class="glyphicon glyphicon-trash"></span> Terminates the Instance from your AWS account.
 									
 								</p>
 							</div>
