@@ -229,6 +229,11 @@ class DeploymentController extends BaseController {
 		}
 		$keys = !empty($secPolicy) ? array_keys($secPolicy) : '';
 		
+		$userArr = array( 'app_username' => 'admin', 'app_psw' => '$apr1$p.Cq/vDM$A7ncQHYxQ5cqC3M2RXomE1');
+		
+		$env= $dockerParams['env'];
+		$dockerParams['env'] = array_merge($env, $userArr);
+		
 		$deployment->wsParams = json_encode(
                                     array (
                                         'token' => $deployment->token,
@@ -246,11 +251,8 @@ class DeploymentController extends BaseController {
                                         'sgPorts' => $parameters->sgPorts,
                                         'dockerParams' => $dockerParams,
                                         'ipUI' => xDockerEngine::getIPAddress($deployment -> docker_name),
-                                        $keys[0] => $secPolicy[$keys[0]],
-                                        'app_username' => 'admin',
-                                        'app_psw' => '$apr1$p.Cq/vDM$A7ncQHYxQ5cqC3M2RXomE1'
-                                        
-										)
+                                        $keys[0] => $secPolicy[$keys[0]]
+                                       )
                                       );	
 		  				
 	}
