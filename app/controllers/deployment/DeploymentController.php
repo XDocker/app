@@ -279,7 +279,7 @@ class DeploymentController extends BaseController {
         }
     }
 
-	private function postTerminate($id)
+	public function postTerminate($id)
 	{
 		$this->check();
 		$deployment = Deployment::where('user_id', Auth::id())->find($id);
