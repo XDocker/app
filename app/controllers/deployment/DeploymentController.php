@@ -234,7 +234,7 @@ class DeploymentController extends BaseController {
 			if(empty($parameters->app_username) || empty($parameters->app_username))
 			{
 				Log::error('App Username/Password are required fields for ' . $deployment -> docker_name);
-				return Redirect::back()->with('error', $e->getMessage());
+				return Redirect::back()->with('error', 'App Username/Password are required fields for ' . $deployment -> docker_name);
 			}
 		}
 		$userArr = array( 'app_username' => $parameters->app_username, 'app_psw' => $parameters->app_psw);
