@@ -64,13 +64,12 @@ return array(
         'parameters[app_username]' => array(
             'type' => 'string',
             'title' => 'App Username',
-            'required' => true
+            'required' => FALSE
         ) ,
         'parameters[app_psw]' => array(
             'type' => 'auto_generate',
             'title' => 'App Password',
-            'required' => true,
-            'value' => StringHelper::gen_uuid()
+            'required' => FALSE
         ) ,
     ) ,
     

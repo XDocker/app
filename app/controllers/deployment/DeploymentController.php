@@ -229,7 +229,15 @@ class DeploymentController extends BaseController {
 		}
 		$keys = !empty($secPolicy) ? array_keys($secPolicy) : '';
 		
-		$userArr = array( 'app_username' => 'admin', 'app_psw' => '$apr1$p.Cq/vDM$A7ncQHYxQ5cqC3M2RXomE1');
+		if(xDockerEngine::isAppCredEanbled($deployment -> docker_name))
+		{
+			if(empty($parameters->app_username) || empty($parameters->app_username))
+			{
+				Log::error('App Username/Password are required fields for ' . $deployment -> docker_name);
+				return Redirect::back()->with('error', $e->getMessage());
+			}
+		}
+		$userArr = array( 'app_username' => $parameters->app_username, 'app_psw' => $parameters->app_psw);
 		
 		$env= $dockerParams['env'];
 		$dockerParams['env'] = array_merge($env, $userArr);

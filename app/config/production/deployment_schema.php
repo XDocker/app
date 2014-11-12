@@ -60,7 +60,17 @@ return array(
                 '5000',
                 '8080'
             )
-        )
+        ),
+        'parameters[app_username]' => array(
+            'type' => 'string',
+            'title' => 'App Username',
+            'required' => FALSE
+        ) ,
+        'parameters[app_psw]' => array(
+            'type' => 'auto_generate',
+            'title' => 'App Password',
+            'required' => FALSE
+        ) ,
     ) ,
     
 	

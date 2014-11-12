@@ -212,4 +212,10 @@ class xDockerEngine {
 		return $status;
 	}
 	
+	public static function isAppCredEanbled($dockerName)
+	{
+		$settings = Config::get('docker_settings');
+		return isset($settings[$dockerName]) ? $settings[$dockerName]['appCredEnabled'] : FALSE;
+	}
+	
 }

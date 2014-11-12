@@ -36,7 +36,7 @@ return array(
    									 'append' => '',
    									 'billingBucket' => FALSE,
    									 'documentationUrl' => 'http://securitymonkey.readthedocs.org/en/latest/quickstart1.html#adding-an-account-in-the-web-ui',
-									 'enabled' => TRUE),
+									 'enabled' => TRUE,  'appCredEnabled' => FALSE),
    									 
 									 //"dockerParams": {"ports": [443, 5000], "env": {}, "tag": "v1",
    'xdocker/netflix_ice' => array('displayName' => 'Netflix ICE',
@@ -54,7 +54,7 @@ return array(
    								  'append' => '/ice/dashboard/summary',
    								  'securityPolicy' =>  '',
    								  'documentationUrl' => 'https://github.com/Netflix/ice',
-   								  'enabled' => TRUE,'billingBucket' => TRUE,),
+   								  'enabled' => TRUE,'billingBucket' => TRUE, 'appCredEnabled' => TRUE),
    								  
     'xdocker/sketchy' => array('displayName' => 'Netflix Sketchy',
    								  'docker_url' => 'https://registry.hub.docker.com/u/xdocker/sketchy/', 
@@ -69,7 +69,7 @@ return array(
    								  'append' => '/eager?url=https://www.xdocker.io&type=sketch',
    								  'securityPolicy' =>  '',
    								  'documentationUrl' => 'https://github.com/Netflix/sketchy/wiki',
-   								  'enabled' => TRUE,'billingBucket' => FALSE,),
+   								  'enabled' => TRUE,'billingBucket' => FALSE,  'appCredEnabled' => FALSE),
    								  
    	 'xdocker/asgard' => array('displayName' => 'Netflix Asgard',
    								  'docker_url' => 'https://registry.hub.docker.com/u/xdocker/asgard/', 
@@ -86,7 +86,7 @@ return array(
    								  'append' => '',
    								  'securityPolicy' =>  '',
    								  'documentationUrl' => 'https://github.com/Netflix/asgard/wiki',
-   								  'enabled' => TRUE,'billingBucket' => FALSE,),
+   								  'enabled' => TRUE, 'billingBucket' => FALSE,  'appCredEnabled' => TRUE),
    								  
    'stefobark/sphinxdocker' => array('displayName' => 'Sphinx', 
    									 'docker_url' => 'https://registry.hub.docker.com/u/xdocker/securitymonkey/',
