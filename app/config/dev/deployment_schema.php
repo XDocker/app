@@ -67,7 +67,7 @@ return array(
             'required' => true
         ) ,
         'parameters[app_psw]' => array(
-            'type' => 'string',
+            'type' => 'auto_generate',
             'title' => 'App Password',
             'required' => true,
             'value' => StringHelper::gen_uuid()
