@@ -51,7 +51,7 @@ return array(
    								  					 				'cmd' => ''),),
    								  					 'ipUI' => '104.131.68.5',
    								  'logo' => 'ice.png', 'protocol' => 'http://',  
-   								  'append' => ':8080/ice',
+   								  'append' => '/ice/dashboard/summary',
    								  'securityPolicy' =>  '',
    								  'documentationUrl' => 'https://github.com/Netflix/ice',
    								  'enabled' => TRUE,'billingBucket' => TRUE,),
