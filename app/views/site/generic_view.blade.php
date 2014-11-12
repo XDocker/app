@@ -47,7 +47,7 @@
 								<input type="hidden" name="instanceAction" value="terminate" />
 								<input type="hidden" name="instanceID" value="{{{ $result->instance_id }}}" />
 								<!-- ./ csrf token -->
-								<button alt="Terminates the Instance from your AWS account." title="Terminates the Instance from your AWS account." type="submit" class="btn btn-danger pull-right" role="button"><span class="glyphicon glyphicon-trash"></span></button>
+								<button alt="Terminates the Instance from your AWS account." title="Terminates the Instance from your AWS account." type="submit" class="btn btn-warning pull-right" role="button"><span class="glyphicon glyphicon-trash"></span></button>
 							</form>
 							<div class="media-body">
 								
