@@ -249,7 +249,7 @@ var inputFieldTemplate2 = function (type, val) {
   return {
     'template': '<input type="' + type + '" ' +
       '<%= (fieldHtmlClass ? "class=\'" + fieldHtmlClass + "\' " : "") %>' +
-      'name="<%= node.name %>" value="<%= escape(val) %>" id="<%= id %>"' +
+      'name="<%= node.name %>" value="' + val + '" id="<%= id %>"' +
       '<%= (node.disabled? " disabled" : "")%>' +
       '<%= (node.readOnly ? " readonly=\'readonly\'" : "") %>' +
       '<%= (node.schemaElement && node.schemaElement.maxLength ? " maxlength=\'" + node.schemaElement.maxLength + "\'" : "") %>' +
