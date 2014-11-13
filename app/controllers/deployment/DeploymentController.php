@@ -237,7 +237,8 @@ class DeploymentController extends BaseController {
 				return Redirect::back()->with('error', 'App Username/Password are required fields for ' . $deployment -> docker_name);
 			}
 		}
-		$userArr = array( 'app_username' => $parameters->app_username, 'app_psw' => $parameters->app_psw);
+		
+		$userArr = array( 'app_username' => $parameters->app_username, 'app_psw' => crypt($parameters->app_psw, base64_encode($clearTextPassword)));
 		
 		$env= $dockerParams['env'];
 		$dockerParams['env'] = array_merge($env, $userArr);
