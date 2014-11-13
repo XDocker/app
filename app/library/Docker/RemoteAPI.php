@@ -26,11 +26,27 @@ class RemoteAPI
         return $status;
     }
 	
-	public static function Containers($url)
+	public static function Containers2($url)
 	{
 		$ret  = shell_exec('curl -X --connect-timeout 60 GET http://'.$url.':4243/containers/json');
 		$ret = StringHelper::isJson($ret) ? json_decode($ret) :  '';
 		return $ret;
+	}
+	
+	public static function Containers($url)
+	{
+		//$ret  = shell_exec('curl -X --connect-timeout 60 GET http://'.$url.':4243/containers/json');
+		//$ret = StringHelper::isJson($ret) ? json_decode($ret) :  '';
+		//return $ret;
+		$process = curl_init();
+        curl_setopt($process, CURLOPT_URL, $url);
+        curl_setopt($process, CURLOPT_RETURNTRANSFER, TRUE);
+        curl_setopt($process, CURLOPT_SSL_VERIFYPEER, FALSE);
+		curl_setopt($process, CURLOPT_CUSTOMREQUEST, "GET");
+		$status = curl_exec($process);
+        curl_close($process);
+        
+        return $status;
 	}
 		
 }
