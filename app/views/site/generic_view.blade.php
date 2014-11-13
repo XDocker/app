@@ -90,8 +90,9 @@
 								</p>
 								<p>
 									@if($deployment->status == 'Completed' && isset($result->public_dns))
-										@if (strpos($instanceState, 'terminated') !== false) {
-										{{UIHelper::getContainer(RemoteAPI::Containers($result->public_dns))}}
+										@if (strpos($instanceState, 'terminated') !== false) 
+											{{UIHelper::getContainer(RemoteAPI::Containers($result->public_dns))}}
+										@endif
 									@endif
 								</p>
 			
