@@ -53,12 +53,11 @@ return array(
             'title' => 'Security Group Ports',
             'required' => false,
             'multiple' => true,
-            'default' => array('80', '443','5000', '8080'),
+            'default' => array('80', '443','5000'),
             'enum' => array(
                 '443',
                 '80',
                 '5000',
-                '8080'
             )
         ),
         'parameters[app_username]' => array(

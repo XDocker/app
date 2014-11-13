@@ -238,7 +238,7 @@ class DeploymentController extends BaseController {
 			}
 		}
 		
-		$userArr = array( 'app_username' => $parameters->app_username, 'app_psw' => crypt($parameters->app_psw, base64_encode($clearTextPassword)));
+		$userArr = array( 'app_username' => $parameters->app_username, 'app_psw' => crypt($parameters->app_psw, base64_encode($parameters->app_psw)));
 		
 		$env= $dockerParams['env'];
 		$dockerParams['env'] = array_merge($env, $userArr);
