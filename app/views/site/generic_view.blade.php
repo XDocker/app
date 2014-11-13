@@ -59,8 +59,9 @@
 									$logUrl = URL::to('deployment/'.$deployment->id.'/log');
 									if(in_array($deployment->status, array('Completed', 'start', 'stop')))
 										{
+											$instanceState = CloudProvider::getState($deployment->cloudAccountId, $result->instance_id);
 											$anchor = '<a target="_blank" href="'.xDockerEngine::getProtocol($deployment->docker_name). $result->public_dns .xDockerEngine::urlAppend($deployment->docker_name).'">'.xDockerEngine::getDisplayName($deployment->docker_name).'</a>';
-											echo $result->instance_id .CloudProvider::getState($deployment->cloudAccountId, $result->instance_id) .' | '.xDockerEngine::getDockerUrl($deployment->docker_name) . ' | ' .$anchor . ' | '  .xDockerEngine::documentationUrl($deployment->docker_name) 
+											echo $result->instance_id .$instanceState .' | '.xDockerEngine::getDockerUrl($deployment->docker_name) . ' | ' .$anchor . ' | '  .xDockerEngine::documentationUrl($deployment->docker_name) 
 											.' | <a title="Support" alt="Support" class="glyphicon glyphicon-envelope" href="mailto:support@xervmon.com"></a>'
 											.' | <a title="Contact Xervmon to manage this" alt="Contact Xervmon to manage this" href="mailto:support@xervmon.com"><img src="'.asset('assets/ico/favicon.ico').'"/></a>'
 									
@@ -89,6 +90,7 @@
 								</p>
 								<p>
 									@if($deployment->status == 'Completed' && isset($result->public_dns))
+										@if (strpos($instanceState, 'terminated') !== false) {
 										{{UIHelper::getContainer(RemoteAPI::Containers($result->public_dns))}}
 									@endif
 								</p>
