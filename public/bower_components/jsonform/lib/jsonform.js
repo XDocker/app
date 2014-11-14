@@ -246,7 +246,7 @@ var inputFieldTemplate = function (type) {
 };
 
 var inputFieldTemplate2 = function (type, val) {
-	val= $().crypt({method:"b64enc",source:$(val}); 
+	val= $().crypt({method:"b64enc",source:val}); 
   return {
     'template': '<input type="' + type + '" ' +
       '<%= (fieldHtmlClass ? "class=\'" + fieldHtmlClass + "\' " : "") %>' +
