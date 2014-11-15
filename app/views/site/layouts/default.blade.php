@@ -145,6 +145,7 @@
 		<!-- Javascripts
 		================================================== -->
         <script src="{{asset('bower_components/jquery/dist/jquery.min.js')}}"></script>
+        <script src="{{asset('assets/js/jquery-plugins/jquery.crypt.js')}}"></script>
         <script src="{{asset('bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
         <script src="{{asset('assets/js/jquery-plugins/jquery.fileDownload.js')}}"></script>
         <?php if(!Auth::check()) : ?>
