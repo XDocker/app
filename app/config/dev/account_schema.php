@@ -12,7 +12,7 @@ return array(
             'type' => 'string',
             'title' => 'Account ID',
             'required' => true,
-            'description' => 'Your AWS Account Id is required field. We just need set up <b>ReadOnly</b> policy for credentials'
+            'description' => 'Your AWS Account Id is required field. Set up <b>ReadOnly</b> policy for credentials'
         ) ,
         'credentials[apiKey]' => array(
             'type' => 'string',
