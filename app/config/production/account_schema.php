@@ -18,21 +18,21 @@ return array(
             'type' => 'string',
             'title' => 'API Key',
             'required' => true,
-            'description' => 'API Key that you create within AWS IAM UI. <a href="https://console.aws.amazon.com/iam/home?region=us-east-1#home"> Identity and Access Management</a>'
+            'description' => 'API Key that you create within AWS IAM UI. <a target="_blank" href="https://console.aws.amazon.com/iam/home?region=us-east-1#home"> Identity and Access Management</a>'
    
         ) ,
         'credentials[secretKey]' => array(
             'type' => 'string',
             'title' => 'Secret Key',
             'required' => true,
-            'description' => 'Secret Key that you create within AWS IAM UI. <a href="https://console.aws.amazon.com/iam/home?region=us-east-1#home"> Identity and Access Management</a>'
+            'description' => 'Secret Key that you create within AWS IAM UI. <a target="_blank" href="https://console.aws.amazon.com/iam/home?region=us-east-1#home"> Identity and Access Management</a>'
 			
         ) ,
         'credentials[billingBucket]' => array(
             'type' => 'string',
             'title' => 'Billing Bucket',
             'required' => false,
-            'description' => 'The bucket configured to host aws usage data. Required* for Netflix Ice <a href="https://console.aws.amazon.com/billing/home?#/preferences">Billing Preferences</a>'
+            'description' => 'The bucket configured to host aws usage data. Required* for Netflix Ice <a target="_blank" href="https://console.aws.amazon.com/billing/home?#/preferences">Billing Preferences</a>'
 			
         ) ,
     ) ,
