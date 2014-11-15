@@ -24,7 +24,8 @@ return array(
                 'cn-north-1'
                 
             ),
-            'event' => 'onchange="loadImages(this)"'
+            'event' => 'onchange="loadImages(this)"',
+            'description' => 'AWS Regions. Select the one where you want to deploy.'
         ) ,
         'parameters[instanceType]' => array(
             'type' => 'string',
@@ -46,7 +47,8 @@ return array(
 	            "cc2.8xlarge",
 	            "cg1.4xlarge"
             ),
-            'event' => 'onchange="loadPrices(this)"'
+            'event' => 'onchange="loadPrices(this)"',
+            'description' => 'AWS Instance Types. Select the type you want to deploy on.'
         ),
 		 'parameters[sgPorts]' => array(
             'type' => 'string',
@@ -58,18 +60,20 @@ return array(
                 '443',
                 '80',
                 '5000',
-                '8080'
-            )
+            ),
+			'description' => 'AWS SecurityGroups. That need to open for application to be accessible.'
         ),
         'parameters[app_username]' => array(
             'type' => 'string',
             'title' => 'App Username',
-            'required' => FALSE
+            'required' => FALSE,
+            'description' => 'Basic HTTP Username for the application.'
         ) ,
         'parameters[app_psw]' => array(
             'type' => 'auto_generate',
             'title' => 'App Password',
-            'required' => FALSE
+            'required' => FALSE,
+            'description' => 'Basic HTTP Password (.htpassword) for the application.'
         ) ,
     ) ,
     
