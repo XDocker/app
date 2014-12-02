@@ -28,6 +28,7 @@
 @endforeach
 	</ul>
 </div>
+{{$accounts->links()}}
 <div>
 	<a href="{{ URL::to('account/create') }}" class="btn btn-inverse pull-right" role="button">Add New Cloud Account</a>
 </div>

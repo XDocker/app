@@ -81,3 +81,42 @@ background: #FFF;
 div#footer p {
 	margin-bottom:0px;
 }
+
+.pagination {
+	border: 1px solid #dfe2e5;
+}
+
+.pagination li > a, .pagination li > span {
+	color: #4981B9;
+}
+
+.pagination li.active > a, .pagination li.active > span {
+	border-left: 0px;
+}
+
+.pagination li:last-child > a, .pagination li:last-child > span, .pagination li:last-child > a:hover, .pagination li:last-child > span:hover, .pagination li:last-child > a:focus, .pagination li:last-child > span:focus {
+	border-radius: 0 3px 3px 0;
+}
+
+.pagination li {
+	margin-right:0px;
+}
+
+.pagination li.disabled > a, .pagination li.disabled > span,.pagination li.disabled > a:hover, .pagination li.disabled > span:hover {
+	color:#34495e;
+}
+
+.pagination li.active > a, .pagination li.active > span {
+	background-color: #428bca;
+	border-color: #428bca;
+}
+
+.pagination li > a:hover, .pagination li > span:hover, .pagination li > a:focus, .pagination li > span:focus {
+	background-color: #428bca;
+	border-color: #428bca;
+}
+
+.pagination li:first-child > a, .pagination li:first-child > span {
+	border-radius: 3px 0 0 3px;
+}
+

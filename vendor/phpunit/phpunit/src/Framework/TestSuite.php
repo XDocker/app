@@ -499,19 +499,49 @@ class PHPUnit_Framework_TestSuite implements PHPUnit_Framework_Test, PHPUnit_Fra
                         $name
                     );
                 } catch (Exception $e) {
-                    $message = sprintf(
-                        'The data provider specified for %s::%s is invalid.',
-                        $className,
-                        $name
-                    );
+                    if (!($e instanceof PHPUnit_Framework_SkippedTestError || $e instanceof PHPUnit_Framework_IncompleteTestError)) {
+                        $message = sprintf(
+                            'The data provider specified for %s::%s is invalid.',
+                            $className,
+                            $name
+                        );
 
-                    $_message = $e->getMessage();
+                        $_message = $e->getMessage();
 
-                    if (!empty($_message)) {
-                        $message .= "\n" . $_message;
+                        if (!empty($_message)) {
+                            $message .= "\n" . $_message;
+                        }
+
+                        $data = self::warning($message);
+                    } elseif ($e instanceof PHPUnit_Framework_SkippedTestError) {
+                        $message = sprintf(
+                            'Test for %s::%s skipped by data provider',
+                            $className,
+                            $name
+                        );
+
+                        $_message = $e->getMessage();
+
+                        if (!empty($_message)) {
+                            $message .= "\n" . $_message;
+                        }
+
+                        $data = self::skipTest($className, $name, $message);
+                    } elseif ($e instanceof PHPUnit_Framework_IncompleteTestError) {
+                        $message = sprintf(
+                            'Test for %s::%s marked incomplete by data provider',
+                            $className,
+                            $name
+                        );
+
+                        $_message = $e->getMessage();
+
+                        if (!empty($_message)) {
+                            $message .= "\n" . $_message;
+                        }
+
+                        $data = self::incompleteTest($className, $name, $message);
                     }
-
-                    $data = self::warning($message);
                 }
 
                 // Test method with @dataProvider.
@@ -531,7 +561,9 @@ class PHPUnit_Framework_TestSuite implements PHPUnit_Framework_Test, PHPUnit_Fra
 
                     $groups = PHPUnit_Util_Test::getGroups($className, $name);
 
-                    if ($data instanceof PHPUnit_Framework_Warning) {
+                    if ($data instanceof PHPUnit_Framework_Warning ||
+                        $data instanceof PHPUnit_Framework_SkippedTestCase ||
+                        $data instanceof PHPUnit_Framework_IncompleteTestCase) {
                         $test->addTest($data, $groups);
                     } else {
                         foreach ($data as $_dataName => $_data) {
@@ -666,7 +698,13 @@ class PHPUnit_Framework_TestSuite implements PHPUnit_Framework_Test, PHPUnit_Fra
             $this->setUp();
 
             foreach ($hookMethods['beforeClass'] as $beforeClassMethod) {
-                if ($this->testCase === true && class_exists($this->name, false) && method_exists($this->name, $beforeClassMethod)) {
+                if ($this->testCase === true &&
+                    class_exists($this->name, false) &&
+                    method_exists($this->name, $beforeClassMethod)) {
+                    if ($missingRequirements = PHPUnit_Util_Test::getMissingRequirements($this->name, $beforeClassMethod)) {
+                        $this->markTestSuiteSkipped(implode(PHP_EOL, $missingRequirements));
+                    }
+
                     call_user_func(array($this->name, $beforeClassMethod));
                 }
             }
@@ -674,16 +712,26 @@ class PHPUnit_Framework_TestSuite implements PHPUnit_Framework_Test, PHPUnit_Fra
             $numTests = count($this);
 
             for ($i = 0; $i < $numTests; $i++) {
+                $result->startTest($this);
                 $result->addFailure($this, $e, 0);
+                $result->endTest($this, 0);
             }
+
+            $this->tearDown();
+            $result->endTestSuite($this);
 
             return $result;
         } catch (Exception $e) {
             $numTests = count($this);
 
             for ($i = 0; $i < $numTests; $i++) {
+                $result->startTest($this);
                 $result->addError($this, $e, 0);
+                $result->endTest($this, 0);
             }
+
+            $this->tearDown();
+            $result->endTestSuite($this);
 
             return $result;
         }
@@ -866,6 +914,30 @@ class PHPUnit_Framework_TestSuite implements PHPUnit_Framework_Test, PHPUnit_Fra
     protected static function warning($message)
     {
         return new PHPUnit_Framework_Warning($message);
+    }
+
+    /**
+     * @param  string $class
+     * @param  string $methodName
+     * @param  string $message
+     * @return PHPUnit_Framework_SkippedTestCase
+     * @since  Method available since Release 4.3.0
+     */
+    protected static function skipTest($class, $methodName, $message)
+    {
+        return new PHPUnit_Framework_SkippedTestCase($class, $methodName, $message);
+    }
+
+    /**
+     * @param  string $class
+     * @param  string $methodName
+     * @param  string $message
+     * @return PHPUnit_Framework_IncompleteTestCase
+     * @since  Method available since Release 4.3.0
+     */
+    protected static function incompleteTest($class, $methodName, $message)
+    {
+        return new PHPUnit_Framework_IncompleteTestCase($class, $methodName, $message);
     }
 
     /**

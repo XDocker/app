@@ -177,24 +177,18 @@ abstract class PHPUnit_Framework_TestCase extends PHPUnit_Framework_Assert imple
     private $expectedExceptionMessage = '';
 
     /**
+     * The regex pattern to validate the expected Exception message.
+     *
+     * @var string
+     */
+    private $expectedExceptionMessageRegExp = '';
+
+    /**
      * The code of the expected Exception.
      *
      * @var integer
      */
     private $expectedExceptionCode;
-
-    /**
-     * The required preconditions for a test.
-     *
-     * @var array
-     */
-    private $required = array(
-        'PHP' => null,
-        'PHPUnit' => null,
-        'OS' => null,
-        'functions' => array(),
-        'extensions' => array()
-    );
 
     /**
      * The name of the test case.
@@ -272,11 +266,6 @@ abstract class PHPUnit_Framework_TestCase extends PHPUnit_Framework_Assert imple
      * @var string
      */
     private $outputExpectedString = null;
-
-    /**
-     * @var bool
-     */
-    private $hasPerformedExpectationsOnOutput = false;
 
     /**
      * @var mixed
@@ -404,9 +393,7 @@ abstract class PHPUnit_Framework_TestCase extends PHPUnit_Framework_Assert imple
             return false;
         }
 
-        if ($this->outputExpectedString !== null ||
-            $this->outputExpectedRegex  !== null ||
-            $this->hasPerformedExpectationsOnOutput) {
+        if ($this->hasExpectationOnOutput()) {
             return false;
         }
 
@@ -447,10 +434,20 @@ abstract class PHPUnit_Framework_TestCase extends PHPUnit_Framework_Assert imple
     /**
      * @return bool
      * @since Method available since Release 3.6.5
+     * @deprecated
      */
     public function hasPerformedExpectationsOnOutput()
     {
-        return $this->hasPerformedExpectationsOnOutput;
+        return $this->hasExpectationOnOutput();
+    }
+
+    /**
+     * @return bool
+     * @since Method available since Release 4.3.3
+     */
+    public function hasExpectationOnOutput()
+    {
+        return is_string($this->outputExpectedString) || is_string($this->outputExpectedRegex);
     }
 
     /**
@@ -476,6 +473,19 @@ abstract class PHPUnit_Framework_TestCase extends PHPUnit_Framework_Assert imple
     }
 
     /**
+     * @param mixed   $exceptionName
+     * @param string  $exceptionMessageRegExp
+     * @param integer $exceptionCode
+     * @since Method available since Release 4.3.0
+     */
+    public function setExpectedExceptionRegExp($exceptionName, $exceptionMessageRegExp = '', $exceptionCode = null)
+    {
+        $this->expectedException              = $exceptionName;
+        $this->expectedExceptionMessageRegExp = $exceptionMessageRegExp;
+        $this->expectedExceptionCode          = $exceptionCode;
+    }
+
+    /**
      * @since  Method available since Release 3.4.0
      */
     protected function setExpectedExceptionFromAnnotation()
@@ -492,6 +502,14 @@ abstract class PHPUnit_Framework_TestCase extends PHPUnit_Framework_Assert imple
                     $expectedException['message'],
                     $expectedException['code']
                 );
+
+                if (!empty($expectedException['message_regex'])) {
+                    $this->setExpectedExceptionRegExp(
+                        $expectedException['class'],
+                        $expectedException['message_regex'],
+                        $expectedException['code']
+                    );
+                }
             }
         } catch (ReflectionException $e) {
         }
@@ -527,101 +545,19 @@ abstract class PHPUnit_Framework_TestCase extends PHPUnit_Framework_Assert imple
     /**
      * @since Method available since Release 3.6.0
      */
-    protected function setRequirementsFromAnnotation()
-    {
-        try {
-            $requirements = PHPUnit_Util_Test::getRequirements(
-                get_class($this),
-                $this->name
-            );
-
-            if (isset($requirements['PHP'])) {
-                $this->required['PHP'] = $requirements['PHP'];
-            }
-
-            if (isset($requirements['PHPUnit'])) {
-                $this->required['PHPUnit'] = $requirements['PHPUnit'];
-            }
-
-            if (isset($requirements['OS'])) {
-                $this->required['OS'] = $requirements['OS'];
-            }
-
-            if (isset($requirements['extensions'])) {
-                $this->required['extensions'] = $requirements['extensions'];
-            }
-
-            if (isset($requirements['functions'])) {
-                $this->required['functions'] = $requirements['functions'];
-            }
-        } catch (ReflectionException $e) {
-        }
-    }
-
-    /**
-     * @since Method available since Release 3.6.0
-     */
     protected function checkRequirements()
     {
-        $this->setRequirementsFromAnnotation();
-
-        $missingRequirements = array();
-
-        if ($this->required['PHP'] &&
-            version_compare(PHP_VERSION, $this->required['PHP'], '<')) {
-            $missingRequirements[] = sprintf(
-                'PHP %s (or later) is required.',
-                $this->required['PHP']
-            );
+        if (!$this->name || !method_exists($this, $this->name)) {
+            return;
         }
 
-        $phpunitVersion = PHPUnit_Runner_Version::id();
-        if ($this->required['PHPUnit'] &&
-            version_compare($phpunitVersion, $this->required['PHPUnit'], '<')) {
-            $missingRequirements[] = sprintf(
-                'PHPUnit %s (or later) is required.',
-                $this->required['PHPUnit']
-            );
-        }
-
-        if ($this->required['OS'] &&
-            !preg_match($this->required['OS'], PHP_OS)) {
-            $missingRequirements[] = sprintf(
-                'Operating system matching %s is required.',
-                $this->required['OS']
-            );
-        }
-
-        foreach ($this->required['functions'] as $function) {
-            $pieces = explode('::', $function);
-            if (2 === count($pieces) && method_exists($pieces[0], $pieces[1])) {
-                continue;
-            }
-            if (function_exists($function)) {
-                continue;
-            }
-            $missingRequirements[] = sprintf(
-                'Function %s is required.',
-                $function
-            );
-        }
-
-        foreach ($this->required['extensions'] as $extension) {
-            if (!extension_loaded($extension)) {
-                $missingRequirements[] = sprintf(
-                    'Extension %s is required.',
-                    $extension
-                );
-            }
-        }
+        $missingRequirements = PHPUnit_Util_Test::getMissingRequirements(
+            get_class($this),
+            $this->name
+        );
 
         if ($missingRequirements) {
-            $this->markTestSkipped(
-                implode(
-                    PHP_EOL,
-                    $missingRequirements
-                )
-            );
+            $this->markTestSkipped(implode(PHP_EOL, $missingRequirements));
         }
     }
 
@@ -706,7 +642,11 @@ abstract class PHPUnit_Framework_TestCase extends PHPUnit_Framework_Assert imple
                 $iniSettings   = PHPUnit_Util_GlobalState::getIniSettingsAsString();
             } else {
                 $constants     = '';
-                $globals       = '';
+                if (!empty($GLOBALS['__PHPUNIT_BOOTSTRAP'])) {
+                    $globals     = '$GLOBALS[\'__PHPUNIT_BOOTSTRAP\'] = ' . var_export($GLOBALS['__PHPUNIT_BOOTSTRAP'], true) . ";\n";
+                } else {
+                    $globals     = '';
+                }
                 $includedFiles = '';
                 $iniSettings   = '';
             }
@@ -874,7 +814,13 @@ abstract class PHPUnit_Framework_TestCase extends PHPUnit_Framework_Assert imple
             }
         }
 
-        $this->stopOutputBuffering();
+        try {
+            $this->stopOutputBuffering();
+        } catch (PHPUnit_Framework_RiskyTestError $_e) {
+            if (!isset($e)) {
+                $e = $_e;
+            }
+        }
 
         // Clean up stat cache.
         clearstatcache();
@@ -915,13 +861,9 @@ abstract class PHPUnit_Framework_TestCase extends PHPUnit_Framework_Assert imple
         if (!isset($e)) {
             try {
                 if ($this->outputExpectedRegex !== null) {
-                    $this->hasPerformedExpectationsOnOutput = true;
                     $this->assertRegExp($this->outputExpectedRegex, $this->output);
-                    $this->outputExpectedRegex = null;
                 } elseif ($this->outputExpectedString !== null) {
-                    $this->hasPerformedExpectationsOnOutput = true;
                     $this->assertEquals($this->outputExpectedString, $this->output);
-                    $this->outputExpectedString = null;
                 }
             } catch (Exception $_e) {
                 $e = $_e;
@@ -993,6 +935,16 @@ abstract class PHPUnit_Framework_TestCase extends PHPUnit_Framework_Assert imple
                         $e,
                         new PHPUnit_Framework_Constraint_ExceptionMessage(
                             $this->expectedExceptionMessage
+                        )
+                    );
+                }
+
+                if (is_string($this->expectedExceptionMessageRegExp) &&
+                    !empty($this->expectedExceptionMessageRegExp)) {
+                    $this->assertThat(
+                        $e,
+                        new PHPUnit_Framework_Constraint_ExceptionMessageRegExp(
+                            $this->expectedExceptionMessageRegExp
                         )
                     );
                 }
@@ -1155,6 +1107,15 @@ abstract class PHPUnit_Framework_TestCase extends PHPUnit_Framework_Assert imple
     }
 
     /**
+     * @return boolean
+     * @since  Method available since Release 4.3.0
+     */
+    public function isInIsolation()
+    {
+        return $this->inIsolation;
+    }
+
+    /**
      * @return mixed
      * @since  Method available since Release 3.4.0
      */
@@ -1273,7 +1234,7 @@ abstract class PHPUnit_Framework_TestCase extends PHPUnit_Framework_Assert imple
 
         $this->locale[$category] = setlocale($category, null);
 
-        $result = call_user_func_array('setlocale', $args);
+        $result = call_user_func_array( 'setlocale', $args );
 
         if ($result === false) {
             throw new PHPUnit_Framework_Exception(
@@ -1331,10 +1292,7 @@ abstract class PHPUnit_Framework_TestCase extends PHPUnit_Framework_Assert imple
      */
     public function getMockBuilder($className)
     {
-        return new PHPUnit_Framework_MockObject_MockBuilder(
-            $this,
-            $className
-        );
+        return new PHPUnit_Framework_MockObject_MockBuilder($this, $className);
     }
 
     /**
@@ -1418,11 +1376,7 @@ abstract class PHPUnit_Framework_TestCase extends PHPUnit_Framework_Assert imple
     protected function getMockFromWsdl($wsdlFile, $originalClassName = '', $mockClassName = '', array $methods = array(), $callOriginalConstructor = true, array $options = array())
     {
         if ($originalClassName === '') {
-            $originalClassName = str_replace(
-                '.wsdl',
-                '',
-                basename($wsdlFile)
-            );
+            $originalClassName = str_replace('.wsdl', '', basename($wsdlFile));
         }
 
         if (!class_exists($originalClassName)) {
@@ -1856,9 +1810,9 @@ abstract class PHPUnit_Framework_TestCase extends PHPUnit_Framework_Assert imple
                         return false;
                     }
 
-                    $this->dependencyInput[] = $passed[$dependency]['result'];
+                    $this->dependencyInput[$dependency] = $passed[$dependency]['result'];
                 } else {
-                    $this->dependencyInput[] = null;
+                    $this->dependencyInput[$dependency] = null;
                 }
             }
         }

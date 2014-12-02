@@ -232,13 +232,13 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     {
         // server is used by default
         $request = Request::create('/', 'DELETE', array(), array(), array(), array(
-            'HTTP_HOST'     => 'example.com',
-            'HTTPS'         => 'on',
-            'SERVER_PORT'   => 443,
+            'HTTP_HOST' => 'example.com',
+            'HTTPS' => 'on',
+            'SERVER_PORT' => 443,
             'PHP_AUTH_USER' => 'fabien',
-            'PHP_AUTH_PW'   => 'pa$$',
-            'QUERY_STRING'  => 'foo=bar',
-            'CONTENT_TYPE'  => 'application/json',
+            'PHP_AUTH_PW' => 'pa$$',
+            'QUERY_STRING' => 'foo=bar',
+            'CONTENT_TYPE' => 'application/json',
         ));
         $this->assertEquals('example.com', $request->getHost());
         $this->assertEquals(443, $request->getPort());
@@ -250,8 +250,8 @@ class RequestTest extends \PHPUnit_Framework_TestCase
 
         // URI has precedence over server
         $request = Request::create('http://thomas:pokemon@example.net:8080/?foo=bar', 'GET', array(), array(), array(), array(
-            'HTTP_HOST'   => 'example.com',
-            'HTTPS'       => 'on',
+            'HTTP_HOST' => 'example.com',
+            'HTTPS' => 'on',
             'SERVER_PORT' => 443,
         ));
         $this->assertEquals('example.net', $request->getHost());
@@ -436,14 +436,14 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         // With encoded characters
 
         $server = array(
-            'HTTP_HOST'       => 'host:8080',
-            'SERVER_NAME'     => 'servername',
-            'SERVER_PORT'     => '8080',
-            'QUERY_STRING'    => 'query=string',
-            'REQUEST_URI'     => '/ba%20se/index_dev.php/foo%20bar/in+fo?query=string',
-            'SCRIPT_NAME'     => '/ba se/index_dev.php',
+            'HTTP_HOST' => 'host:8080',
+            'SERVER_NAME' => 'servername',
+            'SERVER_PORT' => '8080',
+            'QUERY_STRING' => 'query=string',
+            'REQUEST_URI' => '/ba%20se/index_dev.php/foo%20bar/in+fo?query=string',
+            'SCRIPT_NAME' => '/ba se/index_dev.php',
             'PATH_TRANSLATED' => 'redirect:/index.php/foo bar/in+fo',
-            'PHP_SELF'        => '/ba se/index_dev.php/path/info',
+            'PHP_SELF' => '/ba se/index_dev.php/path/info',
             'SCRIPT_FILENAME' => '/some/where/ba se/index_dev.php',
         );
 
@@ -697,7 +697,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     {
         $request = Request::create('http://example.com', 'GET', array(), array(), array(), array(
             'HTTP_X_FORWARDED_PROTO' => 'https',
-            'HTTP_X_FORWARDED_PORT' => '443'
+            'HTTP_X_FORWARDED_PORT' => '443',
         ));
         $port = $request->getPort();
 
@@ -706,40 +706,40 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         Request::setTrustedProxies(array('1.1.1.1'));
         $request = Request::create('http://example.com', 'GET', array(), array(), array(), array(
             'HTTP_X_FORWARDED_PROTO' => 'https',
-            'HTTP_X_FORWARDED_PORT'  => '8443'
+            'HTTP_X_FORWARDED_PORT' => '8443',
         ));
         $port = $request->getPort();
 
         $this->assertEquals(8443, $port, 'With PROTO and PORT set PORT takes precedence.');
 
         $request = Request::create('http://example.com', 'GET', array(), array(), array(), array(
-            'HTTP_X_FORWARDED_PROTO' => 'https'
+            'HTTP_X_FORWARDED_PROTO' => 'https',
         ));
         $port = $request->getPort();
 
         $this->assertEquals(443, $port, 'With only PROTO set getPort() defaults to 443.');
 
         $request = Request::create('http://example.com', 'GET', array(), array(), array(), array(
-            'HTTP_X_FORWARDED_PROTO' => 'http'
+            'HTTP_X_FORWARDED_PROTO' => 'http',
         ));
         $port = $request->getPort();
 
         $this->assertEquals(80, $port, 'If X_FORWARDED_PROTO is set to HTTP return 80.');
 
         $request = Request::create('http://example.com', 'GET', array(), array(), array(), array(
-            'HTTP_X_FORWARDED_PROTO' => 'On'
+            'HTTP_X_FORWARDED_PROTO' => 'On',
         ));
         $port = $request->getPort();
         $this->assertEquals(443, $port, 'With only PROTO set and value is On, getPort() defaults to 443.');
 
         $request = Request::create('http://example.com', 'GET', array(), array(), array(), array(
-            'HTTP_X_FORWARDED_PROTO' => '1'
+            'HTTP_X_FORWARDED_PROTO' => '1',
         ));
         $port = $request->getPort();
         $this->assertEquals(443, $port, 'With only PROTO set and value is 1, getPort() defaults to 443.');
 
         $request = Request::create('http://example.com', 'GET', array(), array(), array(), array(
-            'HTTP_X_FORWARDED_PROTO' => 'something-else'
+            'HTTP_X_FORWARDED_PROTO' => 'something-else',
         ));
         $port = $request->getPort();
         $this->assertEquals(80, $port, 'With only PROTO set and value is not recognized, getPort() defaults to 80.');
@@ -944,10 +944,10 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     {
         $normalizedMethod = strtoupper($method);
 
-        $_GET['foo1']    = 'bar1';
-        $_POST['foo2']   = 'bar2';
+        $_GET['foo1'] = 'bar1';
+        $_POST['foo2'] = 'bar2';
         $_COOKIE['foo3'] = 'bar3';
-        $_FILES['foo4']  = array('bar4');
+        $_FILES['foo4'] = array('bar4');
         $_SERVER['foo5'] = 'bar5';
 
         $request = Request::createFromGlobals();
@@ -969,8 +969,8 @@ class RequestTest extends \PHPUnit_Framework_TestCase
 
         Request::createFromGlobals();
         Request::enableHttpMethodParameterOverride();
-        $_POST['_method']   = $method;
-        $_POST['foo6']      = 'bar6';
+        $_POST['_method'] = $method;
+        $_POST['foo6'] = 'bar6';
         $_SERVER['REQUEST_METHOD'] = 'PoSt';
         $request = Request::createFromGlobals();
         $this->assertEquals($normalizedMethod, $request->getMethod());
@@ -1327,8 +1327,8 @@ class RequestTest extends \PHPUnit_Framework_TestCase
                 '/foo%20bar',
                 array(
                     'SCRIPT_FILENAME' => '/home/John Doe/public_html/foo bar/app.php',
-                    'SCRIPT_NAME'     => '/foo bar/app.php',
-                    'PHP_SELF'        => '/foo bar/app.php',
+                    'SCRIPT_NAME' => '/foo bar/app.php',
+                    'PHP_SELF' => '/foo bar/app.php',
                 ),
                 '/foo%20bar',
                 '/',
@@ -1337,8 +1337,8 @@ class RequestTest extends \PHPUnit_Framework_TestCase
                 '/foo%20bar/home',
                 array(
                     'SCRIPT_FILENAME' => '/home/John Doe/public_html/foo bar/app.php',
-                    'SCRIPT_NAME'     => '/foo bar/app.php',
-                    'PHP_SELF'        => '/foo bar/app.php',
+                    'SCRIPT_NAME' => '/foo bar/app.php',
+                    'PHP_SELF' => '/foo bar/app.php',
                 ),
                 '/foo%20bar',
                 '/home',
@@ -1347,8 +1347,8 @@ class RequestTest extends \PHPUnit_Framework_TestCase
                 '/foo%20bar/app.php/home',
                 array(
                     'SCRIPT_FILENAME' => '/home/John Doe/public_html/foo bar/app.php',
-                    'SCRIPT_NAME'     => '/foo bar/app.php',
-                    'PHP_SELF'        => '/foo bar/app.php',
+                    'SCRIPT_NAME' => '/foo bar/app.php',
+                    'PHP_SELF' => '/foo bar/app.php',
                 ),
                 '/foo%20bar/app.php',
                 '/home',
@@ -1357,8 +1357,8 @@ class RequestTest extends \PHPUnit_Framework_TestCase
                 '/foo%20bar/app.php/home%3Dbaz',
                 array(
                     'SCRIPT_FILENAME' => '/home/John Doe/public_html/foo bar/app.php',
-                    'SCRIPT_NAME'     => '/foo bar/app.php',
-                    'PHP_SELF'        => '/foo bar/app.php',
+                    'SCRIPT_NAME' => '/foo bar/app.php',
+                    'PHP_SELF' => '/foo bar/app.php',
                 ),
                 '/foo%20bar/app.php',
                 '/home%3Dbaz',
@@ -1367,8 +1367,8 @@ class RequestTest extends \PHPUnit_Framework_TestCase
                 '/foo/bar+baz',
                 array(
                     'SCRIPT_FILENAME' => '/home/John Doe/public_html/foo/app.php',
-                    'SCRIPT_NAME'     => '/foo/app.php',
-                    'PHP_SELF'        => '/foo/app.php',
+                    'SCRIPT_NAME' => '/foo/app.php',
+                    'PHP_SELF' => '/foo/app.php',
                 ),
                 '/foo',
                 '/bar+baz',
@@ -1539,31 +1539,31 @@ class RequestTest extends \PHPUnit_Framework_TestCase
                     'X_ORIGINAL_URL' => '/foo/bar',
                 ),
                 array(),
-                '/foo/bar'
+                '/foo/bar',
             ),
             array(
                 array(
                     'X_REWRITE_URL' => '/foo/bar',
                 ),
                 array(),
-                '/foo/bar'
+                '/foo/bar',
             ),
             array(
                 array(),
                 array(
                     'IIS_WasUrlRewritten' => '1',
-                    'UNENCODED_URL' => '/foo/bar'
+                    'UNENCODED_URL' => '/foo/bar',
                 ),
-                '/foo/bar'
+                '/foo/bar',
             ),
             array(
                 array(
                     'X_ORIGINAL_URL' => '/foo/bar',
                 ),
                 array(
-                    'HTTP_X_ORIGINAL_URL' => '/foo/bar'
+                    'HTTP_X_ORIGINAL_URL' => '/foo/bar',
                 ),
-                '/foo/bar'
+                '/foo/bar',
             ),
             array(
                 array(
@@ -1571,9 +1571,9 @@ class RequestTest extends \PHPUnit_Framework_TestCase
                 ),
                 array(
                     'IIS_WasUrlRewritten' => '1',
-                    'UNENCODED_URL' => '/foo/bar'
+                    'UNENCODED_URL' => '/foo/bar',
                 ),
-                '/foo/bar'
+                '/foo/bar',
             ),
             array(
                 array(
@@ -1582,16 +1582,16 @@ class RequestTest extends \PHPUnit_Framework_TestCase
                 array(
                     'HTTP_X_ORIGINAL_URL' => '/foo/bar',
                     'IIS_WasUrlRewritten' => '1',
-                    'UNENCODED_URL' => '/foo/bar'
+                    'UNENCODED_URL' => '/foo/bar',
                 ),
-                '/foo/bar'
+                '/foo/bar',
             ),
             array(
                 array(),
                 array(
                     'ORIG_PATH_INFO' => '/foo/bar',
                 ),
-                '/foo/bar'
+                '/foo/bar',
             ),
             array(
                 array(),
@@ -1599,8 +1599,8 @@ class RequestTest extends \PHPUnit_Framework_TestCase
                     'ORIG_PATH_INFO' => '/foo/bar',
                     'QUERY_STRING' => 'foo=bar',
                 ),
-                '/foo/bar?foo=bar'
-            )
+                '/foo/bar?foo=bar',
+            ),
         );
     }
 

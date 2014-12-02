@@ -39,6 +39,9 @@
 				@else {{{ Lang::get('home/home.empty_deployments') }}}
 				@endif
 		</ul>
+		@if(!empty($deployments)) 
+			{{$deployments->links()}}
+		@endif
 	</div>
 @endif
 <div class="page-header">

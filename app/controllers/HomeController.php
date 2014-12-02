@@ -34,7 +34,7 @@ class HomeController extends BaseController {
      */
     public function getIndex() {
         if (Auth::check()) {
-            $deployments = Deployment::where('user_id', Auth::id())->get();
+            $deployments = Deployment::where('user_id', Auth::id())->paginate(10);
         } else {
             $deployments = array();
         }

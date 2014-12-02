@@ -21,7 +21,7 @@ return
 
 			"Yahoo" => array ( 
 				"enabled" => true,
-				"keys"    => array ( "id" => "", "secret" => "" ),
+				"keys"    => array ( "key" => "", "secret" => "" ),
 			),
 
 			"AOL"  => array ( 
@@ -59,14 +59,14 @@ return
 				"enabled" => true,
 				"keys"    => array ( "id" => "", "secret" => "" ) 
 			),
-			"GitHub" => array (
-				"enabled" => true,
-				"keys"    => array ( "id" => "", "secret" => "" ) 
-			),
 		),
 
-		// if you want to enable logging, set 'debug_mode' to true  then provide a writable file by the web server on "debug_file"
+		// If you want to enable logging, set 'debug_mode' to true.
+		// You can also set it to
+		// - "error" To log only error messages. Useful in production
+		// - "info" To log info and error messages (ignore debug messages) 
 		"debug_mode" => false,
 
+		// Path to file writable by the web server. Required if 'debug_mode' is not false
 		"debug_file" => "",
 	);
