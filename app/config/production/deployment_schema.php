@@ -55,11 +55,11 @@ return array(
             'title' => 'Security Group Ports',
             'required' => false,
             'multiple' => true,
-            'default' => array('80', '443','5000'),
+            'default' => array('80', '443'),
             'enum' => array(
                 '443',
                 '80',
-                '5000',
+             
             ),
 			'description' => 'AWS SecurityGroups. That need to open for application to be accessible.'
         ),
