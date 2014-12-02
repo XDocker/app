@@ -3,6 +3,7 @@
 namespace Docker\Tests\Manager;
 
 use Docker\Container;
+use Docker\Context\ContextBuilder;
 use Docker\Port;
 use Docker\Tests\TestCase;
 use GuzzleHttp\Exception\RequestException;
@@ -37,6 +38,44 @@ class ContainerManagerTest extends TestCase
         $manager->create($container);
 
         $this->assertNotEmpty($container->getId());
+    }
+
+    public function testInteract()
+    {
+        $container = new Container([
+            'Image' => 'ubuntu:precise',
+            'Cmd'   => ['/bin/bash'],
+            'AttachStdin'  => false,
+            'AttachStdout' => true,
+            'AttachStderr' => true,
+            'OpenStdin'    => true,
+            'Tty'          => true,
+        ]);
+
+        $manager = $this->getManager();
+        $manager->create($container);
+        $stream = $manager->interact($container);
+        $manager->start($container);
+
+        $this->assertNotEmpty($container->getId());
+        $this->assertInstanceOf('\Docker\Http\Stream\InteractiveStream', $stream);
+
+        stream_set_blocking($stream->getSocket(), 0);
+
+        $read   = array($stream->getSocket());
+        $write  = null;
+        $expect = null;
+
+        $stream->write("echo test\n");
+        $data = "";
+        do {
+            $frame = $stream->receive(true);
+            $data .= $frame['data'];
+        } while (stream_select($read, $write, $expect, 1) > 0);
+
+        $manager->stop($container, 1);
+
+        $this->assertRegExp('#root@'.substr($container->getId(), 0, 12).':/\# echo test#', $data, $data);
     }
 
     public function testCreateThrowsRightFormedException()
@@ -106,7 +145,7 @@ class ContainerManagerTest extends TestCase
             ->getMock();
 
         $response = $this->getMockBuilder('\GuzzleHttp\Message\Response')->disableOriginalConstructor()->getMock();
-        $stream   = $this->getMockBuilder('\Docker\Http\Stream\AttachStream')->disableOriginalConstructor()->getMock();
+        $stream   = $this->getMockBuilder('\GuzzleHttp\Stream\Stream')->disableOriginalConstructor()->getMock();
 
         $container->setExitCode(0);
         $callback = function () {};
@@ -118,7 +157,7 @@ class ContainerManagerTest extends TestCase
 
         $manager->expects($this->once())
             ->method('attach')
-            ->with($this->isInstanceOf('\Docker\Container'), $this->equalTo(true), $this->equalTo(true), $this->equalTo(true), $this->equalTo(true), $this->equalTo(true), $this->equalTo(null))
+            ->with($this->isInstanceOf('\Docker\Container'), $this->equalTo($callback), $this->equalTo(true), $this->equalTo(true), $this->equalTo(true), $this->equalTo(true), $this->equalTo(true), $this->equalTo(null))
             ->will($this->returnValue($response));
 
         $manager->expects($this->once())
@@ -129,10 +168,6 @@ class ContainerManagerTest extends TestCase
         $response->expects($this->once())
             ->method('getBody')
             ->will($this->returnValue($stream));
-
-        $stream->expects($this->once())
-            ->method('readWithCallback')
-            ->with($callback);
 
         $manager->expects($this->once())
             ->method('wait')
@@ -178,13 +213,13 @@ class ContainerManagerTest extends TestCase
         $output = "";
 
         $manager->create($container);
-        $response = $manager->attach($container);
-        $manager->start($container);
-
-        $response->getBody()->readWithCallback(function ($log, $stdtype) use(&$type, &$output) {
-            $type   = $stdtype;
+        $response = $manager->attach($container, function ($log, $stdtype) use (&$type, &$output) {
+            $type = $stdtype;
             $output = $log;
         });
+        $manager->start($container);
+
+        $response->getBody()->getContents();
 
         $this->assertEquals(1, $type);
         $this->assertEquals('output', $output);
@@ -199,13 +234,13 @@ class ContainerManagerTest extends TestCase
         $output = "";
 
         $manager->create($container);
-        $response = $manager->attach($container);
-        $manager->start($container);
-
-        $response->getBody()->readWithCallback(function ($log, $stdtype) use(&$type, &$output) {
-            $type   = $stdtype;
+        $response = $manager->attach($container, function ($log, $stdtype) use (&$type, &$output) {
+            $type = $stdtype;
             $output = $log;
         });
+        $manager->start($container);
+
+        $response->getBody()->getContents();
 
         $this->assertEquals(2, $type);
         $this->assertEquals('error', $output);
@@ -233,6 +268,10 @@ class ContainerManagerTest extends TestCase
      */
     public function testWaitWithTimeout()
     {
+        if (getenv('DOCKER_TLS_VERIFY')) {
+            $this->markTestSkipped('This test failed when using ssl due to this bug : https://bugs.php.net/bug.php?id=41631');
+        }
+
         $container = new Container(['Image' => 'ubuntu:precise', 'Cmd' => ['/bin/sleep', '2']]);
 
         $manager = $this->getManager();
@@ -243,6 +282,10 @@ class ContainerManagerTest extends TestCase
 
     public function testTimeoutExceptionHasRequest()
     {
+        if (getenv('DOCKER_TLS_VERIFY')) {
+            $this->markTestSkipped('This test failed when using ssl due to this bug : https://bugs.php.net/bug.php?id=41631');
+        }
+
         $container = new Container(['Image' => 'ubuntu:precise', 'Cmd' => ['/bin/sleep', '2']]);
 
         $manager = $this->getManager();
@@ -296,7 +339,6 @@ class ContainerManagerTest extends TestCase
         $this->assertInstanceOf('Docker\\Container', $manager->find($container->getId()));
     }
 
-
     public function testRemove()
     {
         $container = new Container(['Image' => 'ubuntu:precise', 'Cmd' => ['date']]);
@@ -311,4 +353,137 @@ class ContainerManagerTest extends TestCase
         $manager->inspect($container);
     }
 
+    public function testTop()
+    {
+        $container = new Container(['Image' => 'ubuntu:precise', 'Cmd' => ['sleep', '2']]);
+        $manager = $this->getManager();
+        $manager->run($container, null, array(), true);
+
+        $processes = $manager->top($container);
+
+        $this->assertCount(1, $processes);
+        $this->assertArrayHasKey('COMMAND', $processes[0]);
+        $this->assertEquals('sleep 2', $processes[0]['COMMAND']);
+
+        $manager->wait($container);
+        $manager->remove($container);
+    }
+
+    public function testChanges()
+    {
+        $container = new Container(['Image' => 'ubuntu:precise', 'Cmd' => ['touch', '/docker-php-test']]);
+        $manager = $this->getManager();
+        $manager->run($container);
+        $manager->wait($container);
+
+        $changes = $manager->changes($container);
+
+        $manager->remove($container);
+
+        $this->assertCount(1, $changes);
+        $this->assertEquals('/docker-php-test', $changes[0]['Path']);
+        $this->assertEquals(1, $changes[0]['Kind']);
+    }
+
+    public function testExport()
+    {
+        $container = new Container(['Image' => 'ubuntu:precise', 'Cmd' => ['touch', '/docker-php-test']]);
+        $manager = $this->getManager();
+        $manager->run($container);
+        $manager->wait($container);
+
+        $exportStream = $manager->export($container);
+
+        $this->assertInstanceOf('\GuzzleHttp\Stream\Stream', $exportStream);
+
+        $tarFileName  = tempnam(sys_get_temp_dir(), 'docker-php-export-test-');
+        $tarFile      = fopen($tarFileName, 'w+');
+
+        stream_copy_to_stream($exportStream->detach(), $tarFile);
+        fclose($tarFile);
+
+        exec('/usr/bin/env tar -tf '.$tarFileName, $output);
+
+        $this->assertContains('docker-php-test', $output);
+        $this->assertContains('.dockerinit', $output);
+
+        unlink($tarFileName);
+        $manager->remove($container);
+    }
+
+    public function testLogs()
+    {
+        $container = new Container(['Image' => 'ubuntu:precise', 'Cmd' => ['echo', 'test']]);
+        $manager = $this->getManager();
+        $manager->run($container);
+        $manager->stop($container);
+        $logs = $manager->logs($container, false, true);
+        $manager->remove($container);
+
+        $this->assertGreaterThanOrEqual(1, count($logs));
+
+        $logs = array_map(function ($value) {
+            return $value['output'];
+        }, $logs);
+
+        $this->assertContains("test", implode("", $logs));
+    }
+
+    public function testRestart()
+    {
+        $manager = $this->getManager();
+        $dockerFileBuilder = new ContextBuilder();
+        $dockerFileBuilder->from('ubuntu:precise');
+        $dockerFileBuilder->add('/daemon.sh', file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'script' . DIRECTORY_SEPARATOR . 'daemon.sh'));
+        $dockerFileBuilder->run('chmod +x /daemon.sh');
+
+        $this->getDocker()->build($dockerFileBuilder->getContext(), 'docker-php-restart-test', null, true, false, true);
+
+        $container = new Container(['Image' => 'docker-php-restart-test', 'Cmd' => ['/daemon.sh']]);
+        $manager->create($container);
+        $manager->start($container);
+        $manager->restart($container);
+
+        $logs = $manager->logs($container, false, true);
+        $logs = array_map(function ($value) {
+            return $value['output'];
+        }, $logs);
+        $processes = $manager->top($container);
+
+        $manager->stop($container);
+        $manager->remove($container);
+
+        $this->getDocker()->getImageManager()->delete($container->getImage());
+
+        $this->assertCount(2, $processes);
+        $this->assertContains('test', implode("", $logs));
+    }
+
+    public function testKill()
+    {
+        $manager = $this->getManager();
+        $dockerFileBuilder = new ContextBuilder();
+        $dockerFileBuilder->from('ubuntu:precise');
+        $dockerFileBuilder->add('/kill.sh', file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'script' . DIRECTORY_SEPARATOR . 'kill.sh'));
+        $dockerFileBuilder->run('chmod +x /kill.sh');
+
+        $this->getDocker()->build($dockerFileBuilder->getContext(), 'docker-php-kill-test', null, true, false, true);
+
+        $container = new Container(['Image' => 'docker-php-kill-test', 'Cmd' => ['/kill.sh']]);
+        $manager->create($container);
+        $manager->start($container);
+        $manager->kill($container, "SIGHUP");
+
+        $logs = $manager->logs($container, false, true);
+        $logs = array_map(function ($value) {
+            return $value['output'];
+        }, $logs);
+
+        $manager->stop($container);
+        $manager->remove($container);
+
+        $this->getDocker()->getImageManager()->delete($container->getImage());
+
+        $this->assertContains('HUP', implode("", $logs));
+    }
 }

@@ -37,7 +37,6 @@ class HomeController extends BaseController {
         if (Auth::check()) {
             //$deployments = Deployment::where('user_id', Auth::id())->get();
 			$deployments = DeploymentQueryHelper::getQuery( $this->deployments, 10 );
-		
         } else {
             $deployments = array();
         }

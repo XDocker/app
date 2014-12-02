@@ -22,7 +22,6 @@
                     <h3 class="section-heading">{{{ Lang::get('site.name') }}}</h3>
                     <h5 class="section-subheading text-muted">{{{ Lang::get('site.tagline') }}}</h5>
                    
-                		
 		</div>
             </div>
             <div class="row text-center">

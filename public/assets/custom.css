@@ -1,0 +1,104 @@
+.social-login-icons {
+    margin-right: 20px;
+}
+.social-google {
+    color: #da573b;
+    border-color: #be5238;
+}
+.social-google:hover {
+    color: #be5238;
+    border-color: #9b4631;
+}
+.social-git {
+    color: #34495E;
+    border-color: #34495E;
+}
+.social-git:hover {
+    color: #2C3E50;
+    border-color: #2C3E50;
+}
+.social-facebook {
+    color: #4c699e;
+    border-color: #47618d;
+}
+.social-facebook:hover {
+    color: #47618d;
+    border-color: #3c5173;
+}
+.social-linkedin {
+    color: #4875B4;
+    border-color: #466b99;
+}
+.social-linkedin:hover {
+    color: #466b99;
+    border-color: #3b5a7c;
+}
+.main {
+    width: 320px;
+    margin: 0 auto;
+}
+.login-checkbox {
+    float: right;
+}
+.login-checkbox > label > #remember {
+    margin-top: 10px;
+}
+.home-search {
+    margin-bottom: 0px;
+    margin-top: 15px;
+}
+.list-group-custom > li > div > a > img {
+    width: 35px;
+}
+.list-group-custom > li > div > .media-body > p {
+    font-size: 14px;
+    margin: 0px;
+}
+.list-group-custom > li > div > .media-body > .media-heading {
+    font-size: 20px;
+    font-weight: bold;
+}
+.nav-tabs {
+    margin-bottom: 15px;
+}
+div#footer {
+    border-top: 1px solid #E2E2E2;
+    background: #FFF;
+}
+div#footer p {
+    margin-bottom: 0px;
+}
+.pagination {
+    border: 1px solid #dfe2e5;
+}
+.pagination li > a,
+.pagination li > span {
+    color: #4981B9;
+}
+.pagination li.active > a,
+.pagination li.active > span {
+    border-left: 0px;
+}
+.pagination li: last-child > a, .pagination li: last-child > span, .pagination li: last-child > a:hover, .pagination li: last-child > span:hover, .pagination li: last-child > a:focus, .pagination li: last-child > span:focus {
+    border-radius: 0 3px 3px 0;
+}
+.pagination li {
+    margin-right: 0px;
+}
+.pagination li.disabled > a,
+.pagination li.disabled > span,
+.pagination li.disabled > a:hover, .pagination li.disabled > span:hover {
+    color: #34495e;
+}
+.pagination li.active > a,
+.pagination li.active > span {
+    background-color: #428bca;
+    border-color: #428bca;
+}
+.pagination li > a:hover, .pagination li > span:hover, .pagination li > a:focus, .pagination li > span:focus {
+    background-color: #428bca;
+    border-color: #428bca;
+}
+.pagination li:first-child > a, .pagination li:first-child > span {
+    border-radius: 3px 0 0 3px;
+}

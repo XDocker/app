@@ -4,7 +4,6 @@ namespace Docker;
 
 use Docker\Context\Context;
 use Docker\Http\DockerClient;
-use Docker\Http\Stream\StreamCallbackInterface;
 use Docker\Manager\ContainerManager;
 use Docker\Manager\ImageManager;
 use Docker\Exception\UnexpectedStatusCodeException;
@@ -81,45 +80,43 @@ class Docker
     /**
      * Build an image with docker
      *
-     * @param \Docker\Context\ContextInterface   $context  Context to build
-     * @param string                             $name     Name of the wanted image
-     * @param callable                           $callback A callback to be called for having log of build
-     * @param boolean                            $quiet    Quiet build (doest not output commands during build)
-     * @param boolean                            $cache    Use docker cache
-     * @param boolean                            $rm       Remove intermediate container during build
+     * @param \Docker\Context\ContextInterface $context  Context to build
+     * @param string                           $name     Name of the wanted image
+     * @param callable                         $callback A callback to be called for having log of build
+     * @param boolean                          $quiet    Quiet build (doest not output commands during build)
+     * @param boolean                          $cache    Use docker cache
+     * @param boolean                          $rm       Remove intermediate container during build
+     * @param boolean                          $wait     Whether to wait for build to finish
+     *
+     * @return \GuzzleHttp\Message\ResponseInterface
      */
-    public function build(ContextInterface $context, $name, callable $callback = null, $quiet = false, $cache = true, $rm = false)
+    public function build(ContextInterface $context, $name, callable $callback = null, $quiet = false, $cache = true, $rm = false, $wait = true)
     {
+        if (null === $callback) {
+            $callback = function () {};
+        }
+
         $content  = is_resource($context->read()) ? new Stream($context->read()) : $context->read();
-        $response = $this->httpClient->post(['/build{?data*}', ['data' => [
+
+        return $this->httpClient->post(['/build{?data*}', ['data' => [
             'q' => (integer) $quiet,
             't' => $name,
             'nocache' => (integer) !$cache,
-            'rm' => (integer) $rm
+            'rm' => (integer) $rm,
         ]]], [
-            'headers' => array('Content-Type' => 'application/tar'),
-            'body'    => $content,
-            'stream'  => true
+            'headers'  => array('Content-Type' => 'application/tar'),
+            'body'     => $content,
+            'stream'   => true,
+            'callback' => $callback,
+            'wait'     => $wait
         ]);
-
-        if (null === $callback) {
-            $callback = function() {};
-        }
-
-        $stream = $response->getBody();
-
-        if ($stream instanceof StreamCallbackInterface) {
-            $stream->readWithCallback($callback);
-        } else {
-            $callback($stream->__toString(), null);
-        }
     }
 
     /**
      * Commit a container into an image
      *
      * @param \Docker\Container $container
-     * @param array $config
+     * @param array             $config
      *
      * @throws Exception\UnexpectedStatusCodeException
      *

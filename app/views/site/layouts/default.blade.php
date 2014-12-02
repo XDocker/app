@@ -138,7 +138,6 @@
 			<!-- the following div is needed to make a sticky footer -->
 			<div id="push"></div>
 			@include('site.footer')
-		   
 	    </div>
 		<!-- ./wrap -->
 

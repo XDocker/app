@@ -6,7 +6,6 @@ use Docker\Docker;
 use Docker\Context\Context;
 use Docker\Container;
 use Docker\Context\ContextBuilder;
-use Docker\Http\Client;
 
 class DockerTest extends TestCase
 {
@@ -16,10 +15,13 @@ class DockerTest extends TestCase
         $contextBuilder->from('ubuntu:precise');
         $contextBuilder->add('/test', 'test file content');
 
-        $docker = $this->getDocker();
+        $docker  = $this->getDocker();
+        $content = "";
 
-        $docker->build($contextBuilder->getContext(), 'foo', function($output) use(&$content) {
-            $content .= $output;
+        $response = $docker->build($contextBuilder->getContext(), 'foo', function ($output) use (&$content) {
+            if (isset($output['stream'])) {
+                $content .= $output['stream'];
+            }
         });
 
         $this->assertRegExp('/Successfully built/', $content);
@@ -32,8 +34,10 @@ class DockerTest extends TestCase
         $context    = new Context($directory);
         $timecalled = 0;
 
-        $docker->build($context, 'foo', function($output) use(&$content, &$timecalled) {
-            $content .= $output;
+        $docker->build($context, 'foo', function ($output) use (&$content, &$timecalled) {
+            if (isset($output['stream'])) {
+                $content .= $output['stream'];
+            }
             $timecalled++;
         });
 
