@@ -31,17 +31,10 @@ class SignupsController extends \BaseController {
 		}
 		else
 		{
-			if(!$this->checkIfExists( \Input::get('newsletter_signup_email')))	
-			{
-				$signup = new Signup();
-				$signup->email = \Input::get('newsletter_signup_email');
-				$signup->save();
-				$message = \Lang::get('laravel-newsletter-signup::copy.signup.success');
-			}
-			else
-				{
-					$message = \Lang::get('laravel-newsletter-signup::copy.signup.already_subscribed_success');
-				}
+			$signup = new Signup();
+			$signup->email = \Input::get('newsletter_signup_email');
+			$signup->save();
+			$message = \Lang::get('laravel-newsletter-signup::copy.signup.success');
 		}
 
 		if (\Request::ajax())
@@ -49,18 +42,6 @@ class SignupsController extends \BaseController {
 			return \Response::JSON(array('message' => $message));
 		}
 		return \Redirect::to(\Input::get('from'))->with('newsletter_signup_email_message', $message);
-	}
-
-	private function checkIfExists($email)
-	{
-		 $data = Signup::where('email','=',\Input::get('newsletter_signup_email'))->paginate(10);
-         foreach($data as $row)
-         {
-         	if(isset($row->email) && $row->email == $email)
-			return true;                      
-         }
-		 return false;
-		
 	}
 
 	public function delete()

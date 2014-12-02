@@ -2,8 +2,7 @@
 
 return array(
 	'signup' => array(
-		'success' => 'You have been subscribed.',
-		'already_subscribed_success' => 'You have already been subscribed!!',
+		'success' => 'You have been subscribed',
 		'success_restored' => 'You have been resubscribed',
 		'submit' => 'Subscribe',
 		'validation' => array(
@@ -13,8 +12,8 @@ return array(
 		),
 	),
 	'unsubscribe' => array(
-		'success' => 'You have been unsubscribed.',
-		'already_unsubscribed' => 'Your email address was already unsubscribed!!',
+		'success' => 'You have been unsubscribed',
+		'already_unsubscribed' => 'Your email address was already unsubscribed',
 		'submit' => 'Unsubscribe',
 		'validation' => array(
 			'newsletter_unsubscribe_email.required' => 'Please enter your email address',

@@ -24,6 +24,7 @@ use Guzzle\Http\Message\RequestFactory;
 use Guzzle\Http\Message\RequestInterface;
 use Guzzle\Http\QueryString;
 use Guzzle\Http\Url;
+use Guzzle\Stream\Stream;
 
 /**
  * Signature Version 4
@@ -230,12 +231,11 @@ class SignatureV4 extends AbstractSignature implements EndpointSignatureInterfac
         }
 
         if ($request instanceof EntityEnclosingRequestInterface) {
-            return hash(
-                'sha256',
-                $request->getMethod() == 'POST' && count($request->getPostFields())
-                    ? (string) $request->getPostFields()
-                    : (string) $request->getBody()
-            );
+            if ($request->getMethod() == 'POST' && count($request->getPostFields())) {
+                return hash('sha256', (string) $request->getPostFields());
+            } elseif ($body = $request->getBody()) {
+                return Stream::getHash($request->getBody(), 'sha256');
+            }
         }
 
         return self::DEFAULT_PAYLOAD;
@@ -303,6 +303,12 @@ class SignatureV4 extends AbstractSignature implements EndpointSignatureInterfac
      */
     private function createSigningContext(RequestInterface $request, $payload)
     {
+        $signable = array(
+            'host'        => true,
+            'date'        => true,
+            'content-md5' => true
+        );
+
         // Normalize the path as required by SigV4 and ensure it's absolute
         $canon = $request->getMethod() . "\n"
             . $this->createCanonicalizedPath($request) . "\n"
@@ -312,10 +318,7 @@ class SignatureV4 extends AbstractSignature implements EndpointSignatureInterfac
 
         foreach ($request->getHeaders()->getAll() as $key => $values) {
             $key = strtolower($key);
-            if ($key == 'host'
-                || $key == 'date'
-                || substr($key, 0, 6) === 'x-amz-'
-            ) {
+            if (isset($signable[$key]) || substr($key, 0, 6) === 'x-amz-') {
                 $values = $values->toArray();
                 if (count($values) == 1) {
                     $values = $values[0];

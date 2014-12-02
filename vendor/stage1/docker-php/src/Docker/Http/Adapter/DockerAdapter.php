@@ -3,11 +3,10 @@
 namespace Docker\Http\Adapter;
 
 use Docker\Exception\APIException;
-use Docker\Http\Stream\AttachStream;
-use Docker\Http\Stream\ChunkedStream;
-
+use Docker\Http\Stream\Filter\Event;
 use GuzzleHttp\Adapter\AdapterInterface;
 use GuzzleHttp\Adapter\TransactionInterface;
+use GuzzleHttp\Event\EmitterInterface;
 use GuzzleHttp\Event\RequestEvents;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Message\MessageFactoryInterface;
@@ -25,12 +24,25 @@ class DockerAdapter implements AdapterInterface
     /** @var MessageFactoryInterface */
     private $messageFactory;
 
-    public function __construct(MessageFactoryInterface $messageFactory, $entrypoint)
+    /** @var resource A stream context resource */
+    private $context;
+
+    /** @var boolean Whether stream is encrypted with TLS */
+    private $useTls;
+
+    public function __construct(MessageFactoryInterface $messageFactory, $entrypoint, $context = null, $useTls = null)
     {
+        if ($context === null) {
+            $context = stream_context_create();
+        }
+
         $this->entrypoint     = $entrypoint;
         $this->messageFactory = $messageFactory;
+        $this->context        = $context;
+        $this->useTls         = $useTls;
 
         stream_filter_register('chunk', '\Docker\Http\Stream\Filter\Chunk');
+        stream_filter_register('event', '\Docker\Http\Stream\Filter\Event');
     }
 
     /**
@@ -61,7 +73,7 @@ class DockerAdapter implements AdapterInterface
 
             return $transaction->getResponse();
         } catch (RequestException $e) {
-            if ($e->hasResponse()) {
+            if ($e->hasResponse() && $e->getResponse()->getBody()) {
                 throw new APIException($e->getResponse()->getBody()->__toString(), $e->getRequest(), $e->getResponse(), $e);
             }
 
@@ -82,16 +94,24 @@ class DockerAdapter implements AdapterInterface
             $request->setHeader('Content-Length', $request->getBody()->getSize());
         }
 
-        $socket = @stream_socket_client($this->entrypoint, $errorNo, $errorMsg, $this->getDefaultTimeout($transaction));
-        if(!$socket) {
+        $socket = @stream_socket_client($this->entrypoint, $errorNo, $errorMsg, $this->getDefaultTimeout($transaction), STREAM_CLIENT_CONNECT, $this->context);
+
+        if (!$socket) {
             throw new RequestException(sprintf('Cannot open socket connection: %s [code %d]', $errorMsg, $errorNo), $request);
         }
 
+        // CHeck if tls is needed
+        if ($this->useTls) {
+            if (!@stream_socket_enable_crypto($socket, true, STREAM_CRYPTO_METHOD_TLS_CLIENT)) {
+                throw new RequestException(sprintf('Cannot enable tls: %s', error_get_last()['message']), $request);
+            }
+        }
+
         // Write headers
-        fwrite($socket, $this->getRequestHeaderAsString($request));
+        $isWrite = $this->fwrite($socket, $this->getRequestHeaderAsString($request));
 
         // Write body if set
-        if ($request->getBody() !== null) {
+        if ($request->getBody() !== null && $isWrite !== false) {
             $stream = $request->getBody();
             $filter = null;
 
@@ -99,13 +119,16 @@ class DockerAdapter implements AdapterInterface
                 $filter = stream_filter_prepend($socket, 'chunk', STREAM_FILTER_WRITE);
             }
 
-            while (!$stream->eof()) {
-                fwrite($socket, $stream->read(self::CHUNK_SIZE));
+            while (!$stream->eof() && $isWrite) {
+                $isWrite = $this->fwrite($socket, $stream->read(self::CHUNK_SIZE));
             }
 
             if ($request->getHeader('Transfer-Encoding') == 'chunked') {
                 stream_filter_remove($filter);
-                fwrite($socket, "0\r\n\r\n");
+
+                if (false !== $isWrite) {
+                    $isWrite = $this->fwrite($socket, "0\r\n\r\n");
+                }
             }
         }
 
@@ -114,7 +137,7 @@ class DockerAdapter implements AdapterInterface
         // Response should be available, extract headers
         do {
             $response = $this->getResponseWithHeaders($socket);
-        } while($response->getStatusCode() == 100);
+        } while ($response !== null && $response->getStatusCode() == 100);
 
         //Check timeout
         $metadata = stream_get_meta_data($socket);
@@ -123,8 +146,26 @@ class DockerAdapter implements AdapterInterface
             throw new RequestException('Timed out while reading socket', $request, $response);
         }
 
-        $this->setResponseStream($response, $socket);
+        if (false === $isWrite) {
+            // When an error happen and no response it is most probably due to TLS configuration
+            if ($response === null) {
+                throw new RequestException('Error while sending request (Broken Pipe), check your TLS configuration and logs in docker daemon for more information ', $request);
+            }
+
+            throw new RequestException('Error while sending request (Broken Pipe)', $request, $response);
+        }
+
+        if (null == $response) {
+            throw new RequestException('No response could be parsed: check server log', $request);
+        }
+
+        $this->setResponseStream($response, $socket, $request->getEmitter(), ($request->getConfig()->hasKey('attach_filter') && $request->getConfig()->get('attach_filter')));
         $transaction->setResponse($response);
+
+        // If wait read all contents
+        if ($request->getConfig()->hasKey('wait') && $request->getConfig()->get('wait')) {
+            $response->getBody()->getContents();
+        }
 
         return $response;
     }
@@ -134,7 +175,6 @@ class DockerAdapter implements AdapterInterface
         $headers = array();
 
         while (($line = fgets($stream)) !== false) {
-
             if (rtrim($line) === '') {
                 break;
             }
@@ -143,6 +183,11 @@ class DockerAdapter implements AdapterInterface
         }
 
         $parts = explode(' ', array_shift($headers), 3);
+
+        if (count($parts) <= 1) {
+            return null;
+        }
+
         $options = ['protocol_version' => substr($parts[0], -3)];
         if (isset($parts[2])) {
             $options['reason_phrase'] = $parts[2];
@@ -162,16 +207,21 @@ class DockerAdapter implements AdapterInterface
         return $response;
     }
 
-    private function setResponseStream(Response $response, $socket)
+    private function setResponseStream(Response $response, $socket, EmitterInterface $emitter, $useFilter = false)
     {
         if ($response->getHeader('Transfer-Encoding') == "chunked") {
-            $stream = new ChunkedStream($socket);
-        } elseif ($response->getHeader('Content-Type') == "application/vnd.docker.raw-stream") {
-            $stream = new AttachStream($socket);
-        } else {
-            $stream = new Stream($socket);
+            stream_filter_append($socket, 'dechunk');
         }
 
+        // Attach filter
+        if ($useFilter) {
+            stream_filter_append($socket, 'event', STREAM_FILTER_READ, array(
+                'emitter' => $emitter,
+                'content_type' => $response->getHeader('Content-Type'),
+            ));
+        }
+
+        $stream = new Stream($socket);
         $response->setBody($stream);
     }
 
@@ -201,11 +251,68 @@ class DockerAdapter implements AdapterInterface
             ])."\r\n";
 
         foreach ($request->getHeaders() as $name => $values) {
-            $message .= $name . ': ' . implode(', ', $values) . "\r\n";
+            $message .= $name.': '.implode(', ', $values)."\r\n";
         }
 
         $message .= "\r\n";
 
         return $message;
+    }
+
+    /**
+     * Replace fwrite behavior as api is broken in PHP
+     *
+     * @see https://secure.phabricator.com/rPHU69490c53c9c2ef2002bc2dd4cecfe9a4b080b497
+     *
+     * @param resource $stream The stream resource
+     * @param string   $bytes  Bytes written in the stream
+     *
+     * @return bool|int false if pipe is broken, number of bytes written otherwise
+     */
+    private function fwrite($stream, $bytes)
+    {
+        if (!strlen($bytes)) {
+            return 0;
+        }
+
+        $result = @fwrite($stream, $bytes);
+        if ($result !== 0) {
+            // In cases where some bytes are witten (`$result > 0`) or
+            // an error occurs (`$result === false`), the behavior of fwrite() is
+            // correct. We can return the value as-is.
+            return $result;
+        }
+
+        // If we make it here, we performed a 0-length write. Try to distinguish
+        // between EAGAIN and EPIPE. To do this, we're going to `stream_select()`
+        // the stream, write to it again if PHP claims that it's writable, and
+        // consider the pipe broken if the write fails.
+
+        $read = array();
+        $write = array($stream);
+        $except = array();
+
+        @stream_select($read, $write, $except, 0);
+
+        if (!$write) {
+            // The stream isn't writable, so we conclude that it probably really is
+            // blocked and the underlying error was EAGAIN. Return 0 to indicate that
+            // no data could be written yet.
+            return 0;
+        }
+
+        // If we make it here, PHP **just** claimed that this stream is writable, so
+        // perform a write. If the write also fails, conclude that these failures are
+        // EPIPE or some other permanent failure.
+        $result = @fwrite($stream, $bytes);
+        if ($result !== 0) {
+            // The write worked or failed explicitly. This value is fine to return.
+            return $result;
+        }
+
+        // We performed a 0-length write, were told that the stream was writable, and
+        // then immediately performed another 0-length write. Conclude that the pipe
+        // is broken and return `false`.
+        return false;
     }
 }
