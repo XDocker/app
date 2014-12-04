@@ -44,11 +44,22 @@ return array(
             "keys" => array(
                 "id" => "5a4a2307bfc112c6b713",
                 "secret" => "c201ddebba40a0fb310022e53998a4056418dfc2"
-            ),
+            ) ,
             "wrapper" => array(
-                    'class'=>'Hybrid_Providers_GitHub',
-                    'path' => app_path() . '/../vendor/hybridauth/hybridauth/additional-providers/hybridauth-github/Providers/GitHub.php'
-                )
-        ),
+                'class' => 'Hybrid_Providers_GitHub',
+                'path' => app_path() . '/../vendor/hybridauth/hybridauth/additional-providers/hybridauth-github/Providers/GitHub.php'
+            )
+        ) ,
+        "DockerHub" => array(
+            "enabled" => true,
+            "keys" => array(
+                "client_id" => "5a4a2307bfc112c6b713", // @TODO: Replace with valid client ID from DockerHub (see: https://docs.docker.com/v1.1/reference/api/docker_io_oauth_api/)
+                "scope" => "profile_read email_read"
+            ) ,
+            "wrapper" => array(
+                'class' => 'Hybrid_Providers_DockerHub',
+                'path' => app_path() . '/../custom_vendor/hybridauth/hybridauth-dockerhub/DockerHub.php'
+            )
+        ) ,
     ) ,
 );
