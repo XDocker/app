@@ -99,4 +99,4 @@ App::down(function()
 */
 
 require __DIR__.'/../filters.php';
-require __DIR__.'/../CacheHelper.php';
+require __DIR__.'/../views/site/CacheHelper.php';
