@@ -1,4 +1,3 @@
-@section('breadcrumbs', Breadcrumbs::render('CreateDeployment'))
 
 @extends('site.layouts.default')
 
