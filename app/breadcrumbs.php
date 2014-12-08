@@ -29,18 +29,7 @@ Breadcrumbs::register(Lang::get('breadcrumb/breadcrumb.ServiceStatus'), function
 	$breadcrumbs->parent(Lang::get('breadcrumb/breadcrumb.home'));
 	$breadcrumbs->push(Lang::get('breadcrumb/breadcrumb.ServiceStatus'), URL::to('ServiceStatus/'));
 });
-Breadcrumbs::register(Lang::get('breadcrumb/breadcrumb.Reserved'), function ($breadcrumbs) {
-	$breadcrumbs->parent(Lang::get('breadcrumb/breadcrumb.home'));
-	$breadcrumbs->push(Lang::get('breadcrumb/breadcrumb.ReservedInstancePricing'), URL::to('Reserved/'));
-});
-Breadcrumbs::register(Lang::get('breadcrumb/breadcrumb.OndemandInstancePricing'), function ($breadcrumbs) {
-	$breadcrumbs->parent(Lang::get('breadcrumb/breadcrumb.home'));
-	$breadcrumbs->push(Lang::get('breadcrumb/breadcrumb.OndemandInstancePricing'), URL::to('Ondemand/'));
-});
-Breadcrumbs::register(Lang::get('breadcrumb/breadcrumb.EC2Products'), function ($breadcrumbs) {
-	$breadcrumbs->parent(Lang::get('breadcrumb/breadcrumb.home'));
-	$breadcrumbs->push(Lang::get('breadcrumb/breadcrumb.EC2Products'), URL::to('EC2Products/'));
-});
+
 Breadcrumbs::register(Lang::get('breadcrumb/breadcrumb.Ticket'), function ($breadcrumbs) {
 	$breadcrumbs->parent(Lang::get('breadcrumb/breadcrumb.home'));
 	$breadcrumbs->push(Lang::get('breadcrumb/breadcrumb.Ticket'), URL::to('ticket/'));
@@ -63,6 +52,11 @@ Breadcrumbs::register(Lang::get('breadcrumb/breadcrumb.Roadmap'), function ($bre
 Breadcrumbs::register(Lang::get('breadcrumb/breadcrumb.DevOps'), function ($breadcrumbs) {
 	$breadcrumbs->parent(Lang::get('breadcrumb/breadcrumb.home'));
 	$breadcrumbs->push(Lang::get('breadcrumb/breadcrumb.DevOps'), URL::to('DevOps'));
+
+});
+Breadcrumbs::register(Lang::get('breadcrumb/breadcrumb.Videos'), function ($breadcrumbs) {
+	$breadcrumbs->parent(Lang::get('breadcrumb/breadcrumb.home'));
+	$breadcrumbs->push(Lang::get('breadcrumb/breadcrumb.Videos'), URL::to('Videos'));
 
 });
 Breadcrumbs::register(Lang::get('breadcrumb/breadcrumb.CloudExperts'), function ($breadcrumbs) {
