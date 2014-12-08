@@ -46,6 +46,7 @@ return array(
     'File' => array($vendorDir . '/phpseclib/phpseclib/phpseclib'),
     'Fbf\\LaravelNewsletterSignup\\' => array($vendorDir . '/fbf/laravel-newsletter-signup/src'),
     'Doctrine\\Instantiator\\' => array($vendorDir . '/doctrine/instantiator/src'),
+    'DaveJamesMiller\\Breadcrumbs' => array($baseDir . '/src', $vendorDir . '/davejamesmiller/laravel-breadcrumbs/src'),
     'Curl' => array($baseDir . '/src', $vendorDir . '/curl/curl/src'),
     'Crypt' => array($vendorDir . '/phpseclib/phpseclib/phpseclib'),
     'ClassPreloader' => array($vendorDir . '/classpreloader/classpreloader/src'),

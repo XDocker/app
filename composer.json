@@ -18,7 +18,8 @@
         "aws/aws-sdk-php": "~2.6",
         "curl/curl": "*",
         "fbf/laravel-newsletter-signup": "dev-master",
-        "stage1/docker-php": "@dev"
+        "stage1/docker-php": "@dev",
+        "davejamesmiller/laravel-breadcrumbs": "~2.3"
     },
     "require-dev": {
         "way/generators": "~2.6",
@@ -39,7 +40,8 @@
         ],
         "psr-0": {
             "Aws\\Laravel": "src/",
-            "Curl": "src/"
+            "Curl": "src/",
+	     "DaveJamesMiller\\Breadcrumbs": "src/"
         }
     },
     "scripts": {
