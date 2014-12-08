@@ -3,10 +3,10 @@
 return array(
 
 	'home'                    => 'Home',
-	'account'                 => 'Account',
+	'account'                 => 'account',
 	'CreateAccount'           => 'CreateAccount',
 	'EditAccount'             => 'EditAccount',
-	'deployment'			  => 'Deployment',
+	'deployment'			  => 'deployment',
 	'CreateDeployent'		  => 'CreateDeployment',
 	
 	'EngineLog'               => 'EngineLog',
