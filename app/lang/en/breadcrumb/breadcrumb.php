@@ -2,7 +2,7 @@
 
 return array(
 
-	'home'                    => 'Home',
+	'home'                    => 'home',
 	'account'                 => 'account',
 	'CreateAccount'           => 'CreateAccount',
 	'EditAccount'             => 'EditAccount',
