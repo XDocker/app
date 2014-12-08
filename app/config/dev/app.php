@@ -118,7 +118,7 @@ return array(
         'Way\Generators\GeneratorsServiceProvider', // Generators
         'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider', // IDE Helpers
         'Fbf\LaravelNewsletterSignup\LaravelNewsletterSignupServiceProvider',
-         'DaveJamesMiller\Breadcrumbs\ServiceProvider',
+        'DaveJamesMiller\Breadcrumbs\ServiceProvider',
 
     ),
 

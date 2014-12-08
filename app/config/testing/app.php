@@ -26,7 +26,7 @@ return array(
 	|
 	*/
 
-	'url' => 'http://app.xdocker.org',
+	'url' => 'http://qa.xdocker.org',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -118,8 +118,8 @@ return array(
         'Way\Generators\GeneratorsServiceProvider', // Generators
         'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider', // IDE Helpers
         'Fbf\LaravelNewsletterSignup\LaravelNewsletterSignupServiceProvider',
-         'DaveJamesMiller\Breadcrumbs\ServiceProvider',
-
+        'DaveJamesMiller\Breadcrumbs\ServiceProvider',
+        
     ),
 
     /*
@@ -193,10 +193,12 @@ return array(
         'String'          => 'Andrew13\Helpers\String', // String
         'Carbon'          => 'Carbon\Carbon', // Carbon
         'Datatables'      => 'Bllim\Datatables\Datatables', // DataTables
-		'Breadcrumbs' => 'DaveJamesMiller\Breadcrumbs\Facade',
-		
+         'Breadcrumbs' => 'DaveJamesMiller\Breadcrumbs\Facade',
+
     ),
 
     'available_language' => array('en'),
+    
+	'app_environment' => 'dev'
 
 );
