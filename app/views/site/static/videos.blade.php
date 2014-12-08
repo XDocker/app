@@ -7,6 +7,7 @@
 
 {{-- Content --}}
 @section('content')
+@section('breadcrumbs', Breadcrumbs::render('Videos'))
 <h4>{{{ Lang::get('site.videos') }}}</h4>
 <div class="row">
   	<div class="col-md-12">
