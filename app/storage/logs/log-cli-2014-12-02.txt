@@ -49,3 +49,13 @@ Stack trace:
 #16 C:\wamp\www\ClientWork\xdocker\vendor\symfony\console\Symfony\Component\Console\Application.php(124): Symfony\Component\Console\Application->doRun(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
 #17 C:\wamp\www\ClientWork\xdocker\artisan(59): Symfony\Component\Console\Application->run()
 #18 {main} [] []
+[2014-12-02 16:03:03] local.ERROR: 500 - Class 'AddEngineKeyToUsers' not found @ /
+exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'AddEngineKeyToUsers' not found' in C:\Users\admin\Desktop\Sathvik\xDocker\vendor\laravel\framework\src\Illuminate\Database\Migrations\Migrator.php:301
+Stack trace:
+#0 [internal function]: Illuminate\Exception\Handler->handleShutdown()
+#1 {main} [] []
+[2014-12-02 16:03:04] local.ERROR: 500 - Class 'AddEngineKeyToUsers' not found @ /
+exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'AddEngineKeyToUsers' not found' in C:\Users\admin\Desktop\Sathvik\xDocker\vendor\laravel\framework\src\Illuminate\Database\Migrations\Migrator.php:301
+Stack trace:
+#0 [internal function]: Illuminate\Exception\Handler->handleShutdown()
+#1 {main} [] []

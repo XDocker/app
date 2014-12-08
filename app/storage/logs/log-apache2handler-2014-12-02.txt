@@ -590,3 +590,97 @@ Stack trace:
 [2014-12-02 15:56:30] local.INFO: __Guest__ URL : https://index.docker.io/v1/search?q=xdocker [] []
 [2014-12-02 15:57:34] local.INFO: __Guest__ URL : https://index.docker.io/v1/search?q=xdocker [] []
 [2014-12-02 15:57:56] local.INFO: __Guest__ URL : https://index.docker.io/v1/search?q=xdocker [] []
+[2014-12-02 16:01:11] local.ERROR: 500 - SQLSTATE[42S22]: Column not found: 1054 Unknown column 'deployments.deleted_at' in 'where clause' (SQL: select count(*) as aggregate from `deployments` left join `cloudAccounts` on `deployments`.`cloudAccountId` = `cloudAccounts`.`id` where `deployments`.`deleted_at` is null and `deployments`.`user_id` = 6) @ /
+exception 'PDOException' with message 'SQLSTATE[42S22]: Column not found: 1054 Unknown column 'deployments.deleted_at' in 'where clause'' in C:\Users\admin\Desktop\Sathvik\xDocker\vendor\laravel\framework\src\Illuminate\Database\Connection.php:299
+Stack trace:
+#0 C:\Users\admin\Desktop\Sathvik\xDocker\vendor\laravel\framework\src\Illuminate\Database\Connection.php(299): PDO->prepare('select count(*)...')
+#1 C:\Users\admin\Desktop\Sathvik\xDocker\vendor\laravel\framework\src\Illuminate\Database\Connection.php(617): Illuminate\Database\Connection->Illuminate\Database\{closure}(Object(Illuminate\Database\MySqlConnection), 'select count(*)...', Array)
+#2 C:\Users\admin\Desktop\Sathvik\xDocker\vendor\laravel\framework\src\Illuminate\Database\Connection.php(581): Illuminate\Database\Connection->runQueryCallback('select count(*)...', Array, Object(Closure))
+#3 C:\Users\admin\Desktop\Sathvik\xDocker\vendor\laravel\framework\src\Illuminate\Database\Connection.php(304): Illuminate\Database\Connection->run('select count(*)...', Array, Object(Closure))
+#4 C:\Users\admin\Desktop\Sathvik\xDocker\vendor\laravel\framework\src\Illuminate\Database\Query\Builder.php(1359): Illuminate\Database\Connection->select('select count(*)...', Array)
+#5 C:\Users\admin\Desktop\Sathvik\xDocker\vendor\laravel\framework\src\Illuminate\Database\Query\Builder.php(1349): Illuminate\Database\Query\Builder->runSelect()
+#6 C:\Users\admin\Desktop\Sathvik\xDocker\vendor\laravel\framework\src\Illuminate\Database\Query\Builder.php(1336): Illuminate\Database\Query\Builder->getFresh(Array)
+#7 C:\Users\admin\Desktop\Sathvik\xDocker\vendor\laravel\framework\src\Illuminate\Database\Query\Builder.php(1771): Illuminate\Database\Query\Builder->get(Array)
+#8 C:\Users\admin\Desktop\Sathvik\xDocker\vendor\laravel\framework\src\Illuminate\Database\Query\Builder.php(1709): Illuminate\Database\Query\Builder->aggregate('count', Array)
+#9 C:\Users\admin\Desktop\Sathvik\xDocker\vendor\laravel\framework\src\Illuminate\Database\Query\Builder.php(1626): Illuminate\Database\Query\Builder->count()
+#10 C:\Users\admin\Desktop\Sathvik\xDocker\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Builder.php(274): Illuminate\Database\Query\Builder->getPaginationCount()
+#11 C:\Users\admin\Desktop\Sathvik\xDocker\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Builder.php(246): Illuminate\Database\Eloquent\Builder->ungroupedPaginate(Object(Illuminate\Pagination\Factory), 10, Array)
+#12 C:\Users\admin\Desktop\Sathvik\xDocker\app\library\helpers\DeploymentQueryHelper.php(24): Illuminate\Database\Eloquent\Builder->paginate(10)
+#13 C:\Users\admin\Desktop\Sathvik\xDocker\app\controllers\HomeController.php(39): DeploymentQueryHelper::getQuery(Object(Deployment), 10)
+#14 [internal function]: HomeController->getIndex()
+#15 C:\Users\admin\Desktop\Sathvik\xDocker\vendor\laravel\framework\src\Illuminate\Routing\Controller.php(231): call_user_func_array(Array, Array)
+#16 C:\Users\admin\Desktop\Sathvik\xDocker\vendor\laravel\framework\src\Illuminate\Routing\ControllerDispatcher.php(93): Illuminate\Routing\Controller->callAction('getIndex', Array)
+#17 C:\Users\admin\Desktop\Sathvik\xDocker\vendor\laravel\framework\src\Illuminate\Routing\ControllerDispatcher.php(62): Illuminate\Routing\ControllerDispatcher->call(Object(HomeController), Object(Illuminate\Routing\Route), 'getIndex')
+#18 C:\Users\admin\Desktop\Sathvik\xDocker\vendor\laravel\framework\src\Illuminate\Routing\Router.php(962): Illuminate\Routing\ControllerDispatcher->dispatch(Object(Illuminate\Routing\Route), Object(Illuminate\Http\Request), 'HomeController', 'getIndex')
+#19 [internal function]: Illuminate\Routing\Router->Illuminate\Routing\{closure}()
+#20 C:\Users\admin\Desktop\Sathvik\xDocker\vendor\laravel\framework\src\Illuminate\Routing\Route.php(109): call_user_func_array(Object(Closure), Array)
+#21 C:\Users\admin\Desktop\Sathvik\xDocker\vendor\laravel\framework\src\Illuminate\Routing\Router.php(1028): Illuminate\Routing\Route->run(Object(Illuminate\Http\Request))
+#22 C:\Users\admin\Desktop\Sathvik\xDocker\vendor\laravel\framework\src\Illuminate\Routing\Router.php(996): Illuminate\Routing\Router->dispatchToRoute(Object(Illuminate\Http\Request))
+#23 C:\Users\admin\Desktop\Sathvik\xDocker\vendor\laravel\framework\src\Illuminate\Foundation\Application.php(775): Illuminate\Routing\Router->dispatch(Object(Illuminate\Http\Request))
+#24 C:\Users\admin\Desktop\Sathvik\xDocker\vendor\laravel\framework\src\Illuminate\Foundation\Application.php(745): Illuminate\Foundation\Application->dispatch(Object(Illuminate\Http\Request))
+#25 C:\Users\admin\Desktop\Sathvik\xDocker\vendor\laravel\framework\src\Illuminate\Session\Middleware.php(72): Illuminate\Foundation\Application->handle(Object(Illuminate\Http\Request), 1, true)
+#26 C:\Users\admin\Desktop\Sathvik\xDocker\vendor\laravel\framework\src\Illuminate\Cookie\Queue.php(47): Illuminate\Session\Middleware->handle(Object(Illuminate\Http\Request), 1, true)
+#27 C:\Users\admin\Desktop\Sathvik\xDocker\vendor\laravel\framework\src\Illuminate\Cookie\Guard.php(51): Illuminate\Cookie\Queue->handle(Object(Illuminate\Http\Request), 1, true)
+#28 C:\Users\admin\Desktop\Sathvik\xDocker\vendor\stack\builder\src\Stack\StackedHttpKernel.php(23): Illuminate\Cookie\Guard->handle(Object(Illuminate\Http\Request), 1, true)
+#29 C:\Users\admin\Desktop\Sathvik\xDocker\vendor\laravel\framework\src\Illuminate\Foundation\Application.php(641): Stack\StackedHttpKernel->handle(Object(Illuminate\Http\Request))
+#30 C:\Users\admin\Desktop\Sathvik\xDocker\public\index.php(49): Illuminate\Foundation\Application->run()
+#31 {main}
+
+Next exception 'Illuminate\Database\QueryException' with message 'SQLSTATE[42S22]: Column not found: 1054 Unknown column 'deployments.deleted_at' in 'where clause' (SQL: select count(*) as aggregate from `deployments` left join `cloudAccounts` on `deployments`.`cloudAccountId` = `cloudAccounts`.`id` where `deployments`.`deleted_at` is null and `deployments`.`user_id` = 6)' in C:\Users\admin\Desktop\Sathvik\xDocker\vendor\laravel\framework\src\Illuminate\Database\Connection.php:625
+Stack trace:
+#0 C:\Users\admin\Desktop\Sathvik\xDocker\vendor\laravel\framework\src\Illuminate\Database\Connection.php(581): Illuminate\Database\Connection->runQueryCallback('select count(*)...', Array, Object(Closure))
+#1 C:\Users\admin\Desktop\Sathvik\xDocker\vendor\laravel\framework\src\Illuminate\Database\Connection.php(304): Illuminate\Database\Connection->run('select count(*)...', Array, Object(Closure))
+#2 C:\Users\admin\Desktop\Sathvik\xDocker\vendor\laravel\framework\src\Illuminate\Database\Query\Builder.php(1359): Illuminate\Database\Connection->select('select count(*)...', Array)
+#3 C:\Users\admin\Desktop\Sathvik\xDocker\vendor\laravel\framework\src\Illuminate\Database\Query\Builder.php(1349): Illuminate\Database\Query\Builder->runSelect()
+#4 C:\Users\admin\Desktop\Sathvik\xDocker\vendor\laravel\framework\src\Illuminate\Database\Query\Builder.php(1336): Illuminate\Database\Query\Builder->getFresh(Array)
+#5 C:\Users\admin\Desktop\Sathvik\xDocker\vendor\laravel\framework\src\Illuminate\Database\Query\Builder.php(1771): Illuminate\Database\Query\Builder->get(Array)
+#6 C:\Users\admin\Desktop\Sathvik\xDocker\vendor\laravel\framework\src\Illuminate\Database\Query\Builder.php(1709): Illuminate\Database\Query\Builder->aggregate('count', Array)
+#7 C:\Users\admin\Desktop\Sathvik\xDocker\vendor\laravel\framework\src\Illuminate\Database\Query\Builder.php(1626): Illuminate\Database\Query\Builder->count()
+#8 C:\Users\admin\Desktop\Sathvik\xDocker\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Builder.php(274): Illuminate\Database\Query\Builder->getPaginationCount()
+#9 C:\Users\admin\Desktop\Sathvik\xDocker\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Builder.php(246): Illuminate\Database\Eloquent\Builder->ungroupedPaginate(Object(Illuminate\Pagination\Factory), 10, Array)
+#10 C:\Users\admin\Desktop\Sathvik\xDocker\app\library\helpers\DeploymentQueryHelper.php(24): Illuminate\Database\Eloquent\Builder->paginate(10)
+#11 C:\Users\admin\Desktop\Sathvik\xDocker\app\controllers\HomeController.php(39): DeploymentQueryHelper::getQuery(Object(Deployment), 10)
+#12 [internal function]: HomeController->getIndex()
+#13 C:\Users\admin\Desktop\Sathvik\xDocker\vendor\laravel\framework\src\Illuminate\Routing\Controller.php(231): call_user_func_array(Array, Array)
+#14 C:\Users\admin\Desktop\Sathvik\xDocker\vendor\laravel\framework\src\Illuminate\Routing\ControllerDispatcher.php(93): Illuminate\Routing\Controller->callAction('getIndex', Array)
+#15 C:\Users\admin\Desktop\Sathvik\xDocker\vendor\laravel\framework\src\Illuminate\Routing\ControllerDispatcher.php(62): Illuminate\Routing\ControllerDispatcher->call(Object(HomeController), Object(Illuminate\Routing\Route), 'getIndex')
+#16 C:\Users\admin\Desktop\Sathvik\xDocker\vendor\laravel\framework\src\Illuminate\Routing\Router.php(962): Illuminate\Routing\ControllerDispatcher->dispatch(Object(Illuminate\Routing\Route), Object(Illuminate\Http\Request), 'HomeController', 'getIndex')
+#17 [internal function]: Illuminate\Routing\Router->Illuminate\Routing\{closure}()
+#18 C:\Users\admin\Desktop\Sathvik\xDocker\vendor\laravel\framework\src\Illuminate\Routing\Route.php(109): call_user_func_array(Object(Closure), Array)
+#19 C:\Users\admin\Desktop\Sathvik\xDocker\vendor\laravel\framework\src\Illuminate\Routing\Router.php(1028): Illuminate\Routing\Route->run(Object(Illuminate\Http\Request))
+#20 C:\Users\admin\Desktop\Sathvik\xDocker\vendor\laravel\framework\src\Illuminate\Routing\Router.php(996): Illuminate\Routing\Router->dispatchToRoute(Object(Illuminate\Http\Request))
+#21 C:\Users\admin\Desktop\Sathvik\xDocker\vendor\laravel\framework\src\Illuminate\Foundation\Application.php(775): Illuminate\Routing\Router->dispatch(Object(Illuminate\Http\Request))
+#22 C:\Users\admin\Desktop\Sathvik\xDocker\vendor\laravel\framework\src\Illuminate\Foundation\Application.php(745): Illuminate\Foundation\Application->dispatch(Object(Illuminate\Http\Request))
+#23 C:\Users\admin\Desktop\Sathvik\xDocker\vendor\laravel\framework\src\Illuminate\Session\Middleware.php(72): Illuminate\Foundation\Application->handle(Object(Illuminate\Http\Request), 1, true)
+#24 C:\Users\admin\Desktop\Sathvik\xDocker\vendor\laravel\framework\src\Illuminate\Cookie\Queue.php(47): Illuminate\Session\Middleware->handle(Object(Illuminate\Http\Request), 1, true)
+#25 C:\Users\admin\Desktop\Sathvik\xDocker\vendor\laravel\framework\src\Illuminate\Cookie\Guard.php(51): Illuminate\Cookie\Queue->handle(Object(Illuminate\Http\Request), 1, true)
+#26 C:\Users\admin\Desktop\Sathvik\xDocker\vendor\stack\builder\src\Stack\StackedHttpKernel.php(23): Illuminate\Cookie\Guard->handle(Object(Illuminate\Http\Request), 1, true)
+#27 C:\Users\admin\Desktop\Sathvik\xDocker\vendor\laravel\framework\src\Illuminate\Foundation\Application.php(641): Stack\StackedHttpKernel->handle(Object(Illuminate\Http\Request))
+#28 C:\Users\admin\Desktop\Sathvik\xDocker\public\index.php(49): Illuminate\Foundation\Application->run()
+#29 {main} [] []
+[2014-12-02 16:05:41] local.INFO: __Guest__ URL : https://index.docker.io/v1/search?q=xdocker [] []
+[2014-12-02 16:06:02] local.ERROR: exception 'ErrorException' with message 'Undefined index: endpoint_ip' in C:\Users\admin\Desktop\Sathvik\xDocker\app\library\Docker\xDockerEngine.php:65
+Stack trace:
+#0 C:\Users\admin\Desktop\Sathvik\xDocker\app\library\Docker\xDockerEngine.php(65): Illuminate\Exception\Handler->handleError(8, 'Undefined index...', 'C:\\Users\\admin\\...', 65, Array)
+#1 C:\Users\admin\Desktop\Sathvik\xDocker\app\controllers\user\UserController.php(254): xDockerEngine::register(Array)
+#2 [internal function]: UserController->socialLogin()
+#3 C:\Users\admin\Desktop\Sathvik\xDocker\vendor\laravel\framework\src\Illuminate\Routing\Controller.php(231): call_user_func_array(Array, Array)
+#4 C:\Users\admin\Desktop\Sathvik\xDocker\vendor\laravel\framework\src\Illuminate\Routing\ControllerDispatcher.php(93): Illuminate\Routing\Controller->callAction('socialLogin', Array)
+#5 C:\Users\admin\Desktop\Sathvik\xDocker\vendor\laravel\framework\src\Illuminate\Routing\ControllerDispatcher.php(62): Illuminate\Routing\ControllerDispatcher->call(Object(UserController), Object(Illuminate\Routing\Route), 'socialLogin')
+#6 C:\Users\admin\Desktop\Sathvik\xDocker\vendor\laravel\framework\src\Illuminate\Routing\Router.php(962): Illuminate\Routing\ControllerDispatcher->dispatch(Object(Illuminate\Routing\Route), Object(Illuminate\Http\Request), 'UserController', 'socialLogin')
+#7 [internal function]: Illuminate\Routing\Router->Illuminate\Routing\{closure}()
+#8 C:\Users\admin\Desktop\Sathvik\xDocker\vendor\laravel\framework\src\Illuminate\Routing\Route.php(109): call_user_func_array(Object(Closure), Array)
+#9 C:\Users\admin\Desktop\Sathvik\xDocker\vendor\laravel\framework\src\Illuminate\Routing\Router.php(1028): Illuminate\Routing\Route->run(Object(Illuminate\Http\Request))
+#10 C:\Users\admin\Desktop\Sathvik\xDocker\vendor\laravel\framework\src\Illuminate\Routing\Router.php(996): Illuminate\Routing\Router->dispatchToRoute(Object(Illuminate\Http\Request))
+#11 C:\Users\admin\Desktop\Sathvik\xDocker\vendor\laravel\framework\src\Illuminate\Foundation\Application.php(775): Illuminate\Routing\Router->dispatch(Object(Illuminate\Http\Request))
+#12 C:\Users\admin\Desktop\Sathvik\xDocker\vendor\laravel\framework\src\Illuminate\Foundation\Application.php(745): Illuminate\Foundation\Application->dispatch(Object(Illuminate\Http\Request))
+#13 C:\Users\admin\Desktop\Sathvik\xDocker\vendor\laravel\framework\src\Illuminate\Session\Middleware.php(72): Illuminate\Foundation\Application->handle(Object(Illuminate\Http\Request), 1, true)
+#14 C:\Users\admin\Desktop\Sathvik\xDocker\vendor\laravel\framework\src\Illuminate\Cookie\Queue.php(47): Illuminate\Session\Middleware->handle(Object(Illuminate\Http\Request), 1, true)
+#15 C:\Users\admin\Desktop\Sathvik\xDocker\vendor\laravel\framework\src\Illuminate\Cookie\Guard.php(51): Illuminate\Cookie\Queue->handle(Object(Illuminate\Http\Request), 1, true)
+#16 C:\Users\admin\Desktop\Sathvik\xDocker\vendor\stack\builder\src\Stack\StackedHttpKernel.php(23): Illuminate\Cookie\Guard->handle(Object(Illuminate\Http\Request), 1, true)
+#17 C:\Users\admin\Desktop\Sathvik\xDocker\vendor\laravel\framework\src\Illuminate\Foundation\Application.php(641): Stack\StackedHttpKernel->handle(Object(Illuminate\Http\Request))
+#18 C:\Users\admin\Desktop\Sathvik\xDocker\public\index.php(49): Illuminate\Foundation\Application->run()
+#19 {main} [] []
+[2014-12-02 16:06:36] local.INFO: Sathvik_Ponangi_LinkedIn_com URL : https://index.docker.io/v1/search?q=xdocker [] []
+[2014-12-02 16:08:09] local.INFO: Sathvik_Ponangi_LinkedIn_com URL : https://index.docker.io/v1/search?q=xdocke [] []
+[2014-12-02 16:08:35] local.ERROR: Aws\Ec2\Exception\Ec2Exception: AWS Error Code: AuthFailure, Status Code: 401, AWS Request ID: 3363e55d-6b78-425b-824b-36debaf8bfe9, AWS Error Type: client, AWS Error Message: AWS was not able to validate the provided access credentials, User-Agent: aws-sdk-php2/2.7.7 Guzzle/3.9.2 curl/7.36.0 PHP/5.5.12 [] []
