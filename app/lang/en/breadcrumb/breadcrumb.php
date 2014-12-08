@@ -2,10 +2,12 @@
 
 return array(
 
-	'home'                    => 'home',
-	'account'                 => 'account',
+	'home'                    => 'Home',
+	'account'                 => 'Account',
 	'CreateAccount'           => 'CreateAccount',
 	'EditAccount'             => 'EditAccount',
+	'deployment'			  => 'Deployment',
+	'CreateDeployent'		  => 'CreateDeployment',
 	
 	'EngineLog'               => 'EngineLog',
 	'ServiceStatus'           => 'ServiceStatus',

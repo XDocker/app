@@ -14,6 +14,16 @@ Breadcrumbs::register(Lang::get('breadcrumb/breadcrumb.CreateAccount'), function
 	$breadcrumbs->push(Lang::get('breadcrumb/breadcrumb.CreateAccount'), URL::to('account/create'));
 });
 
+Breadcrumbs::register(Lang::get('breadcrumb/breadcrumb.deployment'), function ($breadcrumbs) {
+	$breadcrumbs->parent(Lang::get('breadcrumb/breadcrumb.home'));
+	$breadcrumbs->push(ucfirst(Lang::get('breadcrumb/breadcrumb.deployment')), URL::to('deployment/'));
+});
+Breadcrumbs::register(Lang::get('breadcrumb/breadcrumb.CreateDeployment'), function ($breadcrumbs) {
+	$breadcrumbs->parent(Lang::get('breadcrumb/breadcrumb.account'));
+	// $breadcrumbs->push('Account', URL::to('account/'));
+	$breadcrumbs->push(Lang::get('breadcrumb/breadcrumb.CreateDeployment'), URL::to('deployment/create'));
+});
+
 Breadcrumbs::register(Lang::get('breadcrumb/breadcrumb.EditAccount'), function ($breadcrumbs) {
 	$breadcrumbs->parent(Lang::get('breadcrumb/breadcrumb.account'));
 	// $breadcrumbs->push('Account', URL::to('account/'));

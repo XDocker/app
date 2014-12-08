@@ -1,4 +1,5 @@
 @extends('site.layouts.default')
+@section('breadcrumbs', Breadcrumbs::render('EngineLog'))
 
 {{-- Content --}}
 @section('content')
