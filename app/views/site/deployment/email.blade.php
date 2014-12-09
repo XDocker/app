@@ -7,5 +7,8 @@
 		<h2>Deployment Details: {{ $deploymentName}}</h2>
 
 		<div>{{ $dockerImage }} was deployed using {{ $accountName }}</div>
+		
+		For support, contact </br>
+		<a href="http://support.xervmon.com"> Support</a> or <a href-"mailto:xdocker@xervmon.com">xDocker Team</a>
 	</body>
 </html>
