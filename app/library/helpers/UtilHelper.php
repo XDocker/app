@@ -28,14 +28,15 @@ class UtilHelper
 		}
 	}
 	
-	public static function sendMail($user, $accountName, $deploymentName, $template, $subject)
+	public static function sendMail($user, $accountName, $deployment, $template, $subject)
 	{
-		$data['deploymentName'] = $deploymentName;
+		$data['deploymentName'] = $deployment->name;
+		$data['dockerImage'] = $deployment->docker_name;
 		$data['accountName'] = $accountName;
 		$adminEmail = Config::get('mail');
 		Mail::send($template, $data, function($message) use ($user, $subject, $adminEmail)
 		{
-		  $message->to($user->email, $user->username)->to($adminEmail['supportEmail'])
+		  $message->to($user->email, $user->username)->cc($adminEmail['supportEmail'])
 		          ->subject($subject);
 		});
 	}

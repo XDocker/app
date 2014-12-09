@@ -176,7 +176,7 @@ class DeploymentController extends BaseController {
             			return Redirect::to('deployment')->with('error', 'Failed during deployment!'. $obj1->fail_message);
 					}
 					
-					UtilHelper::sendMail(Auth::user(), $account->name, $deployment->name, 'site/deployment/email', Lang::get('deployment/deployment.deployment_updated'));
+					UtilHelper::sendMail(Auth::user(), $account->name, $deployment, 'site/deployment/email', Lang::get('deployment/deployment.deployment_updated'));
 					
 					return Redirect::to('deployment')->with('success', Lang::get('deployment/deployment.deployment_updated'));
 	            }
