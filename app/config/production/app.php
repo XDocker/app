@@ -119,6 +119,7 @@ return array(
         'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider', // IDE Helpers
         'Fbf\LaravelNewsletterSignup\LaravelNewsletterSignupServiceProvider',
         'DaveJamesMiller\Breadcrumbs\ServiceProvider',
+         'Themonkeys\ErrorEmailer\ErrorEmailerServiceProvider',
 
     ),
 
