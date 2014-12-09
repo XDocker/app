@@ -3566,5 +3566,55 @@
         "keywords": [
             "laravel"
         ]
+    },
+    {
+        "name": "themonkeys/error-emailer",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/TheMonkeys/laravel-error-emailer.git",
+            "reference": "27d8ace45b12e8a9d3daa0c83bb7f322683751ea"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/TheMonkeys/laravel-error-emailer/zipball/27d8ace45b12e8a9d3daa0c83bb7f322683751ea",
+            "reference": "27d8ace45b12e8a9d3daa0c83bb7f322683751ea",
+            "shasum": ""
+        },
+        "require": {
+            "illuminate/support": "~4.0",
+            "php": ">=5.3.0"
+        },
+        "time": "2014-02-26 00:42:33",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "src/migrations"
+            ],
+            "psr-0": {
+                "Themonkeys\\ErrorEmailer": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "themonkeys",
+                "email": "developers@themonkeys.com.au"
+            }
+        ],
+        "description": "Emails you whenever an error occurs on your server",
+        "homepage": "http://github.com/TheMonkeys/laravel-error-emailer",
+        "keywords": [
+            "email",
+            "error",
+            "exception",
+            "laravel",
+            "sysadmin"
+        ]
     }
 ]

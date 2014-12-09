@@ -11,6 +11,7 @@ return array(
     'Woodling' => array($vendorDir . '/summerstreet/woodling/src'),
     'Whoops' => array($vendorDir . '/filp/whoops/src'),
     'Way\\Generators' => array($vendorDir . '/way/generators/src'),
+    'Themonkeys\\ErrorEmailer' => array($vendorDir . '/themonkeys/error-emailer/src'),
     'System' => array($vendorDir . '/phpseclib/phpseclib/phpseclib'),
     'Symfony\\Component\\Yaml\\' => array($vendorDir . '/symfony/yaml'),
     'Symfony\\Component\\Translation\\' => array($vendorDir . '/symfony/translation'),

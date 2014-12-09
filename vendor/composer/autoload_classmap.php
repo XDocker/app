@@ -3452,6 +3452,8 @@ return array(
     'System_SSH_Agent_Identity' => $vendorDir . '/phpseclib/phpseclib/phpseclib/System/SSH/Agent.php',
     'TestCase' => $baseDir . '/app/tests/library/TestCase.php',
     'Text_Template' => $vendorDir . '/phpunit/php-text-template/Text/Template.php',
+    'Themonkeys\\ErrorEmailer\\ErrorEmailer' => $vendorDir . '/themonkeys/error-emailer/src/Themonkeys/ErrorEmailer/ErrorEmailer.php',
+    'Themonkeys\\ErrorEmailer\\ErrorEmailerServiceProvider' => $vendorDir . '/themonkeys/error-emailer/src/Themonkeys/ErrorEmailer/ErrorEmailerServiceProvider.php',
     'Ticket' => $baseDir . '/app/models/Ticket.php',
     'TicketComments' => $baseDir . '/app/models/TicketComments.php',
     'TicketController' => $baseDir . '/app/controllers/support/TicketController.php',
