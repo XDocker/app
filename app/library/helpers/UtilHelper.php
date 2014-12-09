@@ -32,7 +32,7 @@ class UtilHelper
 	{
 		$data['deploymentName'] = $deploymentName;
 		$data['accountName'] = $accountName;
-		$subeje		
+	
 		Mail::send($template, $data, function($message) use ($user, $subject)
 		{
 		  $message->to($user->email, $user->username)
