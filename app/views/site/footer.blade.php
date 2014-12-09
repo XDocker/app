@@ -2,13 +2,18 @@
 	<div class="container">
 
 		<div class="row clearfix">
-			<div class="col-md-4 col-md-offset-4 column">
-				<p class="muted credit text-center">
+		<div class="col-md-8 column pull-left" style="margin-top: 3%;">
+				<p class="muted credit text-center pull-left">
+					<img src="{{{ asset('assets/ico/favicon.ico') }}}" alt="Powered By Xervmon">
+					<a href="https://www.xervmon.com">Copyright <i class="fa fa-copyright"></i> 2014-2015 | Powered By Xervmon</a>
+					<!--
 					<img src="{{{ asset('assets/ico/favicon.ico') }}}" alt="{{{ Lang::get('site.footertitle') }}}"/>
-					<a href="https://www.xervmon.com">{{{ Lang::get('site.footertitle') }}}</a>
+					
+					<a href="https://www.xervmon.com"> Lang::get('site.footertitle') </a>
+					-->
 				</p>
 			</div>
-			<div class="col-md-4 column footer-social">
+		<div class="col-md-4 column footer-social">
 				<p> <strong>{{{ Lang::get('site.follow_us') }}}</strong></p>
 				<p class=" footer-social-icons">
 					<a href="https://hub.docker.com/u/xdocker/"><img width="32px" height="32px" src="{{{ asset('assets/img/providers/docker.jpg') }}}" alt="{{{ Lang::get('site.footertitle') }}}"/></a>
