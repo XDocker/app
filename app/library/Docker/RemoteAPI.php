@@ -26,8 +26,10 @@ class RemoteAPI
         return $status;
     }
 	
-	public static function Containers($url)
+	public static function Containers($deployment, $url)
 	{
+		echo '<pre>';
+		print_r($deployment); die();
 		$ret  = shell_exec('curl -X --connect-timeout 60 GET http://'.$url.':4243/containers/json');
 		$ret = StringHelper::isJson($ret) ? json_decode($ret) :  '';
 		return $ret;
