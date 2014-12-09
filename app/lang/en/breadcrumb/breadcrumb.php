@@ -7,7 +7,7 @@ return array(
 	'CreateAccount'           => 'CreateAccount',
 	'EditAccount'             => 'EditAccount',
 	'deployment'			  => 'deployment',
-	'CreateDeployent'		  => 'CreateDeployment',
+	'CreateDeployment'		  => 'CreateDeployment',
 	
 	'EngineLog'               => 'EngineLog',
 	'ServiceStatus'           => 'ServiceStatus',
