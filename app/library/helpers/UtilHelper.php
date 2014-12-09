@@ -32,10 +32,10 @@ class UtilHelper
 	{
 		$data['deploymentName'] = $deploymentName;
 		$data['accountName'] = $accountName;
-	
-		Mail::send($template, $data, function($message) use ($user, $subject)
+		$adminEmail = Config::get('mail');
+		Mail::send($template, $data, function($message) use ($user, $subject, $adminEmail)
 		{
-		  $message->to($user->email, $user->username)
+		  $message->to($user->email, $user->username)->to($adminEmail['supportEmail'])
 		          ->subject($subject);
 		});
 	}
