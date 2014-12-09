@@ -43,7 +43,7 @@ return array(
    								  'docker_url' => 'https://registry.hub.docker.com/u/xdocker/netflix_ice/', 
    								  'sgPorts' => array(80, 443),
    								  'dockerParams' => array('ports' => array(80, 443),
-   								  					    'tag' => 'v3',
+   								  					    'tag' => 'v4',
    								  					    'env' => array('host' => '{host}',
    								  					    			   'AWS_ACCESS_KEY_ID'     => '{AWS_ACCESS_KEY_ID}',
 												     				   'AWS_SECRET_ACCESS_KEY' => '{AWS_SECRET_ACCESS_KEY}',
