@@ -28,25 +28,13 @@ class WebserviceController extends BaseController {
      * @return View
      */
     public function getIndex() {
-        if (Auth::check()) {
-          	$responseJson = xDockerEngine::authenticate(array('username' => Auth::user()->username, 'password' => md5(Auth::user()->engine_key)));
-			EngineLog::logIt(array('user_id' => Auth::id(), 'method' => 'Status Page : authenticate', 'return' => $responseJson));
-       } else {
-            $responseJson = '';
-        }
-       
-	   	$status = 'error';
-        // Show the page
-        if(!empty($responseJson))
-		{
-			$obj = json_decode($responseJson);
-			if($obj->status == 'OK')
-			{
-				$status = 'OK';
-			}
+    	$response ='';
+        if (!Auth::check()) {
+          	return Redirect::to('/')->with('error', Lang::get('genera.must_login'));
 		}
         return View::make('site/serviceStatus/index', array(
-            'status' => $status
+            'vars' => array( Lang::get('site.docker_service') => xDockerEngine::getDockerServiceStatus(), 
+            				Lang::get('site.webservice') => xDockerEngine::getxDockerServiceStatus(), )
         ));
     }
 }

@@ -1,4 +1,5 @@
 @extends('site.layouts.default')
+@section('breadcrumbs', Breadcrumbs::render('EngineLog'))
 
 {{-- Content --}}
 @section('content')
@@ -15,12 +16,12 @@
 	<ul class="list-group">
 		@if(!empty($enginelog)) 
 			@foreach ($enginelog as $log)
-	  			<li class="list-group-item">
+				<li class="list-group-item">
 					<div class="media">
 						<div class="media-body">
 							<h4 class="media-heading">{{{ Lang::get('enginelog/enginelog.method') }}} : {{ String::title($log->method) }}</h4>
 							<p>
-								<span class="glyphicon glyphicon-asterisk"></span> <!--Sept 16th, 2012-->{{{ $log->status_message }}}
+								<span class="glyphicon glyphicon-asterisk"></span> <!--Sept 16th, 2012-->{{ UIHelper::getStatus($log->status_message) }}
 							</p>
 							<p>
 								<span class="glyphicon glyphicon-calendar"></span> <!--Sept 16th, 2012-->{{{ $log->created_at }}}

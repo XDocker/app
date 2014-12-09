@@ -1,3 +1,4 @@
+
 @extends('site.layouts.default')
 
 {{-- Content --}}
@@ -37,9 +38,9 @@
 		<div class="form-group {{{ $errors->has('username') ? 'error' : '' }}}">
 			<label class="col-md-2 control-label" for="cloud_account_id">Cloud Account <font color="red"> * </font></label>
 			<div class="col-md-6">
-				<select class="form-control" name="cloud_account_id" id="cloud_account_id" required>
+				<select class="form-control" name="cloudAccountId" id="cloudAccountId" required>
 					@foreach ($cloud_account_ids as $key => $value)
-						<option value="{{$value->id}}" data-cloud-provider="{{{$value->cloudProvider}}}" {{{ Input::old('cloud_account_id', isset($deployment->cloud_account_id) && ($deployment->cloud_account_id == $key) ? 'selected="selected"' : '') }}}>{{{$value->name}}}</option>
+						<option value="{{$value->id}}" data-cloud-provider="{{{$value->cloudProvider}}}" {{{ Input::old('cloudAccountId', isset($deployment->cloudAccountId) && ($deployment->cloudAccountId == $key) ? 'selected="selected"' : '') }}}>{{{$value->name}}}</option>
 					@endforeach
 				</select>
 			</div>
@@ -72,12 +73,16 @@
 			</div>
 		</div>
 		<!-- ./ form actions -->
+		
+		<input type="hidden" id="js-imagelookup" name="imageLookup" value="{{ URL::to('deployment/images') }}" />
+	
 	</form>
 @stop
 
 @section('scripts')
-<script src="{{asset('bower_components/jsonform/deps/underscore.js')}}"></script>
-<script src="{{asset('bower_components/jsonform/lib/jsonform.js')}}"></script>
+<script  src="{{asset('bower_components/jsonform/deps/underscore.js')}}"></script>
+<script  src="{{asset('bower_components/jsonform/lib/jsonform.js')}}"></script>
+<script src="{{asset('assets/js/loadlib.js')}}"></script>
 <script type="text/javascript">
 	
 	(function($){
@@ -86,7 +91,7 @@
 		var SAVED_PARAMETERS = {{ !empty($deployment -> parameters) ? $deployment -> parameters : 'null' }};
 		$(function(){
 			var $additionalCloudProviderFields = $('#additionalCloudProviderFields');
-			var $cloud_account_id = $('#cloud_account_id');
+			var $cloud_account_id = $('#cloudAccountId');
 			$cloud_account_id.on('change', function(){
 				var cloudProvider = $(this).find('option:selected').data('cloud-provider');
 				console.log('cloudProvider', cloudProvider);
@@ -130,36 +135,6 @@
 		
 	})(jQuery);
 	
-	loadImages = function(val)
-	{
-		var cloudProvider = $('#cloud_account_id').find('option:selected').data('cloud-provider');
-		var region = val.value;
-		var request = $.ajax({
-					  url: "{{ URL::to('deployment/images') }}",
-					  type: "GET",
-					  data: { "cloudProvider" : cloudProvider, "region" : val.value },
-					  dataType: "json"
-					});
-		request.done(function( msg ) {
-  			var option = '';
-  			for(var i = 0; i < msg.length; i++) {
-    			option += '<option value="' + msg[i] + '">' + msg[i] + '</option>';
-			}
-  			var str = '<div class="form-group {{{ $errors->has('username') ? 'error' : '' }}}"> ' +
-					  ' <label class="col-md-2 control-label" for="name">Instance Image</label> '+
-					  '<div class="col-md-6"> '+
-					  '<select class="form-control" name="instanceAmi" id="jsonform-0-elt-instanceAmi" >' +
-					  option +
-					  '</select>' +
-					  '</div> ' +
-						 '</div> ';
-  			$( "#instanceImage" ).html( str );
-  			
-		});
- 
-		request.fail(function( jqXHR, textStatus ) {
-		  alert( "Request failed: " + textStatus );
-		});
-	}
+	
 </script>
 @stop

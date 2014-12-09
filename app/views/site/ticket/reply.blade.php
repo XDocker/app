@@ -36,6 +36,16 @@
 		</div>
 		
 		<div class="form-group {{{ $errors->has('email') ? 'error' : '' }}}">
+			<label class="col-md-2 control-label" for="email">Deployment </label>
+			<div class="col-md-6">
+				<select class="form-control" name="deploymentId" id="deploymentId" readonly>
+					@foreach ($deployments as $key )
+						<option value="{{$key->id}}" {{{ Input::old('deploymentId', isset($ticket->deploymentId) && ($ticket->deploymentId == $key->id) ? 'selected="selected"' : '') }}}>{{{ $key ->name}}}</option>
+					@endforeach
+				</select>
+			</div>
+		</div>
+		<div class="form-group {{{ $errors->has('email') ? 'error' : '' }}}">
 			<label class="col-md-2 control-label" for="email">Priority </label>
 			<div class="col-md-6">
 				<select class="form-control" name="priority" id="priority" readonly>
@@ -45,6 +55,8 @@
 				</select>
 			</div>
 		</div>
+		
+		
 		
 		<div class="form-group {{{ $errors->has('description') ? 'has-error' : '' }}}">
 			<label class="col-md-2 control-label" for="email">Comment <font color="red">*</font></label>
@@ -58,21 +70,42 @@
 		<div class="form-group">
 			<div class="col-md-offset-2 col-md-10">
 				<a href="{{ URL::to('ticket') }}" class="btn btn-default">Back</a>
-				<button type="submit" class="btn btn-primary">Comment</button>
+				<button type="button" class="btn btn-primary" onclick="saveComment({{{$ticket->id}}}, '{{{URL::to('ticket/' . $ticket->id . '/reply')}}}');">Comment</button>
 			</div>
 		</div>
-		<!--
 		@foreach($ticketComments as $comment)
 		<div class="form-group {{{ $errors->has('comment') ? 'has-error' : '' }}}">
+			<label class="col-md-2 control-label"></label>
 			<div class="col-md-6">
-            		<textarea class="form-control full-width wysihtml5" name="pastComment" value="pastComment" rows="3" readonly>{{{$comment}}}</textarea>
+			@if($comment->comments == '')
+			<div class="well well-small"><font color="blue">No responses yet - Be first to respond<font></div>						
+			@else
+			@foreach($userList as $user)
+				<div class="well well-small" readonly>
+					<div class="nav nav-tabs span2 clearfix">	
+						Recent Comment:	{{{$comment->comments}}}
+					</div>		
+					<div class="nav nav-tabs span2 clearfix">				
+						Username:	{{{$user->username}}}  
+					</div>	
+					<div class="nav nav-tabs span2 clearfix">				
+						Email ID:	{{{$user->email}}}  
+					</div>						
+					<div class="nav nav-tabs span2 clearfix">		
+						Create At:	{{{$comment->created_at}}}  
+					</div>	
+				</div>
+			@endforeach
+			@endif
 			</div>
 		</div>
 		@endforeach
-		-->
 		<!-- ./ form actions -->
 	</form>
+	
 @stop
 
 @section('scripts')
 @stop
+
+<script src="{{asset('assets/js/comment.js')}}"></script>

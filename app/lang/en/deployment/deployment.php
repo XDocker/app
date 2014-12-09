@@ -15,5 +15,10 @@ return array(
 	'empty_deployments'  		   => 'You do not have any deployments. Create one by clicking on "Add New Cloud Deployment" below',
 	'deployment.account_required'  => 'To deploy, please create the Account first',
 	'deployment_updated'   => 'Deployment Updated successfully.',
+	'account_required'  => 'To deploy, please create the Account first',
+	'status' => 'In Progress',
+	'monthly' => '(730 hours / Month)',
+	'docker_service_down' => 'Docker service down!',
+	'xdocker_service_down' => 'xDocker service down!',
 
 );

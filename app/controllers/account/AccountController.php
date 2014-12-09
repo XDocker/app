@@ -50,24 +50,26 @@ class AccountController extends BaseController {
      * Displays the form for cloud account creation
      *
      */
-    public function getCreate($account = false) {
-        $mode = $account !== false ? 'edit' : 'create';
-        $account = $account !== false ? CloudAccount::where('user_id', Auth::id())->findOrFail($account->id) : null;
-        $providers = Config::get('account_schema');
+    public function getCreate($id = false) {
+        $mode = $id !== false ? 'edit' : 'create';
+		$account =  $id !== false ? CloudAccountHelper::findAndDecrypt($id) : null;
+		$providers = Config::get('account_schema');
         return View::make('site/account/create_edit', compact('mode', 'account', 'providers'));
     }
     /**
      * Saves/Edits an account
      *
      */
-    public function postEdit($account = false) {
+    public function postEdit($id = false) {
+    	if($id !== false)
+    		$account = CloudAccount::where('user_id', Auth::id())->findOrFail($id);
         try {
             if (empty($account)) {
                 $account = new CloudAccount;
             } else if ($account->user_id !== Auth::id()) {
                 throw new Exception('general.access_denied');
             }
-
+		    
             $account->name = Input::get('name');
             $account->cloudProvider = Input::get('cloudProvider');
             $account->credentials = json_encode(Input::get('credentials'));
@@ -75,9 +77,11 @@ class AccountController extends BaseController {
             
             $conStatus = CloudProvider::authenticate($account);
             
+            
             if ($conStatus == 1) {
-                $success = $account->save();
-                return Redirect::intended('account')->with('success', Lang::get('account/account.account_updated'));
+            	Log::info('Credentials are encrypted before saving to DB.');
+				CloudAccountHelper::save($account);
+            	return Redirect::intended('account')->with('success', Lang::get('account/account.account_updated'));
             } else {
                 return Redirect::to('account')->with('error', Lang::get('account/account.account_auth_failed'));
             }
@@ -94,6 +98,16 @@ class AccountController extends BaseController {
      *
      */
     public function postDelete($account) {
+    		
+    	if(empty($account->id)) $account = CloudAccount::where('user_id', Auth::id())->find($account);
+		
+		$deployment = Deployment::where('user_id', Auth::id())->where('cloudAccountId', $account->id)->get();
+		if(!$deployment->isEmpty())
+		{
+			  return Redirect::to('account')->with('error', 'Deployment is linked with this account and hence cannot be deleted');
+		}
+		
+		
         CloudAccount::where('id', $account->id)->where('user_id', Auth::id())->delete();
         
         $id = $account->id;

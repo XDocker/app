@@ -40,7 +40,7 @@ class CloudProvider {
     
    public static function authenticate($account) 
 	{
-	 	return self::getDriver($account)->authenticate();
+		return self::getDriver($account)->authenticate();
     }
 	 
 	public static function getDriver($account)
@@ -60,7 +60,8 @@ class CloudProvider {
 		switch ($instanceAction)
 		{
 			case 'start' :
-				$response = self::getDriver($account)->startInstances(array('InstanceIds' =>array($instanceID), 'DryRun' => false, ));
+				
+				$response = self::getDriver($account)->startInstances(array('DryRun' => false, 'InstanceIds' =>array($instanceID),  ));
 				break;
 			case 'stop' :
 				$response = self::getDriver($account)->stopInstances(array('DryRun' => false, 'InstanceIds' =>array($instanceID)));
@@ -71,8 +72,61 @@ class CloudProvider {
 			case 'terminate' :
 				$response = self::getDriver($account)->terminateInstances(array('DryRun' => false, 'InstanceIds' =>array($instanceID)));
 				break;	
+				
+			case 'describeInstances':
+				$response = self::getDriver($account)->describeInstances(array('DryRun' => false, 'InstanceIds' =>array($instanceID)));
+				break;	
+			case 'downloadKey' :
+				$responseJson = xDockerEngine::authenticate(array('username' => Auth::user()->username, 'password' => md5(Auth::user()->engine_key)));
+		 		EngineLog::logIt(array('user_id' => Auth::id(), 'method' => 'authenticate-executeAction', 'return' => $responseJson));
+		 		$obj = json_decode($responseJson);
+				if(!empty($obj) && $obj->status == 'OK')
+		 		{
+		 			$response = xDockerEngine::downloadKey(array('token' =>$obj->token, 'cloudProvider' => $account->cloudProvider, 'instanceRegion' => $account ->instanceRegion));
+					Log::info('downloadKey Json:'.$response);
+					if(StringHelper::isJson($response)) 
+					{
+						$response = json_decode($response, true) ;
+						$response['message'] = 'Key is returned in field key';
+					}
+					else $response = array('status' => 'error', 'message' => 'Error occured while downloading keys');
+				}
+				else if(!empty($obj) && $obj->status == 'error')
+		 		{
+					Log::error('Error occured while downloading key' . $obj->message);
+					$response = array('status' => $obj->status, 'message' => 'Unexpected error! Contact Support' );
+				}
+				else
+		 		{
+					Log::error('Error occured while downloading key');
+					$response = array('status' => 'error', 'message' => 'Unexpected error! Contact Support' );
+				}
+				break;
 		}
 		return $response;
+	}
+
+	public static function getState($cloudAccountId, $instanceID)
+	{
+		$account = CloudAccountHelper::findAndDecrypt($cloudAccountId);
+		
+		$data = self::executeAction('describeInstances', $account, $instanceID);
+		if($data['status'] == 'OK')
+		{
+			if(!empty($data['message']['Reservations'][0]['Instances'][0]['State']['Name']))
+			
+				return UIHelper::getLabel($data['message']['Reservations'][0]['Instances'][0]['State']['Name']);
+			else
+				return UIHelper::getLabel('NA');
+		}
+		else if($data['status'] == 'error')
+		{
+			return UIHelper::getLabel($data['status']);
+		}
+		else
+		{
+			return UIHelper::getLabel('NA');
+		}
 	}
 	
 	

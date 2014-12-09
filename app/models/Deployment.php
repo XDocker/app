@@ -1,5 +1,9 @@
 <?php
 
+use Illuminate\Database\Eloquent\SoftDeletingTrait;
+
 class Deployment extends \Eloquent {
-	protected $fillable = [];
+	use SoftDeletingTrait;
+    protected $fillable = [];
+	protected $softDelete = true;
 }

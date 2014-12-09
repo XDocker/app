@@ -122,3 +122,24 @@ Route::filter('detectLang',  function($route, $request, $lang = 'auto')
         App::setLocale($userLang);
     }
 });
+
+/** 
+ * Enforce https.
+ */
+App::before(function($request)
+{
+	$settings = Config::get('app');
+	if($settings['app_environment'] == 'production')
+	{
+    	if( ! Request::secure())
+    	{
+        	return Redirect::secure(Request::path());
+    	}
+	}
+});
+
+App::error(function(\Illuminate\Session\TokenMismatchException $exception)
+{
+    return Redirect::route('login')->with('message','Your session has expired. Please try logging in again.');
+});
+

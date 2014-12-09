@@ -1,3 +1,5 @@
+@section('breadcrumbs', Breadcrumbs::render('CreateAccount'))
+@section('breadcrumbs', Breadcrumbs::render('EditAccount'))
 @extends('site.layouts.default')
 
 {{-- Content --}}

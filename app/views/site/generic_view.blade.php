@@ -17,15 +17,14 @@
 							$result = new stdClass();
 							$result ->instance_id = '';
 						}
-						$prices = EC2InstancePrices::OnDemand($deployment->parameters);
-						print_r($prices); die();
+						
+						
 					?>
 		  			<li class="list-group-item">
 						<div class="media">
 							<p>
-								<a href="{{ URL::to('account/'.$deployment->cloud_account_id.'/edit') }}" class="pull-left" href="#">
-								    <img class="media-object img-responsive" src="{{ asset('/assets/img/providers/'.Config::get('provider_meta.'.$deployment->cloudProvider.'.logo')) }}" alt="{{ $deployment->cloudProvider }}" />
-								    <p class="text-center">{{{$deployment->accountName}}}</p>
+								<a alt="{{ $deployment->accountName }}" title="{{ $deployment->accountName }}" href="{{ URL::to('account/'.$deployment->cloudAccountId.'/edit') }}" class="pull-left" href="#">
+								    <img title="{{ $deployment->accountName }}" class="media-object img-responsive" src="{{ asset('/assets/img/providers/'.Config::get('provider_meta.'.$deployment->cloudProvider.'.logo')) }}" alt="{{ $deployment->accountName }}" />
 								</a> 
 							</p>
 							<form class="pull-right" method="post" action="{{ URL::to('deployment/' . $deployment->id . '/refresh') }}">
@@ -37,34 +36,73 @@
 							<form class="pull-right" method="post" action="{{ URL::to('deployment/' . $deployment->id . '/delete') }}">
 								<!-- CSRF Token -->
 								<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
+								<input type="hidden" name="instanceAction" value="delete" />
+								<input type="hidden" name="instanceID" value="{{{ $result->instance_id }}}" />
+								<!-- ./ csrf token -->
+								<button alt="Deletes the deployment record and not the instance from your AWS account." title="Deletes the deployment record and not the instance from your AWS account." type="submit" class="btn btn-danger pull-right" role="button"><span class="glyphicon glyphicon-remove"></span></button>
+							</form>
+							<form class="pull-right" method="post" action="{{ URL::to('deployment/' . $deployment->id . '/terminate') }}">
+								<!-- CSRF Token -->
+								<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
 								<input type="hidden" name="instanceAction" value="terminate" />
 								<input type="hidden" name="instanceID" value="{{{ $result->instance_id }}}" />
 								<!-- ./ csrf token -->
-								<button type="submit" class="btn btn-danger pull-right" role="button"><span class="glyphicon glyphicon-trash"></span></button>
+								<button alt="Terminates the Instance from your AWS account." title="Terminates the Instance from your AWS account." type="submit" class="btn btn-warning pull-right" role="button"><span class="glyphicon glyphicon-trash"></span></button>
 							</form>
 							<div class="media-body">
 								
-								<h4 class="media-heading">{{ String::title($deployment->name) }}</h4>
+								<h4 class="media-heading">{{ String::title($deployment->name) }} </h4>
 								<p>
-									<?php
+									<?php 
+									$url = URL::to('deployment/'.$deployment->id.'/instanceAction');
+									$downloadUrl = URL::to('deployment/'.$deployment->id.'/downloadKey');
+									$logUrl = URL::to('deployment/'.$deployment->id.'/log');
 									if(in_array($deployment->status, array('Completed', 'start', 'stop')))
 										{
-											$url = URL::to('deployment/'.$deployment->id.'/instanceAction');
-											$anchor = '<a target="_blank" href="'.xDockerEngine::getProtocol($deployment->docker_name). $result->public_dns .'">'.xDockerEngine::getDisplayName($deployment->docker_name).'</a>';
-											echo $result->instance_id . ' | ' .xDockerEngine::getDockerUrl($deployment->docker_name) . ' | ' .$anchor . '<br/>';
-											echo '<a href="#" onclick="start(\''.$url.'\',\''.$result->instance_id.'\', \''.csrf_token().'\')">Start</a> |'  .
-											'<a href="#" onclick="stop(\''.$url.'\',\''.$result->instance_id.'\', \''.csrf_token().'\')">Stop</a> |'  .
-											'<a href="#" onclick="restart(\''.$url.'\',\''.$result->instance_id.'\', \''.csrf_token().'\')">Restart</a>'  ;
+											$instanceState = CloudProvider::getState($deployment->cloudAccountId, $result->instance_id);
+											$anchor = '<a target="_blank" href="'.xDockerEngine::getProtocol($deployment->docker_name). $result->public_dns .xDockerEngine::urlAppend($deployment->docker_name).'">'.xDockerEngine::getDisplayName($deployment->docker_name).'</a>';
+											echo $result->instance_id .' ' .$instanceState .' | '.xDockerEngine::getDockerUrl($deployment->docker_name) . ' | ' .$anchor . ' | '  .xDockerEngine::documentationUrl($deployment->docker_name) 
+											.' | <a title="Support" alt="Support" class="glyphicon glyphicon-envelope" href="mailto:support@xervmon.com"></a>'
+											.' | <a title="Contact Xervmon to manage this" alt="Contact Xervmon to manage this" href="mailto:support@xervmon.com"><img src="'.asset('assets/ico/favicon.ico').'"/></a>'
+									
+											
+											//'<a title="Start" href="#" onclick="start(\''.$url.'\',\''.$result->instance_id.'\', \''.csrf_token().'\')"><span class="glyphicon glyphicon-collapse-up"> </span></a> | '  .
+											//'<a title="Stop" href="#" onclick="stop(\''.$url.'\',\''.$result->instance_id.'\', \''.csrf_token().'\')"><span class="glyphicon glyphicon-collapse-down"> </span></a> | '.
+											. ' | <a title="Download" href="#" onclick="downloadKey(\''.$downloadUrl.'\',\''.$result->instance_id.'\', \''.csrf_token().'\')"><span class="glyphicon glyphicon-cloud-download"> </span> Pem </a>'
+											. ' | <a title="ViewLog" href="'.$logUrl.'" ><span class="glyphicon glyphicon-th-list"> </span>  </a>';
+																					
 										}
+									else 
+									{
+										echo  xDockerEngine::getDockerUrl($deployment->docker_name) . ' | ' .xDockerEngine::getDisplayName($deployment->docker_name) . ' | ' .xDockerEngine::documentationUrl($deployment->docker_name).
+										' | <a title="Support" alt="Support" class="glyphicon glyphicon-envelope" href="mailto:support@xervmon.com"></a>'
+										.' | <a title="Contact Xervmon to manage this" alt="Contact Xervmon to manage this" href="mailto:support@xervmon.com"><img src="'.asset('assets/ico/favicon.ico').'"/></a>'
+										. ' | <a title="Download" href="#" onclick="downloadKey(\''.$downloadUrl.'\',\''.$result->instance_id.'\', \''.csrf_token().'\')"><span class="glyphicon glyphicon-cloud-download"> </span> Pem </a>'
+										. ' | <a title="ViewLog" href="'.$logUrl.'" ><span class="glyphicon glyphicon-th-list"> </span>  </a>';
+									}
 									?>
 									
 								</p>
+								<p>
+									
+									{{UIHelper::getDataOrganized($deployment->parameters)}}
+									
+								</p>
+								<p>
+									@if($deployment->status == 'Completed' && isset($result->public_dns))
+										@if (strpos($instanceState, 'running') !== false) 
+											{{UIHelper::getContainer(RemoteAPI::Containers($deployment, $result->public_dns))}}
+										@endif
+									@endif
+								</p>
+			
 								<p>
 									<span title="Created At"><span class="glyphicon glyphicon-calendar"></span> <strong>Build Date</strong>:{{{ $deployment->created_at }}}</span>
 								</p>
 								<p>
 									
 									<span title="Status">{{ UIHelper::getLabel($deployment->status) }}</span>
+									
 								</p>
 							</div>
 						</div>
@@ -103,39 +141,49 @@
 </p>
 <div class="media-block">
 	<ul class="list-group list-group-custom">
-		@foreach($dockerInstances as $instance)
-			@if(xDockerEngine::enabled($instance->name))
-	  			<li class="list-group-item">
-	  			<!--[is_automated] => 1
-	            [name] => vubui/ubuntu
-	            [is_trusted] => 1
-	            [is_official] => 
-	            [star_count] => 0
-	            [description] => -->
-				<div class="media">
-					<span class="pull-left" href="#">
-						<img style="width:25px;height:25px" class="media-object img-responsive" src="{{ asset('/assets/img/providers/'.xDockerEngine::getLogo($instance -> name)) }}" alt="{{ $instance -> name }}" />
-					</span>
-					<a href="{{ URL::to('deployment/create/') }}?name={{urlencode($instance -> name)}}" class="btn btn-primary pull-right" role="button"><span class="glyphicon glyphicon-play"></span></a>
-					<div class="media-body">
-						<h4 class="media-heading">{{{!empty($instance -> name)?$instance -> name:''}}}</h4>
-					    <p>
-					    	{{{!empty($instance -> description)?$instance -> description:''}}}
-						</p>
-						<p>
-					    	{{{!empty($instance -> is_automated)?$instance -> is_automated:'Not Automated'}}}
-					    	|
-					    	{{{!empty($instance -> is_trusted)?$instance -> is_trusted:'Not Trusted'}}}
-					    	|
-					    	{{{!empty($instance -> is_official)?$instance -> is_official:'Not Official'}}}
-					    	|
-					    	{{{!empty($instance -> star_count)?$instance -> star_count:'0'}}}
-						</p>
+		@if(!empty($dockerInstances))
+			@foreach($dockerInstances as $instance)
+				@if(xDockerEngine::enabled($instance->name))
+		  			<li class="list-group-item">
+		  			<!--[is_automated] => 1
+		            [name] => vubui/ubuntu
+		            [is_trusted] => 1
+		            [is_official] => 
+		            [star_count] => 0
+		            [description] => -->
+					<div class="media">
+						<span class="pull-left" href="#">
+							<img style="width:25px;height:25px" class="media-object img-responsive" src="{{ asset('/assets/img/providers/'.xDockerEngine::getLogo($instance -> name)) }}" alt="{{ $instance -> name }}" />
+						</span>
+						<a href="{{ URL::to('deployment/create/') }}?name={{urlencode($instance -> name)}}" class="btn btn-primary pull-right" role="button"><span class="glyphicon glyphicon-play"></span></a>
+						<div class="media-body">
+							<h4 class="media-heading">{{!empty($instance -> name)?xDockerEngine::getDockerUrl($instance->name).' ' .$instance->name:''}}</h4>
+						    <p>
+						    	{{{!empty($instance -> description) ? $instance -> description:''}}}
+							</p>
+							<p>
+						    	{{{!empty($instance -> is_automated)?$instance -> is_automated:'Not Automated'}}}
+						    	|
+						    	{{{!empty($instance -> is_trusted)?$instance -> is_trusted:'Not Trusted'}}}
+						    	|
+						    	{{{!empty($instance -> is_official)?$instance -> is_official:'Not Official'}}}
+						    	|
+						    	{{{!empty($instance -> star_count)?$instance -> star_count:'0'}}}
+						    	|
+						    	{{xDockerEngine::documentationUrl($instance->name)}}
+						    	|
+						    	<a title="Support" alt="Support" class="glyphicon glyphicon-envelope" href="mailto:support@xervmon.com"></a>'
+								| 
+								<a title="Contact Xervmon to manage this" alt="Contact Xervmon to manage this" href="mailto:support@xervmon.com"><img src="{{{ asset('assets/ico/favicon.ico') }}}"/></a>
+									
+						    	
+							</p>
+						</div>
 					</div>
-				</div>
-			</li>
-			@endif
-		@endforeach
+				</li>
+				@endif
+			@endforeach
+		@endif
 	</ul>
 	<!-- <div class="text-center">
 		<div class="pagination">

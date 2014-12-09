@@ -46,6 +46,7 @@ return array(
     'File' => array($vendorDir . '/phpseclib/phpseclib/phpseclib'),
     'Fbf\\LaravelNewsletterSignup\\' => array($vendorDir . '/fbf/laravel-newsletter-signup/src'),
     'Doctrine\\Instantiator\\' => array($vendorDir . '/doctrine/instantiator/src'),
+    'DaveJamesMiller\\Breadcrumbs' => array($baseDir . '/src', $vendorDir . '/davejamesmiller/laravel-breadcrumbs/src'),
     'Curl' => array($baseDir . '/src', $vendorDir . '/curl/curl/src'),
     'Crypt' => array($vendorDir . '/phpseclib/phpseclib/phpseclib'),
     'ClassPreloader' => array($vendorDir . '/classpreloader/classpreloader/src'),
@@ -54,4 +55,5 @@ return array(
     'Bllim\\Datatables' => array($vendorDir . '/bllim/datatables/src'),
     'Aws\\Laravel' => array($baseDir . '/src'),
     'Aws' => array($vendorDir . '/aws/aws-sdk-php/src'),
+    '' => array($vendorDir . '/stage1/docker-php/src'),
 );

@@ -78,12 +78,18 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
+                    <a class="navbar-brand" href="{{{ URL::to('/') }}}"><img class="img-responsive" src="{{{ asset('assets/img/logo.png') }}}"></a>  
                 </div>
     			<div class="collapse navbar-collapse navbar-ex1-collapse">
     				<ul class="nav navbar-nav">
     					<li{{ (Request::is('admin') ? ' class="active"' : '') }}><a href="{{{ URL::to('admin') }}}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
     					<li{{ (Request::is('admin/blogs*') ? ' class="active"' : '') }}><a href="{{{ URL::to('admin/blogs') }}}"><span class="glyphicon glyphicon-list-alt"></span> Blog</a></li>
     					<li{{ (Request::is('admin/comments*') ? ' class="active"' : '') }}><a href="{{{ URL::to('admin/comments') }}}"><span class="glyphicon glyphicon-bullhorn"></span> Comments</a></li>
+    					<li{{ (Request::is('admin/accounts*') ? ' class="active"' : '') }}><a href="{{{ URL::to('admin/accounts') }}}"><span class="glyphicon glyphicon-credit-card"></span> Accounts</a></li>
+    					<li{{ (Request::is('admin/deployments*') ? ' class="active"' : '') }}><a href="{{{ URL::to('admin/deployments') }}}"><span class="glyphicon glyphicon-play-circle"></span> Deployments</a></li>
+    					
+    					<li{{ (Request::is('admin/tickets*') ? ' class="active"' : '') }}><a href="{{{ URL::to('admin/tickets') }}}"><span class="glyphicon glyphicon-list"></span> Tickets</a></li>
+    					
     					<li class="dropdown{{ (Request::is('admin/users*|admin/roles*') ? ' active' : '') }}">
     						<a class="dropdown-toggle" data-toggle="dropdown" href="{{{ URL::to('admin/users') }}}">
     							<span class="glyphicon glyphicon-user"></span> Users <span class="caret"></span>
@@ -91,6 +97,8 @@
     						<ul class="dropdown-menu">
     							<li{{ (Request::is('admin/users*') ? ' class="active"' : '') }}><a href="{{{ URL::to('admin/users') }}}"><span class="glyphicon glyphicon-user"></span> Users</a></li>
     							<li{{ (Request::is('admin/roles*') ? ' class="active"' : '') }}><a href="{{{ URL::to('admin/roles') }}}"><span class="glyphicon glyphicon-user"></span> Roles</a></li>
+    							<li{{ (Request::is('admin/subscribers*') ? ' class="active"' : '') }}><a href="{{{ URL::to('admin/subscribers') }}}"><span class="glyphicon glyphicon-user"></span> Subscribers</a></li>
+    					
     						</ul>
     					</li>
     				</ul>
@@ -136,10 +144,10 @@
     <script src="{{asset('assets/js/wysihtml5/wysihtml5-0.3.0.js')}}"></script>
     <script src="{{asset('assets/js/wysihtml5/bootstrap-wysihtml5.js')}}"></script>
     <script src="//cdn.datatables.net/1.9.4/js/jquery.dataTables.min.js"></script>
-    <script src="{{asset('assets/js/datatables-bootstrap.js')}}"></script>
-    <script src="{{asset('assets/js/datatables.fnReloadAjax.js')}}"></script>
-    <script src="{{asset('assets/js/jquery.colorbox.js')}}"></script>
-    <script src="{{asset('assets/js/prettify.js')}}"></script>
+    <script src="{{asset('assets/js/jquery-plugins/datatables-bootstrap.js')}}"></script>
+    <script src="{{asset('assets/js/jquery-plugins/datatables.fnReloadAjax.js')}}"></script>
+    <script src="{{asset('assets/js/jquery-plugins/jquery.colorbox.js')}}"></script>
+    <script src="{{asset('assets/js/jquery-plugins/prettify.js')}}"></script>
 
     <script type="text/javascript">
     	$('.wysihtml5').wysihtml5();

@@ -60,6 +60,13 @@
 	                    <a class="navbar-brand" href="{{{ URL::to('/') }}}"><img class="img-responsive" src="{{{ asset('assets/img/logo.png') }}}"></a>  
 	                </div>
 	                <div class="collapse navbar-collapse navbar-ex1-collapse" id="navbar-collapse-target">
+	                	<ul class="nav navbar-nav">
+	                		<li{{ (Request::is('data-security') ? ' class="active"' : '') }}><a href="{{{ URL::to('data-security') }}}"><span class="glyphicon glyphicon-lock"></span> {{{ Lang::get('site.data_security') }}}</a></li>
+    						<li{{ (Request::is('roadmap') ? ' class="active"' : '') }}><a href="{{{ URL::to('roadmap') }}}"><span class="glyphicon glyphicon-list-alt"></span> {{{ Lang::get('site.roadmap') }}}</a></li>
+	                		<li{{ (Request::is('devops') ? ' class="active"' : '') }}><a href="{{{ URL::to('devops') }}}"><span class="glyphicon glyphicon-plane"></span> {{{ Lang::get('site.devops') }}}</a></li>
+							<li{{ (Request::is('videos') ? ' class="active"' : '') }}><a href="{{{ URL::to('videos') }}}"><span class="glyphicon glyphicon-hd-video"></span> {{{ Lang::get('site.videos') }}}</a></li>
+					
+	                	</ul>	
 	                    <ul class="nav navbar-nav pull-right">
 	                        @if (Auth::check())
 		                        @if (Auth::user()->hasRole('admin'))
@@ -75,11 +82,9 @@
 	    								<li class="divider"></li>
 	    								<li><a href="{{{ URL::to('deployment') }}}"><span class="glyphicon glyphicon-play-circle"></span> {{{ Lang::get('site.deployments') }}}</a></li>
 	    								<li class="divider"></li>
-	    								<li><a href="{{{ URL::to('awsPricing') }}}"><span class="glyphicon glyphicon-inbox"></span> {{{ Lang::get('site.aws_pricing') }}}</a></li>
-	    								<li class="divider"></li>
 	    								<li><a href="{{{ URL::to('enginelog') }}}"><span class="glyphicon glyphicon-inbox"></span> {{{ Lang::get('site.enginelog') }}}</a></li>
 	    								<li class="divider"></li>
-	    								<li><a href="{{{ URL::to('ServiceStatus') }}}"><span class="glyphicon glyphicon-signal"></span> {{{ Lang::get('site.webserivce_status') }}}</a></li>
+	    								<li><a href="{{{ URL::to('ServiceStatus') }}}"><span class="glyphicon glyphicon-signal"></span> {{{ Lang::get('site.webservice_status') }}}</a></li>
 	    								
 	    							</ul>
 		                        </li>
@@ -88,7 +93,7 @@
 	    								<span class="glyphicon glyphicon-hand-up"></span> {{{ Lang::get('site.support') }}}	<span class="caret"></span>
 	    							</a>
 	    							<ul class="dropdown-menu">
-	    								<li><a href="{{{ URL::to('ticket') }}}"><span class="glyphicon glyphicon-exclamation-sign"></span> {{{ Lang::get('site.tickets') }}}</a></li>
+	    								<li><a href="{{{ URL::to('ticket') }}}"><span class="glyphicon glyphicon-question-sign"></span> {{{ Lang::get('site.tickets') }}}</a></li>
 	    							</ul>
 	    						</li>
 		                        <li class="dropdown">
@@ -111,6 +116,7 @@
 					</div>
 				</div>
 			</nav>
+			@section('breadcrumbs', Breadcrumbs::render('home'))
 			<!-- ./ navbar -->
 			<!--
 			<a class="banner-github {{ (Request::is('/') ? '' : 'hide') }}" href="https://github.com/XDocker/app" target="_blank">
@@ -118,7 +124,8 @@
 		    </a>
 			-->
 			<!-- Container -->
-			<div class="container clear-both">
+			<div class="container clear-both" style="margin-top: 3em;">
+				@yield('breadcrumbs')
 				
 				<!-- Notifications -->
 				@include('notifications')
@@ -133,20 +140,22 @@
 			<!-- the following div is needed to make a sticky footer -->
 			<div id="push"></div>
 			@include('site.footer')
-		   
 	    </div>
 		<!-- ./wrap -->
 
 		<!-- Javascripts
 		================================================== -->
         <script src="{{asset('bower_components/jquery/dist/jquery.min.js')}}"></script>
+        <script src="{{asset('assets/js/jquery-plugins/jquery.crypt.js')}}"></script>
         <script src="{{asset('bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
+        <script src="{{asset('assets/js/jquery-plugins/jquery.fileDownload.js')}}"></script>
+        <?php if(!Auth::check()) : ?>
+	        <script src="{{asset('assets/js/jquery-plugins/jssor.js')}}"></script>
+	        <script src="{{asset('assets/js/jquery-plugins/jssor.slider.mini.js')}}"></script>
+	        <script src="{{asset('assets/js/jquery-plugins/prettify.js')}}"></script>
+        @include('site.home.jsPartial')
+        <?php  endif; ?>
 
         @yield('scripts')
-
-        {{-- Load SumoMe for the marketing stuff --}}
-        <!--
-        <script src="//load.sumome.com/" data-sumo-site-id="d9c34610bfb1f1b8f5c8cbfdce3a831f7e81aac9ef616668be06e0ffed04f25b" async></script>
-		-->
 	</body>
 </html>

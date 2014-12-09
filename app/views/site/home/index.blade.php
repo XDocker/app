@@ -19,17 +19,11 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">{{{ Lang::get('site.name') }}}</h2>
+                    <h3 class="section-heading">{{{ Lang::get('site.name') }}}</h3>
                     <h5 class="section-subheading text-muted">{{{ Lang::get('site.tagline') }}}</h5>
-                    <h7 class="section-subheading text-muted btn btn-success">{{{ Lang::get('site.launch') }}}</h7>
-                    
-                    <br/><br/>
-        	 			@include('laravel-newsletter-signup::signup')
-                		
-				</div>
+                   
+		</div>
             </div>
-            <br/>
-            <br/>
             <div class="row text-center">
                 <div class="col-md-4">
                     <span class="fa-stack fa-4x">
@@ -61,13 +55,36 @@
                 </div>
             </div>
         </div>
-        <br/>
         <div class="alert alert-info text-center">
         	<h4>{{{ Lang::get('home.xervmon_intro') }}}</h4>
         	<a target="_blank" href="https://www.xervmon.com/product" class="btn btn-primary">{{{ Lang::get('home.xervmon_call_to_action') }}}</a>
-        	
         </div>
-       
+       <div class="text-center">
+       	 <!-- You can move inline styles to css file or css block. -->
+       	 <p><h4><font color="3399FF">Ready to be deployed now on Amazon AWS</font></h4></p>
+	    <div id="slider1_container" style="position: relative; top: 0px; center: 0px; width: 980px; height: 100px; overflow: hidden; ">
+	
+	        <!-- Loading Screen -->
+	        <div u="loading" style="position: absolute; top: 0px; center: 0px;">
+	            <div style="filter: alpha(opacity=70); opacity:0.7; position: absolute; display: block;
+	                background-color: #000; top: 0px; left: 0px;width: 100%;height:100%;">
+	            </div>
+	            <div style="position: absolute; display: block; background: url({{{ asset('assets/img/loading.gif') }}}) no-repeat center center;
+	                top: 0px; left: 0px;width: 100%;height:100%;">
+	            </div>
+	        </div>
+	
+	        <!-- Slides Container -->
+	        <div u="slides" style="cursor: move; position: absolute; center: 0px; top: 0px; width: 980px; height: 100px; overflow: hidden;">
+	            @foreach($dockerInstances as $instance)
+					@if(xDockerEngine::enabled($instance->name))
+						<div><img u="image" title="{{ $instance -> name }} : {{ $instance -> description }}" alt="{{ $instance -> name }} : {{ $instance -> description }}" src="{{ asset('/assets/img/providers/'.xDockerEngine::getLogo($instance -> name)) }}" /></div>
+	            	@endif
+	            @endforeach
+	           
+	        </div>
+     	</div>
+       </div>
     </section>
 @else
 	@include('site.generic_view')

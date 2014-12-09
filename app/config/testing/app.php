@@ -26,7 +26,7 @@ return array(
 	|
 	*/
 
-	'url' => 'http://app.xdocker.org',
+	'url' => 'http://qa.xdocker.org',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -65,7 +65,7 @@ return array(
 	|
 	*/
 
-	'key' => 'g25wmy6i9MUReI46iL3hB9Q2IlDHQhU2',
+	'key' => '741952hheeyy66#c',
 
 	'cipher' => MCRYPT_RIJNDAEL_128,	
 
@@ -115,9 +115,11 @@ return array(
         'Bllim\Datatables\DatatablesServiceProvider', // Datatables
 
         /* Uncomment for use in development */
-//        'Way\Generators\GeneratorsServiceProvider', // Generators
-//        'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider', // IDE Helpers
-
+        'Way\Generators\GeneratorsServiceProvider', // Generators
+        'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider', // IDE Helpers
+        'Fbf\LaravelNewsletterSignup\LaravelNewsletterSignupServiceProvider',
+        'DaveJamesMiller\Breadcrumbs\ServiceProvider',
+        
     ),
 
     /*
@@ -191,9 +193,12 @@ return array(
         'String'          => 'Andrew13\Helpers\String', // String
         'Carbon'          => 'Carbon\Carbon', // Carbon
         'Datatables'      => 'Bllim\Datatables\Datatables', // DataTables
+         'Breadcrumbs' => 'DaveJamesMiller\Breadcrumbs\Facade',
 
     ),
 
-    'available_language' => array('en', 'pt', 'es'),
+    'available_language' => array('en'),
+    
+	'app_environment' => 'dev'
 
 );

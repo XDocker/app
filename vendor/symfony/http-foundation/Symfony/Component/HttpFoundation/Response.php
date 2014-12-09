@@ -379,7 +379,6 @@ class Response
             fastcgi_finish_request();
         } elseif ('cli' !== PHP_SAPI) {
             static::closeOutputBuffers(0, true);
-            flush();
         }
 
         return $this;
@@ -1077,8 +1076,8 @@ class Response
             return false;
         }
 
-        $notModified   = false;
-        $lastModified  = $this->headers->get('Last-Modified');
+        $notModified = false;
+        $lastModified = $this->headers->get('Last-Modified');
         $modifiedSince = $request->headers->get('If-Modified-Since');
 
         if ($etags = $request->getEtags()) {

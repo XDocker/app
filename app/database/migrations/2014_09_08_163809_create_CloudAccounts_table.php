@@ -18,12 +18,14 @@ class CreateCloudAccountsTable extends Migration {
      * @return void
      */
     public function up() {
-        Schema::create('cloud_accounts', function (Blueprint $table) {
+        Schema::create('cloudAccounts', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+			$table->string('cloudProvider');
             $table->text('credentials');
-            $table->integer('user_id')->unsigned()->index();
+			$table->integer('user_id')->unsigned()->index();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+			$table->softDeletes();
             $table->timestamps();
         });
     }
@@ -33,6 +35,6 @@ class CreateCloudAccountsTable extends Migration {
      * @return void
      */
     public function down() {
-        Schema::drop('cloud_accounts');
+        Schema::drop('cloudAccounts');
     }
 }

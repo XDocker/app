@@ -28,8 +28,8 @@ class TicketController extends BaseController {
      */
     public function __construct(Ticket $ticket, User $user) {
         parent::__construct();
-        $this->ticket = $ticket;
         $this->user = $user;
+		$this->ticket = $ticket;
     }
     /**
      * Returns all the Accounts for logged in user.
@@ -39,11 +39,19 @@ class TicketController extends BaseController {
     public function getIndex() {
         // Get all the user's accounts
         //Auth::id() : gives the logged in userid
-        $tickets = $this->ticket->where('user_id', Auth::id())->orderBy('created_at', 'DESC')->paginate(10);
+        $open_tickets = $this->ticket->where('user_id', Auth::id())->where('active', TRUE)->orderBy('created_at', 'DESC')->paginate(10);
+		$closed_tickets = $this->ticket->where('user_id', Auth::id())->where('active', FALSE)->orderBy('created_at', 'DESC')->paginate(10);
+		if(!Auth::check())
+		{
+			Log::error("Not authorized access");
+			return Redirect::to('ticket')->with('error', Lang::get('ticket/ticket.ticket_auth_failed'));
+		}
         // var_dump($accounts, $this->accounts, $this->accounts->owner);
         // Show the page
         return View::make('site/ticket/index', array(
-            'tickets' => $tickets
+           
+			'open_tickets' => $open_tickets,
+			'closed_tickets' => $closed_tickets
         ));
     }
     /**
@@ -54,7 +62,8 @@ class TicketController extends BaseController {
         $mode = $ticket !== false ? 'edit' : 'create';
         $ticket = $ticket !== false ? Ticket::where('user_id', Auth::id())->findOrFail($ticket->id) : null;
 		$priorities =array('urgent', 'high', 'medium', 'low');
-        return View::make('site/ticket/create_edit', compact('mode', 'ticket', 'priorities'));
+		$deployments = Deployment::where('user_id', Auth::id())->get();
+        return View::make('site/ticket/create_edit', compact('mode', 'ticket', 'priorities', 'deployments'));
     }
     /**
      * Saves/Edits an account
@@ -72,6 +81,8 @@ class TicketController extends BaseController {
             $ticket->description = Input::get('description');
             $ticket->active = 1;
 			$ticket->priority = Input::get('priority');
+			$deploymentId = Input::get('deploymentId');
+			$ticket->deploymentId = empty($deploymentId) ? 0 : $deploymentId;
             $ticket->user_id = Auth::id(); // logged in user id
             
              $success = $ticket->save();
@@ -92,10 +103,12 @@ class TicketController extends BaseController {
 	{
 		$ticket = $id !== false ? Ticket::where('user_id', Auth::id())->findOrFail($id) : null;
 		
-		$ticketComments = $id !== false ? Ticket::where('user_id', Auth::id())->findOrFail($id) : null;
-		//@TODO get all comments for the tickets.
+		$userList = $id !== false ? DB::table('users')->select('username', 'email')->where('id', Auth::id())->get() : null;
+		
+		$ticketComments = $id !== false ? Ticket::leftJoin('ticket_comments', 'tickets.id', '=', 'ticket_comments.ticket_id')->where('tickets.user_id', Auth::id())->orderBy('ticket_comments.created_at', 'DESC')->get() : null;
 		$priorities =array('urgent', 'high', 'medium', 'low');
-        return View::make('site/ticket/reply', compact('mode', 'ticket', 'priorities', 'ticketComments'));
+		$deployments = Deployment::where('user_id', Auth::id())->get();
+        return View::make('site/ticket/reply', compact('mode', 'ticket', 'priorities', 'ticketComments', 'userList', 'deployments'));
 	}
 	
 	 public function postReply($id = false) {
@@ -114,9 +127,11 @@ class TicketController extends BaseController {
 			
 			 
             if ($success) {
-                return Redirect::intended('ticket')->with('success', Lang::get('ticket/ticket.ticket_comments_updated'));
+				print json_encode(array('status' => 'OK', 'message' => Lang::get('ticket/ticket.ticket_comments_updated')));
+               // return Redirect::intended('ticket')->with('success', Lang::get('ticket/ticket.ticket_comments_updated'));
             } else {
-                return Redirect::to('ticket')->with('error', Lang::get('ticket/ticket.ticket_comment_update_failed'));
+				print json_encode(array('status' => 'error', 'message' =>Lang::get('ticket/ticket.ticket_comment_update_failed')));
+               // return Redirect::to('ticket')->with('error', Lang::get('ticket/ticket.ticket_comment_update_failed'));
             }
         }
         catch(Exception $e) {
