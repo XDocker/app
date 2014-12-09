@@ -33,6 +33,7 @@ class UtilHelper
 		$data['deploymentName'] = $deployment->name;
 		$data['dockerImage'] = $deployment->docker_name;
 		$data['accountName'] = $accountName;
+		$data['timestamp'] = $deployment->created_at;
 		$adminEmail = Config::get('mail');
 		Mail::send($template, $data, function($message) use ($user, $subject, $adminEmail)
 		{
