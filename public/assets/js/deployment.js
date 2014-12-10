@@ -84,7 +84,7 @@ showMessage = function (response)
 					'<h4> Error </h4> ' + response.message +
    			  '</div>';
     }
-}
+};
 
 function startContainer(id)
 {
