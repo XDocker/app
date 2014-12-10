@@ -169,6 +169,7 @@ Inverse	<span class="label label-inverse">Inverse</span>
 	                    	'<th>Image</th>'.
 	                    	'<th>Ports</th>'.
 	                    	'<th>Created</th> '.
+	                    	'<th>Actions</th> '.
                 	'</thead>';
 		 	foreach($data as $row)
 			{
@@ -177,8 +178,8 @@ Inverse	<span class="label label-inverse">Inverse</span>
 				//$str .= '<td>' . $row -> Id .'</td>';
 				$str .= '<td>' . $row -> Image .'</td>';
 				$str .= '<td>' . self::getPorts($row->Ports) .'</td>';
-				$str .= '<td>' . StringHelper::timeAgo($row -> Created) .'</td>';
-				
+				$str .= '<td>' . $row -> Created. '<br/>' .StringHelper::timeAgo($row -> Created) .'</td>';
+				$str .= '<td>' . '<a href="" onclick="stopContainer(\''. $row->Id.'\') return false;">Stop</a>';
 				$str .= '</tr>';
 				
 			}

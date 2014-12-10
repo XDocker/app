@@ -39,7 +39,8 @@ class RemoteAPI
                 $arr = [];
                 foreach($containers as $container)
                 {
-                        $arr[] = json_decode(json_encode($container->getData()));
+                		$obj = json_decode(json_encode($container->getData()));
+						$arr[] = $obj;
                 }       
                 return $arr;
         }
