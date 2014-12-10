@@ -179,8 +179,8 @@ Inverse	<span class="label label-inverse">Inverse</span>
 				$str .= '<td>' . $row -> Image .'</td>';
 				$str .= '<td>' . self::getPorts($row->Ports) .'</td>';
 				$str .= '<td>' . $row -> Created. '<br/>' .StringHelper::timeAgo($row -> Created) .'</td>';
-				$str .= '<td>' . '<a href="" onclick="stopContainer(\''. $row->Id.'\') return false;"></a> |';
-				$str .=  '<a href="" onclick="startContainer(\''. $row->Id.'\') return false;"></a> </td>';
+				$str .= '<td>' . '<a href="" onclick="stopContainer(\''. $row->Id.'\') return false;"></a> </td>';
+				//$str .=  '<a href="" onclick="startContainer(\''. $row->Id.'\') return false;"></a> </td>';
 				$str .= '</tr>';
 				
 			}
