@@ -504,5 +504,15 @@ class DeploymentController extends BaseController {
 		//echo json_encode(EC2InstancePrices::On)
 	}
 
+	public function startContainer($id)
+	{
+		echo $id; die();
+	}
+	
+	public function stopContainer($id)
+	{
+		echo $id; die();
+	}
+
 	
 }

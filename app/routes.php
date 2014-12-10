@@ -186,6 +186,9 @@ Route::group(array(
 	Route::any('deployment/{deployment}/downloadKey', 'DeploymentController@getDownloadKey');
 	Route::any('deployment/{deployment}/refresh', 'DeploymentController@checkStatus');
 	
+	Route::any('deployment/{id}/startContainer', 'DeploymentController@startContainer');
+	Route::any('deployment/{id}/stopContainer', 'DeploymentController@stopContainer');
+	
 	Route::any('awsPricing/', 'AWSPricingController@getIndex'); 
 	
 	Route::group(array(

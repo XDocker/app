@@ -85,3 +85,18 @@ showMessage = function (response)
    			  '</div>';
     }
 }
+
+function startContainer(id)
+{
+	
+	$.ajax({
+	 type: "POST",
+	 url: 'deployment/'+id +'/startContainer',
+	 data: { "containerId": id}
+	 }).done(function(response) 
+	 {
+	 	console.log(response);
+	 	return response;
+		    //showMessage(response);
+	});	
+}
