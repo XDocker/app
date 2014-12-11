@@ -7,7 +7,6 @@
 <p class="text-center">
 	<a title="Github" href="{{URL::to('user/social')}}?provider=GitHub" class="social-git"><i class="fa fa-github-square fa-4x"></i></a>
 	<a title="LinkedIn" href="{{URL::to('user/social')}}?provider=LinkedIn" class="social-linkedin "><i class="fa fa-linkedin-square fa-4x"></i></a>
-	<a title="DockerHub" href="{{URL::to('user/social')}}?provider=DockerHub" class="social-linkedin "><i class="fa fa-4x"><img width="50px" height="46px" style="margin-bottom: -5px; border-radius: 10px;" src="{{{ asset('assets/img/providers/docker.jpg') }}}" alt="{{{ Lang::get('site.footertitle') }}}"/></i></a>
 	<a title="Amazon" href="#" id="LoginWithAmazon" class="social-amazon "><i class="fa fa-adn fa-4x"></i></a>
 </p>
 
