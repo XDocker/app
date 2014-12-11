@@ -20,7 +20,7 @@
   };
   (function(d) {
     var a = d.createElement('script'); a.type = 'text/javascript';
-    a.async = true; a.id = '{{Config::get('amazon_sdk')}}';
+    a.async = true; a.id = '{{Config::get('amazon.amazon_sdk')}}';
     a.src = '{{ Config::get('amazon.login_js') }}';
     d.getElementById('amazon-root').appendChild(a);
   })(document);

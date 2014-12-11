@@ -11,5 +11,3 @@ return array(
 	'amazon_oauth_api' => 'https://api.amazon.com/auth/o2/tokeninfo?access_token=',
 	'amazon_api_profile' => 'https://api.amazon.com/user/profile',
 );
-
-
