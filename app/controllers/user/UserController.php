@@ -283,7 +283,8 @@ class UserController extends BaseController {
     // Handle the response for Login with Amazon : http://login.amazon.com/website
     public function amazonLogin() {
         // verify that the access token belongs to us
-        $c = curl_init('https://api.amazon.com/auth/o2/tokeninfo?access_token=' . urlencode(Input::get('access_token')));
+        $startUrl = Config::get('amazon.amazon_oauth_api');
+        $c = curl_init($startUrl . urlencode(Input::get('access_token')));
         curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
          
         $r = curl_exec($c);
@@ -298,7 +299,7 @@ class UserController extends BaseController {
         }
          
         // exchange the access token for user profile
-        $c = curl_init('https://api.amazon.com/user/profile');
+        $c = curl_init(Config::get('amazon.amazon_api_profile'));
         curl_setopt($c, CURLOPT_HTTPHEADER, array('Authorization: bearer ' . Input::get('access_token')));
         curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
          
