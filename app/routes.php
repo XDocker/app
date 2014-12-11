@@ -117,6 +117,10 @@ Route::any('user/social/{action?}', array(
     "as" => "hybridauth",
     'uses' => 'UserController@socialLogin'
 ));
+
+//:: Amazon login return URL ::
+Route::post(URL::to(Config::get('amazon.return_route')), 'UserController@amazonLogin');
+
 # User RESTful Routes (Login, Logout, Register, etc)
 Route::controller('user', 'UserController');
 //:: Application Routes ::
