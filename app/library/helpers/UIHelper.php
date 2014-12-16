@@ -182,11 +182,11 @@ Inverse	<span class="label label-inverse">Inverse</span>
 				$str .= '<td>';
 				$str .= '<form class="pull-right" method="post" action=" '.URL::to('deployment/'.$row -> Id .'/startContainer'). '">
 							<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
-							<button alt="Start the Container." title="Terminates the Instance from your AWS account." type="submit" class="btn btn-warning pull-right" role="button"><span class="glyphicon glyphicon-trash"></span></button>
+							<button alt="Start the Container." title="Terminates the Instance from your AWS account." type="submit" class="btn btn-info pull-right" role="button"><span class="glyphicon glyphicon-play"></span></button>
 							</form> | ';
 				$str .= '<form class="pull-right" method="post" action=" '.URL::to('deployment/'.$row -> Id .'/stopContainer'). '">
 							<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
-							<button alt="Start the Container." title="Terminates the Instance from your AWS account." type="submit" class="btn btn-warning pull-right" role="button"><span class="glyphicon glyphicon-trash"></span></button>
+							<button alt="Start the Container." title="Terminates the Instance from your AWS account." type="submit" class="btn btn-danger pull-right" role="button"><span class="glyphicon glyphicon-stop"></span></button>
 							</form>';
 				$str .= '</td>';
 				$str .= '</tr>';
