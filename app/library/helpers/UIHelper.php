@@ -183,8 +183,9 @@ Inverse	<span class="label label-inverse">Inverse</span>
 				$str .= '<form class="pull-right" method="post" action=" '.URL::to('deployment/'.$row -> Id .'/startContainer'). '">
 							<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
 							<button alt="Start the Container." title="Starts the Container." type="submit" class="btn btn-info" role="button"><span class="glyphicon glyphicon-play"></span></button>
+							|
 							<button alt="Stop the Container." title="Stops the container." type="submit" class="btn btn-danger" role="button"><span class="glyphicon glyphicon-stop"></span></button>
-							</form> | ';
+							</form> ';
 				
 				$str .= '</td>';
 				$str .= '</tr>';
