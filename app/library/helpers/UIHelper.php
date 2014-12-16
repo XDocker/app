@@ -180,11 +180,11 @@ Inverse	<span class="label label-inverse">Inverse</span>
 				$str .= '<td>' . self::getPorts($row->Ports) .'</td>';
 				$str .= '<td>' . $row -> Created. '<br/>' .StringHelper::timeAgo($row -> Created) .'</td>';
 				$str .= '<td>';
-				$str .= '<form class="pull-right" method="post" action=" '.URL::to('deployment/'.$id.'/startContainer'). '">
+				$str .= '<form class="pull-right" method="post" action=" '.URL::to('deployment/'.$row -> Id .'/startContainer'). '">
 							<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
 							<button alt="Start the Container." title="Terminates the Instance from your AWS account." type="submit" class="btn btn-warning pull-right" role="button"><span class="glyphicon glyphicon-trash"></span></button>
 							</form> | ';
-				$str .= '<form class="pull-right" method="post" action=" '.URL::to('deployment/'.$id.'/stopContainer'). '">
+				$str .= '<form class="pull-right" method="post" action=" '.URL::to('deployment/'.$row -> Id .'/stopContainer'). '">
 							<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
 							<button alt="Start the Container." title="Terminates the Instance from your AWS account." type="submit" class="btn btn-warning pull-right" role="button"><span class="glyphicon glyphicon-trash"></span></button>
 							</form>';
