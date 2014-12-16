@@ -504,8 +504,9 @@ class DeploymentController extends BaseController {
 		//echo json_encode(EC2InstancePrices::On)
 	}
 
-	public function startContainer($id)
+	public function startContainer()
 	{
+		$id = Input::post('containerId');
 		echo $id; die();
 	}
 	
