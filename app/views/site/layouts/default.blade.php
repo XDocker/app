@@ -32,6 +32,9 @@
 		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
 
+		<script src="{{asset('bower_components/jquery/dist/jquery.min.js')}}"></script>
+        <script src="{{asset('assets/js/jquery-plugins/jquery.crypt.js')}}"></script>
+
 		<!-- Favicons
 		================================================== -->
 		<link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{{ asset('assets/ico/apple-touch-icon-144-precomposed.png') }}}">
@@ -145,8 +148,7 @@
 
 		<!-- Javascripts
 		================================================== -->
-        <script src="{{asset('bower_components/jquery/dist/jquery.min.js')}}"></script>
-        <script src="{{asset('assets/js/jquery-plugins/jquery.crypt.js')}}"></script>
+        
         <script src="{{asset('bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
         <script src="{{asset('assets/js/jquery-plugins/jquery.fileDownload.js')}}"></script>
         <?php if(!Auth::check()) : ?>

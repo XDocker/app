@@ -22,11 +22,14 @@
 						    <img class="media-object img-responsive" src="{{ asset('/assets/img/providers/'.Config::get('provider_meta.'.$account->cloudProvider.'.logo')) }}" alt="{{ $account->cloudProvider }}" />
 						</span>
 						<form class="pull-right" method="post" action="{{ URL::to('account/' . $account->id . '/delete') }}">
-							<!-- CSRF Token -->
-							<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
-							<!-- ./ csrf token -->
-							<button type="submit" class="btn btn-warning pull-right" role="button"><span class="glyphicon glyphicon-trash"></span></button>
-						</form>
+					<!-- CSRF Token -->
+					<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
+					<!-- ./ csrf token -->
+					<button type="button" class="btn btn-warning pull-right" role="button" data-toggle="modal" data-target="#confirmDelete" data-title="Delete Account" data-message="{{ Lang::get('account/account.account_delete') }}">
+						<span class="glyphicon glyphicon-trash"></span>
+					</button>
+
+				</form>
 						<a href="{{ URL::to('account/' . $account->id . '/edit') }}" class="btn btn-success pull-right" role="button"><span class="glyphicon glyphicon-edit"></span></a>
 						<div class="media-body">
 							<h4 class="media-heading">{{ String::title($account->name) }}</h4>
@@ -47,5 +50,8 @@
 <div>
 <a href="{{ URL::to('account/create') }}" class="btn btn-primary pull-right" role="button">{{{ Lang::get('account/account.add_account') }}}</a>
 </div>
+@include('deletemodal')
+
+
 
 @stop
