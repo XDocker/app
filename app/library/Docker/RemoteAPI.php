@@ -26,12 +26,24 @@ class RemoteAPI
         return $status;
     }
 	
-	public static function Containers($deployment, $url)
-	{
-		$ret  = shell_exec('curl -X --connect-timeout 60 GET http://'.$url.':4243/containers/json');
-		$ret = StringHelper::isJson($ret) ? json_decode($ret) :  '';
-		return $ret;
-	}
+	 public static function Containers($deployment, $url)
+     {
+     	$client = new Docker\Http\DockerClient(array(), $url . ':4243/containers/json');
+        $docker = new Docker\Docker($client);
+        $containers = self::unmarshal($docker->getContainerManager()->findAll());
+        return $containers;
+        }
+
+        private static function unmarshal($containers)
+        {
+                $arr = [];
+                foreach($containers as $container)
+                {
+                		$obj = json_decode(json_encode($container->getData()));
+						$arr[] = $obj;
+                }       
+                return $arr;
+        }
 	
 	public static function Containers2($url)
 	{

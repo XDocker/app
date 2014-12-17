@@ -53,8 +53,8 @@ return array(
         "DockerHub" => array(
             "enabled" => true,
             "keys" => array(
-                "client_id" => "5a4a2307bfc112c6b713", // @TODO: Replace with valid client ID from DockerHub (see: https://docs.docker.com/v1.1/reference/api/docker_io_oauth_api/)
-                "client_secret" => "5a4a2307bfc112c6b713", // @TODO: Replace with valid client_secret from DockerHub (see: https://docs.docker.com/v1.1/reference/api/docker_io_oauth_api/)
+                "id" => "5a4a2307bfc112c6b713", // @TODO: Replace with valid client ID from DockerHub (see: https://docs.docker.com/v1.1/reference/api/docker_io_oauth_api/)
+                "secret" => "5a4a2307bfc112c6b713", // @TODO: Replace with valid client_secret from DockerHub (see: https://docs.docker.com/v1.1/reference/api/docker_io_oauth_api/)
                 "scope" => "profile_read email_read"
             ) ,
             "wrapper" => array(

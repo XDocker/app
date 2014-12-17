@@ -175,14 +175,16 @@ class DeploymentController extends BaseController {
 						Log::error('Log :' . implode(' ', $obj2->job_log));
             			return Redirect::to('deployment')->with('error', 'Failed during deployment!'. $obj1->fail_message);
 					}
+					
+					UtilHelper::sendMail(Auth::user(), $account->name, $deployment, 'site/deployment/email', Lang::get('deployment/deployment.deployment_updated'));
+					
 					return Redirect::to('deployment')->with('success', Lang::get('deployment/deployment.deployment_updated'));
 	            }
 				else if(!empty($obj) && $obj->status == 'error')
 				{
 					Log::error('Failed to authenticate before deployment!'.$obj2->fail_code .':'. $obj->fail_message);
 					Log::error('Log :' . implode(' ', $obj2->job_log));
-            
-					return Redirect::to('deployment')->with('error', 'Failed to authenticate before deployment!'. $obj->fail_message);
+            		return Redirect::to('deployment')->with('error', 'Failed to authenticate before deployment!'. $obj->fail_message);
 				}
 				else
 				{
@@ -194,6 +196,7 @@ class DeploymentController extends BaseController {
             catch(Exception $err) {
                 $status = 'Unexpected Error: ' . $err->getMessage();
 				Log::error('Error while saving deployment : '. $status);
+				
                 throw new Exception($err->getMessage());
             }
             
@@ -499,6 +502,17 @@ class DeploymentController extends BaseController {
 		echo json_encode($ondemand);
 		
 		//echo json_encode(EC2InstancePrices::On)
+	}
+
+	public function startContainer()
+	{
+		$id = Input::post('containerId');
+		echo $id; die();
+	}
+	
+	public function stopContainer($id)
+	{
+		echo $id; die();
 	}
 
 	

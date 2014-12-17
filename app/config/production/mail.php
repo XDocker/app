@@ -8,7 +8,7 @@ return array(
  
     'port' => 587,
  
-    'from' => array('address' => 'info@xervmon.com', 'name' => 'Info Team'),
+    'from' => array('address' => 'info@xervmon.com', 'name' => 'xDocker Team'),
  
     'encryption' => 'tls',
  
@@ -19,6 +19,7 @@ return array(
     'sendmail' => '/usr/sbin/sendmail -bs',
  
     'pretend' => false,
+    'supportEmail' => 'support@xervmon.com'
  
 );
 

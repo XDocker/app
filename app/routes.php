@@ -117,6 +117,10 @@ Route::any('user/social/{action?}', array(
     "as" => "hybridauth",
     'uses' => 'UserController@socialLogin'
 ));
+
+//:: Amazon login return URL ::
+Route::post(URL::to(Config::get('amazon.return_route')), 'UserController@amazonLogin');
+
 # User RESTful Routes (Login, Logout, Register, etc)
 Route::controller('user', 'UserController');
 //:: Application Routes ::
@@ -185,6 +189,9 @@ Route::group(array(
 	Route::get('deployment/images', 'DeploymentController@getImages');
 	Route::any('deployment/{deployment}/downloadKey', 'DeploymentController@getDownloadKey');
 	Route::any('deployment/{deployment}/refresh', 'DeploymentController@checkStatus');
+	
+	Route::any('deployment/startContainer', 'DeploymentController@startContainer');
+	//Route::any('deployment/{id}/stopContainer', 'DeploymentController@stopContainer');
 	
 	Route::any('awsPricing/', 'AWSPricingController@getIndex'); 
 	

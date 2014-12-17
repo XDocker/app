@@ -19,6 +19,7 @@ return array(
     'sendmail' => '/usr/sbin/sendmail -bs',
  
     'pretend' => false,
+    'supportEmail' => 'support@xervmon.com'
  
 );
 

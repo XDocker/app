@@ -197,6 +197,41 @@ class UserController extends BaseController {
             return Redirect::to('user/login')->withInput(Input::except('password'))->with('error', $err_msg);
         }
     }
+
+    private static function checkSocialEmailAndLogin($email){
+        // Check if user with email exists, otherwise create one and finaly log them in
+        // Used by socialLogin and amazonLogin
+        $user = User::where('email', $email)->first();
+        if (empty($user)) {
+            // Register
+            $user = new User;
+            $user->email = $email;
+            // Generate a username from the email for compatibility with Confide's schema
+            $user->username = preg_replace('/[\s\W]+/', '_', $email);
+            // Assign a random password for compatibility with Confide's Auth
+            $randomPass = Hash::make(uniqid(mt_rand() , true));
+            $user->password = $randomPass;
+            $user->password_confirmation = $randomPass;
+            $user->confirmation_code = md5(uniqid(mt_rand() , true));
+            // Set as confirmed by default since we have social proof
+            $user->confirmed = 1;
+            $user->display_name = $user->username;
+            $user->engine_key = Hash::make(uniqid(mt_rand() , true));
+            // var_dump('created', $user->save() , $user->errors());
+            if (!$user->save()) {
+                throw new Exception($user->errors());
+            }
+            // Register the user on the engine
+            $return = xDockerEngine::register(array(
+                'username' => $user->username,
+                'password' => $user->engine_key
+            ));
+            Log::info("Return Status : " . $return);
+            EngineLog::logIt(array('user_id' => $user->id, 'method' => 'register', 'return' => $return));
+        }
+        // return Confide::logAttempt((array) $user);
+        return Auth::loginUsingId($user->id);
+    }
     
     public function socialLogin($action = "") {
         // check URL segment
@@ -226,37 +261,7 @@ class UserController extends BaseController {
             if (empty($email)) {
                 $email = preg_replace('/[\s\W]+/', '_', $userProfile->displayName) . '@' . $providerName . '.com';
             }
-            
-            $user = User::where('email', $email)->first();
-            if (empty($user)) {
-                // Register
-                $user = new User;
-                $user->email = $email;
-                // Generate a username from the email for compatibility with Confide's schema
-                $user->username = preg_replace('/[\s\W]+/', '_', $email);
-                // Assign a random password for compatibility with Confide's Auth
-                $randomPass = Hash::make(uniqid(mt_rand() , true));
-                $user->password = $randomPass;
-                $user->password_confirmation = $randomPass;
-                $user->confirmation_code = md5(uniqid(mt_rand() , true));
-                // Set as confirmed by default since we have social proof
-                $user->confirmed = 1;
-                $user->display_name = $user->username;
-                $user->engine_key = Hash::make(uniqid(mt_rand() , true));
-                // var_dump('created', $user->save() , $user->errors());
-                if (!$user->save()) {
-                    throw new Exception($user->errors());
-                }
-                // Register the user on the engine
-                $return = xDockerEngine::register(array(
-                    'username' => $user->username,
-                    'password' => $user->engine_key
-                ));
-				Log::info("Return Status : " . $return);
-				EngineLog::logIt(array('user_id' => $user->id, 'method' => 'register', 'return' => $return));
-            }
-            Auth::loginUsingId($user->id);
-            // Confide::logAttempt((array) $user);
+            self::checkSocialEmailAndLogin($email);
             return Redirect::intended('/');
         }
         catch(Exception $e) {
@@ -273,6 +278,44 @@ class UserController extends BaseController {
                 return Redirect::to('user/login')->with('notice', $e->getMessage() . '<hr/>' . $err->getMessage());
             }
         }
+    }
+
+    // Handle the response for Login with Amazon : http://login.amazon.com/website
+    public function amazonLogin() {
+        // verify that the access token belongs to us
+        $startUrl = Config::get('amazon.amazon_oauth_api');
+        $c = curl_init($startUrl . urlencode(Input::get('access_token')));
+        curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
+         
+        $r = curl_exec($c);
+        curl_close($c);
+        $d = json_decode($r);
+         
+        if ($d->aud != Config::get('amazon.client_id')) {
+          // the access token does not belong to us
+          $err = 'Amazon token mismatch, please try again after some time';
+          Log::error($err);
+          return Redirect::to('user/login')->with('notice', $err);
+        }
+         
+        // exchange the access token for user profile
+        $c = curl_init(Config::get('amazon.amazon_api_profile'));
+        curl_setopt($c, CURLOPT_HTTPHEADER, array('Authorization: bearer ' . Input::get('access_token')));
+        curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
+         
+        $r = curl_exec($c);
+        curl_close($c);
+        $d = json_decode($r);
+         
+        // echo sprintf('%s %s %s', $d->name, $d->email, $d->user_id);
+        try {
+            self::checkSocialEmailAndLogin($d->email);
+        } catch(Exception $err) {
+            Log::error($err);
+            return Redirect::to('user/login')->with('notice', $err->getMessage());
+        }
+
+        return Redirect::intended('/');
     }
     /**
      * Attempt to confirm account with code

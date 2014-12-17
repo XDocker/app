@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "86c76f88f4385fd427603ece136f11b3",
+    "hash": "119f932e3acc2325d692b012ae8abbc7",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -2255,6 +2255,54 @@
             "time": "2014-10-26 07:41:27"
         },
         {
+            "name": "themonkeys/error-emailer",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/TheMonkeys/laravel-error-emailer.git",
+                "reference": "27d8ace45b12e8a9d3daa0c83bb7f322683751ea"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/TheMonkeys/laravel-error-emailer/zipball/27d8ace45b12e8a9d3daa0c83bb7f322683751ea",
+                "reference": "27d8ace45b12e8a9d3daa0c83bb7f322683751ea",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~4.0",
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/migrations"
+                ],
+                "psr-0": {
+                    "Themonkeys\\ErrorEmailer": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "themonkeys",
+                    "email": "developers@themonkeys.com.au"
+                }
+            ],
+            "description": "Emails you whenever an error occurs on your server",
+            "homepage": "http://github.com/TheMonkeys/laravel-error-emailer",
+            "keywords": [
+                "email",
+                "error",
+                "exception",
+                "laravel",
+                "sysadmin"
+            ],
+            "time": "2014-02-26 00:42:33"
+        },
+        {
             "name": "zizaco/confide",
             "version": "3.2.5",
             "source": {
@@ -3457,7 +3505,8 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "fbf/laravel-newsletter-signup": 20,
-        "stage1/docker-php": 20
+        "stage1/docker-php": 20,
+        "themonkeys/error-emailer": 20
     },
     "prefer-stable": false,
     "platform": [],
