@@ -515,7 +515,10 @@ class DeploymentController extends BaseController {
 	public function stopContainer()
 	{
 		echo $id = Input::get('id');
+		
 		$deploymentId = Input::get('deploymentId');
+		$deployment 	= Deployment::where('user_id', Auth::id())->find($deploymentId);
+		Log::info('Stopping Deployment '. $deployment->name);
 		echo $deploymentId;
 		die();
 	}
