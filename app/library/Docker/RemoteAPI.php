@@ -45,7 +45,7 @@ class RemoteAPI
         return $arr;
      }
 	 
-	 public static function stopContainer($id)
+	 public static function stopContainer($id, $url)
 	 {
 	 	$client = new Docker\Http\DockerClient(array(), $url . ':4243/containers/json');
         $docker = new Docker\Docker($client);
