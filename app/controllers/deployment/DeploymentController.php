@@ -520,6 +520,8 @@ class DeploymentController extends BaseController {
 		$deployment 	= Deployment::where('user_id', Auth::id())->find($deploymentId);
 		Log::info('Stopping Deployment '. $deployment->name);
 		echo $deploymentId;
+		
+		RemoteAPI::stopContainer($id);
 		die();
 	}
 
