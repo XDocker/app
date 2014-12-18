@@ -51,7 +51,9 @@ class RemoteAPI
         $docker = new Docker\Docker($client);
 		$container = $docker->getContainerManager()->find($id);
 		$ret = $docker->getContainerManager()->stop($container);
-		print_r($ret);
+		$data = $ret->find($id);
+		echo '<pre>';
+		print_r($data);
 	 }
 	
 	public static function Containers2($url)
