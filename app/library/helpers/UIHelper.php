@@ -150,18 +150,7 @@ Inverse	<span class="label label-inverse">Inverse</span>
 	
 	public static function getContainer($deployment, $data)
 	{
-		/*
-		 * Array ( [0] => stdClass Object ( [Command] => /bin/sh -c /home/ice/netflix-ice.sh 
-		 * [Created] => 1413937646 [Id] => 4f262ebac076ee717539e082918d97393111d1b4de24415b6a30cbfbf74aa502 
-		 * [Image] => xdocker/netflix_ice:v2 [Names] => Array ( [0] => /desperate_turing ) 
-		 * [Ports] => Array ( [0] => stdClass Object ( [IP] => 0.0.0.0 [PrivatePort] => 443 [PublicPort] => 443 [Type] => tcp ) 
-		 * [1] => stdClass Object ( [IP] => 0.0.0.0 [PrivatePort] => 5000 [PublicPort] => 5000 [Type] => tcp ) 
-		 * [2] => stdClass Object ( [IP] => 0.0.0.0 [PrivatePort] => 8080 [PublicPort] => 8080 [Type] => tcp ) ) 
-		 * [Status] => Up 3 hours ) )
-		 * 
-		 */
-		
-		 if(!empty($data))
+		if(!empty($data))
 		 {
 		 	 $str = '<h5> Container Details</h5><div class="table-responsive">  <table class="table table-bordered"> '.
               		' <thead> ' .
