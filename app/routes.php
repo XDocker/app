@@ -193,6 +193,7 @@ Route::group(array(
 	//Route::post('deployment/startContainer', 'DeploymentController@startContainer');
     Route::any('deployment/startContainer', 'DeploymentController@startContainer');
 	Route::any('deployment/stopContainer', 'DeploymentController@stopContainer');
+	Route::any('deployment/Containers', 'DeploymentController@getContainers');
 	
 	Route::any('awsPricing/', 'AWSPricingController@getIndex'); 
 	

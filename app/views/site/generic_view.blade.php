@@ -102,7 +102,8 @@
 								<p>
 									@if($deployment->status == 'Completed' && isset($result->public_dns))
 										@if (strpos($instanceState, 'running') !== false) 
-											{{UIHelper::getContainer($deployment, RemoteAPI::Containers($result->public_dns))}}
+											<span title="Created At"><a href="{{{URL::to('deployment/'.$deployment->id.'/Container')}}}"></a><span class="fa fa-info"></span></a> </span>
+						
 										@endif
 									@endif
 								</p>

@@ -30,28 +30,10 @@ class RemoteAPI
      {
      	$client = new Docker\Http\DockerClient(array(), $url . ':4243/containers/json');
         $docker = new Docker\Docker($client);
-        $containers = self::unmarshal($docker->getContainerManager());
-        return $containers;
+		return $docker->getContainerManager()->findAll();
      }
 
-     private static function unmarshal($cm)
-     {
-     	$containers = $cm->findAll();
-     	$arr = [];
-        foreach($containers as $container)
-        {
-        	echo '<pre>';
-			
-        	$container = $cm->find($container->getId());
-			print_r($container);
-			die();
-        	//$obj = json_decode(json_encode($container->getData()));
-			//$arr[] = $obj;
-        }       
-        return $arr;
-     }
-	 
-	 public static function stopContainer($id, $url)
+     public static function stopContainer($id, $url)
 	 {
 	 	$client = new Docker\Http\DockerClient(array(), $url . ':4243/containers/json');
         $docker = new Docker\Docker($client);
