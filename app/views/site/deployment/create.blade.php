@@ -69,8 +69,8 @@
 		<!-- Form Actions -->
 		<div class="form-group">
 			<div class="col-md-offset-2 col-md-10">
-				<a href="{{ URL::to('/') }}" class="btn btn-default">Back</a>
-				<button type="submit" class="btn btn-primary">Deploy</button>
+				<a id="deploy_back_btn" href="{{ URL::to('/') }}" class="btn btn-default">Back</a>
+				<button id="deploy_save_btn" type="submit" class="btn btn-primary">Deploy</button>
 			</div>
 		</div>
 		<!-- ./ form actions -->

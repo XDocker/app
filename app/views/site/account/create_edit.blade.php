@@ -54,8 +54,8 @@
 		<!-- Form Actions -->
 		<div class="form-group">
 			<div class="col-md-offset-2 col-md-10">
-				<a href="{{ URL::to('account') }}" class="btn btn-default">Back</a>
-				<button type="submit" class="btn btn-primary">Save</button>
+				<a id="acc_back_btn" href="{{ URL::to('account') }}" class="btn btn-default">Back</a>
+				<button id="acc_save_btn" type="submit" class="btn btn-primary">Save</button>
 			</div>
 		</div>
 		<!-- ./ form actions -->
