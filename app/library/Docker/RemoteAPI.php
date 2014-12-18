@@ -43,9 +43,9 @@ class RemoteAPI
         	echo '<pre>';
         	$container = $cm->find($container->id);
 			print_r($container);
-			die()
+			die();
         	//$obj = json_decode(json_encode($container->getData()));
-			$arr[] = $obj;
+			//$arr[] = $obj;
         }       
         return $arr;
      }
