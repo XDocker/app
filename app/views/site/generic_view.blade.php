@@ -102,7 +102,7 @@
 								<p>
 									@if($deployment->status == 'Completed' && isset($result->public_dns))
 										@if (strpos($instanceState, 'running') !== false) 
-											{{UIHelper::getContainer(RemoteAPI::Containers($deployment, $result->public_dns))}}
+											{{UIHelper::getContainer($deployment, RemoteAPI::Containers($result->public_dns))}}
 										@endif
 									@endif
 								</p>

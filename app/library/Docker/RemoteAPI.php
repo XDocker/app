@@ -26,7 +26,7 @@ class RemoteAPI
         return $status;
     }
 	
-	 public static function Containers($deployment, $url)
+	 public static function Containers($url)
      {
      	$client = new Docker\Http\DockerClient(array(), $url . ':4243/containers/json');
         $docker = new Docker\Docker($client);

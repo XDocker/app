@@ -148,7 +148,7 @@ Inverse	<span class="label label-inverse">Inverse</span>
 		else return 'NA';
 	}
 	
-	public static function getContainer($data)
+	public static function getContainer($deployment, $data)
 	{
 		/*
 		 * Array ( [0] => stdClass Object ( [Command] => /bin/sh -c /home/ice/netflix-ice.sh 
@@ -168,7 +168,7 @@ Inverse	<span class="label label-inverse">Inverse</span>
                 		'<th>Command</th>'.
 	                    	'<th>Image</th>'.
 	                    	'<th>Ports</th>'.
-	                    	'<th>Created</th> '.
+	                    	'<th>Status / Created</th> '.
 	                    	'<th>Actions</th> '.
                 	'</thead>';
 		 	foreach($data as $row)
@@ -178,18 +178,11 @@ Inverse	<span class="label label-inverse">Inverse</span>
 				//$str .= '<td>' . $row -> Id .'</td>';
 				$str .= '<td>' . $row -> Image .'</td>';
 				$str .= '<td>' . self::getPorts($row->Ports) .'</td>';
-				$str .= '<td>' . $row -> Created. '<br/>' .StringHelper::timeAgo($row -> Created) .'</td>';
+				$str .= '<td>' . $row -> Status. ' / ' .StringHelper::timeAgo($row -> Created) .'</td>';
 				$str .= '<td>';
-				/*$str .= '<form class="pull-right" method="post" action="'.URL::to('deployment/startContainer'). '">
-							<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
-							<input type="hidden" name="containerId" value="{{{ $row -> Id}}}" />
-							<button alt="Start the Container." title="Starts the Container." type="submit" class="btntolink" role="button"><i class="fa fa-play"></i></button>
-							|
-							<button alt="Stop the Container." title="Stops the container." type="submit" class="btntolink" role="button"><i class="fa fa-stop"></i></button>
-							</form> ';*/
-				$str .= '<a href="'.URL::to('deployment/startContainer').'?id='.$row -> Id.'"><i class="fa fa-play"></i></a>';	
+				$str .= '<a href="'.URL::to('deployment/startContainer').'?id='.$row -> Id.'&deploymentId=' .$deployment->id. '"><i class="fa fa-play"></i></a>';	
 				$str .= ' | ';
-				$str .= '<a href="'.URL::to('deployment/stopContainer').'?id='.$row -> Id.'"><i class="fa fa-stop"></i></a>';	
+				$str .= '<a href="'.URL::to('deployment/stopContainer').'?id='.$row -> Id.'&deploymentId=' .$deployment->id.'"><i class="fa fa-stop"></i></a>';	
 							
 				$str .= '</td>';
 				$str .= '</tr>';
