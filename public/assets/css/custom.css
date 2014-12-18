@@ -172,3 +172,11 @@ div#footer  .container > .row > div.column:first-child{
    }
 }
 
+.btntolink {
+    -webkit-appearance: none;
+    outline: none;
+    border: 0;
+    background: transparent;
+}
+
+

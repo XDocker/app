@@ -53,7 +53,7 @@
 								<input type="hidden" name="instanceAction" value="terminate" />
 								<input type="hidden" name="instanceID" value="{{{ $result->instance_id }}}" />
 								<!-- ./ csrf token -->
-								<button type="button" class="btn btn-warning pull-right" role="button" data-toggle="modal" data-target="#confirmDelete" data-title="Terminate Instance" data-message="{{ Lang::get('deployment/deployment.deployment_terminate') }}">
+								<button type="button" class="btn btn-warning pull-right" role="button" data-toggle="modal" data-target="#confirmDelete1"  data-title="Terminate Instance" data-message="{{ Lang::get('deployment/deployment.deployment_terminate') }}">
 						        <span class="glyphicon glyphicon-trash"></span>
 					            </button>
 
