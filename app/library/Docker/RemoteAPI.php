@@ -41,7 +41,8 @@ class RemoteAPI
         foreach($containers as $container)
         {
         	echo '<pre>';
-        	$container = $cm->find($container->id);
+			
+        	$container = $cm->find($container->getId());
 			print_r($container);
 			die();
         	//$obj = json_decode(json_encode($container->getData()));
