@@ -30,7 +30,14 @@ class RemoteAPI
      {
      	$client = new Docker\Http\DockerClient(array(), $url . ':4243/containers/json');
         $docker = new Docker\Docker($client);
-		return $docker->getContainerManager()->findAll();
+		$containers = $docker->getContainerManager()->findAll();
+		$arr = [];
+		foreach($containers as $container)
+		{
+			$obj = $docker->getContainerManager()->find($container->getId());
+			$arr[] = $obj;
+		}
+		return $arr;
      }
 
      public static function stopContainer($id, $url)
