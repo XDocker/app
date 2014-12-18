@@ -53,7 +53,7 @@
 								<input type="hidden" name="instanceAction" value="terminate" />
 								<input type="hidden" name="instanceID" value="{{{ $result->instance_id }}}" />
 								<!-- ./ csrf token -->
-								<button type="button" class="btn btn-warning pull-right" role="button" data-toggle="modal" data-target="#confirmDelete" data-title="Terminate Instance" data-message="{{ Lang::get('deployment/deployment.deployment_terminate') }}">
+								<button type="button" class="btn btn-warning pull-right" role="button" data-toggle="modal" data-target="#confirmDelete1"  data-title="Terminate Instance" data-message="{{ Lang::get('deployment/deployment.deployment_terminate') }}">
 						        <span class="glyphicon glyphicon-trash"></span>
 					            </button>
 
@@ -167,7 +167,7 @@
 						<span class="pull-left" href="#">
 							<img style="width:25px;height:25px" class="media-object img-responsive" src="{{ asset('/assets/img/providers/'.xDockerEngine::getLogo($instance -> name)) }}" alt="{{ $instance -> name }}" />
 						</span>
-						<a href="{{ URL::to('deployment/create/') }}?name={{urlencode($instance -> name)}}" class="btn btn-primary pull-right" role="button"><span class="glyphicon glyphicon-play"></span></a>
+						<a  id="deploy_add_btn"  href="{{ URL::to('deployment/create/') }}?name={{urlencode($instance -> name)}}" class="btn btn-primary pull-right" role="button"><span class="glyphicon glyphicon-play"></span></a>
 						<div class="media-body">
 							<h4 class="media-heading">{{!empty($instance -> name)?xDockerEngine::getDockerUrl($instance->name).' ' .$instance->name:''}}</h4>
 						    <p>

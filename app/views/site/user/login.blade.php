@@ -46,7 +46,7 @@
                         {{ Lang::get('confide::confide.login.remember') }}
                     </label>
                 </div>
-                <button tabindex="3" type="submit" class="btn btn-success">{{ Lang::get('confide::confide.login.submit') }}</button>
+                <button id="user_login_btn" tabindex="3" type="submit" class="btn btn-success">{{ Lang::get('confide::confide.login.submit') }}</button>
             </div>      
         </fieldset>
     </form>

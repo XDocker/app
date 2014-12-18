@@ -48,7 +48,7 @@
 </div>
 {{$accounts->links()}}
 <div>
-<a href="{{ URL::to('account/create') }}" class="btn btn-primary pull-right" role="button">{{{ Lang::get('account/account.add_account') }}}</a>
+<a id="acc_add_btn" href="{{ URL::to('account/create') }}" class="btn btn-primary pull-right" role="button">{{{ Lang::get('account/account.add_account') }}}</a>
 </div>
 @include('deletemodal')
 

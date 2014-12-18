@@ -506,13 +506,15 @@ class DeploymentController extends BaseController {
 
 	public function startContainer()
 	{
-		$id = Input::post('containerId');
-		echo $id; die();
+		echo $id = Input::get('id');
+		die();
+		
 	}
 	
-	public function stopContainer($id)
+	public function stopContainer()
 	{
-		echo $id; die();
+		echo $id = Input::get('id');
+		die();
 	}
 
 	

@@ -61,8 +61,8 @@
 		<!-- Form Actions -->
 		<div class="form-group">
 			<div class="col-md-offset-2 col-md-10">
-				<a href="{{ URL::to('ticket') }}" class="btn btn-default">Back</a>
-				<button type="submit" class="btn btn-primary">Save</button>
+				<a id="ticket_back_btn" href="{{ URL::to('ticket') }}" class="btn btn-default">Back</a>
+				<button id="ticket_save_btn" type="submit" class="btn btn-primary">Save</button>
 			</div>
 		</div>
 		<!-- ./ form actions -->
