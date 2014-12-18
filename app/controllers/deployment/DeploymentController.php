@@ -506,7 +506,7 @@ class DeploymentController extends BaseController {
 
 	public function getContainers($id)
 	{
-		$deployment 	= Deployment::where('user_id', Auth::id())->find($deploymentId);
+		$deployment 	= Deployment::where('user_id', Auth::id())->find($id);
 		Log::info('Stopping Deployment '. $deployment->name);	
 		$result = json_decode($deployment->wsResults);
 		Log::info('Starting Container '. $result->public_dns);
