@@ -55,6 +55,17 @@ class RemoteAPI
 		echo '<pre>';
 		print_r($data);
 	 }
+	 
+	 public static function startContainer($id, $url)
+	 {
+	 	$client = new Docker\Http\DockerClient(array(), $url . ':4243/containers/json');
+        $docker = new Docker\Docker($client);
+		$container = $docker->getContainerManager()->find($id);
+		$ret = $docker->getContainerManager()->start($container);
+		$data = $ret->find($id);
+		echo '<pre>';
+		print_r($data);
+	 }
 	
 	public static function Containers2($url)
 	{

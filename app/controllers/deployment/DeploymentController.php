@@ -507,7 +507,13 @@ class DeploymentController extends BaseController {
 	public function startContainer()
 	{
 		echo $id = Input::get('id');
+		
 		$deploymentId = Input::get('deploymentId');
+		$deployment 	= Deployment::where('user_id', Auth::id())->find($deploymentId);
+		Log::info('Stopping Deployment '. $deployment->name);
+		echo $deploymentId;
+		$result = json_decode($deployment->wsResults);
+		RemoteAPI::startContainer($id, $result->public_dns);
 		die();
 		
 	}
