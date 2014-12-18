@@ -504,7 +504,7 @@ class DeploymentController extends BaseController {
 		//echo json_encode(EC2InstancePrices::On)
 	}
 
-	public function getContainer($id)
+	public function getContainers($id)
 	{
 		$deployment 	= Deployment::where('user_id', Auth::id())->find($deploymentId);
 		Log::info('Stopping Deployment '. $deployment->name);	

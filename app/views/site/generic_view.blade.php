@@ -102,7 +102,7 @@
 								<p>
 									@if($deployment->status == 'Completed' && isset($result->public_dns))
 										@if (strpos($instanceState, 'running') !== false) 
-											<span title="Created At"><a href="{{{URL::to('deployment/'.$deployment->id.'/Container')}}}"><span class="fa fa-info"></span></a> </span>
+											<span title="Created At"><a href="{{{URL::to('deployment/'.$deployment->id.'/Containers')}}}"><span class="fa fa-info"></span></a> </span>
 						
 										@endif
 									@endif
