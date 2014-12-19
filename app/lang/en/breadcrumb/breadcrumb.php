@@ -18,5 +18,6 @@ return array(
 	'Roadmap'                 => 'Roadmap',
 	'DevOps'				  => 'DevOps',
 	'Videos'				  => 'Videos',
+	'Container'				  => 'Container'
 	
 );

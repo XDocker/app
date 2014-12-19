@@ -74,3 +74,9 @@ Breadcrumbs::register(Lang::get('breadcrumb/breadcrumb.CloudExperts'), function 
 	$breadcrumbs->push(Lang::get('breadcrumb/breadcrumb.CloudExperts'), URL::to('cloudExperts'));
 
 });
+Breadcrumbs::register(Lang::get('breadcrumb/breadcrumb.Container'), function ($breadcrumbs) {
+	$breadcrumbs->parent(Lang::get('breadcrumb/breadcrumb.home'));
+	$breadcrumbs->push(Lang::get('breadcrumb/breadcrumb.Container'), URL::to('Container'));
+
+});
+

@@ -92,6 +92,12 @@
 										. ' | <a title="ViewLog" href="'.$logUrl.'" ><span class="glyphicon glyphicon-th-list"> </span>  </a>';
 									}
 									?>
+
+									@if($deployment->status == 'Completed' && isset($result->public_dns))
+										@if (strpos($instanceState, 'running') !== false) 
+											<span title="Created At"><a href="{{{URL::to('deployment/'.$deployment->id.'/Containers')}}}">{{ ' | '}}<span class="fa fa-info"></span></a> </span>
+										@endif
+									@endif
 									
 								</p>
 								<p>
@@ -99,15 +105,7 @@
 									{{UIHelper::getDataOrganized($deployment->parameters)}}
 									
 								</p>
-								<p>
-									@if($deployment->status == 'Completed' && isset($result->public_dns))
-										@if (strpos($instanceState, 'running') !== false) 
-											<span title="Created At"><a href="{{{URL::to('deployment/'.$deployment->id.'/Containers')}}}"><span class="fa fa-info"></span></a> </span>
-						
-										@endif
-									@endif
-								</p>
-			
+										
 								<p>
 									<span title="Created At"><span class="glyphicon glyphicon-calendar"></span> <strong>Build Date</strong>:{{{ $deployment->created_at }}}</span>
 								</p>
