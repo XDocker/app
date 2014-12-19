@@ -504,9 +504,30 @@ class DeploymentController extends BaseController {
 		//echo json_encode(EC2InstancePrices::On)
 	}
 
+	public function getContainers($id)
+	{
+		$deployment 	= Deployment::where('user_id', Auth::id())->find($id);
+		Log::info('Stopping Deployment '. $deployment->name);	
+		$result = json_decode($deployment->wsResults);
+		Log::info('Starting Container '. $result->public_dns);
+		$containers = RemoteAPI::Containers($result->public_dns);
+		return View::make('site/deployment/containers/container', array(
+            'containers' => $containers,
+            'deployment' => $deployment
+        ));
+	}
+
 	public function startContainer()
 	{
 		echo $id = Input::get('id');
+		
+		$deploymentId = Input::get('deploymentId');
+		$deployment 	= Deployment::where('user_id', Auth::id())->find($deploymentId);
+		Log::info('Starting Deployment '. $deployment->name);
+		echo $deploymentId;
+		$result = json_decode($deployment->wsResults);
+		Log::info('Starting Container '. $result->public_dns);
+		RemoteAPI::startContainer($id, $result->public_dns);
 		die();
 		
 	}
@@ -514,6 +535,13 @@ class DeploymentController extends BaseController {
 	public function stopContainer()
 	{
 		echo $id = Input::get('id');
+		
+		$deploymentId = Input::get('deploymentId');
+		$deployment 	= Deployment::where('user_id', Auth::id())->find($deploymentId);
+		Log::info('Stopping Deployment '. $deployment->name);
+		echo $deploymentId;
+		$result = json_decode($deployment->wsResults);
+		RemoteAPI::stopContainer($id, $result->public_dns);
 		die();
 	}
 

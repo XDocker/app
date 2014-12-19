@@ -26,24 +26,41 @@ class RemoteAPI
         return $status;
     }
 	
-	 public static function Containers($deployment, $url)
+	 public static function Containers($url)
      {
      	$client = new Docker\Http\DockerClient(array(), $url . ':4243/containers/json');
         $docker = new Docker\Docker($client);
-        $containers = self::unmarshal($docker->getContainerManager()->findAll());
-        return $containers;
-        }
+		$containers = $docker->getContainerManager()->findAll();
+		$arr = [];
+		foreach($containers as $container)
+		{
+			$obj = $docker->getContainerManager()->find($container->getId());
+			$arr[] = $obj;
+		}
+		return $arr;
+     }
 
-        private static function unmarshal($containers)
-        {
-                $arr = [];
-                foreach($containers as $container)
-                {
-                		$obj = json_decode(json_encode($container->getData()));
-						$arr[] = $obj;
-                }       
-                return $arr;
-        }
+     public static function stopContainer($id, $url)
+	 {
+	 	$client = new Docker\Http\DockerClient(array(), $url . ':4243/containers/json');
+        $docker = new Docker\Docker($client);
+		$container = $docker->getContainerManager()->find($id);
+		$ret = $docker->getContainerManager()->stop($container);
+		$data = $ret->find($id);
+		echo '<pre>';
+		print_r($data);
+	 }
+	 
+	 public static function startContainer($id, $url)
+	 {
+	 	$client = new Docker\Http\DockerClient(array(), $url . ':4243/containers/json');
+        $docker = new Docker\Docker($client);
+		$container = $docker->getContainerManager()->find($id);
+		$ret = $docker->getContainerManager()->start($container);
+		$data = $ret->find($id);
+		echo '<pre>';
+		print_r($data);
+	 }
 	
 	public static function Containers2($url)
 	{
