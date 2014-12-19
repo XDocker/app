@@ -37,6 +37,7 @@ class RemoteAPI
 			$obj = $docker->getContainerManager()->find($container->getId());
 			$arr[] = $obj;
 		}
+
 		return $arr;
      }
 
