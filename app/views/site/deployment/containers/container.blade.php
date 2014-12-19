@@ -54,7 +54,7 @@ $('#accordion').on('shown.bs.collapse', toggleChevron);
             {{ 'Name:' .$deployment->name. ':' . $deployment->docker_name }}  </a>
             @if($value['State']['Running']==1)
             <button type="button" class="btn btn-success btn-xs" disabled="disabled">{{ 'Running' }}</button>
-            <a href="#"><i class="fa fa-stop"></i></a>
+            <a href="{{URL::to('deployment/startContainer').'?id='.$value['Id'].'&deploymentId=' .$deployment->id }}"><i class="fa fa-stop"></i></a>
             @else
             <button type="button" class="btn btn-danger btn-xs" disabled="disabled">{{ 'Stoped' }}</button>
             <a href="#"><i class="fa fa-play"></i></a>
