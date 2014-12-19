@@ -93,8 +93,34 @@ $('#accordion').on('shown.bs.collapse', toggleChevron);
       </tbody>
       </table>
 
-	
-     <table class="table table-bordered">
+      <table class="table table-bordered">
+         <?php foreach ($value['Config']['Env'] as $v3) {
+              $env[] = explode('=',$v3); 
+         } 
+         $env_count= count($env); 
+         $i=0;?>
+         <thead>
+           <tr>
+              @foreach ($env as $v4)
+                  <th> {{ $v4[0] }} </th> 
+              @endforeach 
+          </tr>
+        </thead>
+           
+        <tbody>
+          <tr>
+               @foreach ($env as $v4)
+                  <td> {{ $v4[1] }} </td> 
+              @endforeach 
+          </tr>
+        </tbody>
+           
+      </table>
+
+
+
+
+      <table class="table table-bordered">
         <thead>
           <tr>
             <th> {{ Lang::get('deployment/deployment.Driver') }} </th> 
