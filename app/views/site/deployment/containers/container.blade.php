@@ -51,7 +51,7 @@ $('#accordion').on('shown.bs.collapse', toggleChevron);
     <div class="panel-heading">
       <h4 class="panel-title">
         <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ $key }}">
-            {{ 'Name:' .$value['Name'].' '}}  </a>
+            {{ 'Name:' .$deployment->name. ':' . $deployment->docker_name }}  </a>
             @if($value['State']['Running']==1)
             <button type="button" class="btn btn-success btn-xs" disabled="disabled">{{ 'Running' }}</button>
             <a href="#"><i class="fa fa-stop"></i></a>
