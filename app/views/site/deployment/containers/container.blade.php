@@ -9,26 +9,14 @@
 @section('breadcrumbs', Breadcrumbs::render(Lang::get('breadcrumb/breadcrumb.Container')))
 
 
-
-<?php  foreach ($containers as $container) {
-
-$getid['id'] = $container -> getId();
-$runtimeInformations = $container -> getRuntimeInformations();
-$contents[] = array_merge($getid,$runtimeInformations);
-}?>
-
-
-
-<script type="text/javascript">
-function toggleChevron(e) {
-    $(e.target)
-        .prev('.panel-heading')
-        .find("i.indicator")
-        .toggleClass('glyphicon-chevron-down glyphicon-chevron-up');
-}
-$('#accordion').on('hidden.bs.collapse', toggleChevron);
-$('#accordion').on('shown.bs.collapse', toggleChevron);
-</script>
+<?php
+	foreach ($containers as $container) 
+	{
+		$getid['id'] = $container -> getId();
+		$runtimeInformations = $container -> getRuntimeInformations();
+		$contents[] = array_merge($getid,$runtimeInformations);
+	}
+?>
 
 <div class="page-header">
 		<div class="row">
@@ -191,5 +179,18 @@ $('#accordion').on('shown.bs.collapse', toggleChevron);
 
     </div> 
   </div>
+  
+<script type="text/javascript">
+	function toggleChevron(e) 
+	{
+	    $(e.target)
+	        .prev('.panel-heading')
+	        .find("i.indicator")
+	        .toggleClass('glyphicon-chevron-down glyphicon-chevron-up');
+	}
+$('#accordion').on('hidden.bs.collapse', toggleChevron);
+$('#accordion').on('shown.bs.collapse', toggleChevron);
+</script>
+
 
   @stop
