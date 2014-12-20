@@ -529,7 +529,7 @@ class DeploymentController extends BaseController {
 		echo $deploymentId;
 		$result = json_decode($deployment->wsResults);
 		Log::info('Starting Container '. $result->public_dns);
-		RemoteAPI::startContainer($id, $result->public_dns);
+		return RemoteAPI::startContainer($id, $result->public_dns);
 		die();
 		
 	}

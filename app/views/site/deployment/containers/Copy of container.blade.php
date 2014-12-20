@@ -51,10 +51,10 @@ $('#accordion').on('shown.bs.collapse', toggleChevron);
     <div class="panel-heading">
       <h4 class="panel-title">
         <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ $key }}">
-            {{ 'Name:' .$deployment->name. ':' . $deployment->docker_name }}  </a>
+            {{ 'Name:' .$value['Name'].' '}}  </a>
             @if($value['State']['Running']==1)
             <button type="button" class="btn btn-success btn-xs" disabled="disabled">{{ 'Running' }}</button>
-            <a href="{{URL::to('deployment/startContainer').'?id='.$value['Id'].'&deploymentId=' .$deployment->id }}"><i class="fa fa-stop"></i></a>
+            <a href="#"><i class="fa fa-stop"></i></a>
             @else
             <button type="button" class="btn btn-danger btn-xs" disabled="disabled">{{ 'Stoped' }}</button>
             <a href="#"><i class="fa fa-play"></i></a>
@@ -93,8 +93,34 @@ $('#accordion').on('shown.bs.collapse', toggleChevron);
       </tbody>
       </table>
 
-	
-     <table class="table table-bordered">
+      <table class="table table-bordered">
+         <?php foreach ($value['Config']['Env'] as $v3) {
+              $env[] = explode('=',$v3); 
+         } 
+         $env_count= count($env); 
+         $i=0;?>
+         <thead>
+           <tr>
+              @foreach ($env as $v4)
+                  <th> {{ $v4[0] }} </th> 
+              @endforeach 
+          </tr>
+        </thead>
+           
+        <tbody>
+          <tr>
+               @foreach ($env as $v4)
+                  <td> {{ $v4[1] }} </td> 
+              @endforeach 
+          </tr>
+        </tbody>
+           
+      </table>
+
+
+
+
+      <table class="table table-bordered">
         <thead>
           <tr>
             <th> {{ Lang::get('deployment/deployment.Driver') }} </th> 
