@@ -10,7 +10,10 @@
 
 
 
-<?php  foreach ($containers as $container) {
+<?php  
+echo '<pre>';
+print_r($containers);die();
+foreach ($containers as $container) {
 
 $getid['id'] = $container -> getId();
 $runtimeInformations = $container -> getRuntimeInformations();
