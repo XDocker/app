@@ -57,7 +57,7 @@ $('#accordion').on('shown.bs.collapse', toggleChevron);
             <a href="{{URL::to('deployment/startContainer').'?id='.$value['Id'].'&deploymentId=' .$deployment->id }}"><i class="fa fa-stop"></i></a>
             @else
             <button type="button" class="btn btn-danger btn-xs" disabled="disabled">{{ 'Stoped' }}</button>
-            <a href="#"><i class="fa fa-play"></i></a>
+            <a href="{{URL::to('deployment/stopContainer').'?id='.$value['Id'].'&deploymentId=' .$deployment->id }}"><i class="fa fa-play"></i></a>
             @endif
        <i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
       </h4>
