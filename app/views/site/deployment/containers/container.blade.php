@@ -11,9 +11,6 @@
 
 
 <?php  
-	echo '<pre>';
-	print_r($deployment);
-	die();
 	foreach ($containers as $container) 
 	{
 		$getid['id'] = $container -> getId();

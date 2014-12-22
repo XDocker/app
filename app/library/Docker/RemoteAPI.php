@@ -50,7 +50,7 @@ class RemoteAPI
 		foreach($containers as $container)
 		{
 			$obj = $docker->getContainerManager()->find($container->getId());
-			$contents[] = array_merge($container->getId() -> getId(), $obj -> getRuntimeInformations());
+			$contents[] = array_merge($container->getId(), $obj -> getRuntimeInformations());
 		}
 		return $contents;
 	}
