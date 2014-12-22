@@ -512,7 +512,7 @@ class DeploymentController extends BaseController {
 			case 'Completed' : $result = json_decode($deployment->wsResults);
 			 				   Log::info('Retrieving containers. '. $deployment->name);
 							   $containers = RemoteAPI::getContainers($result->public_dns);
-							   $deployment ->containers($containers);
+							   $deployment ->containers =$containers;
 		}
 		
 	}
