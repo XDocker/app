@@ -49,8 +49,9 @@ class RemoteAPI
 		$contents = [];
 		foreach($containers as $container)
 		{
+			$getid['id'] = $container -> getId();
 			$obj = $docker->getContainerManager()->find($container->getId());
-			$contents[] = array_merge($container->getId(), $obj -> getRuntimeInformations());
+			$contents[] = array_merge($getid, $obj -> getRuntimeInformations());
 		}
 		return $contents;
 	}
