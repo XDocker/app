@@ -11,12 +11,16 @@
 
 
 <?php  
-foreach ($containers as $container) {
-
-$getid['id'] = $container -> getId();
-$runtimeInformations = $container -> getRuntimeInformations();
-$contents[] = array_merge($getid,$runtimeInformations);
-}?>
+	echo '<pre>';
+	print_r($deployment);
+	die();
+	foreach ($containers as $container) 
+	{
+		$getid['id'] = $container -> getId();
+		$runtimeInformations = $container -> getRuntimeInformations();
+		$contents[] = array_merge($getid,$runtimeInformations);
+	}
+?>
 
 
 
