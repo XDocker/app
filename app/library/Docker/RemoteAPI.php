@@ -48,8 +48,7 @@ class RemoteAPI
 		$container = $docker->getContainerManager()->find($id);
 		$ret = $docker->getContainerManager()->stop($container);
 		$data = $ret->find($id);
-		echo '<pre>';
-		print_r($data);
+		return $data;
 	 }
 	 
 	 public static function startContainer($id, $url)
@@ -59,8 +58,7 @@ class RemoteAPI
 		$container = $docker->getContainerManager()->find($id);
 		$ret = $docker->getContainerManager()->start($container);
 		$data = $ret->find($id);
-		echo '<pre>';
-		print_r($data);
+		return $data;
 	 }
 	
 	public static function Containers2($url)
