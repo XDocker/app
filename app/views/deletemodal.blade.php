@@ -101,7 +101,7 @@
 
   <!-- Form confirm (yes/ok) handler, submits form -->
 
-  $('#confirmDelete1').find('.modal-footer #confirm').on('click', function(){
+  $('#confirmDelete').find('.modal-footer #confirm').on('click', function(){
 
       $(this).data('form').submit();
 
