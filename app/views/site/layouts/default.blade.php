@@ -111,6 +111,9 @@
 	    							</ul>
 	    						</li>
 	                        @else
+	                        <li><a href="#Howitworks">How it works</a></li>
+                       <!-- <li><a href="#services">Services</a></li>
+                            <li><a href="#blog">Blog</a></li>-->
 	                        <li {{ (Request::is('user/login') ? ' class="active"' : '') }}><a href="{{{ URL::to('user/login') }}}"><span class="glyphicon glyphicon-log-in"></span> {{{ Lang::get('site.login') }}}</a></li>
 	                        <li {{ (Request::is('user/create') ? ' class="active"' : '') }}><a href="{{{ URL::to('user/create') }}}"><span class="glyphicon glyphicon-log-out"></span> {{{ Lang::get('site.sign_up') }}}</a></li>
 	                        @endif
