@@ -40,6 +40,21 @@ class RemoteAPI
 
 		return $arr;
      }
+	 
+	 public static function getContainers($url)
+	 {
+	 	$client = new Docker\Http\DockerClient(array(), $url . ':4243/containers/json');
+        $docker = new Docker\Docker($client);
+		$containers = $docker->getContainerManager()->findAll();
+		$contents = [];
+		foreach($containers as $container)
+		{
+			$getid['id'] = $container -> getId();
+			$obj = $docker->getContainerManager()->find($container->getId());
+			$contents[] = array_merge($getid, $obj -> getRuntimeInformations());
+		}
+		return $contents;
+	}
 
      public static function stopContainer($id, $url)
 	 {

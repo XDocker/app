@@ -333,6 +333,7 @@ class DeploymentController extends BaseController {
 				} 
 				$deployment->status = $obj2->job_status;
 				$deployment -> wsResults = json_encode($obj2 -> result);
+				$this->saveContainers($deployment);
 				$success = $deployment->save();
 		        if (!$success) {
 		        	Log::error('Error while saving deployment : '.json_encode( $dep->errors()));
@@ -502,6 +503,18 @@ class DeploymentController extends BaseController {
 		echo json_encode($ondemand);
 		
 		//echo json_encode(EC2InstancePrices::On)
+	}
+
+	private function saveContainers(& $deployment)
+	{
+		switch($deployment->status)
+		{
+			case 'Completed' : $result = json_decode($deployment->wsResults);
+			 				   Log::info('Retrieving containers. '. $deployment->name);
+							   $containers = RemoteAPI::getContainers($result->public_dns);
+							   $deployment ->containers = json_encode($containers);
+		}
+		
 	}
 
 	public function getContainers($id)
