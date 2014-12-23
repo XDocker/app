@@ -11,6 +11,9 @@
 
 
 <?php  
+
+	if(empty($containers))
+	$containers = json_decode($deployment->containers);	
 	foreach ($containers as $container) 
 	{
 		$getid['id'] = $container -> getId();
