@@ -150,7 +150,7 @@ hr.small {
 
 /* Header */
 
-.header {
+/*.header {
     display: table;
     position: relative;
     width: 100%;
@@ -160,7 +160,7 @@ hr.small {
     -moz-background-size: cover;
     background-size: cover;
     -o-background-size: cover;
-}
+}*/
 
 /* About */
 
