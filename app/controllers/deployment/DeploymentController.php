@@ -559,7 +559,7 @@ class DeploymentController extends BaseController {
 		RemoteAPI::stopContainer($id, $result->public_dns);
 		Log::info('Stopped Container ');
 		return View::make('site/deployment/containers/container', array(
-            'containers' => $deployment -> containers,
+            'containers' => json_decode($deployment -> containers),
             'deployment' => $deployment
         ));
 	}
