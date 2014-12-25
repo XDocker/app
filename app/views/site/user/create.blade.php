@@ -20,4 +20,13 @@
 		@include('site.user.social')
 	</div>
 </div>
+
+<script type="text/javascript">
+	$(function() {
+		$('#howitworks').hide();
+		$('#pricings').hide();
+	});
+
+</script>
+
 @stop
