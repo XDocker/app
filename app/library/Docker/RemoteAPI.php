@@ -69,8 +69,7 @@ class RemoteAPI
         $docker = new Docker\Docker($client);
 		$container = $docker->getContainerManager()->find($id);
 		$ret = $docker->getContainerManager()->stop($container);
-		$data = $ret->find($id);
-		return $data;
+		return $ret;
 	 }
 	 
 	 public static function startContainer($id, $url)
@@ -79,8 +78,7 @@ class RemoteAPI
         $docker = new Docker\Docker($client);
 		$container = $docker->getContainerManager()->find($id);
 		$ret = $docker->getContainerManager()->start($container);
-		$data = $ret->find($id);
-		return $data;
+		return $ret;
 	 }
 	
 	public static function Containers2($url)
