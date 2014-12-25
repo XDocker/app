@@ -525,7 +525,8 @@ class DeploymentController extends BaseController {
 		Log::info('Stopping Deployment '. $deployment->name);	
 		$result = json_decode($deployment->wsResults);
 		Log::info('Starting Container '. $result->public_dns);
-		$containers = RemoteAPI::Containers($result->public_dns);
+		$containers = RemoteAPI::getContainers($result->public_dns);
+		
 		return View::make('site/deployment/containers/container', array(
             'containers' => $containers,
             'deployment' => $deployment
@@ -557,7 +558,10 @@ class DeploymentController extends BaseController {
 		$result = json_decode($deployment->wsResults);
 		RemoteAPI::stopContainer($id, $result->public_dns);
 		Log::info('Stopped Container ');
-		$this->getContainers($deploymentId);
+		return View::make('site/deployment/containers/container', array(
+            'containers' => $deployment -> containers,
+            'deployment' => $deployment
+        ));
 	}
 
 	

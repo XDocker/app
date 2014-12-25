@@ -13,13 +13,19 @@
 <?php  
 
 	if(empty($containers))
-	$containers = json_decode($deployment->containers);	
-	foreach ($containers as $container) 
 	{
-		$getid['id'] = $container -> getId();
-		$runtimeInformations = $container -> getRuntimeInformations();
-		$contents[] = array_merge($getid,$runtimeInformations);
+		$contents = json_decode($deployment->containers);	
 	}
+	else 
+	{
+		/*foreach ($containers as $container) 
+		{
+			$getid['id'] = $container -> getId();
+			$runtimeInformations = $container -> getRuntimeInformations();
+			$contents[] = array_merge($getid,$runtimeInformations);
+		}*/
+	}
+	
 ?>
 
 

@@ -30,16 +30,23 @@ class RemoteAPI
      {
      	$client = new Docker\Http\DockerClient(array(), $url . ':4243/containers/json');
         $docker = new Docker\Docker($client);
-		$containers = $docker->getContainerManager()->findAll();
-		$arr = [];
-		foreach($containers as $container)
+		try
 		{
-			$obj = $docker->getContainerManager()->find($container->getId());
-			$arr[] = $obj;
+			$containers = $docker->getContainerManager()->findAll();
+			$arr = [];
+			foreach($containers as $container)
+			{
+				$obj = $docker->getContainerManager()->find($container->getId());
+				$arr[] = $obj;
+			}
+			return $arr;
 		}
-
-		return $arr;
-     }
+		catch(Exception $ex)
+		{
+			Log::error('Error file getting all containers');
+			return array();
+		}
+	 }
 	 
 	 public static function getContainers($url)
 	 {
