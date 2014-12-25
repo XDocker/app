@@ -15,11 +15,12 @@
 	if(empty($containers))
 	{
 		$contents = json_decode($deployment->containers, true);	
+		$status = 0;
 	}
 	else 
 	{
 		$contents = $containers;
-		
+		$status = 1;
 		/*foreach ($containers as $container) 
 		{
 			$getid['id'] = $container -> getId();
@@ -65,7 +66,7 @@ $('#accordion').on('shown.bs.collapse', toggleChevron);
       <h4 class="panel-title">
         <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ $key }}">
             {{ 'Name:' .$deployment->name. ':' . $deployment->docker_name }}  </a>
-            @if(is_array($value) && $value['State']['Running']==1)
+            @if($status==1)
             <button type="button" class="btn btn-success btn-xs" disabled="disabled">{{ 'Running' }}</button>
             <a href="{{URL::to('deployment/stopContainer').'?id='.$value['Id'].'&deploymentId=' .$deployment->id }}"><i class="fa fa-stop"></i></a>
             @else
