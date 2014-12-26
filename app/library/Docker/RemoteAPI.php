@@ -30,30 +30,47 @@ class RemoteAPI
      {
      	$client = new Docker\Http\DockerClient(array(), $url . ':4243/containers/json');
         $docker = new Docker\Docker($client);
-		$containers = $docker->getContainerManager()->findAll();
-		$arr = [];
-		foreach($containers as $container)
+		try
 		{
-			$obj = $docker->getContainerManager()->find($container->getId());
-			$arr[] = $obj;
+			$containers = $docker->getContainerManager()->findAll();
+			$arr = [];
+			foreach($containers as $container)
+			{
+				$obj = $docker->getContainerManager()->find($container->getId());
+				$arr[] = $obj;
+			}
+			return $arr;
 		}
-
-		return $arr;
-     }
+		catch(Exception $ex)
+		{
+			Log::error('Error file getting all containers');
+			return array();
+		}
+	 }
 	 
 	 public static function getContainers($url)
 	 {
 	 	$client = new Docker\Http\DockerClient(array(), $url . ':4243/containers/json');
         $docker = new Docker\Docker($client);
-		$containers = $docker->getContainerManager()->findAll();
-		$contents = [];
-		foreach($containers as $container)
+		try
 		{
-			$getid['id'] = $container -> getId();
-			$obj = $docker->getContainerManager()->find($container->getId());
-			$contents[] = array_merge($getid, $obj -> getRuntimeInformations());
+			$containers = $docker->getContainerManager()->findAll();
+			$contents = [];
+			
+			foreach($containers as $container)
+			{
+				$getid['id'] = $container -> getId();
+				$obj = $docker->getContainerManager()->find($container->getId());
+				$contents[] = array_merge($getid, $obj -> getRuntimeInformations());
+			}
+			return $contents;
 		}
-		return $contents;
+		catch(Exception $ex)
+		{
+			Log::error('Error file getting all containers');
+			return array();
+		}
+		
 	}
 
      public static function stopContainer($id, $url)
@@ -62,8 +79,7 @@ class RemoteAPI
         $docker = new Docker\Docker($client);
 		$container = $docker->getContainerManager()->find($id);
 		$ret = $docker->getContainerManager()->stop($container);
-		$data = $ret->find($id);
-		return $data;
+		return $ret;
 	 }
 	 
 	 public static function startContainer($id, $url)
@@ -72,8 +88,7 @@ class RemoteAPI
         $docker = new Docker\Docker($client);
 		$container = $docker->getContainerManager()->find($id);
 		$ret = $docker->getContainerManager()->start($container);
-		$data = $ret->find($id);
-		return $data;
+		return $ret;
 	 }
 	
 	public static function Containers2($url)
