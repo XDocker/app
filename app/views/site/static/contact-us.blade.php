@@ -10,4 +10,12 @@
 
 {{{ Lang::get('site.contact_us') }}}
 
+<script type="text/javascript">
+	$(function() {
+		$('#howitworks').hide();
+		$('#pricings').hide();
+	});
+
+</script>
+
 @stop
