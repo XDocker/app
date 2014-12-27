@@ -92,6 +92,7 @@ class ContainerController extends BaseController
 		$result = json_decode($deployment->wsResults);
 		$ret = RemoteAPI::top($id, $result->public_dns);
 		Log::info('Top for Container ');
+		echo '<pre>';
 		print_r($ret);
 		
 	}
