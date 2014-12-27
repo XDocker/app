@@ -191,8 +191,8 @@ Route::group(array(
 	Route::any('deployment/{deployment}/refresh', 'DeploymentController@checkStatus');
 	
 	//Route::post('deployment/startContainer', 'DeploymentController@startContainer');
-    Route::any('docker/startContainer', 'ContainerController@startContainer');
-	Route::any('docker/stopContainer', 'ContainerController@stopContainer');
+    Route::any('docker/container/start', 'ContainerController@startContainer');
+	Route::any('docker/container/stop', 'ContainerController@stopContainer');
 	Route::any('docker/{deployment}/Containers', 'ContainerController@getContainers');
 	
 	Route::any('awsPricing/', 'AWSPricingController@getIndex'); 

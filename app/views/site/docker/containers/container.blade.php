@@ -68,10 +68,10 @@ $('#accordion').on('shown.bs.collapse', toggleChevron);
             {{ 'Name:' .$deployment->name. ':' . $deployment->docker_name }}  </a>
             @if($status==1)
             <button type="button" class="btn btn-success btn-xs" disabled="disabled">{{ 'Running' }}</button>
-            <a href="{{URL::to('deployment/stopContainer').'?id='.$value['Id'].'&deploymentId=' .$deployment->id }}"><i class="fa fa-stop"></i></a>
+            <a href="{{URL::to('docker/container/stop').'?id='.$value['Id'].'&deploymentId=' .$deployment->id }}"><i class="fa fa-stop"></i></a>
             @else
             <button type="button" class="btn btn-danger btn-xs" disabled="disabled">{{ 'Stoped' }}</button>
-            <a href="{{URL::to('deployment/startContainer').'?id='.$value['Id'].'&deploymentId=' .$deployment->id }}"><i class="fa fa-play"></i></a>
+            <a href="{{URL::to('docker/container/start').'?id='.$value['Id'].'&deploymentId=' .$deployment->id }}"><i class="fa fa-play"></i></a>
             @endif
             <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ $key }}">
        <i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i></a>
