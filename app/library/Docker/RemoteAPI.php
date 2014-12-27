@@ -90,6 +90,24 @@ class RemoteAPI
 		$ret = $docker->getContainerManager()->start($container);
 		return $ret;
 	 }
+	 
+	 public static function top($id, $url)
+	 {
+	 	$client = new Docker\Http\DockerClient(array(), $url . ':4243/containers/json');
+        $docker = new Docker\Docker($client);
+		try
+		{
+			$container = $docker->getContainerManager()->find($id);
+			$ret = $docker->getContainerManager()->top($container);
+			return $ret;
+		}
+		catch(Exception $ex)
+		{
+			Log::error("Error while getting list of process from container ". $id);
+			return array();	
+		}
+		
+	 }
 	
 	public static function Containers2($url)
 	{

@@ -69,8 +69,11 @@ $('#accordion').on('shown.bs.collapse', toggleChevron);
             @if($status==1)
             <button type="button" class="btn btn-success btn-xs" disabled="disabled">{{ 'Running' }}</button>
             <a href="{{URL::to('docker/container/stop').'?id='.$value['Id'].'&deploymentId=' .$deployment->id }}"><i class="fa fa-stop"></i></a>
+            <button type="button" class="btn btn-success btn-xs" disabled="disabled">{{ 'Running' }}</button>
+            <a href="{{URL::to('docker/container/top').'?id='.$value['Id'].'&deploymentId=' .$deployment->id }}"><i class="fa fa-stop"></i></a>
+            
             @else
-            <button type="button" class="btn btn-danger btn-xs" disabled="disabled">{{ 'Stoped' }}</button>
+            <button type="button" class="btn btn-danger btn-xs" disabled="disabled">{{ 'Stopped' }}</button>
             <a href="{{URL::to('docker/container/start').'?id='.$value['Id'].'&deploymentId=' .$deployment->id }}"><i class="fa fa-play"></i></a>
             @endif
             <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ $key }}">

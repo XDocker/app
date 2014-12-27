@@ -80,6 +80,19 @@ class ContainerController extends BaseController
 		Log::info('Stopped Container ');
 		
 		return Redirect::to('docker/'.$deploymentId.'/Containers')->with('success', $deployment->docker_name . ' stopped ' ); 
+	}
+	
+	public function topContainer()
+	{
+		$id = Input::get('id');
+		
+		$deploymentId = Input::get('deploymentId');
+		$deployment 	= Deployment::where('user_id', Auth::id())->find($deploymentId);
+		Log::info('Top for '. $deployment->name);
+		$result = json_decode($deployment->wsResults);
+		$ret = RemoteAPI::topContainer($id, $result->public_dns);
+		Log::info('Top for Container ');
+		print_r($ret);
 		
 	}
 }
