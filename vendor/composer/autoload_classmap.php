@@ -33,6 +33,8 @@ return array(
     'Comment' => $baseDir . '/app/models/Comment.php',
     'CommentsTableSeeder' => $baseDir . '/app/database/seeds/CommentsTableSeeder.php',
     'ConfideSetupUsersTable' => $baseDir . '/app/database/migrations/2013_02_05_024934_confide_setup_users_table.php',
+    'ContainerController' => $baseDir . '/app/controllers/docker/ContainerController.php',
+    'ContainersDeploymentTable' => $baseDir . '/app/database/migrations/2014_12_22_043505_containers_deployment_table.php',
     'CreateCloudAccountsTable' => $baseDir . '/app/database/migrations/2014_09_08_163809_create_CloudAccounts_table.php',
     'CreateCommentsTable' => $baseDir . '/app/database/migrations/2013_02_05_044505_create_comments_table.php',
     'CreateDeploymentsTable' => $baseDir . '/app/database/migrations/2014_09_11_141820_create_deployments_table.php',
