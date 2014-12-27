@@ -194,7 +194,7 @@ Route::group(array(
     Route::any('docker/container/start', 'ContainerController@startContainer');
 	Route::any('docker/container/stop', 'ContainerController@stopContainer');
 	Route::any('docker/{deployment}/Containers', 'ContainerController@getContainers');
-	Route::any('docker/{deployment}/top', 'ContainerController@topContainer');
+	Route::any('docker/{deployment}/topContainer', 'ContainerController@topContainer');
 	
 	Route::any('awsPricing/', 'AWSPricingController@getIndex'); 
 	
