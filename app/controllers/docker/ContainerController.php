@@ -120,7 +120,7 @@ class ContainerController extends BaseController
 		$deployment 	= Deployment::where('user_id', Auth::id())->find($deploymentId);
 		Log::info('Logs for '. $deployment->name);
 		$result = json_decode($deployment->wsResults);
-		$ret = RemoteAPI::logs($id, $result->public_dns);
+		$ret = RemoteAPI::export($id, $result->public_dns);
 		Log::info('Logs for Container ');
 		echo '<pre>';
 		print_r($ret);
