@@ -69,13 +69,14 @@ $('#accordion').on('shown.bs.collapse', toggleChevron);
             @if($status==1)
             <button type="button" class="btn btn-success btn-xs" disabled="disabled">{{ 'Running' }}</button>
             <a href="{{URL::to('docker/container/stop').'?id='.$value['Id'].'&deploymentId=' .$deployment->id }}"><i class="fa fa-stop"></i></a>
+            <!--
             <button type="button" class="btn btn-success btn-xs" disabled="disabled">{{ 'Running' }}</button>
             <a href="{{URL::to('docker/container/top').'?id='.$value['Id'].'&deploymentId=' .$deployment->id }}"><i class="fa fa-stop"></i></a>
             <button type="button" class="btn btn-success btn-xs" disabled="disabled">{{ 'Running' }}</button>
             <a href="{{URL::to('docker/container/logs').'?id='.$value['Id'].'&deploymentId=' .$deployment->id }}"><i class="fa fa-stop"></i></a>
             <button type="button" class="btn btn-success btn-xs" disabled="disabled">{{ 'Running' }}</button>
             <a href="{{URL::to('docker/container/export').'?id='.$value['Id'].'&deploymentId=' .$deployment->id }}"><i class="fa fa-stop"></i></a>
-            
+            -->
             @else
             <button type="button" class="btn btn-danger btn-xs" disabled="disabled">{{ 'Stopped' }}</button>
             <a href="{{URL::to('docker/container/start').'?id='.$value['Id'].'&deploymentId=' .$deployment->id }}"><i class="fa fa-play"></i></a>
@@ -86,7 +87,13 @@ $('#accordion').on('shown.bs.collapse', toggleChevron);
     </div>
     <div id="collapse{{ $key }}" class="panel-collapse collapse">
       <div class="panel-body">
-
+		<button type="button" class="btn btn-info btn-xs" disabled="disabled">{{ 'Top' }}</button>
+            <a href="{{URL::to('docker/container/top').'?id='.$value['Id'].'&deploymentId=' .$deployment->id }}"><i class="fa fa-stop"></i></a>
+            <button type="button" class="btn btn-default btn-xs" disabled="disabled">{{ 'Logs' }}</button>
+            <a href="{{URL::to('docker/container/logs').'?id='.$value['Id'].'&deploymentId=' .$deployment->id }}"><i class="fa fa-stop"></i></a>
+            <button type="button" class="btn btn-warning btn-xs" disabled="disabled">{{ 'Export' }}</button>
+            <a href="{{URL::to('docker/container/export').'?id='.$value['Id'].'&deploymentId=' .$deployment->id }}"><i class="fa fa-stop"></i></a>
+          
      <table class="table table-bordered">
         <thead>
           <tr>
