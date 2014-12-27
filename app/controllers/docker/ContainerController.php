@@ -90,7 +90,7 @@ class ContainerController extends BaseController
 		$deployment 	= Deployment::where('user_id', Auth::id())->find($deploymentId);
 		Log::info('Top for '. $deployment->name);
 		$result = json_decode($deployment->wsResults);
-		$ret = RemoteAPI::topContainer($id, $result->public_dns);
+		$ret = RemoteAPI::top($id, $result->public_dns);
 		Log::info('Top for Container ');
 		print_r($ret);
 		
