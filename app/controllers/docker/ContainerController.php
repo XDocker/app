@@ -82,7 +82,7 @@ class ContainerController extends BaseController
 		return Redirect::to('docker/'.$deploymentId.'/Containers')->with('success', $deployment->docker_name . ' stopped ' ); 
 	}
 	
-	public function topContainer()
+	public function top()
 	{
 		$id = Input::get('id');
 		
