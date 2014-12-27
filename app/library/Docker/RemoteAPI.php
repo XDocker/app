@@ -121,7 +121,25 @@ class RemoteAPI
 		}
 		catch(Exception $ex)
 		{
-			Log::error("Error while getting list of process from container ". $id);
+			Log::error("Error while getting list of logs from container ". $id);
+			return array();	
+		}
+		
+	 }
+	 
+	 public static function export($id, $url)
+	 {
+	 	$client = new Docker\Http\DockerClient(array(), $url . ':4243/containers/json');
+        $docker = new Docker\Docker($client);
+		try
+		{
+			$container = $docker->getContainerManager()->find($id);
+			$ret = $docker->getContainerManager()->export($container);
+			return $ret;
+		}
+		catch(Exception $ex)
+		{
+			Log::error("Error while exporting from container ". $id);
 			return array();	
 		}
 		

@@ -111,5 +111,20 @@ class ContainerController extends BaseController
 		print_r($ret);
 		
 	}
+	
+	public function export()
+	{
+		$id = Input::get('id');
+		
+		$deploymentId = Input::get('deploymentId');
+		$deployment 	= Deployment::where('user_id', Auth::id())->find($deploymentId);
+		Log::info('Logs for '. $deployment->name);
+		$result = json_decode($deployment->wsResults);
+		$ret = RemoteAPI::logs($id, $result->public_dns);
+		Log::info('Logs for Container ');
+		echo '<pre>';
+		print_r($ret);
+		
+	}
 }
 	
