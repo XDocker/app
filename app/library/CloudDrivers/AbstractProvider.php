@@ -14,7 +14,7 @@
 
 abstract class AbstractProvider implements IProvider
 {
-	private $account;
+	protected $account;
 	
 	private function init() 
 	{

@@ -15,7 +15,6 @@
 class DockerImpl extends AbstractProvider
 {
 	private $ec2Client;
-	private $account;
 	
 	private function init() 
 	{
