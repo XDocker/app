@@ -34,7 +34,6 @@ class ContainerController extends BaseController
         $this->user = $user;
     }
 	
-	
 	public function getContainers($id)
 	{
 		$deployment 	= Deployment::where('user_id', Auth::id())->find($id);

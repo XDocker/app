@@ -53,7 +53,7 @@ return array(
         'credentials[basicAuthUser]' => array(
             'type' => 'string',
             'title' => 'Basic Auth User',
-            'required' => true,
+            'required' => false,
             'description' => 'Basic Auth User'
 			
         ) ,
