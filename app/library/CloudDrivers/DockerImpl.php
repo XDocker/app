@@ -12,7 +12,7 @@
 */
 
 
-class DockerImpl implements IProvider
+class DockerImpl extends AbstractProvider
 {
 	private $ec2Client;
 	private $account;
@@ -24,7 +24,7 @@ class DockerImpl implements IProvider
 	
 	public function __construct($acct) 
 	{
-	   $this->account = $acct;
+	   parent::__construct($acct) ;
     }
 	
 	public function authenticate() 
@@ -44,26 +44,7 @@ class DockerImpl implements IProvider
 	   }
 	}
 	
-	/*
-	 * $client = new Docker\Http\DockerClient(array(), $url . ':4243/containers/json');
-        $docker = new Docker\Docker($client);
-		try
-		{
-			$containers = $docker->getContainerManager()->findAll();
-			$arr = [];
-			foreach($containers as $container)
-			{
-				$obj = $docker->getContainerManager()->find($container->getId());
-				$arr[] = $obj;
-			}
-			return $arr;
-		}
-		catch(Exception $ex)
-		{
-			Log::error('Error file getting all containers');
-			return array();
-		}
-	 */
+	
 	
 }
 		
