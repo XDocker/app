@@ -8,6 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'AWSPRoviderImpl' => $baseDir . '/app/library/CloudDrivers/AWSProviderImpl.php',
     'AWSPricingController' => $baseDir . '/app/controllers/aws/AWSPricingController.php',
+    'AbstractProvider' => $baseDir . '/app/library/CloudDrivers/AbstractProvider.php',
     'AccountController' => $baseDir . '/app/controllers/account/AccountController.php',
     'AddDeploymentIdToTicketsTable' => $baseDir . '/app/database/migrations/2014_10_26_043505_add_deploymentId_to_tickets_table.php',
     'AddEngineKeyLog' => $baseDir . '/app/database/migrations/2014_09_29_041347_add_engine_key_log.php',
@@ -46,6 +47,7 @@ return array(
     'Deployment' => $baseDir . '/app/models/Deployment.php',
     'DeploymentController' => $baseDir . '/app/controllers/deployment/DeploymentController.php',
     'DeploymentQueryHelper' => $baseDir . '/app/library/helpers/DeploymentQueryHelper.php',
+    'DockerImpl' => $baseDir . '/app/library/CloudDrivers/DockerImpl.php',
     'EC2InstancePrices' => $baseDir . '/app/library/helpers/EC2InstancePrices.php',
     'EngineLog' => $baseDir . '/app/models/EngineLog.php',
     'EnginelogController' => $baseDir . '/app/controllers/enginelog/EnginelogController.php',
