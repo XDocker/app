@@ -40,7 +40,6 @@ class AccountController extends BaseController {
         // Get all the user's accounts
         //Auth::id() : gives the logged in userid
         $accounts = $this->accounts->where('user_id', Auth::id())->orderBy('created_at', 'DESC')->paginate(10);
-       
         return View::make('site/account/index', array(
             'accounts' => $accounts
         ));
