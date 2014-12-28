@@ -83,7 +83,7 @@ class AccountController extends BaseController {
 				CloudAccountHelper::save($account);
             	return Redirect::intended('account')->with('success', Lang::get('account/account.account_updated'));
             } else {
-                return Redirect::to('account')->with('error', Lang::get('account/account.account_auth_failed'));
+                return Redirect::to('account')->with('error', Lang::get('account/account.account_auth_failed') .' for ' .$account->cloudProvider);
             }
         }
         catch(Exception $e) {
