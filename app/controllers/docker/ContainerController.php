@@ -133,7 +133,7 @@ class ContainerController extends BaseController
 		$containers = RemoteAPI::getContainers($cred->host, $cred->port);
 		return View::make('site/docker/containers/container_account', array(
             'containers' => $containers,
-            'deployment' => $account->name
+            'account' => $account
         ));
 	}
 	
