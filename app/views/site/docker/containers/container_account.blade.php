@@ -15,12 +15,10 @@
 	if(empty($containers))
 	{
 		$contents = json_decode($account->containers, true);	
-		$status = 0;
 	}
 	else 
 	{
 		$contents = $containers;
-		$status = 1;
 		/*foreach ($containers as $container) 
 		{
 			$getid['id'] = $container -> getId();

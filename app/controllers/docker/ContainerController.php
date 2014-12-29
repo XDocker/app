@@ -131,15 +131,18 @@ class ContainerController extends BaseController
 		$account 	= CloudAccountHelper::findAndDecrypt($id);
 		$cred = json_decode($account->credentials);
 		$containers = RemoteAPI::getContainers($cred->host, $cred->port);
-		
+		$status = 1;
 		if(empty($containers))
 		{
 			$accountContainer = AccountContainer::where('user_id', Auth::id())->where('cloudAccountId', $id)->first();
 			$containers = json_decode($accountContainer->containers);
+			$status = 0;
 		}
+		
 		return View::make('site/docker/containers/container_account', array(
             'containers' => $containers,
-            'account' => $account
+            'account' => $account,
+            'status' => $status
         ));
 	}
 	
