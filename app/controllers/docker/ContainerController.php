@@ -128,7 +128,7 @@ class ContainerController extends BaseController
 	
 	public function getContainersByAccount($id)
 	{
-		$account 	= CloudAccount::where('user_id', Auth::id())->find($id);
+		$account 	= CloudAccountHelper::findAndDecrypt($id);
 		$cred = json_decode($account->credentials);
 		$containers = RemoteAPI::getContainers($cred->host, $cred->port);
 		return View::make('site/docker/containers/container_account', array(
@@ -142,7 +142,7 @@ class ContainerController extends BaseController
 		$id = Input::get('id');
 		
 		$accountId = Input::get('accountId');
-		$account 	= CloudAccount::where('user_id', Auth::id())->find($deploymentId);
+		$account 	= CloudAccountHelper::findAndDecrypt($id);
 		Log::info('Starting Account '. $account->name);
 		$result = json_decode($account->credentials);
 		Log::info('Starting Container '. $result->host);
@@ -158,7 +158,7 @@ class ContainerController extends BaseController
 		$id = Input::get('id');
 		
 		$accountId = Input::get('accountId');
-		$account 	= CloudAccount::where('user_id', Auth::id())->find($deploymentId);
+		$account 	= CloudAccountHelper::findAndDecrypt($id);
 		Log::info('Starting Account '. $account->name);
 		$result = json_decode($account->credentials);
 		Log::info('Starting Container '. $result->host);
@@ -173,7 +173,7 @@ class ContainerController extends BaseController
 		$id = Input::get('id');
 		
 		$accountId = Input::get('accountId');
-		$account 	= CloudAccount::where('user_id', Auth::id())->find($deploymentId);
+		$account 	= CloudAccountHelper::findAndDecrypt($id);
 		Log::info('Starting Account '. $account->name);
 		$result = json_decode($account->credentials);
 		Log::info('Top for '. $result->host);
@@ -189,7 +189,7 @@ class ContainerController extends BaseController
 		$id = Input::get('id');
 		
 		$accountId = Input::get('accountId');
-		$account 	= CloudAccount::where('user_id', Auth::id())->find($deploymentId);
+		$account 	= CloudAccountHelper::findAndDecrypt($id);
 		
 		Log::info('Logs for '. $account->name);
 		$result = json_decode($account->credentials);
@@ -205,7 +205,7 @@ class ContainerController extends BaseController
 		$id = Input::get('id');
 		
 		$accountId = Input::get('accountId');
-		$account 	= CloudAccount::where('user_id', Auth::id())->find($deploymentId);
+		$account 	= CloudAccountHelper::findAndDecrypt($id);
 		
 		Log::info('Logs for '. $account->name);
 		
