@@ -34,7 +34,11 @@
 						<div class="media-body">
 							<h4 class="media-heading">{{ String::title($account->name) }}</h4>
 							<p>
-								<span class="glyphicon glyphicon-calendar"></span> <!--Sept 16th, 2012-->{{{ $account->created_at }}}
+								<span class="glyphicon glyphicon-calendar"></span> <!--Sept 16th, 2012-->{{{ $account->created_at }}} 
+								
+								@if($account->cloudProvider == 'Docker')
+								| <a href="{{ URL::to('account/docker/' . $account->id . '/Containers') }}"><span class="glyphicon glyphicon-calendar"></span></a>
+								@endif
 							</p>
 						</div>
 					</div>
