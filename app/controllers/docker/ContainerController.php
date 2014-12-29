@@ -131,6 +131,12 @@ class ContainerController extends BaseController
 		$account 	= CloudAccountHelper::findAndDecrypt($id);
 		$cred = json_decode($account->credentials);
 		$containers = RemoteAPI::getContainers($cred->host, $cred->port);
+		
+		if(empty($containers))
+		{
+			$accountContainer = AccountContainer::where('user_id', Auth::id())->where('cloudAccountId', $id)->first();
+			$containers = json_decode($accountContainer->containers);
+		}
 		return View::make('site/docker/containers/container_account', array(
             'containers' => $containers,
             'account' => $account
@@ -158,10 +164,20 @@ class ContainerController extends BaseController
 		$id = Input::get('id');
 		
 		$accountId = Input::get('accountId');
+		
 		$account 	= CloudAccountHelper::findAndDecrypt($id);
 		Log::info('Starting Account '. $account->name);
 		$result = json_decode($account->credentials);
 		Log::info('Starting Container '. $result->host);
+		
+		$containers = RemoteAPI::getContainers($cred->host, $cred->port);
+		$accountContainer = new AccountContainer();
+		$accountContainer -> user_id = Auth::id();
+		$accountContainer ->cloudAccountId = $accountId;
+		$accountContainer->containers = json_decode($containers);
+		
+		$accountContainer -> save();
+		
 		RemoteAPI::stopContainer($id, $result->host, $result->port);
 		Log::info('Stopped Container ');
 		
