@@ -173,7 +173,7 @@ class ContainerController extends BaseController
 		$result = json_decode($account->credentials);
 		Log::info('Starting Container '. $result->host);
 		
-		$containers = RemoteAPI::getContainers($cred->host, $cred->port);
+		$containers = RemoteAPI::getContainers($result->host, $result->port);
 		$accountContainer = new AccountContainer();
 		$accountContainer -> user_id = Auth::id();
 		$accountContainer ->cloudAccountId = $accountId;
