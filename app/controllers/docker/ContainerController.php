@@ -62,7 +62,7 @@ class ContainerController extends BaseController
 		RemoteAPI::startContainer($id, $result->public_dns);
 		Log::info('Started Container ');
 		//$this->getContainers($deploymentId);
-		return Redirect::to('docker/'.$deploymentId.'/Containers')->with('success', $deployment->docker_name . ' started ' ); 
+		return Redirect::to('deployment/docker/'.$deploymentId.'/Containers')->with('success', $deployment->docker_name . ' started ' ); 
 		
 	}
 	
@@ -78,7 +78,7 @@ class ContainerController extends BaseController
 		RemoteAPI::stopContainer($id, $result->public_dns);
 		Log::info('Stopped Container ');
 		
-		return Redirect::to('docker/'.$deploymentId.'/Containers')->with('success', $deployment->docker_name . ' stopped ' ); 
+		return Redirect::to('deployment/docker/'.$deploymentId.'/Containers')->with('success', $deployment->docker_name . ' stopped ' ); 
 	}
 	
 	public function topByDeployment()
