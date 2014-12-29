@@ -37,7 +37,7 @@
 								<span class="glyphicon glyphicon-calendar"></span> <!--Sept 16th, 2012-->{{{ $account->created_at }}} 
 								
 								@if($account->cloudProvider == 'Docker')
-								| <a href="{{ URL::to('account/docker/' . $account->id . '/Containers') }}"><span class="glyphicon glyphicon-calendar"></span></a>
+								| <a href="{{ URL::to('account/docker/' . $account->id . '/Containers') }}"><span class="fa fa-info"></span></a>
 								@endif
 							</p>
 						</div>

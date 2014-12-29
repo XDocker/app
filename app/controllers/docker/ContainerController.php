@@ -91,8 +91,20 @@ class ContainerController extends BaseController
 		$result = json_decode($deployment->wsResults);
 		$ret = RemoteAPI::top($id, $result->public_dns);
 		Log::info('Top for Container ');
-		echo '<pre>';
-		print_r($ret);
+		$arr = array();
+
+		foreach ($ret as $key => $value) {
+			foreach ($value as $key1 => $value1) {
+				if(!in_array($key1, $arr))
+					$arr[] = $key1;
+			}
+		}
+		
+		return View::make('site/docker/containers/top_deployment', array(
+            'DeploymentTop' => $ret,
+            'DeploymentTopkey' => $arr,
+            'deployment' => $deployment
+        ));
 		
 	}
 	
@@ -198,8 +210,20 @@ class ContainerController extends BaseController
 		Log::info('Top for '. $result->host);
 		$ret = RemoteAPI::top($id, $result->host, $result->port);
 		Log::info('Top for Container ');
-		echo '<pre>';
-		print_r($ret);
+
+		$arr = array();
+		foreach ($ret as $key => $value) {
+			foreach ($value as $key1 => $value1) {
+				if(!in_array($key1, $arr))
+					$arr[] = $key1;
+			}
+		}
+		
+		return View::make('site/docker/containers/top_account', array(
+            'accountTop' => $ret,
+            'accountTopkey' => $arr,
+            'account' => $account
+        ));
 		
 	}
 	

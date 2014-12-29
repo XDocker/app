@@ -6,7 +6,7 @@
 
 {{-- Content --}}
 @section('content')
-@section('breadcrumbs', Breadcrumbs::render(Lang::get('breadcrumb/breadcrumb.Container')))
+@section('breadcrumbs', Breadcrumbs::render(Lang::get('breadcrumb/breadcrumb.deploymentContainer'),$deployment->id))
 
 
 
