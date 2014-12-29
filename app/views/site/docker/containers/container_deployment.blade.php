@@ -41,7 +41,7 @@ $('#accordion').on('shown.bs.collapse', toggleChevron);
 <div class="page-header">
 		<div class="row">
 			<div class="col-md-9">
-				<h4> Deployment Name:{{ $deploymentName }}</h4>
+				<h4> Deployment Name:{{ $deployment->name }}</h4>
 			</div>
 		</div>
 	</div>
