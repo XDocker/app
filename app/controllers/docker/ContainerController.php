@@ -149,64 +149,68 @@ class ContainerController extends BaseController
 		RemoteAPI::startContainer($id, $result->host, $result->port);
 		Log::info('Started Container ');
 		//$this->getContainers($deploymentId);
-		return Redirect::to('docker/'.$deploymentId.'/Containers')->with('success', $deployment->docker_name . ' started ' ); 
+		return Redirect::to('account/docker/'.$accountId.'/Containers')->with('success', $account->name . ' started ' ); 
 		
 	}
 	
-	public function stopContainerByDeployment()
+	public function stopContainerByAccount()
 	{
 		$id = Input::get('id');
 		
-		$deploymentId = Input::get('deploymentId');
-		$deployment 	= Deployment::where('user_id', Auth::id())->find($deploymentId);
-		Log::info('Stopping Deployment '. $deployment->name);
-		
-		$result = json_decode($deployment->wsResults);
-		RemoteAPI::stopContainer($id, $result->public_dns);
+		$accountId = Input::get('accountId');
+		$account 	= CloudAccount::where('user_id', Auth::id())->find($deploymentId);
+		Log::info('Starting Account '. $account->name);
+		$result = json_decode($account->credentials);
+		Log::info('Starting Container '. $result->host);
+		RemoteAPI::stopContainer($id, $result->host, $result->port);
 		Log::info('Stopped Container ');
 		
-		return Redirect::to('docker/'.$deploymentId.'/Containers')->with('success', $deployment->docker_name . ' stopped ' ); 
+		return Redirect::to('account/docker/'.$accountId.'/Containers')->with('success', $account->name . ' stopped ' ); 
 	}
 	
-	public function topByDeployment()
+	public function topByAccount()
 	{
 		$id = Input::get('id');
 		
-		$deploymentId = Input::get('deploymentId');
-		$deployment 	= Deployment::where('user_id', Auth::id())->find($deploymentId);
-		Log::info('Top for '. $deployment->name);
-		$result = json_decode($deployment->wsResults);
-		$ret = RemoteAPI::top($id, $result->public_dns);
+		$accountId = Input::get('accountId');
+		$account 	= CloudAccount::where('user_id', Auth::id())->find($deploymentId);
+		Log::info('Starting Account '. $account->name);
+		$result = json_decode($account->credentials);
+		Log::info('Top for '. $result->host);
+		$ret = RemoteAPI::top($id, $result->host, $result->port);
 		Log::info('Top for Container ');
 		echo '<pre>';
 		print_r($ret);
 		
 	}
 	
-	public function logsByDeployment()
+	public function logsByAccount()
 	{
 		$id = Input::get('id');
 		
-		$deploymentId = Input::get('deploymentId');
-		$deployment 	= Deployment::where('user_id', Auth::id())->find($deploymentId);
-		Log::info('Logs for '. $deployment->name);
-		$result = json_decode($deployment->wsResults);
-		$ret = RemoteAPI::logs($id, $result->public_dns);
+		$accountId = Input::get('accountId');
+		$account 	= CloudAccount::where('user_id', Auth::id())->find($deploymentId);
+		
+		Log::info('Logs for '. $account->name);
+		$result = json_decode($account->credentials);
+		$ret = RemoteAPI::logs($id, $result->host, $result->port);
 		Log::info('Logs for Container ');
 		echo '<pre>';
 		print_r($ret);
 		
 	}
 	
-	public function exportByDeployment()
+	public function exportByAccount()
 	{
 		$id = Input::get('id');
 		
-		$deploymentId = Input::get('deploymentId');
-		$deployment 	= Deployment::where('user_id', Auth::id())->find($deploymentId);
-		Log::info('Logs for '. $deployment->name);
-		$result = json_decode($deployment->wsResults);
-		$ret = RemoteAPI::export($id, $result->public_dns);
+		$accountId = Input::get('accountId');
+		$account 	= CloudAccount::where('user_id', Auth::id())->find($deploymentId);
+		
+		Log::info('Logs for '. $account->name);
+		
+		$result = json_decode($account->credentials);
+		$ret = RemoteAPI::export($id, $result->host, $result->port);
 		Log::info('Logs for Container ');
 		echo '<pre>';
 		print_r($ret);
