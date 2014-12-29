@@ -135,7 +135,7 @@ class ContainerController extends BaseController
 		if(empty($containers))
 		{
 			$accountContainer = AccountContainer::where('user_id', Auth::id())->where('cloudAccountId', $id)->first();
-			$containers = json_decode($accountContainer->containers);
+			$containers = json_decode($accountContainer->containers, true);
 			$status = 0;
 		}
 		
