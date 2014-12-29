@@ -34,7 +34,7 @@ class ContainerController extends BaseController
         $this->user = $user;
     }
 	
-	public function getContainers($id)
+	public function getContainersByDeployment($id)
 	{
 		$deployment 	= Deployment::where('user_id', Auth::id())->find($id);
 		$deployment     = json_decode($deployment->toJson());
@@ -135,6 +135,82 @@ class ContainerController extends BaseController
             'containers' => $containers,
             'deployment' => $account->name
         ));
+	}
+	
+	public function startContainerByAccount()
+	{
+		$id = Input::get('id');
+		
+		$accountId = Input::get('accountId');
+		$account 	= CloudAccount::where('user_id', Auth::id())->find($deploymentId);
+		Log::info('Starting Account '. $account->name);
+		$result = json_decode($account->credentials);
+		Log::info('Starting Container '. $result->host);
+		RemoteAPI::startContainer($id, $result->host, $result->port);
+		Log::info('Started Container ');
+		//$this->getContainers($deploymentId);
+		return Redirect::to('docker/'.$deploymentId.'/Containers')->with('success', $deployment->docker_name . ' started ' ); 
+		
+	}
+	
+	public function stopContainerByDeployment()
+	{
+		$id = Input::get('id');
+		
+		$deploymentId = Input::get('deploymentId');
+		$deployment 	= Deployment::where('user_id', Auth::id())->find($deploymentId);
+		Log::info('Stopping Deployment '. $deployment->name);
+		
+		$result = json_decode($deployment->wsResults);
+		RemoteAPI::stopContainer($id, $result->public_dns);
+		Log::info('Stopped Container ');
+		
+		return Redirect::to('docker/'.$deploymentId.'/Containers')->with('success', $deployment->docker_name . ' stopped ' ); 
+	}
+	
+	public function topByDeployment()
+	{
+		$id = Input::get('id');
+		
+		$deploymentId = Input::get('deploymentId');
+		$deployment 	= Deployment::where('user_id', Auth::id())->find($deploymentId);
+		Log::info('Top for '. $deployment->name);
+		$result = json_decode($deployment->wsResults);
+		$ret = RemoteAPI::top($id, $result->public_dns);
+		Log::info('Top for Container ');
+		echo '<pre>';
+		print_r($ret);
+		
+	}
+	
+	public function logsByDeployment()
+	{
+		$id = Input::get('id');
+		
+		$deploymentId = Input::get('deploymentId');
+		$deployment 	= Deployment::where('user_id', Auth::id())->find($deploymentId);
+		Log::info('Logs for '. $deployment->name);
+		$result = json_decode($deployment->wsResults);
+		$ret = RemoteAPI::logs($id, $result->public_dns);
+		Log::info('Logs for Container ');
+		echo '<pre>';
+		print_r($ret);
+		
+	}
+	
+	public function exportByDeployment()
+	{
+		$id = Input::get('id');
+		
+		$deploymentId = Input::get('deploymentId');
+		$deployment 	= Deployment::where('user_id', Auth::id())->find($deploymentId);
+		Log::info('Logs for '. $deployment->name);
+		$result = json_decode($deployment->wsResults);
+		$ret = RemoteAPI::export($id, $result->public_dns);
+		Log::info('Logs for Container ');
+		echo '<pre>';
+		print_r($ret);
+		
 	}
 
 	
