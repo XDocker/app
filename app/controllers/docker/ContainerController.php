@@ -177,7 +177,7 @@ class ContainerController extends BaseController
 		$accountContainer = new AccountContainer();
 		$accountContainer -> user_id = Auth::id();
 		$accountContainer ->cloudAccountId = $accountId;
-		$accountContainer->containers = json_decode($containers);
+		$accountContainer->containers = json_encode($containers);
 		
 		$accountContainer -> save();
 		
