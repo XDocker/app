@@ -44,13 +44,13 @@ class ContainerController extends BaseController
 		Log::info('Starting Container '. $result->public_dns);
 		$containers = RemoteAPI::getContainers($result->public_dns);
 		
-		return View::make('site/docker/containers/container', array(
+		return View::make('site/docker/containers/container_deployment', array(
             'containers' => $containers,
             'deployment' => $deployment
         ));
 	}
-
-	public function startContainer()
+	
+	public function startContainerByDeployment()
 	{
 		$id = Input::get('id');
 		
@@ -66,7 +66,7 @@ class ContainerController extends BaseController
 		
 	}
 	
-	public function stopContainer()
+	public function stopContainerByDeployment()
 	{
 		$id = Input::get('id');
 		
@@ -81,7 +81,7 @@ class ContainerController extends BaseController
 		return Redirect::to('docker/'.$deploymentId.'/Containers')->with('success', $deployment->docker_name . ' stopped ' ); 
 	}
 	
-	public function top()
+	public function topByDeployment()
 	{
 		$id = Input::get('id');
 		
@@ -96,7 +96,7 @@ class ContainerController extends BaseController
 		
 	}
 	
-	public function logs()
+	public function logsByDeployment()
 	{
 		$id = Input::get('id');
 		
@@ -111,7 +111,7 @@ class ContainerController extends BaseController
 		
 	}
 	
-	public function export()
+	public function exportByDeployment()
 	{
 		$id = Input::get('id');
 		
@@ -125,5 +125,18 @@ class ContainerController extends BaseController
 		print_r($ret);
 		
 	}
+	
+	public function getContainersByAccount($id)
+	{
+		$account 	= CloudAccount::where('user_id', Auth::id())->find($id);
+		$cred = json_decode($account->credentials);
+		$containers = RemoteAPI::getContainers($cred->host, $cred->port);
+		return View::make('site/docker/containers/container_account', array(
+            'containers' => $containers,
+            'deployment' => $account->name
+        ));
+	}
+
+	
 }
 	

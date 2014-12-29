@@ -21,12 +21,6 @@
 	{
 		$contents = $containers;
 		$status = 1;
-		/*foreach ($containers as $container) 
-		{
-			$getid['id'] = $container -> getId();
-			$runtimeInformations = $container -> getRuntimeInformations();
-			$contents[] = array_merge($getid,$runtimeInformations);
-		}*/
 	}
 	
 ?>
@@ -47,7 +41,7 @@ $('#accordion').on('shown.bs.collapse', toggleChevron);
 <div class="page-header">
 		<div class="row">
 			<div class="col-md-9">
-				<h4> Deployment Name:{{ $deployment->name }}</h4>
+				<h4> Deployment Name:{{ $deploymentName }}</h4>
 			</div>
 		</div>
 	</div>
@@ -68,7 +62,7 @@ $('#accordion').on('shown.bs.collapse', toggleChevron);
             {{ 'Name:' .$deployment->name. ':' . $deployment->docker_name }}  </a>
             @if($status==1)
             <button type="button" class="btn btn-success btn-xs" disabled="disabled">{{ 'Running' }}</button>
-            <a href="{{URL::to('docker/container/stop').'?id='.$value['Id'].'&deploymentId=' .$deployment->id }}"><i class="fa fa-stop"></i></a>
+            <a href="{{URL::to('deployment/docker/container/stop').'?id='.$value['Id'].'&deploymentId=' .$deployment->id }}"><i class="fa fa-stop"></i></a>
             <!--
             <button type="button" class="btn btn-success btn-xs" disabled="disabled">{{ 'Running' }}</button>
             <a href="{{URL::to('docker/container/top').'?id='.$value['Id'].'&deploymentId=' .$deployment->id }}"><i class="fa fa-stop"></i></a>
@@ -79,7 +73,7 @@ $('#accordion').on('shown.bs.collapse', toggleChevron);
             -->
             @else
             <button type="button" class="btn btn-danger btn-xs" disabled="disabled">{{ 'Stopped' }}</button>
-            <a href="{{URL::to('docker/container/start').'?id='.$value['Id'].'&deploymentId=' .$deployment->id }}"><i class="fa fa-play"></i></a>
+            <a href="{{URL::to('deployment/docker/container/start').'?id='.$value['Id'].'&deploymentId=' .$deployment->id }}"><i class="fa fa-play"></i></a>
             @endif
             <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ $key }}">
        <i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i></a>
@@ -88,11 +82,11 @@ $('#accordion').on('shown.bs.collapse', toggleChevron);
     <div id="collapse{{ $key }}" class="panel-collapse collapse">
       <div class="panel-body">
 		<button type="button" class="btn btn-info btn-xs" disabled="disabled">{{ 'Top' }}</button>
-            <a href="{{URL::to('docker/container/top').'?id='.$value['Id'].'&deploymentId=' .$deployment->id }}"><i class="fa fa-stop"></i></a>
+            <a href="{{URL::to('deployment/docker/container/top').'?id='.$value['Id'].'&deploymentId=' .$deployment->id }}"><i class="fa fa-stop"></i></a>
             <button type="button" class="btn btn-default btn-xs" disabled="disabled">{{ 'Logs' }}</button>
-            <a href="{{URL::to('docker/container/logs').'?id='.$value['Id'].'&deploymentId=' .$deployment->id }}"><i class="fa fa-stop"></i></a>
+            <a href="{{URL::to('deployment/docker/container/logs').'?id='.$value['Id'].'&deploymentId=' .$deployment->id }}"><i class="fa fa-stop"></i></a>
             <button type="button" class="btn btn-warning btn-xs" disabled="disabled">{{ 'Export' }}</button>
-            <a href="{{URL::to('docker/container/export').'?id='.$value['Id'].'&deploymentId=' .$deployment->id }}"><i class="fa fa-stop"></i></a>
+            <a href="{{URL::to('deployment/docker/container/export').'?id='.$value['Id'].'&deploymentId=' .$deployment->id }}"><i class="fa fa-stop"></i></a>
           
      <table class="table table-bordered">
         <thead>
