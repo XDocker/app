@@ -76,13 +76,8 @@ $('#accordion').on('shown.bs.collapse', toggleChevron);
     </div>
     <div id="collapse{{ $key }}" class="panel-collapse collapse">
       <div class="panel-body">
-		<button type="button" class="btn btn-info btn-xs" disabled="disabled">{{ 'Top' }}</button>
-            <a href="{{URL::to('account/docker/container/top').'?id='.$value['Id'].'&accountId=' .$account->id }}"><i class="fa fa-stop"></i></a>
-            <button type="button" class="btn btn-default btn-xs" disabled="disabled">{{ 'Logs' }}</button>
-            <a href="{{URL::to('account/docker/container/logs').'?id='.$value['Id'].'&accountId=' .$account->id }}"><i class="fa fa-stop"></i></a>
-            <button type="button" class="btn btn-warning btn-xs" disabled="disabled">{{ 'Export' }}</button>
-            <a href="{{URL::to('account/docker/container/export').'?id='.$value['Id'].'&accountId=' .$account->id }}"><i class="fa fa-stop"></i></a>
-          
+		<a class="btn btn-info btn-xs" href="{{URL::to('account/docker/container/top').'?id='.$value['Id'].'&accountId=' .$account->id }}">{{ 'Top' }}</i></a>
+           
      <table class="table table-bordered">
         <thead>
           <tr>
