@@ -82,7 +82,7 @@ Breadcrumbs::register(Lang::get('breadcrumb/breadcrumb.accountContainer'), funct
 
 Breadcrumbs::register(Lang::get('breadcrumb/breadcrumb.deploymentContainer'), function ($breadcrumbs,$id) {
 	$breadcrumbs->parent(Lang::get('breadcrumb/breadcrumb.deployment'));
-	$breadcrumbs->push(Lang::get('breadcrumb/breadcrumb.deploymentContainer'), URL::to('deployment/docker/'.$id.'/Containers'));
+	$breadcrumbs->push(ucfirst(Lang::get('breadcrumb/breadcrumb.deploymentContainer')), URL::to('deployment/docker/'.$id.'/Containers'));
 
 });
 
@@ -94,6 +94,6 @@ Breadcrumbs::register(Lang::get('breadcrumb/breadcrumb.accountTop'), function ($
 
 Breadcrumbs::register(Lang::get('breadcrumb/breadcrumb.deploymentTop'), function ($breadcrumbs,$id) {
 	$breadcrumbs->parent(Lang::get('breadcrumb/breadcrumb.deploymentContainer'),$id);
-	$breadcrumbs->push(Lang::get('breadcrumb/breadcrumb.deploymentTop'), URL::to('account/create'));
+	$breadcrumbs->push(ucfirst(Lang::get('breadcrumb/breadcrumb.deploymentTop')), URL::to('account/create'));
 });
 

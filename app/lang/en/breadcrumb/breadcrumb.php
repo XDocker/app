@@ -19,8 +19,8 @@ return array(
 	'DevOps'				  => 'DevOps',
 	'Videos'				  => 'Videos',
 	'accountContainer'		  => 'Containers',
-	'deploymentContainer'	  => 'Containers',
+	'deploymentContainer'	  => 'containers',
 	'accountTop'			  => 'Top',
-	'deploymentTop'			  => 'Top',
+	'deploymentTop'			  => 'top',
 	
 );
