@@ -19,4 +19,5 @@ return array(
 	'empty_accounts'  		   => 'You do not have any accounts. Create one by clicking on "Add Account" below',
 	'deployment.account_required'  => 'To deploy, please create <a href="'.URL::to('account/create').'">Account</a> first',
      'account_delete'           =>   'Are You Sure  Want To Delete This Account ?. This would also Delete PORT PREFERENCES Associated with this Account.',
+     'deployment_status_failed' => 'Deployment Status could not be updated now. Please try later.'
 );
