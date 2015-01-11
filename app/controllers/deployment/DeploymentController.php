@@ -344,9 +344,10 @@ class DeploymentController extends BaseController {
 			else  if(!empty($obj2) && $obj2->status == 'error')
 			 {
 				 // There was a problem deleting the user
-				 Log::error('Request to deploy failed :' . $obj2->fail_code . ':' . $obj2->fail_message);
-				 Log::error('Log :' . implode(' ', $obj2->job_log));
-	            return Redirect::to('deployment')->with('error', $obj2->fail_message );
+				 Log::error('Request to deploy failed :' . $obj2->job_status . ':' . $obj2->job_status);
+				 Log::error('Log :' . implode(' ', array($obj2->job_status)));
+				 $obj2->status = Lang::get('account/account.deployment_status_failed');
+	            return Redirect::to('deployment')->with('error', $obj2->status );
 			 }	
 			else
 			{
