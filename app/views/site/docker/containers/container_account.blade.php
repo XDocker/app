@@ -6,7 +6,7 @@
 
 {{-- Content --}}
 @section('content')
-@section('breadcrumbs', Breadcrumbs::render(Lang::get('breadcrumb/breadcrumb.accountContainer'),$account->id))
+@section('breadcrumbs', Breadcrumbs::render(Lang::get('breadcrumb/breadcrumb.accountContainer'), $account->id))
 
 <?php  
 

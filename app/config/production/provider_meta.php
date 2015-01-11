@@ -10,6 +10,9 @@ return array(
     'Amazon AWS' => array(
         'logo' => 'aws-big.jpg'
     ),
+      'Docker' => array(
+        'logo' => 'docker.jpg'
+    ),
 	'Rackspace Cloud' => array(
         'logo' => 'rackspace-small.png'
     )
