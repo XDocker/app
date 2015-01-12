@@ -94,7 +94,7 @@
     </section>
 
 
-
+<!--
     <section id="Howitworks" class="section section-center section-hilite section-features loaded" style="margin-top:0.5em;">
      
          <div class="container" style="padding-right: 40px;">
@@ -140,7 +140,7 @@
             </div>
           </div>
 
-    </section>
+    </section>-->
 
 
 
@@ -206,15 +206,13 @@
                             </div>
                         </div>
                     </div>
-                    <!-- /.row (nested) -->
-               <!--  </div>
-                <!-- /.col-lg-10 -->
-           <!--  </div>
-            <!-- /.row -->
-       <!--  </div>
-        <!-- /.container -->
-    <!-- </section>
- -->
+                    
+               </div>
+               </div>
+            
+      </div>
+       
+
 
 
     <section id="pricing" class="section section-center section-pricing loaded">
@@ -314,7 +312,7 @@
 
 
 
-       <!--  <section id="team" class="section section-center section-hilite section-team loaded">
+        <section id="team" class="section section-center section-hilite section-team loaded">
             <div class="container" style="padding-right: 50px;">
                 <h2 class="section-title"><span>Our Team</span></h2>
                 <div class="row">
