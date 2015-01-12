@@ -6,8 +6,8 @@
 -->
 <p class="text-center">
 	<a title="Github" href="{{URL::to('user/social')}}?provider=GitHub" class="social-git"><i class="fa fa-github-square fa-4x"></i></a>
-	<a title="LinkedIn" href="{{URL::to('user/social')}}?provider=LinkedIn" class="social-linkedin "><i class="fa fa-linkedin-square fa-4x"></i></a>
-	<a title="Amazon" href="#" id="LoginWithAmazon" class="social-amazon "><i class="fa fa-adn fa-4x"></i></a>
+<!--	<a title="LinkedIn" href="{{URL::to('user/social')}}?provider=LinkedIn" class="social-linkedin "><i class="fa fa-linkedin-square fa-4x"></i></a>
+	<a title="Amazon" href="#" id="LoginWithAmazon" class="social-amazon "><i class="fa fa-adn fa-4x"></i></a>-->
 </p>
 
 
