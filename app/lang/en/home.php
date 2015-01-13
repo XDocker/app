@@ -10,7 +10,7 @@ return array(
     'steps' => array(
         'select' => array(
             'title' => 'Select',
-            'description' => 'Just search for and hit play on the docker image you want to use, from the list below.'
+            'description' => 'Just search for and hit play on the Docker® image you want to use, from the list below.'
         ),
         'configure' => array(
             'title' => 'Configure',
