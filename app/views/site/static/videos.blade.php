@@ -16,7 +16,7 @@
 		<iframe src="//www.youtube.com/embed/JVRZrhHBHFU" width="700" height="480" frameborder="0"></iframe>
 
 		</p>
-		<p>Call us today on (800) 813-1315 or <a href="mailto:roapmap-xdocker@xervmon.com">email us </a> with your feature request in relation to our xDocker service. </p>
+		<p>Call us today on (800) 813-1315 or <a href="mailto:roapmap-xdock@xervmon.com">email us </a> with your feature request in relation to our xDocker service. </p>
 		
 	</div>
 </div>

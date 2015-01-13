@@ -19,7 +19,7 @@ return array(
 	'status' 						=> 'In Progress',
 	'monthly'						=> '(730 hours / Month)',
 	'docker_service_down' 			=> 'Docker service down!',
-	'xdocker_service_down' 			=> 'xDocker service down!',
+	'xdocker_service_down' 			=> 'xDock service down!',
 	'deployment_terminate'			=> 'Are You Sure  Want To Terminate This Instance ?',
 	'deployment_delete' 			=> 'Are You Sure  Want To Delete This Deployment ?',
 	'Hostname'						=> 'Host Name',

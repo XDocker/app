@@ -17,10 +17,10 @@
 				<p> <strong>{{{ Lang::get('site.follow_us') }}}</strong></p>
 				<p class=" footer-social-icons">
 					<a href="https://hub.docker.com/u/xdocker/"><img width="32px" height="32px" src="{{{ asset('assets/img/providers/docker.jpg') }}}" alt="{{{ Lang::get('site.footertitle') }}}"/></a>
-					<a href="https://github.com/XDocker"><img width="32px" height="32px" src="{{{ asset('assets/img/providers/GitHub-Mark-32px.png') }}}" alt="{{{ Lang::get('site.footertitle') }}}"/></a>
-					<a href="https://www.linkedin.com/groups/Xdocker-Users-6789160?gid=6789160"><img width="32px" height="32px" src="{{{ asset('assets/img/providers/LinkedIn.png') }}}" alt="{{{ Lang::get('site.footertitle') }}}"/></a>
-					<a href="https://www.facebook.com/pages/XDocker/687711791303636"><img width="32px" height="32px" src="{{{ asset('assets/img/providers/facebook.png') }}}" alt="{{{ Lang::get('site.footertitle') }}}"/></a>
-					<a href="https://www.twitter.com/xdocker"><img width="32px" height="32px" src="{{{ asset('assets/img/providers/Twitter_logo.png') }}}" alt="{{{ Lang::get('site.footertitle') }}}"/></a>
+					<a href="https://github.com/XDock"><img width="32px" height="32px" src="{{{ asset('assets/img/providers/GitHub-Mark-32px.png') }}}" alt="{{{ Lang::get('site.footertitle') }}}"/></a>
+					<a href="https://www.linkedin.com/groups/Xdock-Users-6789160?gid=6789160"><img width="32px" height="32px" src="{{{ asset('assets/img/providers/LinkedIn.png') }}}" alt="{{{ Lang::get('site.footertitle') }}}"/></a>
+					<a href="https://www.facebook.com/pages/XDock/687711791303636"><img width="32px" height="32px" src="{{{ asset('assets/img/providers/facebook.png') }}}" alt="{{{ Lang::get('site.footertitle') }}}"/></a>
+					<a href="https://www.twitter.com/xdock"><img width="32px" height="32px" src="{{{ asset('assets/img/providers/Twitter_logo.png') }}}" alt="{{{ Lang::get('site.footertitle') }}}"/></a>
 				</p>
 			</div>
 		</div>

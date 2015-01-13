@@ -13,9 +13,9 @@
   	<div class="col-md-12">
   		<h4>What to expect?</h4>
   		<p>
-		While our roadmap items will be defined by our xdocker service users, the following are a gist of items that we would cover in next few releses.
+		While our roadmap items will be defined by our xDock service users, the following are a gist of items that we would cover in next few releses.
 		<ul>
-			<li>Collaborate and Integrate with <a href="https://www.docker.io">Docker</a> eco system</li>
+			<li>Collaborate and Integrate with <a href="https://www.docker.io">Docker®</a> eco system</li>
 			<li>Multi Cloud Deployment & Management</li>
 			<li>Multi Container Deployment & Management</li>
 			<li>Application Container (logs, process etc.,) monitoring</li>
@@ -24,7 +24,7 @@
 			
 		</ul>
 		</p>
-		<p>Call us today on (800) 813-1315 or <a href="mailto:roapmap-xdocker@xervmon.com">email us </a> with your feature request in relation to our xDocker service. </p>
+		<p>Call us today on (800) 813-1315 or <a href="mailto:roapmap-xdock@xervmon.com">email us </a> with your feature request in relation to our xDock service. </p>
 		
 	</div>
 </div>
