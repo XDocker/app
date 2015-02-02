@@ -40,8 +40,6 @@ class AccountController extends BaseController {
         // Get all the user's accounts
         //Auth::id() : gives the logged in userid
         $accounts = $this->accounts->where('user_id', Auth::id())->orderBy('created_at', 'DESC')->paginate(10);
-        // var_dump($accounts, $this->accounts, $this->accounts->owner);
-        // Show the page
         return View::make('site/account/index', array(
             'accounts' => $accounts
         ));
@@ -83,7 +81,7 @@ class AccountController extends BaseController {
 				CloudAccountHelper::save($account);
             	return Redirect::intended('account')->with('success', Lang::get('account/account.account_updated'));
             } else {
-                return Redirect::to('account')->with('error', Lang::get('account/account.account_auth_failed'));
+                return Redirect::to('account')->with('error', Lang::get('account/account.account_auth_failed') .' for ' .$account->cloudProvider);
             }
         }
         catch(Exception $e) {

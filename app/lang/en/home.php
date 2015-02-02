@@ -10,7 +10,7 @@ return array(
     'steps' => array(
         'select' => array(
             'title' => 'Select',
-            'description' => 'Just search for and hit play on the docker instance you want to use, from the list below.'
+            'description' => 'Just search for and hit play on the Docker® image you want to use, from the list below.'
         ),
         'configure' => array(
             'title' => 'Configure',
@@ -18,9 +18,9 @@ return array(
         ),
         'manage' => array(
             'title' => 'Manage',
-            'description' => 'xDocker allows you to easily manage, refresh or delete your deployments.'
+            'description' => 'xDock allows you to easily manage, refresh or delete your deployments.'
         )
     ),
-    'xervmon_intro'=>'xDocker is a part of the powerful Xervmon cloud management suite',
+    'xervmon_intro'=>'xDock is a part of the powerful Xervmon cloud management suite',
     'xervmon_call_to_action'=>'Learn how you can save upto 50% on cloud costs with Xervmon'
 );

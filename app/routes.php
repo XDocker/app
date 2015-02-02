@@ -191,10 +191,19 @@ Route::group(array(
 	Route::any('deployment/{deployment}/refresh', 'DeploymentController@checkStatus');
 	
 	//Route::post('deployment/startContainer', 'DeploymentController@startContainer');
-    Route::any('deployment/startContainer', 'DeploymentController@startContainer');
-	Route::any('deployment/stopContainer', 'DeploymentController@stopContainer');
-	Route::any('deployment/{deployment}/Containers', 'DeploymentController@getContainers');
+    Route::any('deployment/docker/container/start', 'ContainerController@startContainerByDeployment');
+	Route::any('deployment/docker/container/stop', 'ContainerController@stopContainerByDeployment');
+	Route::any('deployment/docker/{deployment}/Containers',   'ContainerController@getContainersByDeployment');
+	Route::any('deployment/docker/container/top', 'ContainerController@topByDeployment');
+	Route::any('deployment/docker/container/logs', 'ContainerController@logsByDeployment');
+	Route::any('deployment/docker/container/export', 'ContainerController@exportByDeployment');
 	
+	Route::any('account/docker/container/start', 'ContainerController@startContainerByAccount');
+	Route::any('account/docker/container/stop', 'ContainerController@stopContainerByAccount');
+	Route::any('account/docker/{account}/Containers',   'ContainerController@getContainersByAccount');
+	Route::any('account/docker/container/top', 'ContainerController@topByAccount');
+	Route::any('account/docker/container/logs', 'ContainerController@logsByAccount');
+	Route::any('account/docker/container/export', 'ContainerController@exportByAccount');
 	Route::any('awsPricing/', 'AWSPricingController@getIndex'); 
 	
 	Route::group(array(

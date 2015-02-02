@@ -8,7 +8,7 @@ return array(
  
     'port' => 587,
  
-    'from' => array('address' => 'info@xervmon.com', 'name' => 'Info Team'),
+    'from' => array('address' => 'info@xervmon.com', 'name' => 'xDock Team'),
  
     'encryption' => 'tls',
  

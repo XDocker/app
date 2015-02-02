@@ -36,21 +36,33 @@ return array(
 			
         ) ,
     ) ,
-    'Rackspace Cloud' => array(
-        'credentials[accountId]' => array(
+     'Docker' => array(
+        'credentials[host]' => array(
             'type' => 'string',
-            'title' => 'Account ID',
-            'required' => true
+            'title' => 'Host',
+            'required' => true,
+            'description' => 'Host where Docker is running.'
         ) ,
-        'credentials[username]' => array(
-            'type' => 'string',
-            'title' => 'Username',
-            'required' => true
+        'credentials[port]' => array(
+            'type' => 'integer',
+            'title' => 'Port',
+            'required' => true,
+            'description' => 'Port of the where Docker is running.'
+   
         ) ,
-        'credentials[apiKey]' => array(
+        'credentials[basicAuthUser]' => array(
             'type' => 'string',
-            'title' => 'Api Key',
-            'required' => true
+            'title' => 'Basic Auth User',
+            'required' => false,
+            'description' => 'Basic Auth User'
+			
+        ) ,
+        'credentials[basicAuthPassword]' => array(
+            'type' => 'string',
+            'title' => 'Basic Auth Password',
+            'required' => false,
+            'description' => 'Basic Auth Password'
+			
         ) ,
     ) ,
 );

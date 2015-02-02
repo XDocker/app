@@ -10,26 +10,12 @@
 
 
 
-<?php  
+<?php  foreach ($containers as $container) {
 
-	if(empty($containers))
-	{
-		$contents = json_decode($deployment->containers, true);	
-		$status = 0;
-	}
-	else 
-	{
-		$contents = $containers;
-		$status = 1;
-		/*foreach ($containers as $container) 
-		{
-			$getid['id'] = $container -> getId();
-			$runtimeInformations = $container -> getRuntimeInformations();
-			$contents[] = array_merge($getid,$runtimeInformations);
-		}*/
-	}
-	
-?>
+$getid['id'] = $container -> getId();
+$runtimeInformations = $container -> getRuntimeInformations();
+$contents[] = array_merge($getid,$runtimeInformations);
+}?>
 
 
 
@@ -65,16 +51,15 @@ $('#accordion').on('shown.bs.collapse', toggleChevron);
     <div class="panel-heading">
       <h4 class="panel-title">
         <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ $key }}">
-            {{ 'Name:' .$deployment->name. ':' . $deployment->docker_name }}  </a>
-            @if($status==1)
+            {{ 'Name:' .$value['Name'].' '}}  </a>
+            @if($value['State']['Running']==1)
             <button type="button" class="btn btn-success btn-xs" disabled="disabled">{{ 'Running' }}</button>
-            <a href="{{URL::to('deployment/stopContainer').'?id='.$value['Id'].'&deploymentId=' .$deployment->id }}"><i class="fa fa-stop"></i></a>
+            <a href="#"><i class="fa fa-stop"></i></a>
             @else
             <button type="button" class="btn btn-danger btn-xs" disabled="disabled">{{ 'Stoped' }}</button>
-            <a href="{{URL::to('deployment/startContainer').'?id='.$value['Id'].'&deploymentId=' .$deployment->id }}"><i class="fa fa-play"></i></a>
+            <a href="#"><i class="fa fa-play"></i></a>
             @endif
-            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ $key }}">
-       <i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i></a>
+       <i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
       </h4>
     </div>
     <div id="collapse{{ $key }}" class="panel-collapse collapse">
@@ -108,8 +93,34 @@ $('#accordion').on('shown.bs.collapse', toggleChevron);
       </tbody>
       </table>
 
-	
-     <table class="table table-bordered">
+      <table class="table table-bordered">
+         <?php foreach ($value['Config']['Env'] as $v3) {
+              $env[] = explode('=',$v3); 
+         } 
+         $env_count= count($env); 
+         $i=0;?>
+         <thead>
+           <tr>
+              @foreach ($env as $v4)
+                  <th> {{ $v4[0] }} </th> 
+              @endforeach 
+          </tr>
+        </thead>
+           
+        <tbody>
+          <tr>
+               @foreach ($env as $v4)
+                  <td> {{ $v4[1] }} </td> 
+              @endforeach 
+          </tr>
+        </tbody>
+           
+      </table>
+
+
+
+
+      <table class="table table-bordered">
         <thead>
           <tr>
             <th> {{ Lang::get('deployment/deployment.Driver') }} </th> 
@@ -127,7 +138,7 @@ $('#accordion').on('shown.bs.collapse', toggleChevron);
             <td> @if(is_array($value['HostConfig']['PortBindings'])) 
               <ul>
                     @foreach ($value['HostConfig']['PortBindings'] as $k5=>$v5)
-                      <li>{{ preg_replace('/[^A-Za-z0-9 \-,:]/', '', str_replace('/', '-', $k5).' : '.json_encode($v5)) }}</li>
+                      <li>{{ $k5.'='.json_encode($v5) }}</li>
                     @endforeach
               </ul>      
                  @endif  
@@ -159,7 +170,7 @@ $('#accordion').on('shown.bs.collapse', toggleChevron);
             <td> @if(is_array($value['NetworkSettings']['Ports'])) 
               <ul>
                     @foreach ($value['NetworkSettings']['Ports'] as $k6=>$v6)
-                      <li>{{ preg_replace('/[^A-Za-z0-9 \-,:]/', '', str_replace('/', '-', $k6).' : '.json_encode($v6)) }}</li>
+                      <li>{{ $k6.'='.json_encode($v6) }}</li>
                     @endforeach
               </ul>      
                  @endif  

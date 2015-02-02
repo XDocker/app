@@ -51,6 +51,10 @@ class CloudProvider {
 				$iProvider = new AWSPRoviderImpl($account);
                 return $iProvider;
             break;
+			case 'Docker' :
+				$iProvider = new DockerImpl($account);
+                return $iProvider;
+				break;
         }
 	}
 	 

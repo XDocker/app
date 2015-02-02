@@ -6,21 +6,17 @@
 
 {{-- Content --}}
 @section('content')
-@section('breadcrumbs', Breadcrumbs::render(Lang::get('breadcrumb/breadcrumb.Container')))
-
-
+@section('breadcrumbs', Breadcrumbs::render(Lang::get('breadcrumb/breadcrumb.accountContainer'), $account->id))
 
 <?php  
 
 	if(empty($containers))
 	{
-		$contents = json_decode($deployment->containers, true);	
-		$status = 0;
+		$contents = json_decode($account->containers, true);	
 	}
 	else 
 	{
 		$contents = $containers;
-		$status = 1;
 		/*foreach ($containers as $container) 
 		{
 			$getid['id'] = $container -> getId();
@@ -47,7 +43,7 @@ $('#accordion').on('shown.bs.collapse', toggleChevron);
 <div class="page-header">
 		<div class="row">
 			<div class="col-md-9">
-				<h4> Deployment Name:{{ $deployment->name }}</h4>
+				<h4> Account Name:{{ $account->name }}</h4>
 			</div>
 		</div>
 	</div>
@@ -65,13 +61,14 @@ $('#accordion').on('shown.bs.collapse', toggleChevron);
     <div class="panel-heading">
       <h4 class="panel-title">
         <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ $key }}">
-            {{ 'Name:' .$deployment->name. ':' . $deployment->docker_name }}  </a>
+            {{ 'Name:' .$account->name }}  </a>
             @if($status==1)
             <button type="button" class="btn btn-success btn-xs" disabled="disabled">{{ 'Running' }}</button>
-            <a href="{{URL::to('deployment/stopContainer').'?id='.$value['Id'].'&deploymentId=' .$deployment->id }}"><i class="fa fa-stop"></i></a>
+            <a href="{{URL::to('account/docker/container/stop').'?id='.$value['Id'].'&accountId=' .$account->id }}"><i class="fa fa-stop"></i></a>
+           
             @else
-            <button type="button" class="btn btn-danger btn-xs" disabled="disabled">{{ 'Stoped' }}</button>
-            <a href="{{URL::to('deployment/startContainer').'?id='.$value['Id'].'&deploymentId=' .$deployment->id }}"><i class="fa fa-play"></i></a>
+            <button type="button" class="btn btn-danger btn-xs" disabled="disabled">{{ 'Stopped' }}</button>
+            <a href="{{URL::to('account/docker/container/start').'?id='.$value['Id'].'&accountId=' .$account->id }}"><i class="fa fa-play"></i></a>
             @endif
             <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ $key }}">
        <i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i></a>
@@ -79,7 +76,8 @@ $('#accordion').on('shown.bs.collapse', toggleChevron);
     </div>
     <div id="collapse{{ $key }}" class="panel-collapse collapse">
       <div class="panel-body">
-
+		<a class="btn btn-info btn-xs" href="{{URL::to('account/docker/container/top').'?id='.$value['Id'].'&accountId=' .$account->id }}">{{ 'Top' }}</i></a>
+           
      <table class="table table-bordered">
         <thead>
           <tr>

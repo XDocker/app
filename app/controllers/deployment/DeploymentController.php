@@ -333,6 +333,7 @@ class DeploymentController extends BaseController {
 				} 
 				$deployment->status = $obj2->job_status;
 				$deployment -> wsResults = json_encode($obj2 -> result);
+				$this->saveContainers($deployment);
 				$success = $deployment->save();
 		        if (!$success) {
 		        	Log::error('Error while saving deployment : '.json_encode( $dep->errors()));
@@ -343,9 +344,10 @@ class DeploymentController extends BaseController {
 			else  if(!empty($obj2) && $obj2->status == 'error')
 			 {
 				 // There was a problem deleting the user
-				 Log::error('Request to deploy failed :' . $obj2->fail_code . ':' . $obj2->fail_message);
-				 Log::error('Log :' . implode(' ', $obj2->job_log));
-	            return Redirect::to('deployment')->with('error', $obj2->fail_message );
+				 Log::error('Request to deploy failed :' . $obj2->job_status . ':' . $obj2->job_status);
+				 Log::error('Log :' . implode(' ', array($obj2->job_status)));
+				 $obj2->status = Lang::get('account/account.deployment_status_failed');
+	            return Redirect::to('deployment')->with('error', $obj2->status );
 			 }	
 			else
 			{
@@ -504,48 +506,19 @@ class DeploymentController extends BaseController {
 		//echo json_encode(EC2InstancePrices::On)
 	}
 
-	public function getContainers($id)
+	private function saveContainers(& $deployment)
 	{
-		$deployment 	= Deployment::where('user_id', Auth::id())->find($id);
-		$deployment     = json_decode($deployment->toJson());
-
-		Log::info('Stopping Deployment '. $deployment->name);	
-		$result = json_decode($deployment->wsResults);
-		Log::info('Starting Container '. $result->public_dns);
-		$containers = RemoteAPI::Containers($result->public_dns);
-		return View::make('site/deployment/containers/container', array(
-            'containers' => $containers,
-            'deployment' => $deployment
-        ));
-	}
-
-	public function startContainer()
-	{
-		$id = Input::get('id');
+		switch($deployment->status)
+		{
+			case 'Completed' : $result = json_decode($deployment->wsResults);
+			 				   Log::info('Retrieving containers. '. $deployment->name);
+							   $containers = RemoteAPI::getContainers($result->public_dns);
+							   $deployment ->containers = json_encode($containers);
+		}
 		
-		$deploymentId = Input::get('deploymentId');
-		$deployment 	= Deployment::where('user_id', Auth::id())->find($deploymentId);
-		Log::info('Starting Deployment '. $deployment->name);
-		$result = json_decode($deployment->wsResults);
-		Log::info('Starting Container '. $result->public_dns);
-		RemoteAPI::startContainer($id, $result->public_dns);
-		Log::info('Started Container ');
-		$this->getContainers($deploymentId);
 	}
+
 	
-	public function stopContainer()
-	{
-		$id = Input::get('id');
-		
-		$deploymentId = Input::get('deploymentId');
-		$deployment 	= Deployment::where('user_id', Auth::id())->find($deploymentId);
-		Log::info('Stopping Deployment '. $deployment->name);
-		
-		$result = json_decode($deployment->wsResults);
-		RemoteAPI::stopContainer($id, $result->public_dns);
-		Log::info('Stopped Container ');
-		$this->getContainers($deploymentId);
-	}
 
 	
 }

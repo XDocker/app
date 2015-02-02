@@ -44,7 +44,7 @@ return array(
             'description' => 'Host where Docker is running.'
         ) ,
         'credentials[port]' => array(
-            'type' => 'int',
+            'type' => 'integer',
             'title' => 'Port',
             'required' => true,
             'description' => 'Port of the where Docker is running.'
@@ -53,7 +53,7 @@ return array(
         'credentials[basicAuthUser]' => array(
             'type' => 'string',
             'title' => 'Basic Auth User',
-            'required' => true,
+            'required' => false,
             'description' => 'Basic Auth User'
 			
         ) ,
@@ -63,23 +63,6 @@ return array(
             'required' => false,
             'description' => 'Basic Auth Password'
 			
-        ) ,
-    ) ,
-    'Rackspace Cloud' => array(
-        'credentials[accountId]' => array(
-            'type' => 'string',
-            'title' => 'Account ID',
-            'required' => true
-        ) ,
-        'credentials[username]' => array(
-            'type' => 'string',
-            'title' => 'Username',
-            'required' => true
-        ) ,
-        'credentials[apiKey]' => array(
-            'type' => 'string',
-            'title' => 'Api Key',
-            'required' => true
         ) ,
     ) ,
 );

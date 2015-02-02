@@ -18,6 +18,9 @@ return array(
 	'Roadmap'                 => 'Roadmap',
 	'DevOps'				  => 'DevOps',
 	'Videos'				  => 'Videos',
-	'Container'				  => 'Container'
+	'accountContainer'		  => 'Containers',
+	'deploymentContainer'	  => 'containers',
+	'accountTop'			  => 'Top',
+	'deploymentTop'			  => 'top',
 	
 );

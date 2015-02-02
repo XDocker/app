@@ -110,6 +110,7 @@ class UserController extends BaseController {
     public function postEdit($user) {
         // Validate the inputs
         $validator = Validator::make(Input::all() , $user->getUpdateRules());
+        $messages = $validator->messages();
         
         if ($validator->passes()) {
             $oldUser = clone $user;
@@ -138,14 +139,19 @@ class UserController extends BaseController {
             $user->prepareRules($oldUser, $user);
             // Save if valid. Password field will be hashed before save
             $user->amend();
-        }
+        
         // Get validation errors (see Ardent package)
         $error = $user->errors()->all();
         
-        if (empty($error)) {
+        
             return Redirect::to('user')->with('success', Lang::get('user/user.user_account_updated'));
         } else {
-            return Redirect::to('user')->withInput(Input::except('password', 'password_confirmation'))->with('error', $error);
+            foreach ($messages->all('<li>:message</li>') as $message)
+            {
+            //  return Redirect::to('user')->with('success', $message);
+                return Redirect::to('user')->withInput(Input::except('password', 'password_confirmation'))->with('error', $message);
+            }
+            
         }
     }
     /**
