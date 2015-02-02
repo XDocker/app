@@ -16,7 +16,8 @@
 @if (!Auth::check())
 	{{-- Home page welcome content for new users --}}
 
-
+<script src="{{asset('assets/js/responsiveslides.min.js')}}"></script>
+    <link href="{{asset('assets/css/responsiveslides.css')}}" rel="stylesheet">    
     <link href="{{asset('assets/css/stylish-portfolio.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/template.css')}}" rel="stylesheet">
 
@@ -31,7 +32,7 @@
 		</div>
             </div>
             <div class="row text-center">
-                <div class="col-md-4">
+               <!--  <div class="col-md-4">
                     <span class="fa-stack fa-4x">
                         <i class="fa fa-circle fa-stack-2x text-primary"></i>
                         <i class="fa fa-play fa-stack-1x fa-inverse"></i>
@@ -58,7 +59,13 @@
                     </span>
                     <h4 class="service-heading">{{{ Lang::get('home.steps.manage.title') }}}</h4>
                     <p class="text-muted">{{{ Lang::get('home.steps.manage.description') }}}</p>
-                </div>
+                </div> -->
+                
+                <ul class="rslides transparent-btns transparent-btns2" id="slider">
+                  <li class=""  id="transparent-btns2_s0"><img src="{{asset('assets/img/img0.png')}}" alt="" style="height: 360px;"></li>
+                  <li class=""  id="transparent-btns2_s1"><img src="{{asset('assets/img/img1.png')}}" alt="" style="height: 360px;"></li>
+                  <li class=""  id="transparent-btns2_s2"><img src="{{asset('assets/img/img2.jpeg')}}" alt="" style="height: 360px;"></li>
+                </ul>
             </div>
         </div>
         <div class="alert alert-info text-center">
@@ -483,6 +490,14 @@
 
     // Scrolls to the selected menu item on the page
     $(function() {
+
+        $("#slider").responsiveSlides({
+        pager: true,
+        speed: 400,
+        timeout: 4000,
+        namespace: "transparent-btns"
+        });
+
         $('a[href*=#]:not([href=#])').click(function() {
             if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') || location.hostname == this.hostname) {
 
