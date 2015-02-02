@@ -35,6 +35,23 @@
 		<script src="{{asset('bower_components/jquery/dist/jquery.min.js')}}"></script>
         <script src="{{asset('assets/js/jquery-plugins/jquery.crypt.js')}}"></script>
 
+        <link rel='stylesheet' id='usernoise-button-css'  href="{{asset('packages/usernoise/css/button.css')}}" type='text/css' media='all' />
+        <script type='text/javascript' src="{{asset('packages/usernoise/js/usernoise.js')}}"></script>
+
+        <script type='text/javascript'>
+        
+			var usernoiseButton = {
+				"text" : "Feedback", // The text shown on the button
+				"class" : "un-right un-has-border", // un-left, un-right, un-top and un-bottom define the button positioning, un-has-border - if it will have a border
+				"style" : "", // You can add some extra CSS rules if you want.
+				"windowUrl" : "{{asset('packages/usernoise/index.php')}}", // Please make sure this URL is pointing to your actual Usernoise folder!
+				"showButton" : "1" // 0 to disable the button and show a window programmatically.
+			};
+
+       </script>
+
+	   <script type='text/javascript' src="{{asset('packages/usernoise/js/button.js')}}"></script>
+
 		<!-- Favicons
 		================================================== -->
 		<link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{{ asset('assets/ico/apple-touch-icon-144-precomposed.png') }}}">

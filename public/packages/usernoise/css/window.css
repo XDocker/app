@@ -1,0 +1,134 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+html{
+	overflow-y: hidden;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+.clearfix:before,
+.clearfix:after{
+  content: '.';
+  display: block;
+  overflow: hidden;
+  visibility: hidden;
+  font-size: 0;
+  line-height: 0;
+  width: 0;
+  height: 0;
+}
+
+.clearfix:after{
+  clear: both;
+}
+.clearfix{
+	zoom: 1;
+}
+
+
+body{
+	line-height: 18px;
+	font-size: 13px;
+}
+
+p{
+	margin: 0 0 13px 0 !important;
+}
+
+body,  a{
+	color: #555;
+}
+
+#window{
+	border-radius: 4px;
+	-ms-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	-o-border-radius: 4px;
+	background: white;
+	width: 100%;
+	max-width: 420px; 
+	position: absolute;
+	top: 50%; 
+	left: 50%;
+}
+@media screen and (max-width: 640px){
+	#window{
+	}
+}
+
+
+#window-close{
+	position: absolute;
+	right: 14px;
+	top: 14px;
+	line-height: 8px !important;
+	width: 8px;
+	height: 8px;
+	overflow-y: hidden;
+	display: block;
+	z-index: 10;
+	background: url(../images/close.png);
+	text-decoration: none;
+	opacity: 0.3;
+	text-indent: -9999px;
+}
+#window-close:hover{
+	opacity: 1;
+}
+#un-feedback-wrapper{
+	padding: 22px 21px !important;
+}
+h2{
+	margin: 0 0 13px 0;
+	padding: 0;
+	line-height: 1.1em;
+	font-size: 29px;
+	margin-bottom: 12px;
+}
+#button-settings{
+	position: relative;
+	top: -0.3em;
+	font-size: 10px;
+	padding: 3px 5px;
+	line-height: 10px;
+}

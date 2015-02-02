@@ -1,0 +1,18 @@
+#window.ie7 #un-feedback-submit{
+	padding: 9px 0px;
+	font-weight: bold;
+	font-size: 14px;
+}
+#facebox.un-ie7 .close{
+	top: 12px;
+}
+
+
+#window.ie7 a.button-settings{
+	display: inline;
+}
+#window.ie7 #un-feedback-submit{
+	display: inline;
+	zoom: 1;
+	padding: 9px 0;
+}
