@@ -46,7 +46,7 @@ if (isset($_SERVER['XDOCKER_ENV'])) {
         /*'testing' => array(
             'xdocker'
         ) ,*/
-        //'production' => array('xdocker.org'),
+        'production' => array('prod.xdocker.io'),
         
     ));
 }
