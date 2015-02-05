@@ -229,3 +229,8 @@ Route::get('/', array(
     'before' => 'detectLang',
     'uses' => 'HomeController@getIndex'
 ));
+
+Route::get('FeedbackController', array(
+    'before' => 'detectLang',
+    'uses' => 'FeedbackController@getFeedback'
+));
