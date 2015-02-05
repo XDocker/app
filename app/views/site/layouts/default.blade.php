@@ -22,6 +22,7 @@
         <link rel="stylesheet" href="{{asset('bower_components/bootswatch/paper/bootstrap.min.css')}}">
         <link rel="stylesheet" href="{{asset('bower_components/font-awesome/css/font-awesome.min.css')}}">
         <link rel="stylesheet" href="{{asset('assets/css/custom.css')}}">
+        <link rel="stylesheet" href="{{asset('assets/css/feedback.css')}}">
 		<style>
 		@section('styles')
 		@show
@@ -34,23 +35,7 @@
 
 		<script src="{{asset('bower_components/jquery/dist/jquery.min.js')}}"></script>
         <script src="{{asset('assets/js/jquery-plugins/jquery.crypt.js')}}"></script>
-
-        <link rel='stylesheet' id='usernoise-button-css'  href="{{asset('packages/usernoise/css/button.css')}}" type='text/css' media='all' />
-        <script type='text/javascript' src="{{asset('packages/usernoise/js/usernoise.js')}}"></script>
-
-        <script type='text/javascript'>
-        
-			var usernoiseButton = {
-				"text" : "Feedback", // The text shown on the button
-				"class" : "un-right un-has-border", // un-left, un-right, un-top and un-bottom define the button positioning, un-has-border - if it will have a border
-				"style" : "", // You can add some extra CSS rules if you want.
-				"windowUrl" : "{{asset('packages/usernoise/index.php')}}", // Please make sure this URL is pointing to your actual Usernoise folder!
-				"showButton" : "1" // 0 to disable the button and show a window programmatically.
-			};
-
-       </script>
-
-	   <script type='text/javascript' src="{{asset('packages/usernoise/js/button.js')}}"></script>
+        <script src="{{asset('assets/js/jqueryblockui.js')}}"></script>
 
 		<!-- Favicons
 		================================================== -->
@@ -155,9 +140,14 @@
 				@include('notifications')
 				<!-- ./ notifications -->
 
+				<button type="button" id="followTab" class="btn btn-danger pull-right"  role="button" data-toggle="modal" data-target="#feedbackmodal">
+					Feedback
+				</button>
+
 				<!-- Content -->
 				@yield('content')
 				<!-- ./ content -->
+				@include('feedbackmodal')
 			</div>
 			<!-- ./ container -->
 
@@ -178,6 +168,58 @@
 	        <script src="{{asset('assets/js/jquery-plugins/prettify.js')}}"></script>
         @include('site.home.jsPartial')
         <?php  endif; ?>
+   
+        <script>
+        $(function () {
+
+        var url = "{{ URL::to('FeedbackController') }}";
+
+           $('#feedbackconfirm').click(function(e){
+
+           	var feedbackmessage = $('#feedbackmessage').val();
+           	var feedbackemail = $('#feedbackemail').val();
+           	var feedbackdescription = $('textarea#feedbackdescription').val();
+           	if ($.trim(feedbackemail).length == 0 || $("#feedbackmessage").val()=="" || $("textarea#feedbackdescription").val()=="") {
+           	$('#feedback_response').html('<h5 style="color:red;">All fields are mandatory</h5>');
+            e.preventDefault();
+             }
+             if(feedbackmessage && feedbackemail && feedbackdescription){
+             if (validateEmail(feedbackemail)) {
+             	$('#feedbackmodal').modal('hide');
+             $.blockUI({ message: "<h6>Sending Feedback.....</h6>" });    
+             $.ajax({
+             url:url,
+             data:{feedbackmessage:feedbackmessage,feedbackemail:feedbackemail,feedbackdescription:feedbackdescription},
+             cache: false
+             }).done(function(response) {
+            
+             if(response){
+             	$.unblockUI();
+             	$.blockUI({ message: "<h6>"+response+"</h6>" }); 
+             	setTimeout($.unblockUI, 2000); 
+             }
+             });
+             }else {
+             $('#feedback_response').html('<h5 style="color:red;">Invalid Email Address</h5>');
+             e.preventDefault();
+             }
+           	}
+                        
+          });
+       
+        });
+
+        function validateEmail(email) {
+          var filter = /^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/;
+          if (filter.test(email)) {
+          return true;
+          }else {
+          return false;
+          }
+        }
+
+        </script>
+
 
         @yield('scripts')
 	</body>
