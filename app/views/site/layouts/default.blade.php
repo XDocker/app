@@ -140,9 +140,7 @@
 				@include('notifications')
 				<!-- ./ notifications -->
 
-				<button type="button" id="followTab" class="btn btn-danger pull-right"  role="button" data-toggle="modal" data-target="#feedbackmodal">
-					Feedback
-				</button>
+			<button style="margin-top: -29px; right: 38px; opacity: 0.96;" class="un-button un-right un-has-border css3"  id="followTab" data-toggle="modal" data-target="#feedbackmodal">Feedback</button>
 
 				<!-- Content -->
 				@yield('content')
@@ -170,9 +168,14 @@
         <?php  endif; ?>
    
         <script>
-        $(function () {
+       <!--  $(function () { -->
 
         var url = "{{ URL::to('FeedbackController') }}";
+
+           $('#feedbackmodal').on('hidden.bs.modal', function (e) {
+            $(this).find("input,textarea").val('').end()
+                   .find("#feedback_response").text('').end();
+            })
 
            $('#feedbackconfirm').click(function(e){
 
@@ -207,7 +210,7 @@
                         
           });
        
-        });
+        
 
         function validateEmail(email) {
           var filter = /^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/;
@@ -217,6 +220,8 @@
           return false;
           }
         }
+
+        <!--  });-->
 
         </script>
 

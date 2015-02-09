@@ -1,21 +1,28 @@
-#followTab {
-list-style: none;
-position: fixed;
-z-index: 5;
-right: 0;
-top: 300px;
-width: 80px;
-padding: 8px 5px;
-border: 3px solid #fff;
-border-right: none;
--moz-border-radius: 10px 0 0 10px;
--webkit-border-radius: 10px 0 0 10px;
-border-radius: 10px 0 0 10px;
--moz-box-shadow: 0 0 7px rgba(0, 0, 0, .6);
--webkit-box-shadow: 0 0 7px rgba(0, 0, 0, .6);
-box-shadow: 0 0 7px rgba(0, 0, 0, .6);
-background: rgba(239, 91, 10, .75);
-background: -moz-linear-gradient(top, rgba(243, 52, 8, .75), rgba(239, 91, 10, .75));
-background: -webkit-gradient( linear, left top, left bottom, from( rgba(243, 52, 8, .75) ), to( rgba(239, 91, 10, .75) ) );
-background: linear-gradient(top, rgba(243, 52, 8, .75), rgba(239, 91, 10, .75));
+.un-button.un-right {
+    right: -2px;
+    top: 50%;
+    padding: 12px 15px 16px;
+    transform-origin: right top 0px;
+    transform: rotate(-90deg);
 }
+.un-button.un-has-border {
+    border: 0px solid #FFF;
+
+}
+.un-button, .un-button:hover {
+    text-decoration: none !important;
+    color: white;
+}
+.un-button {
+    position: fixed;
+    opacity: 0.95;
+    z-index: 9997;
+    text-decoration: none;
+    color: #FFF;
+    border-radius: 4px;
+    background: none repeat scroll 0% 0% #404040;
+    padding: 14px 15px 12px;
+    line-height: 14px;
+    float: none;
+    text-shadow: none;
+} 
