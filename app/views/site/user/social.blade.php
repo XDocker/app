@@ -26,10 +26,10 @@
   })(document);
 
   // Enable the login button
-  document.getElementById('LoginWithAmazon').onclick = function() {
-    options = { scope : 'profile' };
-    amazon.Login.authorize(options, '{{ URL::to(Config::get('amazon.return_route')) }}');
-    return false;
-  };
+  // document.getElementById('LoginWithAmazon').onclick = function() {
+  //   options = { scope : 'profile' };
+  //   amazon.Login.authorize(options, '{{ URL::to(Config::get('amazon.return_route')) }}');
+  //   return false;
+  // };
 
 </script>

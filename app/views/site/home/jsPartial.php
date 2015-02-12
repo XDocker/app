@@ -13,21 +13,29 @@
                 $SlideWidth: 140,                                   //[Optional] Width of every slide in pixels, default value is width of 'slides' container
                 //$SlideHeight: 100,                                //[Optional] Height of every slide in pixels, default value is height of 'slides' container
                 $SlideSpacing: 0, 					                //[Optional] Space between each slide in pixels, default value is 0
-                $DisplayPieces: 3,                                  //[Optional] Number of pieces to display (the slideshow would be disabled if the value is set to greater than 1), the default value is 1
-                $ParkingPosition: 0,                              //[Optional] The offset position to park slide (this options applys only when slideshow disabled), default value is 0.
+                $DisplayPieces: 2,                                  //[Optional] Number of pieces to display (the slideshow would be disabled if the value is set to greater than 1), the default value is 1
+                $ParkingPosition: 1,                              //[Optional] The offset position to park slide (this options applys only when slideshow disabled), default value is 0.
                 $UISearchMode: 1,                                   //[Optional] The way (0 parellel, 1 recursive, default value is 1) to search UI components (slides container, loading screen, navigator container, arrow navigator container, thumbnail navigator container etc).
                 $PlayOrientation: 1,                                //[Optional] Orientation to play slide (for auto play, navigation), 1 horizental, 2 vertical, 5 horizental reverse, 6 vertical reverse, default value is 1
                 $DragOrientation: 1                                //[Optional] Orientation to drag slide, 0 no drag, 1 horizental, 2 vertical, 3 either, default value is 1 (Note that the $DragOrientation should be the same as $PlayOrientation when $DisplayPieces is greater than 1, or parking position is not 0)
             };
 
             var jssor_slider1 = new $JssorSlider$("slider1_container", options);
-
+            var jssor_slider2 = new $JssorSlider$("slider2_container", options);
             //responsive code begin
             //you can remove responsive code if you don't want the slider scales while window resizes
             function ScaleSlider() {
                 var bodyWidth = document.body.clientWidth;
                 if (bodyWidth)
                     jssor_slider1.$ScaleWidth(Math.min(bodyWidth, 980));
+                else
+                    window.setTimeout(ScaleSlider, 30);
+            }
+
+             function ScaleSlider() {
+                var bodyWidth = document.body.clientWidth;
+                if (bodyWidth)
+                    jssor_slider2.$ScaleWidth(Math.min(bodyWidth, 980));
                 else
                     window.setTimeout(ScaleSlider, 30);
             }
