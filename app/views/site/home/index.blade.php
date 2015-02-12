@@ -75,6 +75,8 @@
        <div class="text-center">
        	 <!-- You can move inline styles to css file or css block. -->
        	 <p><h4><font color="3399FF">Ready to be deployed now on Amazon AWS</font></h4></p>
+         </div>
+
 	    <div id="slider1_container" style="position: relative; top: 0px; center: 0px; width: 980px; height: 100px; overflow: hidden; ">
 	
 	        <!-- Loading Screen -->
@@ -97,9 +99,35 @@
 	           
 	        </div>
      	</div>
-       </div>
-    </section>
 
+    
+    </section></br></br>
+
+    <div id="Customers">
+
+          <div id="slider2_container" style="position: relative; top: 0px; center: 0px; width: 980px; height: 100px; overflow: hidden; ">
+    
+            <!-- Loading Screen -->
+            <div u="loading" style="position: absolute; top: 0px; center: 0px;">
+                <div style="filter: alpha(opacity=70); opacity:0.7; position: absolute; display: block;
+                    background-color: #000; top: 0px; left: 0px;width: 100%;height:100%;">
+                </div>
+                <div style="position: absolute; display: block; background: url({{{ asset('assets/img/loading.gif') }}}) no-repeat center center;
+                    top: 0px; left: 0px;width: 100%;height:100%;">
+                </div>
+            </div>
+
+            <!-- Slides Container -->
+            <div u="slides" style="cursor: move; position: absolute; center: 0px; top: 0px; width: 980px; height: 35px; overflow: hidden;">
+                        
+               <div><img u="image" title="olacabs.com" alt="olacabs.com" src="{{asset('assets/img/customers/olacabs.png')}}" /></div>
+               <div><img u="image" title="loyal3.com" alt="loyal3.com" src="{{asset('assets/img/customers/loyal3.png')}}" /></div>
+               <div> <img u="image" title="sleepnumber.com" alt="sleepnumber.com" src="{{asset('assets/img/customers/selectcomfort.png')}}" /></div>
+                   
+            </div>
+        </div>
+
+    </div>
 
 <!--
     <section id="Howitworks" class="section section-center section-hilite section-features loaded" style="margin-top:0.5em;">

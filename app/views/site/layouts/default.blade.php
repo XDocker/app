@@ -70,7 +70,14 @@
     						<li{{ (Request::is('roadmap') ? ' class="active"' : '') }}><a href="{{{ URL::to('roadmap') }}}"><span class="glyphicon glyphicon-list-alt"></span> {{{ Lang::get('site.roadmap') }}}</a></li>
 	                		<li{{ (Request::is('devops') ? ' class="active"' : '') }}><a href="{{{ URL::to('devops') }}}"><span class="glyphicon glyphicon-plane"></span> {{{ Lang::get('site.devops') }}}</a></li>
 							<li{{ (Request::is('videos') ? ' class="active"' : '') }}><a href="{{{ URL::to('videos') }}}"><span class="glyphicon glyphicon-hd-video"></span> {{{ Lang::get('site.videos') }}}</a></li>
-					
+					        @if (!Auth::check())						
+								@if(Request::url()==URL::to('/'))
+		                          	<li id="howitworks"><a href="#Customers"><i class="fa fa-users"></i> Customers </a></li>
+		                         @else
+		                         	<li id="howitworks"></li>
+		                         	<li id="howitworks"><a href="{{{ URL::to('/').'#Customers' }}}"><i class="fa fa-users"></i> Customers </a></li>
+		                         @endif	
+	                         @endif
 	                	</ul>	
 	                    <ul class="nav navbar-nav pull-right">
 	                        @if (Auth::check())
@@ -160,15 +167,15 @@
         
         <script src="{{asset('bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
         <script src="{{asset('assets/js/jquery-plugins/jquery.fileDownload.js')}}"></script>
-        <?php if(!Auth::check()) : ?>
-	        <script src="{{asset('assets/js/jquery-plugins/jssor.js')}}"></script>
+        <script src="{{asset('assets/js/jquery-plugins/prettify.js')}}"></script>
+        @if(!Auth::check())
+        @if(Request::url()==URL::to('/'))
 	        <script src="{{asset('assets/js/jquery-plugins/jssor.slider.mini.js')}}"></script>
-	        <script src="{{asset('assets/js/jquery-plugins/prettify.js')}}"></script>
         @include('site.home.jsPartial')
-        <?php  endif; ?>
-   
+        @endif
+        @endif
         <script>
-       <!--  $(function () { -->
+        $(function () { 
 
         var url = "{{ URL::to('FeedbackController') }}";
 
@@ -221,7 +228,7 @@
           }
         }
 
-        <!--  });-->
+         });
 
         </script>
 
