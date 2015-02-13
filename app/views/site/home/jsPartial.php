@@ -12,7 +12,7 @@
                 $MinDragOffsetToSlide: 20,                          //[Optional] Minimum drag offset to trigger slide , default value is 20
                 $SlideWidth: 140,                                   //[Optional] Width of every slide in pixels, default value is width of 'slides' container
                 //$SlideHeight: 100,                                //[Optional] Height of every slide in pixels, default value is height of 'slides' container
-                $SlideSpacing: 0, 					                //[Optional] Space between each slide in pixels, default value is 0
+                $SlideSpacing: 100, 					                //[Optional] Space between each slide in pixels, default value is 0
                 $DisplayPieces: 2,                                  //[Optional] Number of pieces to display (the slideshow would be disabled if the value is set to greater than 1), the default value is 1
                 $ParkingPosition: 1,                              //[Optional] The offset position to park slide (this options applys only when slideshow disabled), default value is 0.
                 $UISearchMode: 1,                                   //[Optional] The way (0 parellel, 1 recursive, default value is 1) to search UI components (slides container, loading screen, navigator container, arrow navigator container, thumbnail navigator container etc).
@@ -27,7 +27,7 @@
             function ScaleSlider() {
                 var bodyWidth = document.body.clientWidth;
                 if (bodyWidth)
-                    jssor_slider1.$ScaleWidth(Math.min(bodyWidth, 980));
+                    jssor_slider1.$ScaleWidth(Math.min(bodyWidth, 1024));
                 else
                     window.setTimeout(ScaleSlider, 30);
             }
@@ -35,7 +35,7 @@
              function ScaleSlider() {
                 var bodyWidth = document.body.clientWidth;
                 if (bodyWidth)
-                    jssor_slider2.$ScaleWidth(Math.min(bodyWidth, 980));
+                    jssor_slider2.$ScaleWidth(Math.min(bodyWidth, 1024));
                 else
                     window.setTimeout(ScaleSlider, 30);
             }
