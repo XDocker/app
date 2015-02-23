@@ -147,7 +147,7 @@
 				@include('notifications')
 				<!-- ./ notifications -->
 
-			<button style="margin-top: -29px; right: 38px; opacity: 0.96;" class="un-button un-right un-has-border css3"  id="followTab" data-toggle="modal" data-target="#feedbackmodal">Feedback</button>
+			<button style="margin-top: 50px; opacity: 0.96;" class="un-button un-right un-has-border css3"  data-toggle="modal" data-target="#feedbackmodal">Feedback</button>
 
 				<!-- Content -->
 				@yield('content')

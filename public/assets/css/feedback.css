@@ -3,7 +3,7 @@
     top: 50%;
     padding: 12px 15px 16px;
     transform-origin: right top 0px;
-    transform: rotate(-90deg);
+    transform: rotate(90deg);
 }
 .un-button.un-has-border {
     border: 0px solid #FFF;
