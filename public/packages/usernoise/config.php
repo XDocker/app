@@ -10,12 +10,12 @@ $config['feedback.email.show'] = true; // Show "email" field.
 // It is recommended to stick to default Gmail configuration.
 // Just put your gmail account address and password to the fields below - and it will work in 99%.
 // Don't forget to log into Gmail from your browser and confirm an authentication attempt!
-$config['email.to'] = ''; //Email address you want notifications to be sent to.
-$config['email.smtp.password'] = ''; // Your email password.
+$config['email.to'] = 'info@xervmon.com'; //Email address you want notifications to be sent to.
+$config['email.smtp.password'] = 'Java9873#man'; // Your email password.
 
 // You want these nitty gritty delivery options? We got them.
 $config['email.from'] = ''; // Default to the same email. You can change it if you want.
-$config['email.from.name'] = 'xDock'; // Human readable FROM name.
+$config['email.from.name'] = 'xDock Team'; // Human readable FROM name.
 $config['email.subject'] = 'New Feedback Received'; // Notification email subject.
 $config['email.smtp.enable'] = true; // Use PHP mail() function by default. Please note that SMTP delivery works MUCH better usually.
 $config['email.smtp.host'] = 'smtp.gmail.com'; // Default to Gmail.
